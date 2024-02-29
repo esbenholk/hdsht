@@ -1,0 +1,70 @@
+{
+  "id": "structure",
+  "type": "SharedSlice",
+  "name": "Structure",
+  "description": "Structure",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Structure",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading1"
+          }
+        },
+        "suborder": {
+          "type": "Number",
+          "config": {
+            "label": "SubOrder",
+            "placeholder": ""
+          }
+        },
+        "order": {
+          "type": "Number",
+          "config": {
+            "label": "Order",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {
+        "location": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Location",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading1"
+          }
+        },
+        "category_title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Category Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading3"
+          }
+        },
+        "list": {
+          "type": "StructuredText",
+          "config": {
+            "label": "List",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "list-item"
+          }
+        }
+      },
+      "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format"
+    }
+  ]
+}

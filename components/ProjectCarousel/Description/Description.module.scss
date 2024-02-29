@@ -1,0 +1,40 @@
+.Container {
+  padding: 2rem;
+  border-radius: 1rem;
+  flex-direction: column;
+  overflow: hidden;
+  mix-blend-mode: difference;
+  .Content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+
+    opacity: 0.7;
+    .RichText {
+      &:first-child {
+        border-left-width: 0;
+        border-top-width: 0;
+      }
+      &:nth-child(2) {
+        border-left-width: 0;
+        border-top-width: 0;
+        border-right-width: 0;
+      }
+      &:nth-child(3) {
+        border-left-width: 0;
+        border-top-width: 0;
+        border-right-width: 1;
+        border-bottom-width: 0;
+      }
+      &:last-child {
+        border-top-width: 0;
+        border-left-width: 0;
+        border-bottom-width: 0;
+        border-right-width: 0;
+      }
+
+      padding: 1rem;
+      mix-blend-mode: difference;
+      border: 0.1rem solid var(--main-font-color);
+    }
+  }
+}

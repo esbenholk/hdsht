@@ -1,0 +1,113 @@
+.NavContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  padding: 0.5rem;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  justify-content: space-between;
+  z-index: 3;
+
+  svg {
+    display: flex;
+    width: 10rem;
+    height: 2rem !important;
+    height: auto;
+    fill: var(--main-font-color);
+    &:hover {
+      fill: var(--main-font-color-highlight);
+    }
+  }
+}
+
+.ToggleBtn {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  mix-blend-mode: var(--mix-blend-mode);
+  div {
+    width: 2rem;
+    height: 0.15rem;
+    background-color: var(--main-font-color);
+    margin: 0.2rem;
+  }
+}
+.NavLinksContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  backdrop-filter: blur(10px) saturate(50%) !important;
+  z-index: 4;
+  border-radius: 1rem 0 0 1rem;
+  mix-blend-mode: var(--mix-blend-mode);
+  font-size: 1.125rem;
+  .NavLinks {
+    position: relative;
+    right: 0;
+    top: 2.5rem;
+    // transform: translateX(100%);
+    z-index: 3;
+    position: fixed;
+
+    padding-left: 0%;
+    // backdrop-filter: blur(10px) saturate(50%);
+    padding: 1rem;
+
+    mix-blend-mode: var(--mix-blend-mode);
+
+    ul {
+      mix-blend-mode: var(--mix-blend-mode);
+      padding-left: 0%;
+      margin: 0 1rem;
+      ul {
+        mix-blend-mode: var(--mix-blend-mode);
+        padding-left: 0%;
+      }
+    }
+  }
+}
+
+//write media queries for mobile here
+
+@media (max-width: 768px) {
+  .NavLinksContainer {
+    display: grid;
+    place-content: center;
+    grid-template-columns: 100vw;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 5;
+    border: 1px solid white;
+    .NavLinks {
+      flex: 1;
+      top: 0;
+      right: 0;
+      text-align: center;
+      font-size: 2rem;
+      // transform: translateY(50%) !important;
+      ul {
+        padding-left: 0%;
+        margin: 0;
+        li {
+          padding: 1rem;
+        }
+        ul {
+          padding-left: 0%;
+          margin: 0;
+          li {
+            padding: 1rem;
+          }
+        }
+      }
+    }
+  }
+}

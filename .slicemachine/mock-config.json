@@ -1,0 +1,102 @@
+{
+  "_cts": {
+    "landing": {},
+    "work": {},
+    "about": {},
+    "page": {}
+  },
+  "slices": {
+    "Article": {
+      "default": {
+        "items": {
+          "content": {
+            "config": {
+              "patternType": "PARAGRAPH",
+              "blocks": 1
+            }
+          }
+        },
+        "primary": {}
+      }
+    },
+    "WorkGrid": {
+      "default": {
+        "primary": {},
+        "items": {}
+      }
+    },
+    "WorkCarousel": {
+      "default": {
+        "primary": {},
+        "items": {}
+      }
+    },
+    "Nav": {},
+    "ImageSlice": {
+      "default": {
+        "items": {},
+        "primary": {}
+      }
+    },
+    "Contact": {
+      "default": {
+        "items": {},
+        "primary": {}
+      }
+    },
+    "HeroText": {
+      "default": {
+        "primary": {}
+      }
+    },
+    "HeroVideo": {
+      "default": {
+        "items": {},
+        "primary": {}
+      }
+    },
+    "StickyHeader": {
+      "default": {
+        "primary": {}
+      }
+    },
+    "CookieFooter": {
+      "default": {
+        "primary": {}
+      }
+    },
+    "CopyrightHeader": {
+      "default": {
+        "primary": {}
+      }
+    },
+    "ClientLogos": {
+      "default": {
+        "primary": {}
+      }
+    },
+    "CreditFooter": {
+      "default": {
+        "primary": {},
+        "items": {}
+      }
+    },
+    "Philosophy": {
+      "default": {
+        "primary": {},
+        "items": {}
+      }
+    },
+    "Structure": {
+      "default": {
+        "primary": {},
+        "items": {}
+      }
+    },
+    "MediaArray": {
+      "default": {
+        "primary": {}
+      }
+    }
+  }
+}

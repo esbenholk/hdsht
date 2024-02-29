@@ -1,0 +1,24 @@
+.DateTime {
+  position: absolute;
+  overflow-x: hidden;
+  top: 1rem;
+  right: 1rem;
+  font-family: var(--special-font-display);
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  color: var(--main-text-color);
+  //   background-color: var(--main-bg-color);
+  mix-blend-mode: difference;
+  span {
+    mix-blend-mode: luminosity;
+  }
+}
+@media screen and (max-width: 768px) {
+  .DateTime {
+    width: 100%;
+    background-color: var(--main-bg-color);
+    mix-blend-mode: luminosity;
+    opacity: 1;
+  }
+}

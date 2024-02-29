@@ -1,0 +1,88 @@
+{
+  "title": {
+    "__TYPE__": "FieldContent",
+    "value": "wave",
+    "type": "Text"
+  },
+  "description": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
+      {
+        "type": "paragraph",
+        "content": {
+          "text": "Esse eiusmod eiusmod nostrud ipsum eiusmod nostrud ex. Consectetur Lorem irure non reprehenderit labore tempor laboris commodo sit. Dolor culpa voluptate eu irure consectetur sint labore laboris velit mollit ut aliquip nostrud nisi."
+        }
+      }
+    ]
+  },
+  "keywords": {
+    "__TYPE__": "FieldContent",
+    "value": "improve",
+    "type": "Text"
+  },
+  "slices": {
+    "__TYPE__": "SliceContentType",
+    "value": [
+      {
+        "key": "contact$f1ca31b8-4aed-4991-854a-1a22dc6023c4",
+        "name": "contact",
+        "widget": {
+          "__TYPE__": "SharedSliceContent",
+          "variation": "default",
+          "primary": {
+            "title": {
+              "__TYPE__": "StructuredTextContent",
+              "value": [
+                {
+                  "type": "heading1",
+                  "content": {
+                    "text": "Solution"
+                  }
+                }
+              ]
+            }
+          },
+          "items": [
+            {
+              "__TYPE__": "GroupItemContent",
+              "value": [
+                [
+                  "contact_name",
+                  {
+                    "__TYPE__": "StructuredTextContent",
+                    "value": [
+                      {
+                        "type": "paragraph",
+                        "content": {
+                          "text": "Officia sit adipisicing qui fugiat aliquip cupidatat ad commodo et consectetur eu anim."
+                        }
+                      }
+                    ]
+                  }
+                ],
+                [
+                  "contact_link",
+                  {
+                    "__TYPE__": "LinkContent",
+                    "value": {
+                      "__TYPE__": "ExternalLink",
+                      "url": "http://twitter.com"
+                    }
+                  }
+                ],
+                [
+                  "position",
+                  {
+                    "__TYPE__": "FieldContent",
+                    "value": "right",
+                    "type": "Text"
+                  }
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "id": "contact",
+  "type": "SharedSlice",
+  "name": "Contact",
+  "description": "Contact",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Contact",
+      "primary": {
+        "order": {
+          "type": "Number",
+          "config": {
+            "label": "Order",
+            "placeholder": ""
+          }
+        },
+        "negative_order": {
+          "type": "Number",
+          "config": {
+            "label": "Negative Order",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading3"
+          }
+        },
+        "address": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Address",
+            "placeholder": "Address...",
+            "allowTargetBlank": false,
+            "multi": "list-item"
+          }
+        },
+        "maps_link": {
+          "type": "Link",
+          "config": {
+            "label": "Maps Link",
+            "placeholder": "",
+            "select": null
+          }
+        },
+        "phone": {
+          "type": "Link",
+          "config": {
+            "label": "Phone",
+            "placeholder": "tel:1234567890",
+            "allowTargetBlank": false,
+            "select": null
+          }
+        },
+        "email": {
+          "type": "Link",
+          "config": {
+            "label": "Email",
+            "placeholder": "mailto:abc@def.gh",
+            "allowTargetBlank": false,
+            "select": null
+          }
+        },
+        "timezone": {
+          "type": "Text",
+          "config": {
+            "label": "TimeZone",
+            "placeholder": "America/New_York"
+          }
+        }
+      },
+      "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format"
+    }
+  ]
+}

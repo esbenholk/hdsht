@@ -1,0 +1,25 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--secondary-font-reg);
+overflow-x: hidden;
+  .Content {
+    padding: 1rem;
+    flex-direction: row;
+    .Address {
+      display: flex;
+      flex-direction: column;
+
+      ul {
+        padding: 1rem 0;
+      }
+      border-bottom: 1px solid var(--main-font-color);
+    }
+    a {
+      width: min-content;
+    }
+    a:has(span) {
+      padding: 0.5rem 0;
+    }
+  }
+}

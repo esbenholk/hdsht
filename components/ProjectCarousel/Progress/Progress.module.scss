@@ -1,0 +1,54 @@
+.ProgressBar {
+  top: 0;
+  left: 0;
+  position: absolute;
+  display: flex;
+  z-index: 2;
+  width: 100%;
+  flex-direction: row;
+  opacity: 1;
+  // padding: 1rem;
+  // -webkit-box-shadow: 0px 10px 26px -15px rgba(255,0,255,0.6);
+  // -moz-box-shadow: 0px -5px 26px -15px rgba(255,0,255,0.6);
+  // box-shadow: 0px 5px 5px rgba(255,0,255, 0.75);
+  .ProgressContainer {
+    flex: 1;
+    background-color: var(--main-bg-color);
+
+    // background-color: var(--main-font-color);
+    height: 2px;
+    // border: 1px solid var(--main-font-color);
+    margin: 0.1rem;
+    flex-direction: row;
+    justify-content: flex-start;
+    .Progress {
+      height: 100%;
+      flex: 1;
+      width: 0;
+      display: flex;
+      background: var(--main-font-color);
+
+      &.Played {
+        width: 100%;
+        -webkit-box-shadow: 0px 10px 26px -15px rgba(255,0,255,0.6);
+        -moz-box-shadow: 0px -5px 26px -15px rgba(255,0,255,0.6);
+        box-shadow: 0px 0px 15px 5px rgba(255,0,255, 0.75);
+      }
+      &.Playing {
+        animation-name: fill;
+  
+        animation-fill-mode: forwards;
+        animation-timing-function: linear;
+      }
+    }
+  }
+}
+
+@keyframes fill {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "id": "work_grid",
+  "type": "SharedSlice",
+  "name": "WorkGrid",
+  "description": "WorkGrid",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "WorkGrid",
+      "primary": {
+        "order": {
+          "type": "Number",
+          "config": {
+            "label": "Order",
+            "placeholder": ""
+          }
+        },
+        "negative_order": {
+          "type": "Number",
+          "config": {
+            "label": "Negative Order",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {
+        "worklink": {
+          "type": "Link",
+          "config": {
+            "label": "Project Link",
+            "select": "document"
+          }
+        },
+        "project_title": {
+          "type": "Text",
+          "config": {
+            "label": "Project Title",
+            "placeholder": ""
+          }
+        },
+        "mediaforgrid": {
+          "type": "Link",
+          "config": {
+            "label": "MediaForGrid",
+            "placeholder": "",
+            "select": "media"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "year": {
+          "type": "Number",
+          "config": {
+            "label": "Year",
+            "placeholder": ""
+          }
+        },
+        "work": {
+          "type": "Link",
+          "config": {
+            "label": "Work",
+            "select": "document"
+          }
+        }
+      },
+      "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format"
+    }
+  ]
+}

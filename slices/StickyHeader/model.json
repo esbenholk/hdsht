@@ -1,0 +1,40 @@
+{
+  "id": "sticky_header",
+  "type": "SharedSlice",
+  "name": "StickyHeader",
+  "description": "StickyHeader",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "StickyHeader",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "order": {
+          "type": "Number",
+          "config": {
+            "label": "Order",
+            "placeholder": ""
+          }
+        },
+        "negative_order": {
+          "type": "Number",
+          "config": {
+            "label": "Negative Order",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {},
+      "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format"
+    }
+  ]
+}

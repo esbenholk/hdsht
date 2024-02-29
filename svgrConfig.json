@@ -1,0 +1,8 @@
+{
+  "icon": "1rem",
+  "ext": "jsx",
+  "filenameCase": "pascal",
+  "outDir": "components/SVGR",
+  "ignoreExisting": "true",
+  "replaceAttrValues": "{ '#000': '{props.color}' }"
+}

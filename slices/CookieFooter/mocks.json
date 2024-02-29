@@ -1,0 +1,42 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "content": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Laboris mollit eiusmod pariatur. Cillum aute dolor sit irure excepteur deserunt do cupidatat consequat ea est dolor. Sunt in adipisicing ex elit nulla ea adipisicing excepteur amet est esse velit sunt commodo."
+            }
+          }
+        ]
+      },
+      "imprintlink": {
+        "__TYPE__": "LinkContent",
+        "value": {
+          "__TYPE__": "DocumentLink",
+          "id": "mock_document_id"
+        }
+      },
+      "order": {
+        "__TYPE__": "FieldContent",
+        "value": "0",
+        "type": "Number"
+      },
+      "negative_order": {
+        "__TYPE__": "FieldContent",
+        "value": "27",
+        "type": "Number"
+      }
+    },
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": []
+      }
+    ]
+  }
+]

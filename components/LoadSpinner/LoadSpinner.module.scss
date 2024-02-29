@@ -1,0 +1,34 @@
+@font-face {
+  font-family: "loadSpinner";
+  src: url("/crosshair_HDSHT_01-0000VF.woff2") format("woff2");
+}
+
+.LoadSpinner {
+  display: flex;
+  .Crosshair {
+    display: flex;
+    align-items: center;
+    font-family: "loadSpinner";
+    font-variation-settings: "wght" 500, "ital" 6;
+    font-size: 4rem;
+    span {
+      display: flex;
+      animation: spin 1800ms linear infinite forwards;
+      &:hover {
+        animation: spin 800ms linear infinite forwards;
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    font-variation-settings: "wght" 500, "ital" 6;
+
+  }
+
+  100% {
+    font-variation-settings: "wght" 900, "ital" 1;
+
+  }
+}

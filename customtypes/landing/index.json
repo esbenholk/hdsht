@@ -1,0 +1,63 @@
+{
+  "id": "landing",
+  "label": "landing",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Title",
+          "placeholder": ""
+        }
+      },
+      "description": {
+        "type": "Text",
+        "config": {
+          "label": "Description",
+          "placeholder": ""
+        }
+      },
+      "keywords": {
+        "type": "Text",
+        "config": {
+          "label": "Keywords",
+          "placeholder": ""
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "client_logos": {
+              "type": "SharedSlice"
+            },
+            "sticky_header": {
+              "type": "SharedSlice"
+            },
+            "work_grid": {
+              "type": "SharedSlice"
+            },
+            "contact": {
+              "type": "SharedSlice"
+            },
+            "hero_video": {
+              "type": "SharedSlice"
+            },
+            "credit_footer": {
+              "type": "SharedSlice"
+            },
+            "cookie_footer": {
+              "type": "SharedSlice"
+            },
+            "philosophy": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    }
+  }
+}

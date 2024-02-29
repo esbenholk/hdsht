@@ -1,0 +1,78 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "title": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "heading1",
+            "content": {
+              "text": "Halfway"
+            }
+          }
+        ]
+      },
+      "suborder": {
+        "__TYPE__": "FieldContent",
+        "value": "33",
+        "type": "Number"
+      },
+      "order": {
+        "__TYPE__": "FieldContent",
+        "value": "1",
+        "type": "Number"
+      }
+    },
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": [
+          [
+            "location",
+            {
+              "__TYPE__": "StructuredTextContent",
+              "value": [
+                {
+                  "type": "heading1",
+                  "content": {
+                    "text": "Stiff"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            "category_title",
+            {
+              "__TYPE__": "StructuredTextContent",
+              "value": [
+                {
+                  "type": "heading3",
+                  "content": {
+                    "text": "Whose"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            "list",
+            {
+              "__TYPE__": "StructuredTextContent",
+              "value": [
+                {
+                  "type": "paragraph",
+                  "content": {
+                    "text": "Fugiat nisi Lorem incididunt consequat ea ullamco veniam officia laborum sunt id aliquip tempor Lorem exercitation."
+                  }
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    ]
+  }
+]

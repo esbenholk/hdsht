@@ -1,0 +1,17 @@
+.TextBlock {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-gap: 2rem;
+  position: relative;
+  font-size: 1rem;
+  font-family: var(--secondary-font-reg);
+  img {
+    width: auto;
+    height: auto;
+    max-height: 30rem;
+    max-width: 40rem;
+    object-fit: cover;
+  }
+  //give every third child a column span of 2
+}

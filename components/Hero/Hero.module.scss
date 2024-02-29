@@ -1,0 +1,12 @@
+.Container {
+  margin: 5rem 0;
+  font-size: 3.5rem;
+  font-family: var(--hero-font);
+  display: flex;
+  flex-direction: column;
+  mix-blend-mode: difference;
+  color: var(--main-highlight-color);
+  .LineWrapper {
+    margin: 1rem 0;
+  }
+}

@@ -1,0 +1,91 @@
+@import "/assets/fonts/displdts/displdts.scss";
+@import "/assets/fonts/sf-mono-cufonfonts-webfont/style.scss";
+@import "/assets/fonts/LetterGothic/LetterGothic.scss";
+@import "/assets/fonts/Xanh_Mono/XanhMono.scss";
+
+:root {
+  --main-font-color: #FFF;
+  --main-font-color-highlight: #fe2eed;
+  --main-bg-color: lightgrey;
+  --secondary-bg-color: #4e464c;
+  --display-font: "SF Mono Bold";
+  --regular-font: "SF Mono Regular";
+  --secondary-font-reg: "Xanh Mono Regular";
+  --secondary-font-italic: "Xanh Mono Italic";
+  --third-font-display: "Letter Gothic Bold";
+  --third-font-display-italic: "Letter Gothic Bold Slanted";
+  --third-font-reg: "Letter Gothic Medium";
+  --third-font-italic: "Letter Gothic Slanted";
+  --detail-font: "SF Mono Light";
+  --hero-font: "Sf Mono Bold Italic";
+  --mix-blend-mode: luminosity;
+  --special-font-regular: "Displdts";
+  --special-font-display: "DOTMATRI";
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  scroll-behavior: smooth;
+  cursor: none;
+  //no text highlighting
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome and Opera */
+}
+
+body {
+  position: relative;
+  background-color: var(--main-bg-color);
+  font-family: var(--regular-font);
+  font-weight: 500;
+  color: var(--main-font-color);
+  font-style: normal !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-style: normal;
+  font-weight: normal;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--main-font-color);
+  text-decoration: none;
+  &:hover {
+    color: var(--main-font-color-highlight);
+    mix-blend-mode: difference;
+  }
+  cursor: none;
+}
+
+ul {
+  list-style: none;
+  // padding: 0;
+  margin: 0;
+}
+
+.swiper {
+  .swiper-slide {
+    width: max-content !important;
+    max-width: 100vw !important;
+    //parent container
+  }
+}
+
+.swiper-slide-thumb-active {
+  border: 0.1rem solid var(--main-font-color-highlight) !important;
+}
+
+/* Fix the control bar due to us resetting the line-height on the video-js */

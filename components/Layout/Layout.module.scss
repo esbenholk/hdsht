@@ -1,0 +1,9 @@
+.Container {
+  margin: 1rem 5rem;
+
+}
+@media screen and (max-width: 768px) {
+  .Container {
+    margin: 5rem 1rem;
+  }
+}

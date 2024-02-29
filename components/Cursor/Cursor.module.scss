@@ -1,0 +1,124 @@
+.Cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+  margin: 0 !important;
+}
+
+.Cross{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+  margin: 0 !important;
+}
+.Cross div{
+  display: flex;
+  position: absolute;
+  top:0;
+  left:0;
+}
+
+///vertical line
+.Cross div:is(:first-child){
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 10000px;
+  background: linear-gradient(0deg, var(--main-font-color) 49%,  rgba(0,0,0,0) 49%,  rgba(0,0,0,0) 51%, var(--main-font-color)51%);
+}
+
+///horisontal line
+.Cross div:is(:last-child){
+  transform: translate(-50%, -50%);
+  width: 10000px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--main-font-color) 49%,  rgba(0,0,0,0) 49%,  rgba(0,0,0,0) 51%, var(--main-font-color)51%);
+}
+
+
+
+
+.Dot{
+  display: flex;
+  position: absolute;
+  top:0;
+  left:0;
+}
+.Dot:is(:first-child){
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%);
+}
+.Dot:is(:last-child){
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%);
+
+}
+.Dot div {
+  background-color: var(--main-font-color);
+  mix-blend-mode: difference;
+  width: 10px;
+  height: 10px;
+  margin: 5px;
+  border-radius: 50%;
+
+}
+.Dot div:is(:nth-child(5)) {
+  width: 10px;
+  height: 10px;
+  margin: 5px;
+  visibility: hidden;
+}
+.Dot div:is(:nth-child(9)),
+.Dot div:is(:nth-child(1)) {
+  transform: scale(0.5);
+}
+.Dot div:is(:nth-child(8)),
+.Dot div:is(:nth-child(2)) {
+  transform: scale(0.7);
+}
+.Dot div:is(:nth-child(7)),
+.Dot div:is(:nth-child(3)) {
+  transform: scale(0.9);
+}
+
+
+.Fly{
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  z-index: 99999999999999;
+  pointer-events: none;
+  border-radius: 50%;
+  transform: translate(-50%,50%);
+  background-color: var(--main-font-color);
+  mix-blend-mode:difference;
+  top:0;
+}
+.Fly:nth-child(1){
+  width: 35px;
+  height: 35px; 
+}
+.Fly:nth-child(2){
+  width: 25px;
+  height: 25px; 
+  bottom: 0;
+}
+.Fly:nth-child(3){
+  width: 20px;
+  height: 20px; 
+  left: 0;
+}
+.Fly:nth-child(4){
+  width: 15px;
+  height: 15px; 
+  left: 0;
+  bottom: 0;
+}
+

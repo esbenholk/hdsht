@@ -1,0 +1,22 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {},
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": [
+          [
+            "hero_text",
+            {
+              "__TYPE__": "FieldContent",
+              "value": "sets",
+              "type": "Text"
+            }
+          ]
+        ]
+      }
+    ]
+  }
+]
