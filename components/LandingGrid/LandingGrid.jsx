@@ -35,16 +35,21 @@ export default function LandingGrid({workInGridWithDetails}) {
   console.log("GRID HAS ARRAY", workInGridWithDetails);
  
 
-  const handleHover = (e) => {
+  const handleHover = (item) => {
+    console.log("hovers over", item);
     useCursor.setState({
       cursorVariant: "hover",
-      isOverProject: true
+      isOverProject: true,
+      description: item.data.description,
+      title: item.data.title,
     });
   };
   const handleLeave = (e) => {
     useCursor.setState({
       cursorVariant: "default",
-      isOverProject: false
+      isOverProject: false,
+      description: "",
+      title: "",
     });
   };
 
@@ -62,23 +67,16 @@ export default function LandingGrid({workInGridWithDetails}) {
 
    
           {workInGridWithDetails && workInGridWithDetails.map((item, key) => (
-            <>
+            <div key={key}>
             
          
             {item.data.slices && item.data.slices.map((slice, index)=>(
-         
+              <div key={index}>
+            {slice && slice.slice_type === "work_carousel" && 
             <motion.div
                 key={key}
                 className={styles.MediaWrapper}
-                onMouseOver={() => {
-                  setHovering(true);
-                  moveExcluder(mediaWrapper.current);
-                  handleHover();
-                }}
-                onMouseLeave={() => {
-                  setHovering(false);
-                  handleLeave();
-                }}
+      
                 ref={mediaWrapper}
                 style={{
                   borderRadius: "1rem",
@@ -87,26 +85,49 @@ export default function LandingGrid({workInGridWithDetails}) {
               >
                 <Suspense fallback={<LoadSpinner />}>
                   <motion.div
-                    // className={styles.LinkOverlay}
-                    // variants={blendIn}
-                    // animate={hovering ? "visible" : "hidden"}
-            
+                    onMouseOver={() => {
+                      setHovering(true);
+                      moveExcluder(mediaWrapper.current);
+                      handleHover(item);
+                    }}
+                    onMouseLeave={() => {
+                      setHovering(false);
+                      handleLeave();
+                    }}
                   >
-                    {slice && slice.slice_type === "work_carousel" && <WorkCarousel slice={slice}/>}
+                    <WorkCarousel slice={slice}/>
 
-                    <PrismicLink href={item.url}>
-                      {item.project_title}
-                    </PrismicLink>
+                
                   </motion.div>
-        
+                    <PrismicLink href={item.url} 
+                    className={styles.Redirect}
+                    onMouseOver={() => {
+                      useCursor.setState({
+                        cursorVariant: "hoveronlink",
+                     
+                      });
+                    }}
+                    onMouseLeave={() => {
+                      useCursor.setState({
+                        cursorVariant: "default",
+                     
+                      });
+                    }}>
+                      {item.data.title}
+                    </PrismicLink>
+                  {/* <a  
+                    
+                    href={item.url} className={styles.Redirect}> {item.data.title}</a> */}
+
                 </Suspense>
               </motion.div> 
+            }
           
-             
+             </div>
                 
             ))}
           
-            </>
+            </div>
        
             // const videoRef = useRef();
             // const mediaWrapper = useRef();

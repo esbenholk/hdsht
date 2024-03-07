@@ -2,9 +2,10 @@
   background-color: var(--main-bg-color);
   position: fixed !important;
   top: 0;
+  bottom: 0;
   z-index: -1;
   left: 0;
-  height: 80vh !important;
+  // height: 80vh !important;
   width: 100vw;
   overflow: hidden;
   .VideoContainer {

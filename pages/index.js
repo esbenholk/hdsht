@@ -23,25 +23,44 @@ const Page = ({ page }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [foldedHeight, setFoldedHeight] = useState(0);
 
+  const [isDesktop, setIsDesktop] = useState(false);
+  const { footerOffset } = useFooterOffset();
+  const {height, width} = useWindowDimensions();
+
+
   useEffect(() => {
     console.log("New Page Comp mounted", page.data.slices);
+
+    const userAgent = navigator.userAgent;
+    const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+
+    setIsDesktop(!mobile);
+
+    let incr = 52;
+    if(mobile){
+      incr = 47;
+    }
+
     let foldedHeight_temp = 0;
     for (let index = 0; index < page.data.slices.length; index++) {
       const slice = page.data.slices[index];
-      if(slice.slice_type === "sticky_header" || slice.slice_type === "credit_footer" || slice.slice_type === "cookie_footer" ){
-        foldedHeight_temp += 55;
+      if(slice.slice_type === "sticky_header"||   !mobile && slice.slice_type === "credit_footer"|| slice.slice_type === "cookie_footer" ){
+        foldedHeight_temp += incr;
         console.log("has sticky header", slice);
+      } else if(  mobile && slice.slice_type === "credit_footer"){
+        foldedHeight_temp += incr*2;
+        console.log("has credit footer", slice);
       }
     }
+ 
     setFoldedHeight(foldedHeight_temp);
     setIsMounted(true);
+    console.log("sets height", foldedHeight_temp, incr);
     useCursor.setState({ cursor: "default" });
-    console.log("footer offset", footerOffset, height, foldedHeight_temp, foldedHeight, width);
 
   }, []);
 
-  const { footerOffset } = useFooterOffset();
-  const {height, width} = useWindowDimensions();
+
 
 
   
@@ -65,6 +84,7 @@ const Page = ({ page }) => {
         <Cursor />
         {/* <HighlightExclusion /> */}
         <motion.div
+
           className={styles.Container}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -72,7 +92,8 @@ const Page = ({ page }) => {
           transition={{ duration: 0.5 }}
           style={{
       
-            marginTop: `calc(${height-foldedHeight}px - ${footerOffset}px)`,
+            transition: "all 5 ease",
+            marginTop: `calc(${height-foldedHeight}px + ${footerOffset}px)`,
           }}
         >
           <SliceZone slices={page.data.slices} components={components} />

@@ -35,6 +35,8 @@ export default function App({ Component, pageProps }) {
   return (
     isMounted && (
       <PrismicProvider internalLinkComponent={(props) => <Link {...props} />}>
+        {/* <div style={{backgroundColor: "black"}}><img src="/assets/svg/logo-symbol.svg"/></div> */}
+        
         <PrismicPreview repositoryName={repositoryName}>
           <AnimatePresence>
             <Component {...pageProps} />

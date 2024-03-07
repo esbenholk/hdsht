@@ -2,20 +2,27 @@ import styles from "./Sticky.module.scss";
 import { useRef, useEffect, useState } from "react";
 import useCursor from "../Resolvers/States/Cursor";
 import { useFooterOffset } from "../Resolvers/States/FooterOffset";
+import useWindowDimensions from "../Resolvers/UseWindowDimensions";
 
-const OffSetValue = 1;
+
 const Sticky = ({ slice }) => {
   const header = useRef();
   const [height, setHeight] = useState(0);
+  const [OffSetValue, setOffset] = useState(1);
+  const {width} = useWindowDimensions();
+
   useEffect(() => {
-    setHeight(header.current.offsetHeight );
+    const userAgent = navigator.userAgent;
+    const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+    if(!mobile){
+      setOffset(0.9);
+    }
+    setHeight(header.current.offsetHeight);
   }, []);
   const { footerOffset } = useFooterOffset();
-  console.log(footerOffset);
 
-
-  
   return (
+ 
     <h3
       className={styles.Header}
       style={{
@@ -32,7 +39,7 @@ const Sticky = ({ slice }) => {
         const offset =
           nextSibling.offsetTop -
           slice.primary.order * height * OffSetValue +
-          window.innerHeight * 0.7;
+          window.innerHeight * 0.8;
 
         if (nextSibling) {
           window.scrollTo({
@@ -43,7 +50,7 @@ const Sticky = ({ slice }) => {
       }}
       onMouseOver={() => {
         useCursor.setState({
-          cursorVariant: "hover",
+          cursorVariant: "hoveronlink",
         });
       }}
       onMouseLeave={() => {
@@ -55,6 +62,7 @@ const Sticky = ({ slice }) => {
       <span className={styles.Order}>{slice.primary.order}.</span>
       {slice.primary.title}
     </h3>
+ 
   );
 };
 

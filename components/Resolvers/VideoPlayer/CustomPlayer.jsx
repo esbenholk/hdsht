@@ -13,6 +13,7 @@ const CustomPlayer = ({ media, videoRef }) => {
         className={styles.Video}
         loop
         autoPlay
+        playsInline
         muted
         controls={false}
         onLoadedMetadata={() => {

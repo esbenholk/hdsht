@@ -26,9 +26,10 @@
 html,
 body {
   padding: 0;
-  margin: 0;
+  margin: 4px 4px 0px 4px;
   font-size: 16px;
   scroll-behavior: smooth;
+  box-sizing: border-box;
   cursor: none;
   //no text highlighting
   -webkit-touch-callout: none; /* iOS Safari */
@@ -65,9 +66,13 @@ a {
   text-decoration: none;
   &:hover {
     color: var(--main-font-color-highlight);
-    mix-blend-mode: difference;
+    // background-color: var(--main-font-color);
+    border-color: var(--main-font-color-highlight);
+    // mix-blend-mode: difference;
+    // filter: invert(1);
   }
   cursor: none;
+
 }
 
 ul {

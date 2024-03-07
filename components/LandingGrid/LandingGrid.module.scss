@@ -1,9 +1,19 @@
+
+.Redirect{
+ 
+  border-radius: 1rem;
+  padding: 0.5rem;
+  border: 0.1rem solid var(--main-font-color);
+  width: fit-content;
+  position: relative;
+}
 .Wrapper {
   // border-top-left-radius: 1rem;
   // border-top-right-radius: 1rem;
   position: relative;
   font-family: var(--secondary-font-reg);
   background-color: var(--main-bg-color);
+
   .Grid {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
@@ -12,12 +22,13 @@
     grid-gap: 0.5rem;
     grid-auto-flow: dense;
     // padding: 0 10rem;
-
+  
     .MediaWrapper {
       display: flex;
       height: 15rem;
+  
       // border-radius: 1rem;
-      overflow: hidden;
+      // overflow: hidden;
       position: relative;
       img {
         width: 100%;
@@ -46,7 +57,7 @@
         // make the div the same size as the container
       }
       &:hover {
-        filter: brightness(1.2);
+        filter: brightness(8);
         transition: filter 0.3s ease-in-out;
       }
       transition: filter 0.3s ease-in-out;
@@ -69,6 +80,13 @@
     //   max-height: 100vh;
     // }
   }
+}
+
+.MediaWrapper{
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+
 }
 
 

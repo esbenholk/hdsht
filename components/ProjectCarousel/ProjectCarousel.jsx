@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, Suspense } from "react";
 import styles from "./ProjectCarousel.module.scss";
 import { Swiper, SwiperSlide, useSwiperSlide, useSwiper } from "swiper/react";
+import throttle from "lodash.throttle";
 import "swiper/scss";
 import "swiper/scss/thumbs";
 import "swiper/scss/pagination";
@@ -49,6 +50,7 @@ const slideInFromBottom = {
 
 const ProjectCarousel = ({ slice }) => {
   const gallerySwiperRef = useRef();
+  const carousel = useRef();
   const thumbSwiperRef = useRef();
   const [thumbsSwiper, setThumbsSwiper] = useState(0);
   const [slideIndex, setSlideIndex] = useState(0);
@@ -56,7 +58,9 @@ const ProjectCarousel = ({ slice }) => {
   const [hovered, setHovered] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(null);
   const { duration, setCurrentVideo, currentVideo } = useVideo();
-  const [paused, setPaused] = useState(false);
+  const [paused, setPaused] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
     if (slice.items[slideIndex].carouselitem.kind === "image") {
       setCurrentSlide("image");
@@ -120,6 +124,27 @@ const ProjectCarousel = ({ slice }) => {
     }
   }, [seconds]);
 
+
+  let offset = 0;
+  let throttleMilliseconds = 100;
+
+  const onScroll = throttle(() => {
+    if (!carousel.current) {
+      setIsVisible(false);
+      return;
+    }
+    const top = carousel.current.getBoundingClientRect().top;
+    let visibility = top + offset >= 0 && top - offset <= window.innerHeight;
+    setIsVisible(visibility);
+
+    setPaused(!visibility);
+  }, throttleMilliseconds);
+
+  useEffect(() => {
+    document.addEventListener('scroll', onScroll, true);
+    return () => document.removeEventListener('scroll', onScroll, true);
+  });
+
   const handleSlide = () => {
     useCursor.setState({
       cursorVariant: "slide",
@@ -141,6 +166,7 @@ const ProjectCarousel = ({ slice }) => {
       initial="hidden"
       animate="visible"
       exit="hidden"
+      ref={carousel}
     >
       <Progress
         slice={slice}
@@ -148,12 +174,12 @@ const ProjectCarousel = ({ slice }) => {
         paused={paused}
         currentSlide={currentSlide}
       />
-      <Controls
+      {/* <Controls
         hovered={hovered}
         setHovered={setHovered}
         paused={paused}
         setPaused={setPaused}
-      />
+      /> */}
       <Swiper
         ref={gallerySwiperRef}
         className={styles.SwiperTop}
@@ -216,7 +242,7 @@ const ProjectCarousel = ({ slice }) => {
         className={styles.ThumbSwiper}
         modules={[FreeMode, Thumbs, Mousewheel]}
         mousewheel
-        spaceBetween={10}
+        // spaceBetween={10}
         direction={"horizontal"}
         slideToClickedSlide={true}
         slidesPerView={"auto"}
@@ -246,7 +272,7 @@ const ProjectCarousel = ({ slice }) => {
           );
         })}
       </Swiper>
-      <DescriptionModal data={slice.primary.projectdescription} />
+      {/* <DescriptionModal data={slice.primary.projectdescription} /> */}
     </motion.div>
   );
 };

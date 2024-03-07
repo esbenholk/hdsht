@@ -4,6 +4,9 @@ import { PrismicNextImage } from "@prismicio/next";
 import CustomPlayer from "../VideoPlayer/CustomPlayer";
 
 const MediaResolver = ({ media, slide, videoRef, loop }) => {
+
+  const userAgent = navigator.userAgent;
+  const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
   if (
     media.kind === "document" &&
     media.url.match(".(mp4|mkv|wmv|m4v|mov|avi|flv|webm|flac|mka|m4a|aac|ogg)")
@@ -36,7 +39,7 @@ const MediaResolver = ({ media, slide, videoRef, loop }) => {
       <Image
         src={media.url}
         width={media.width}
-        height={media.height > 500 ? 500: media.height }
+        height={mobile ? 150 : !mobile &&  media.height  > 500  ? 500 : media.height }
         alt={media.name}
         loading="eager"
       />

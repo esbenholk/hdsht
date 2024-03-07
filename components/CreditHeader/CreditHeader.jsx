@@ -5,9 +5,15 @@ import { useCreditOffset } from "../Resolvers/States/CreditOffset";
 import { PrismicNextImage } from "@prismicio/next";
 const CreditHeader = ({ slice }) => {
   const header = useRef();
+  const [offset, setOffset] = useState(0.35);
 
   const { creditOffset, setCreditOffset } = useCreditOffset();
   useEffect(() => {
+    const userAgent = navigator.userAgent;
+    const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+    if(!mobile){
+      setOffset(0.4);
+    }
     setCreditOffset(header.current.offsetHeight);
   }, []);
   const thisYear = new Date().getFullYear();
@@ -22,12 +28,15 @@ const CreditHeader = ({ slice }) => {
       ref={header}
       style={{
         bottom: `calc(${
-          slice.primary.negative_order * creditOffset * 0.6 - footerOffset
+          slice.primary.negative_order * creditOffset * offset - footerOffset
         }px - ${creditOffset}px)`,
         zIndex: slice.primary.order ? slice.primary.order : 0,
       }}
     >
       <div className={styles.Header}>
+        <div className={styles.Logo}>
+          <PrismicNextImage field={slice.primary.logo} />
+        </div>
         <span>{slice.primary.line_one}</span>
 
         <span className={styles.lineTwo}>
@@ -35,9 +44,7 @@ const CreditHeader = ({ slice }) => {
           {slice.primary.line_two}
         </span>
       </div>
-      <div className={styles.Logo}>
-        <PrismicNextImage field={slice.primary.logo} />
-      </div>
+   
     </div>
   );
 };

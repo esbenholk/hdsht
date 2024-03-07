@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import styles from "./Footer.module.scss";
 import { useRef, useEffect, useState } from "react";
 import { useFooterOffset } from "../Resolvers/States/FooterOffset";
+import useCursor from "../Resolvers/States/Cursor";
+
 const hideDown = {
   hidden: {
     y: 100,
@@ -28,7 +30,7 @@ const Footer = ({ slice }) => {
     setHeight(footer.current.offsetHeight);
   }, []);
   const { setFooterOffset } = useFooterOffset();
-  console.log(height);
+
   
   return (
     <motion.div
@@ -51,6 +53,18 @@ const Footer = ({ slice }) => {
         onClick={() => {
           setHide(true);
           setFooterOffset(height)
+        }}
+        onMouseOver={() => {
+          useCursor.setState({
+            cursorVariant: "hoveronlink",
+         
+          });
+        }}
+        onMouseLeave={() => {
+          useCursor.setState({
+            cursorVariant: "default",
+         
+          });
         }}
       >
         OK

@@ -1,3 +1,10 @@
 .VideoWrapper{
-    max-height:50vh;
+    max-height:500px;
 }
+
+@media screen and (max-width: 768px) {
+    .VideoWrapper{
+        max-height:150px;
+    }
+  }
+  

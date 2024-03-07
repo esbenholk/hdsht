@@ -30,7 +30,7 @@ const Controls = ({ hovered, setHovered, setPaused, paused }) => {
     currentVideo && (
       <motion.div
         className={styles.Controls}
-        variants={blendIn}
+        // variants={blendIn}
         initial="hidden"
         animate={currentVideo && hovered ? "visible" : "hidden"}
         onMouseOver={() => {
