@@ -25,17 +25,10 @@
 
 html,
 body {
-  top:0;
-  left:0;
-  right: 0;
-  bottom: 0;
-  overflow-y: scroll;
-  position: fixed;
   padding: 0;
-  margin: 0;
+  margin: 4px 4px 0px 4px;
   font-size: 16px;
   scroll-behavior: smooth;
-  box-sizing: border-box;
   cursor: none;
   //no text highlighting
   -webkit-touch-callout: none; /* iOS Safari */
@@ -46,10 +39,12 @@ body {
   user-select: none; /* Non-prefixed version, currently
                         supported by Chrome and Opera */
 }
+*::-webkit-scrollbar {
+  display: none;
+}
 
 body {
-  // position: relative;
-
+  position: relative;
   background-color: var(--main-bg-color);
   font-family: var(--regular-font);
   font-weight: 500;
@@ -73,17 +68,13 @@ a {
   text-decoration: none;
   &:hover {
     color: var(--main-font-color-highlight);
-    // background-color: var(--main-font-color);
-    border-color: var(--main-font-color-highlight);
-    // mix-blend-mode: difference;
-    // filter: invert(1);
+    mix-blend-mode: difference;
   }
   cursor: none;
-
 }
 
 .body{
-  width: 100%;
+  // width: 100%;
   top:0;
   left:0;
   right: 0;
@@ -91,6 +82,7 @@ a {
   bottom: 0;
   overflow-y: scroll;
   position: fixed;
+  z-index: 0;
   // overflow:visible;
   // margin: 0;
 }
@@ -98,6 +90,15 @@ section:not(:has(.VideoHero_Container__djQMy)){
   background-color: var(--main-bg-color);
   padding-bottom: 10rem;
   margin-bottom: -10rem;
+
+
+  // border-left: 2px solid #FFF;
+  // border-right: 2px solid #FFF;
+
+  // border-bottom: 0px solid white;
+  // -webkit-box-shadow: 0px 10px 26px -15px rgba(255,0,255,0.6);
+  // -moz-box-shadow: 0px -5px 26px -15px rgba(255,0,255,0.6);
+  // box-shadow: 0px -4px 5px rgba(255,0,255, 0.75), inset 0px 7px 3px -7px rgba(255,0,255, 0.75);
 }
 ul {
   list-style: none;

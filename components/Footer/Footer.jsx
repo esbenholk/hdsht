@@ -37,7 +37,7 @@ const Footer = ({ slice }) => {
       className={styles.Container}
       style={{
         bottom: "0",
-        zIndex: slice.primary.order ? slice.primary.order : 0,
+        zIndex: slice.primary.order ? slice.primary.order +10 : 10,
       }}
       variants={hideDown}
       initial="visible"

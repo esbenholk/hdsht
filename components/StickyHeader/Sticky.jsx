@@ -15,7 +15,7 @@ const Sticky = ({ slice }) => {
     const userAgent = navigator.userAgent;
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
     if(!mobile){
-      setOffset(0.9);
+      setOffset(0.75);
     }
     setHeight(header.current.offsetHeight);
   }, []);
@@ -30,23 +30,31 @@ const Sticky = ({ slice }) => {
         bottom: `calc(${
           slice.primary.negative_order * height * OffSetValue - footerOffset
         }px - ${height}px)`,
-        zIndex: slice.primary.order ? slice.primary.order : 0,
+        zIndex: slice.primary.order ? slice.primary.order + 10 : 10,
       }}
       ref={header}
       id={slice.primary.title}
       onClick={() => {
         const nextSibling = header.current.nextSibling;
         const offset =
-          nextSibling.offsetTop -
-          slice.primary.order * height * OffSetValue +
-          window.innerHeight * 0.8;
+         ( nextSibling.offsetTop -
+          slice.primary.order * height * OffSetValue) - 50;
 
-        if (nextSibling) {
-          window.scrollTo({
-            top: offset,
-            behavior: "smooth",
-          });
+
+        const bodyContainer = document.getElementsByClassName("body")[0];
+        // bodyContainer.scrollTop = offset;
+
+        if(bodyContainer.scrollTop < offset){
+          for (let i = bodyContainer.scrollTop; i <= offset; i++) {
+            setTimeout(() => (bodyContainer.scrollTop = i), 4);
+          }
+        } else {
+          for (let i = bodyContainer.scrollTop; i >= offset; i--) {
+            setTimeout(() => (bodyContainer.scrollTop = i), 4);
+          }
         }
+     
+ 
       }}
       onMouseOver={() => {
         useCursor.setState({

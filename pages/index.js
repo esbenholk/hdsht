@@ -14,6 +14,7 @@ import DateTime from "../components/DateTime/DateTime";
 import HighlightExclusion from "../components/HighlightExclusion/HighlightExclusion";
 import { useFooterOffset } from "../components/Resolvers/States/FooterOffset";
 import useWindowDimensions from "../components/Resolvers/UseWindowDimensions"
+import Logo from 'assets/svg/HDSHT_HD.svg';
 
 const Gizmo = dynamic(() => import("../components/Gizmo/Gizmo"), {
   ssr: false,
@@ -27,16 +28,20 @@ const Page = ({ page }) => {
   const { footerOffset } = useFooterOffset();
   const {height, width} = useWindowDimensions();
 
+  const logoRef = useRef();
+  const [isIntersecting, setIsIntersecting] = useState();
 
   useEffect(() => {
     console.log("New Page Comp mounted", page.data.slices);
+
+
 
     const userAgent = navigator.userAgent;
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
 
     setIsDesktop(!mobile);
 
-    let incr = 52;
+    let incr = 60;
     if(mobile){
       incr = 47;
     }
@@ -55,13 +60,34 @@ const Page = ({ page }) => {
  
     setFoldedHeight(foldedHeight_temp);
     setIsMounted(true);
-    console.log("sets height", foldedHeight_temp, incr);
     useCursor.setState({ cursor: "default" });
 
   }, [width]);
 
 
+  const onScroll = () => {
+    let h3s = document.getElementsByTagName('h3');
+    if(h3s && h3s.length > 0){
+      if(h3s[0]){
+        let stickyPosY = h3s[0].getBoundingClientRect().y;
+  
+  
+        if(stickyPosY<50){
+          setIsIntersecting(true);
+        } else {
+          setIsIntersecting(false);
+        }
+      }
+    }
+   
 
+
+  };
+
+  useEffect(() => {
+    document.addEventListener('scroll', onScroll, true);
+    return () => document.removeEventListener('scroll', onScroll, true);
+  });
 
   
 
@@ -84,7 +110,7 @@ const Page = ({ page }) => {
         <Cursor />
         {/* <HighlightExclusion /> */}
         <motion.div
-
+        
           className={styles.Container}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -98,6 +124,9 @@ const Page = ({ page }) => {
         >
           <SliceZone slices={page.data.slices} components={components} />
         </motion.div>
+        <div ref={logoRef} style={{width: "100%", position: "fixed", zIndex: 1, top: "0", backgroundColor: "var(--main-font-color-highlight)", maxHeight: "5rem", overflow: "hidden", transition: "opacity 0.01s ease-in", opacity: isIntersecting ? 1 :0}}>
+          <img src={Logo.src} alt="logo" style={{width: "100%"}} />
+        </div>
       </>
     )
   );

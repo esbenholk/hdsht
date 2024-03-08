@@ -34,7 +34,7 @@ const CreditHeader = ({ slice }) => {
         bottom: `calc(${
           slice.primary.negative_order * creditOffset * offset - footerOffset
         }px - ${creditOffset}px)`,
-        zIndex: slice.primary.order ? slice.primary.order : 0,
+        zIndex: slice.primary.order ? slice.primary.order +10 : 10,
       }}
     >
       <div className={styles.Header}>

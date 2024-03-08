@@ -37,6 +37,7 @@ export default function App({ Component, pageProps }) {
     isMounted && (
       <PrismicProvider internalLinkComponent={(props) => <Link {...props} />}>
         {/* <div style={{backgroundColor: "black"}}><img src="/assets/svg/logo-symbol.svg"/></div> */}
+   
       
         <div className="body">
         <PrismicPreview repositoryName={repositoryName}>
@@ -49,6 +50,7 @@ export default function App({ Component, pageProps }) {
           <img src={Logo.src} alt="logo" style={{width: "calc(100% - 6rem)", margin: "3rem"}}/>
         </section>
         </div>
+
 
       </PrismicProvider>
     )

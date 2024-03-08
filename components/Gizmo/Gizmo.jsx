@@ -91,7 +91,7 @@ const Atom = () => {
           ref={redMesh}
         >
           <torusGeometry args={[20, 0.5, 18, 60, Math.PI]} />
-          <meshStandardMaterial color={"#ff0000"} />
+          <meshStandardMaterial color={"rgba(255,0,255,0.6)"} />
         </mesh>
         <mesh rotation={[Math.PI * 0.5, 0, 0]} scale={0.1} ref={blueMesh}>
           <torusGeometry args={[20, 0.5, 18, 60, Math.PI]} />
