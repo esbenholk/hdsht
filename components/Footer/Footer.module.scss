@@ -1,8 +1,10 @@
 .Container {
-  position: sticky;
+  position: fixed;
   padding: 0 3rem;
   display: flex;
   flex-direction: row;
+  right:0;
+  left:0;
   font-size: 0.75rem;
   background-color: var(--main-bg-color);
   -ms-animation: blink 0.1s ease infinite; 

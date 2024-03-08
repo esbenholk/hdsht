@@ -58,7 +58,7 @@ const Page = ({ page }) => {
     console.log("sets height", foldedHeight_temp, incr);
     useCursor.setState({ cursor: "default" });
 
-  }, []);
+  }, [width]);
 
 
 
@@ -93,7 +93,7 @@ const Page = ({ page }) => {
           style={{
       
             transition: "all 5 ease",
-            marginTop: `calc(${height-foldedHeight}px + ${footerOffset}px)`,
+            paddingTop: `calc(${height-foldedHeight}px + ${footerOffset}px)`,
           }}
         >
           <SliceZone slices={page.data.slices} components={components} />

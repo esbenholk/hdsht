@@ -3,9 +3,13 @@ import { useRef, useEffect, useState } from "react";
 import { useFooterOffset } from "../Resolvers/States/FooterOffset";
 import { useCreditOffset } from "../Resolvers/States/CreditOffset";
 import { PrismicNextImage } from "@prismicio/next";
+
+
 const CreditHeader = ({ slice }) => {
   const header = useRef();
   const [offset, setOffset] = useState(0.35);
+
+
 
   const { creditOffset, setCreditOffset } = useCreditOffset();
   useEffect(() => {
@@ -43,6 +47,7 @@ const CreditHeader = ({ slice }) => {
           ©{thisYear}&nbsp;
           {slice.primary.line_two}
         </span>
+
       </div>
    
     </div>

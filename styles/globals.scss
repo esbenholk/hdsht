@@ -25,8 +25,14 @@
 
 html,
 body {
+  top:0;
+  left:0;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  position: fixed;
   padding: 0;
-  margin: 4px 4px 0px 4px;
+  margin: 0;
   font-size: 16px;
   scroll-behavior: smooth;
   box-sizing: border-box;
@@ -42,7 +48,8 @@ body {
 }
 
 body {
-  position: relative;
+  // position: relative;
+
   background-color: var(--main-bg-color);
   font-family: var(--regular-font);
   font-weight: 500;
@@ -75,6 +82,23 @@ a {
 
 }
 
+.body{
+  width: 100%;
+  top:0;
+  left:0;
+  right: 0;
+  padding-top: 3rem;
+  bottom: 0;
+  overflow-y: scroll;
+  position: fixed;
+  // overflow:visible;
+  // margin: 0;
+}
+section:not(:has(.VideoHero_Container__djQMy)){
+  background-color: var(--main-bg-color);
+  padding-bottom: 10rem;
+  margin-bottom: -10rem;
+}
 ul {
   list-style: none;
   // padding: 0;
