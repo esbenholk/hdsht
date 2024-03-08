@@ -58,8 +58,8 @@ const ProjectCarousel = ({ slice }) => {
   const [hovered, setHovered] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(null);
   const { duration, setCurrentVideo, currentVideo } = useVideo();
-  const [paused, setPaused] = useState(true);
-  const [isVisible, setIsVisible] = useState(false);
+  const [paused, setPaused] = useState(false);
+  // const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     if (slice.items[slideIndex].carouselitem.kind === "image") {
@@ -125,25 +125,25 @@ const ProjectCarousel = ({ slice }) => {
   }, [seconds]);
 
 
-  let offset = 0;
-  let throttleMilliseconds = 100;
+  // let offset = 0;
+  // let throttleMilliseconds = 100;
 
-  const onScroll = throttle(() => {
-    if (!carousel.current) {
-      setIsVisible(false);
-      return;
-    }
-    const top = carousel.current.getBoundingClientRect().top;
-    let visibility = top + offset >= 0 && top - offset <= window.innerHeight;
-    setIsVisible(visibility);
+  // const onScroll = throttle(() => {
+  //   if (!carousel.current) {
+  //     setIsVisible(false);
+  //     return;
+  //   }
+  //   const top = carousel.current.getBoundingClientRect().top;
+  //   let visibility = top + offset >= 0 && top - offset <= window.innerHeight;
+  //   setIsVisible(visibility);
 
-    setPaused(!visibility);
-  }, throttleMilliseconds);
+  //   setPaused(!visibility);
+  // }, throttleMilliseconds);
 
-  useEffect(() => {
-    document.addEventListener('scroll', onScroll, true);
-    return () => document.removeEventListener('scroll', onScroll, true);
-  });
+  // useEffect(() => {
+  //   document.addEventListener('scroll', onScroll, true);
+  //   return () => document.removeEventListener('scroll', onScroll, true);
+  // });
 
   const handleSlide = () => {
     useCursor.setState({

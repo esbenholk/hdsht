@@ -5,6 +5,16 @@ import { useFooterOffset } from "../Resolvers/States/FooterOffset";
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
 
 
+// if(bodyContainer.scrollTop < offset){
+//   for (let i = bodyContainer.scrollTop; i <= offset; i++) {
+//     setTimeout(() => (bodyContainer.scrollTop = i), 4);
+//   }
+// } else {
+//   for (let i = bodyContainer.scrollTop; i >= offset; i--) {
+//     setTimeout(() => (bodyContainer.scrollTop = i), 4);
+//   }
+// }
+
 const Sticky = ({ slice }) => {
   const header = useRef();
   const [height, setHeight] = useState(0);
@@ -42,17 +52,8 @@ const Sticky = ({ slice }) => {
 
 
         const bodyContainer = document.getElementsByClassName("body")[0];
-        // bodyContainer.scrollTop = offset;
+        bodyContainer.scrollTop = offset;
 
-        if(bodyContainer.scrollTop < offset){
-          for (let i = bodyContainer.scrollTop; i <= offset; i++) {
-            setTimeout(() => (bodyContainer.scrollTop = i), 4);
-          }
-        } else {
-          for (let i = bodyContainer.scrollTop; i >= offset; i--) {
-            setTimeout(() => (bodyContainer.scrollTop = i), 4);
-          }
-        }
      
  
       }}

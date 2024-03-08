@@ -7,6 +7,8 @@ import { useEffect, useRef } from "react";
 import useCursor from "../Resolvers/States/Cursor";
 import Layout from "../Layout/Layout";
 import { useExcluder } from "../Resolvers/States/Excluder";
+import Marquee from "react-marquee-slider";
+
 
 const fadeFromRight = {
   right: {
@@ -24,10 +26,60 @@ const fadeFromRight = {
   },
 };
 
+const TickerContent = ({slice}) =>{
+  return (<>
+        <div
+          className="tickerContent"
+          style={{
+              display: "flex",
+              position: "relative",
+              width: "auto",
+              height: "10rem",
+            }}
+          >
+                  {slice?.items?.map((item, index) =>  (
+                          <motion.div
+                            className={styles.LogoWrapper}
+                            key={index}
+                            variants={fadeFromRight}
+                      
+                          >
+                            <a
+                              key={index}
+                              target="_blank"
+                              href={item.link.url}
+                              onMouseOver={() => {
+                                useCursor.setState({
+                                  cursorVariant: "hoveronlink",
+                                  isOverProject: true,
+                                  title: "click 2 open " + item.link.url
+                                });
+                              }}
+                              onMouseLeave={() => {
+                                useCursor.setState({
+                                  cursorVariant: "default",
+                  
+                                  isOverProject: false
+                                });
+                              }}
+                            >
+                              <Image
+                                src={item.logo.url}
+                                width={100}
+                                height={90}
+                                alt={item.logo.url}
+                              />
+                            </a>
+                          </motion.div>
+                        
+                        ))}
+                </div>
+  </>)
+}
+
 const ClientLogoGrid = ({ slice }) => {
   const grid = useRef();
   const inView = useInView(grid, { once: true });
-  const { moveExcluder, removeExcluder } = useExcluder();
 
   return (
     <motion.div
@@ -40,55 +92,46 @@ const ClientLogoGrid = ({ slice }) => {
         <span>{slice.primary.suborder}</span>
         <PrismicRichText field={slice.primary.title} />
       </motion.div>
-      <Layout>
+
         <motion.div
           className={styles.Container}
           variants={fadeFromRight}
-          onMouseLeave={() => removeExcluder()}
         >
-          {slice?.items?.map((item, index) => {
-            const wrapper = useRef();
-            return (
-              <motion.div
-                className={styles.LogoWrapper}
-                key={index}
-                variants={fadeFromRight}
-                ref={wrapper}
-                onMouseOver={() => {
-                  moveExcluder(wrapper.current);
-                }}
-                style={{
-                  borderRadius: "1rem",
-                }}
+          <div
+            style={{
+              display: "block",
+              position: "relative",
+              width: "100%",
+              // height: "90px",
+              overflow: "hidden",
+            }}
+          >
+              <Marquee
+                velocity={50}
+                minScale={0.7}
+                resetAfterTries={200}
+                scatterRandomly={false}
               >
-                <PrismicLink
-                  key={index}
-                  href={item.link.url}
-                  onMouseOver={() => {
-                    useCursor.setState({
-                      cursorVariant: "hover",
-                    });
-                  }}
-                  onMouseLeave={() => {
-                    useCursor.setState({
-                      cursorVariant: "default",
-                    });
-                  }}
-                >
-                  <Image
-                    src={item.logo.url}
-                    width={item.logo.dimensions.width}
-                    height={item.logo.dimensions.height}
-                    alt={item.logo.url}
-                  />
-                </PrismicLink>
-              </motion.div>
-            );
-          })}
+              <TickerContent slice={slice}/>
+              <TickerContent slice={slice}/>
+
+              <TickerContent slice={slice}/>
+
+              </Marquee>
+          </div>
+         
         </motion.div>
-      </Layout>
     </motion.div>
   );
 };
+
+
+
+
+
+
+
+
+
 
 export default ClientLogoGrid;

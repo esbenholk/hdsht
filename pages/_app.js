@@ -12,12 +12,20 @@ import Logo from 'assets/svg/HDSHT_HD.svg';
 
 export default function App({ Component, pageProps }) {
   const [isMounted, setIsMounted] = useState(false);
+  const [desc, setDesc] = useState("");
+  const [title, setTitle] = useState("");
   const router = useRouter();
 
   useEffect(() => {
     // If the component is unmounted, unsubscribe
     // from the event with the `off` method:
     console.log("App comp mounted", Component, pageProps);
+    if(pageProps.page.data && pageProps.page.data.description){
+      setDesc(pageProps.page.data.description);
+    }
+    if(pageProps.page.data && pageProps.page.data.title){
+      setTitle(pageProps.page.data.title);
+    }
     setIsMounted(true);
   }, []);
 
@@ -46,8 +54,22 @@ export default function App({ Component, pageProps }) {
           </AnimatePresence>
         </PrismicPreview>
 
-        <section>
-          <img src={Logo.src} alt="logo" style={{width: "calc(100% - 6rem)", margin: "3rem"}}/>
+        <section onMouseOver={() => {
+                  useCursor.setState({
+                    cursorVariant: "logo",
+                    isOverProject: true,
+                    title: title,
+                    description: desc
+                  });
+                }}
+                onMouseLeave={() => {
+                  useCursor.setState({
+                    cursorVariant: "default",
+                    isOverProject: false
+
+                  });
+                }}>
+          <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 6rem)", margin: "3rem"}}/>
         </section>
         </div>
 

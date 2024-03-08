@@ -68,7 +68,7 @@ a {
   text-decoration: none;
   &:hover {
     color: var(--main-font-color-highlight);
-    mix-blend-mode: difference;
+    // mix-blend-mode: difference;
   }
   cursor: none;
 }
@@ -85,6 +85,12 @@ a {
   z-index: 0;
   // overflow:visible;
   // margin: 0;
+}
+.logo{
+  transition: all 1s ease-in-out;
+}
+.logo:hover{
+  filter: invert(1) blur(20px);
 }
 section:not(:has(.VideoHero_Container__djQMy)){
   background-color: var(--main-bg-color);

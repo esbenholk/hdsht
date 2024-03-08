@@ -68,19 +68,21 @@
   text-align: justify;
 }
 
-
+.PinkDot,
 .Dot{
   display: flex;
   position: absolute;
   top:0;
   left:0;
 }
+.PinkDot:is(:first-child),
 .Dot:is(:first-child){
   flex-direction: row;
   justify-content: center;
   align-items: center;
   transform: translate(-50%, -50%);
 }
+.PinkDot:is(:last-child),
 .Dot:is(:last-child){
   flex-direction: column;
   justify-content: center;
@@ -88,6 +90,7 @@
   transform: translate(-50%, -50%);
 
 }
+.PinkDot div,
 .Dot div {
   background-color: var(--main-font-color);
   // mix-blend-mode: difference;
@@ -96,24 +99,34 @@
   margin: 5px;
   border-radius: 50%;
   transition: all 0.2s ease-in-out;
+}
+.PinkDot div{
+  background-color: var(--main-font-color-highlight);
 
 }
+.PinkDot div:is(:nth-child(5)),
 .Dot div:is(:nth-child(5)) {
   width: 10px;
   height: 10px;
   margin: 5px;
   visibility: hidden;
 }
+.PinkDot div:is(:nth-child(9)),
+.PinkDot div:is(:nth-child(1)),
 .Dot div:is(:nth-child(9)),
 .Dot div:is(:nth-child(1)) {
   width: 5px;
   height: 5px;
 }
+.PinkDot div:is(:nth-child(8)),
+.PinkDot div:is(:nth-child(2)),
 .Dot div:is(:nth-child(8)),
 .Dot div:is(:nth-child(2)) {
   width: 7px;
   height: 7px;
 }
+.PinkDot div:is(:nth-child(7)),
+.PinkDot div:is(:nth-child(3)),
 .Dot div:is(:nth-child(7)),
 .Dot div:is(:nth-child(3)) {
   width: 9px;

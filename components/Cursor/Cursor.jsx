@@ -52,11 +52,20 @@ const Cursor = () => {
       scale: 0.7,
       // mixBlendMode: "difference",
     },
+    logo: {
+      x: mousePosition.x + 16,
+      y: mousePosition.y + 16,
+      mixBlendMode: "difference",
+      transitionTime: 3,
+      scale: 2,
+      ease: [0.1, 0.2, 0.01, 0.99],
+    },
     hoveronlink: {
       x: mousePosition.x + 16,
       y: mousePosition.y + 16,
       ease: [0.1, 0.2, 0.01, 0.99],
       scale: 1,
+      mixBlendMode: "difference",
   
     },
     cross: {
@@ -185,27 +194,27 @@ const Cursor = () => {
       >
   
         <div className={cursorVariant==="hoveronlink" && styles.Hoveronlink}>
-        <div className={styles.Dot} >
-          <div className={cursorVariant==="hover" && styles.Activecursor} ></div>
-          <div className={cursorVariant==="hover" && styles.Activecursor}></div>
-          <div className={cursorVariant==="hover" && styles.Activecursor}></div>
-          <div className={cursorVariant==="hover" && styles.Activecursor}></div>
+        <div className={cursorVariant==="logo" ? styles.PinkDot : styles.Dot} >
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null} ></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
           <div></div>
-          <div className={cursorVariant==="hover" && styles.Activecursor}></div>
-          <div className={cursorVariant==="hover" && styles.Activecursor}></div>
-          <div className={cursorVariant==="hover" && styles.Activecursor}></div>
-          <div className={cursorVariant==="hover" && styles.Activecursor}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
         </div>
-        <div className={styles.Dot}>
-          <div className={cursorVariant==="hover" && styles.Activecursor}></div>
-          <div className={cursorVariant==="hover" && styles.Activecursor}></div>
-          <div className={cursorVariant==="hover" && styles.Activecursor}></div>
-          <div className={cursorVariant==="hover" && styles.Activecursor}></div>
+        <div className={cursorVariant==="logo" ? styles.PinkDot : styles.Dot}>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
           <div></div>
-          <div className={cursorVariant==="hover" && styles.Activecursor}></div>
-          <div className={cursorVariant==="hover" && styles.Activecursor}></div>
-          <div className={cursorVariant==="hover" && styles.Activecursor}></div>
-          <div className={cursorVariant==="hover" && styles.Activecursor}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
         </div>
         </div>
 

@@ -46,16 +46,16 @@ const ContactSection = ({ slice }) => {
             initial="closed"
             animate={hovered ? "open" : "closed"}
             onMouseOver={() => {
-              setHovered(true);
-              moveExcluder(container.current);
+              // setHovered(true);
+              // moveExcluder(container.current);
             }}
             onMouseLeave={() => {
-              setHovered(false);
-              removeExcluder();
+              // setHovered(false);
+              // removeExcluder();
             }}
             ref={container}
           >
-            <DateTime location={item.timezone} hovered={hovered} />
+            {/* <DateTime location={item.timezone} hovered={hovered} /> */}
             <motion.div className={styles.Title}>
               <PrismicRichText field={item.title} />
             </motion.div>
@@ -65,12 +65,16 @@ const ContactSection = ({ slice }) => {
                 target="_blank"
                 onMouseOver={() => {
                   useCursor.setState({
-                    cursorVariant: "hover",
+                    cursorVariant: "hoveronlink",
+                    isOverProject: true,
+                    title: "visit us"
                   });
                 }}
                 onMouseLeave={() => {
                   useCursor.setState({
                     cursorVariant: "default",
+                    isOverProject: false
+
                   });
                 }}
               >
@@ -81,12 +85,16 @@ const ContactSection = ({ slice }) => {
                 target="_blank"
                 onMouseOver={() => {
                   useCursor.setState({
-                    cursorVariant: "hover",
+                    cursorVariant: "hoveronlink",
+                    isOverProject: true,
+                    title: "call us"
                   });
                 }}
                 onMouseLeave={() => {
                   useCursor.setState({
                     cursorVariant: "default",
+                    isOverProject: false
+
                   });
                 }}
               >
@@ -97,12 +105,15 @@ const ContactSection = ({ slice }) => {
                 target="_blank"
                 onMouseOver={() => {
                   useCursor.setState({
-                    cursorVariant: "hover",
+                    cursorVariant: "hoveronlink",
+                    isOverProject: true,
+                    title: "send us an email"
                   });
                 }}
                 onMouseLeave={() => {
                   useCursor.setState({
                     cursorVariant: "default",
+                    isOverProject: false
                   });
                 }}
               >
