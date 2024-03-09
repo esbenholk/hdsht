@@ -18,7 +18,7 @@ import useWindowDimensions from "../Resolvers/UseWindowDimensions";
 const Sticky = ({ slice }) => {
   const header = useRef();
   const [height, setHeight] = useState(0);
-  const [OffSetValue, setOffset] = useState(1);
+  const [OffSetValue, setOffset] = useState(0.9);
   const {width} = useWindowDimensions();
 
   useEffect(() => {

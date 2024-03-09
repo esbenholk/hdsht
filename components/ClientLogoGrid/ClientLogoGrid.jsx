@@ -8,7 +8,7 @@ import useCursor from "../Resolvers/States/Cursor";
 import Layout from "../Layout/Layout";
 import { useExcluder } from "../Resolvers/States/Excluder";
 import Marquee from "react-marquee-slider";
-
+import useWindowDimensions from "../Resolvers/UseWindowDimensions";
 
 const fadeFromRight = {
   right: {
@@ -80,6 +80,7 @@ const TickerContent = ({slice}) =>{
 const ClientLogoGrid = ({ slice }) => {
   const grid = useRef();
   const inView = useInView(grid, { once: true });
+  const {width} = useWindowDimensions();
 
   return (
     <motion.div
@@ -107,7 +108,7 @@ const ClientLogoGrid = ({ slice }) => {
             }}
           >
               <Marquee
-                velocity={50}
+                velocity={width>700 ? 50: 5}
                 minScale={0.7}
                 resetAfterTries={200}
                 scatterRandomly={false}

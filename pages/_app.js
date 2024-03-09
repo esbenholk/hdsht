@@ -65,7 +65,9 @@ export default function App({ Component, pageProps }) {
                 onMouseLeave={() => {
                   useCursor.setState({
                     cursorVariant: "default",
-                    isOverProject: false
+                    isOverProject: false,
+                    title: "",
+                    description: ""
 
                   });
                 }}>

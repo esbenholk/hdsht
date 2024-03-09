@@ -43,7 +43,7 @@ const Page = ({ page }) => {
 
     let incr = 60;
     if(mobile){
-      incr = 47;
+      incr = 55;
     }
 
     let foldedHeight_temp = 0;
@@ -124,7 +124,7 @@ const Page = ({ page }) => {
         >
           <SliceZone slices={page.data.slices} components={components} />
         </motion.div>
-        <div ref={logoRef} style={{width: "100%", position: "fixed", zIndex: 1, top: "0", backgroundColor: "var(--main-font-color-highlight)", maxHeight: "5rem", overflow: "hidden", transition: "opacity 0.01s ease-in", opacity: isIntersecting ? 1 :0}}>
+        <div ref={logoRef} style={{width: "100%", position: "fixed", zIndex: 1, top: "0", backgroundColor: "var(--main-font-color-highlight)", maxHeight: "5rem", minHeight: "4rem", overflow: "hidden", transition: "opacity 0.01s ease-in", opacity: isIntersecting ? 1 :0}}>
           <img src={Logo.src} alt="logo" style={{width: "100%"}} />
         </div>
       </>

@@ -63,7 +63,11 @@
     font-family: var(--secondary-font-reg);
     background-color: var(--main-bg-color);
     overflow-x: hidden;
-
+    padding: 1rem 0rem;
+    .TitleContainer {
+      padding-left: 3rem;
+      margin-bottom: 1rem;
+    }
     .Container {
       grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
       grid-template-rows: repeat(auto-fit, minmax(7.5rem, 1fr));

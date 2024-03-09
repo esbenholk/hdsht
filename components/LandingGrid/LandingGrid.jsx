@@ -9,7 +9,7 @@ import useCursor from "../Resolvers/States/Cursor";
 import Layout from "../Layout/Layout";
 import { useExcluder } from "../Resolvers/States/Excluder";
 import {WorkCarousel} from "../../slices/WorkCarousel"
-
+import useWindowDimensions from "../Resolvers/UseWindowDimensions";
 
 const blendIn = {
   hidden: {
@@ -31,7 +31,7 @@ const blendIn = {
 export default function LandingGrid({workInGridWithDetails}) {
 
   const grid = useRef();
-
+  const {width} = useWindowDimensions();
   console.log("GRID HAS ARRAY", workInGridWithDetails);
  
 
@@ -99,6 +99,7 @@ export default function LandingGrid({workInGridWithDetails}) {
 
                 
                   </motion.div>
+
                     <PrismicLink href={item.url} 
                     className={styles.Redirect}
                     onMouseOver={() => {
@@ -115,10 +116,13 @@ export default function LandingGrid({workInGridWithDetails}) {
                     }}>
                       {item.data.title}
                     </PrismicLink>
-                  {/* <a  
-                    
-                    href={item.url} className={styles.Redirect}> {item.data.title}</a> */}
-
+      
+                    {width<700 &&      
+                        <motion.div>
+                          <p> {item.data.description}</p>
+                        </motion.div>
+                    }
+               
                 </Suspense>
               </motion.div> 
             }
