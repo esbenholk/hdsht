@@ -48,7 +48,7 @@ const slideInFromBottom = {
   },
 };
 
-const ProjectCarousel = ({ slice }) => {
+const ProjectCarousel = ({ slice, project }) => {
   const gallerySwiperRef = useRef();
   const carousel = useRef();
   const thumbSwiperRef = useRef();
@@ -59,6 +59,8 @@ const ProjectCarousel = ({ slice }) => {
   const [currentSlide, setCurrentSlide] = useState(null);
   const { duration, setCurrentVideo, currentVideo } = useVideo();
   const [paused, setPaused] = useState(false);
+  const nexturl = useCursor((state) => state.nexturl);
+  const url = useCursor((state) => state.url);
   // const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -124,39 +126,24 @@ const ProjectCarousel = ({ slice }) => {
     }
   }, [seconds]);
 
-
-  // let offset = 0;
-  // let throttleMilliseconds = 100;
-
-  // const onScroll = throttle(() => {
-  //   if (!carousel.current) {
-  //     setIsVisible(false);
-  //     return;
-  //   }
-  //   const top = carousel.current.getBoundingClientRect().top;
-  //   let visibility = top + offset >= 0 && top - offset <= window.innerHeight;
-  //   setIsVisible(visibility);
-
-  //   setPaused(!visibility);
-  // }, throttleMilliseconds);
-
-  // useEffect(() => {
-  //   document.addEventListener('scroll', onScroll, true);
-  //   return () => document.removeEventListener('scroll', onScroll, true);
-  // });
-
-  const handleSlide = () => {
+  const handleHover = (item) => {
+    console.log("hovers over", item);
     useCursor.setState({
-      cursorVariant: "slide",
+      cursorVariant: "hover",
+      isOverProject: true,
+      description: item? item.data.description : "",
+      title: item? item.data.title : "",
+      shouldrenderdetailsontop: false
     });
-    setHovered(true);
   };
-
-  const handleLeave = () => {
+  const handleLeave = (e) => {
     useCursor.setState({
       cursorVariant: "default",
+      isOverProject: false,
+      description: "",
+      title: "",
+      shouldrenderdetailsontop: false
     });
-    setHovered(false);
   };
 
   return (
@@ -188,6 +175,11 @@ const ProjectCarousel = ({ slice }) => {
         thumbs={{
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
+        onReachEnd={() => {
+            if(url.includes("work") && nexturl){
+              window.location.href = nexturl;              
+            }
+        }}
         modules={[FreeMode, Navigation, Thumbs, Mousewheel, Autoplay, Lazy]}
         mousewheel={false}
         lazy={true}
@@ -212,10 +204,12 @@ const ProjectCarousel = ({ slice }) => {
           }
         }}
         onMouseOver={() => {
-          setHovered(true);
+          setHovering(true);
+          handleHover(project);
         }}
         onMouseLeave={() => {
-          setHovered(false);
+          setHovering(false);
+          handleLeave();
         }}
       >
         {slice?.items.map((item, i) => {
@@ -223,7 +217,11 @@ const ProjectCarousel = ({ slice }) => {
             <SwiperSlide
               className={styles.GallerySlide}
               key={i}
-              onMouseOver={handleSlide}
+              // onMouseOver={handleSlide}
+
+              onMouseOver={() => {
+                handleHover(project);
+              }}
               onMouseLeave={handleLeave}
             >
               <GallerySlide
@@ -255,7 +253,7 @@ const ProjectCarousel = ({ slice }) => {
             <SwiperSlide
               className={styles.ThumbSlide}
               key={i}
-              onMouseOver={handleSlide}
+              // onMouseOver={handleSlide}
               onMouseLeave={handleLeave}
             >
               <Suspense fallback={<LoadSpinner />}>

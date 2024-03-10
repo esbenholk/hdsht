@@ -62,8 +62,8 @@ const DescriptionModal = ({ slice }) => {
         <motion.div
           className={styles.Content}
           variants={slideInFromBottom}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
+          // initial="visible"
+          // animate={inView ? "visible" : "hidden"}
           exit="hidden"
         >
           {slice?.items?.map((item, index) => {

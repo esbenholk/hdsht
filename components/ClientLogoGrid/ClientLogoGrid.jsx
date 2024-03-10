@@ -3,7 +3,7 @@ import PrismicRichTextResolver from "../Resolvers/PrismicRichTextResolver/Prismi
 import Image from "next/image";
 import { PrismicLink, PrismicRichText } from "@prismicio/react";
 import { motion, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import useCursor from "../Resolvers/States/Cursor";
 import Layout from "../Layout/Layout";
 import { useExcluder } from "../Resolvers/States/Excluder";
@@ -52,13 +52,15 @@ const TickerContent = ({slice}) =>{
                                 useCursor.setState({
                                   cursorVariant: "hoveronlink",
                                   isOverProject: true,
-                                  title: "click 2 open " + item.link.url
+                                  title: "click 2 open",
+                                  description: item.link.url
                                 });
                               }}
                               onMouseLeave={() => {
                                 useCursor.setState({
                                   cursorVariant: "default",
-                  
+                                  title: "",
+                                  description: "",
                                   isOverProject: false
                                 });
                               }}
@@ -81,6 +83,7 @@ const ClientLogoGrid = ({ slice }) => {
   const grid = useRef();
   const inView = useInView(grid, { once: true });
   const {width} = useWindowDimensions();
+  const [paused, setPaused] = useState(false);
 
   return (
     <motion.div
@@ -88,6 +91,12 @@ const ClientLogoGrid = ({ slice }) => {
       initial="right"
       animate={inView ? "center" : "right"}
       ref={grid}
+      onMouseOver={()=>{
+        setPaused(true);
+      }}
+      onMouseLeave={()=>{
+        setPaused(false);
+      }}
     >
       <motion.div className={styles.TitleContainer}>
         <span>{slice.primary.suborder}</span>
@@ -108,10 +117,11 @@ const ClientLogoGrid = ({ slice }) => {
             }}
           >
               <Marquee
-                velocity={width>700 ? 50: 5}
+                velocity={paused ? 0 : width>700 ? 50: 5}
                 minScale={0.7}
                 resetAfterTries={200}
                 scatterRandomly={false}
+              
               >
               <TickerContent slice={slice}/>
               <TickerContent slice={slice}/>

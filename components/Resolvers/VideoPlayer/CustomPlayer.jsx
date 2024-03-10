@@ -1,14 +1,20 @@
 import styles from "./VideoPlayer.module.scss";
 import useVideo from "../States/Video";
 import { useRef, useEffect } from "react";
+import useCursor from "../States/Cursor";
+import useWindowDimensions from "../UseWindowDimensions";
 
 const CustomPlayer = ({ media, videoRef }) => {
   //make a custom video player that uses the media.url as src and scales to it's dimensions, as well as updates the currentTime and duration of useVideo
   //   make a regex that checks the media.rul prefix and returns a source JSX elemt with the correct type
   //   make a useEffect that updates the currentTime and duration of useVideo
+  const url = useCursor((state) => state.url);
+
+  const {height} = useWindowDimensions();
+
 
   return (
-    <div className={styles.VideoWrapper}>
+    <div className={url.includes("work") ? styles.VideoWrapperInWork : styles.VideoWrapper} style={{height: url.includes("work") ? `${height- 200}px` : "auto" }}>
       <video
         className={styles.Video}
         loop

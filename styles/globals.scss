@@ -90,7 +90,10 @@ a {
   transition: all 1s ease-in-out;
 }
 .logo:hover{
-  filter: invert(1) blur(20px);
+ 
+  filter: invert(35%) sepia(79%) saturate(4001%) hue-rotate(286deg) brightness(104%) contrast(108%)  blur(20px);
+  fill:#4e464c
+
 }
 section:not(:has(.VideoHero_Container__djQMy)){
   background-color: var(--main-bg-color);

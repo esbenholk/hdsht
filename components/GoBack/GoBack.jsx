@@ -6,6 +6,7 @@ import { useScroll } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./GoBack.module.scss";
+import useCursor from "../Resolvers/States/Cursor";
 const fadeIn = {
   hidden: {
     opacity: 0,
@@ -27,38 +28,79 @@ const GoBack = () => {
   const [height, setHeight] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const modal = useRef();
+  const nexturl = useCursor((state) => state.nexturl);
+  const [isDeskTop, setIsmobile] = useState(false);
 
-  const handleScroll = () => {
-    const position = window.pageYOffset;
-    setScrollY(position);
-  };
+
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    setHeight(modal.current.offsetHeight);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    const userAgent = navigator.userAgent;
+    const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+    setIsmobile(!mobile);
+
+    // window.addEventListener("scroll", handleScroll, { passive: true });
+    // setHeight(modal.current.offsetHeight);
+
+    // return () => {
+    //   window.removeEventListener("scroll", handleScroll);
+    // };
   }, []);
+
+  const handleShowModal = (bool) =>{
+   
+    if(bool){
+      useCursor.setState({
+        cursorVariant: "hoveronlink",
+        title: nexturl ? "go to next work" : "go to frontpage",
+        description: nexturl ? nexturl : "/",
+        isOverProject: true, 
+        shouldrenderdetailsontop: true
+      });
+    } else {
+      useCursor.setState({
+        cursorVariant: "default",
+        title: "",
+        description: "",
+        isOverProject: false, 
+        shouldrenderdetailsontop: false
+      });
+    }
+
+  }
+  const handleShowBackModal = (bool) =>{
+   
+    if(bool){
+      useCursor.setState({
+        cursorVariant: "hoveronlink",
+        title: "go to frontpage",
+        description: "",
+        isOverProject: true, 
+        shouldrenderdetailsontop: false
+      });
+    } else {
+      useCursor.setState({
+        cursorVariant: "default",
+        title: "",
+        description: "",
+        isOverProject: false, 
+        shouldrenderdetailsontop: false
+      });
+    }
+
+  }
 
   useEffect(() => {
     const handleMouseMove = (e) => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
-      if (clientX > innerWidth * 0.75 && clientY > innerHeight * 0.75) {
-        setShowModal(true);
-      } else if (scrollY > height) {
+      if (scrollY > height) {
         setShowModal(true);
       } else {
         setShowModal(false);
       }
     };
-    if (scrollY > height) {
-      setShowModal(true);
-    } else {
-      setShowModal(false);
-    }
+
     window.addEventListener("mousemove", handleMouseMove);
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
@@ -68,21 +110,56 @@ const GoBack = () => {
   useEffect(() => {}, []);
 
   return (
-    <motion.div
-      className={styles.Modal}
-      style={{
-        display: showModal ? "flex" : "none",
-      }}
-      ref={modal}
-      variants={fadeIn}
-      initial="hidden"
-      animate={showModal ? "visible" : "hidden"}
-      exit="hidden"
-    >
-      <Link href="/">
-        <motion.button variants={fadeIn}>go back</motion.button>
-      </Link>
-    </motion.div>
+    <>
+      {isDeskTop ? <>
+      <a
+        href={nexturl ? nexturl : "/"}
+        ref={modal}
+        className={styles.Modal}
+
+        onMouseLeave={()=>{
+          handleShowModal(false);
+        }}
+        onMouseEnter={()=>{
+          handleShowModal(true);
+        }}
+      >
+      </a>
+
+      <a
+        href="/"
+        ref={modal}
+        className={styles.BackModal}
+
+        onMouseLeave={()=>{
+          handleShowBackModal(false);
+        }}
+        onMouseEnter={()=>{
+          handleShowBackModal(true);
+        }}
+      >
+        </a >
+        </>
+      : 
+     
+      
+
+
+        <div className={styles.Row}>
+       <Link href="/" className={styles.Redirect}>
+        go back
+       </Link>
+       {nexturl.length > 0 && 
+       <Link href={nexturl} className={styles.Redirect} >
+        next
+       </Link>}
+       </div>
+      
+      }
+      
+      
+
+    </>
   );
 };
 export default GoBack;

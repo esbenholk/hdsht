@@ -3,13 +3,16 @@
   border-radius: 1rem;
   flex-direction: column;
   overflow: hidden;
-  mix-blend-mode: difference;
+  h1{
+    padding-left: 1rem;
+  }
   .Content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-
+    position: relative;
     opacity: 0.7;
     .RichText {
+      padding: 1rem;
       &:first-child {
         border-left-width: 0;
         border-top-width: 0;
@@ -31,10 +34,30 @@
         border-bottom-width: 0;
         border-right-width: 0;
       }
+   
 
-      padding: 1rem;
-      mix-blend-mode: difference;
       border: 0.1rem solid var(--main-font-color);
     }
   }
+}
+
+@media screen and (max-width: 768px) {
+  .Container{
+    h1{
+      padding-left: 0;
+    }
+    .Content{
+      .RichText {
+        // width: 100%;
+        max-width: 60%;
+        padding: 0;
+        p{
+          max-width: 100%;
+        }
+    
+        border: 0rem solid var(--main-font-color);
+      }
+    }
+  }
+ 
 }

@@ -63,6 +63,23 @@
   top:0;
   left:0;
 }
+.DescriptionContianerTopLeft{
+  position: absolute;
+  background-color: rgba(0,0,0,0);
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  margin-top: -2rem;
+  width: 50rem;
+  bottom:0;
+  right:0;
+  transform: translate(-105%, -100%);
+}
+
+.DescriptionContianerTopLeft span{
+  margin-bottom: 2rem;
+  text-align: right;
+}
 .DescriptionContianer span{
   margin-bottom: 2rem;
   text-align: justify;
@@ -100,10 +117,10 @@
   border-radius: 50%;
   transition: all 0.2s ease-in-out;
 }
-.PinkDot div{
-  background-color: var(--main-font-color-highlight);
+// .PinkDot div{
+//   background-color: var(--main-font-color-highlight);
 
-}
+// }
 .PinkDot div:is(:nth-child(5)),
 .Dot div:is(:nth-child(5)) {
   width: 10px;

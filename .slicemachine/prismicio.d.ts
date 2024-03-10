@@ -166,6 +166,17 @@ interface WorkDocumentData {
      */
     keywords: prismicT.KeyTextField;
     /**
+     * NextWork field in *Work*
+     *
+     * - **Field Type**: Content Relationship
+     * - **Placeholder**: *None*
+     * - **API ID Path**: work.nextwork
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
+     *
+     */
+    nextwork: prismicT.RelationField;
+    /**
      * Slice Zone field in *Work*
      *
      * - **Field Type**: Slice Zone

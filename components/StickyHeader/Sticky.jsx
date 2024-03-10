@@ -20,7 +20,8 @@ const Sticky = ({ slice }) => {
   const [height, setHeight] = useState(0);
   const [OffSetValue, setOffset] = useState(0.9);
   const {width} = useWindowDimensions();
-
+  const [isNotInAHirarchy, setIsNotInAHirarchy] = useState(true);
+  const [hirarchyTitle, setHirarchyTitle] = useState("");
   useEffect(() => {
     const userAgent = navigator.userAgent;
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
@@ -28,6 +29,15 @@ const Sticky = ({ slice }) => {
       setOffset(0.75);
     }
     setHeight(header.current.offsetHeight);
+
+    if(isNaN(slice.primary.order)){
+      setHirarchyTitle(slice.primary.order);
+      slice.primary.order = 1;
+      setIsNotInAHirarchy(true);
+    } else {
+      setHirarchyTitle(slice.primary.order);
+      setIsNotInAHirarchy(false);
+    }
   }, []);
   const { footerOffset } = useFooterOffset();
 
@@ -36,7 +46,7 @@ const Sticky = ({ slice }) => {
     <h3
       className={styles.Header}
       style={{
-        top: `calc(${slice.primary.order * height * OffSetValue}px - ${height}px)`,
+        top: isNotInAHirarchy ? 0 : `calc(${slice.primary.order * height * OffSetValue}px - ${height}px)`,
         bottom: `calc(${
           slice.primary.negative_order * height * OffSetValue - footerOffset
         }px - ${height}px)`,
@@ -68,7 +78,7 @@ const Sticky = ({ slice }) => {
         });
       }}
     >
-      <span className={styles.Order}>{slice.primary.order}.</span>
+      <span className={styles.Order}>{hirarchyTitle}.</span>
       {slice.primary.title}
     </h3>
  

@@ -3,9 +3,11 @@ import Image from "next/image";
 import { PrismicNextImage } from "@prismicio/next";
 import CustomPlayer from "../VideoPlayer/CustomPlayer";
 import useWindowDimensions from "../UseWindowDimensions";
-
+import useCursor from "../States/Cursor";
 const MediaResolver = ({ media, slide, videoRef, loop }) => {
-  const {width} = useWindowDimensions();
+
+  const url = useCursor((state) => state.url);
+  const {width, height} = useWindowDimensions();
   const userAgent = navigator.userAgent;
   let mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
   if(width < 768){
@@ -44,7 +46,7 @@ const MediaResolver = ({ media, slide, videoRef, loop }) => {
       <Image
         src={media.url}
         width={media.width}
-        height={mobile ? 150 : !mobile &&  media.height  > 500  ? 500 : media.height }
+        height={mobile && !url.includes("work") ? 150 : !mobile && media.height  > 500  && !url.includes("work") ? 500 : url.includes("work") ? height-200 : media.height }
         alt={media.name}
         loading="eager"
       />

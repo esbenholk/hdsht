@@ -35,32 +35,15 @@ export default function LandingGrid({workInGridWithDetails}) {
   console.log("GRID HAS ARRAY", workInGridWithDetails);
  
 
-  const handleHover = (item) => {
-    console.log("hovers over", item);
-    useCursor.setState({
-      cursorVariant: "hover",
-      isOverProject: true,
-      description: item.data.description,
-      title: item.data.title,
-    });
-  };
-  const handleLeave = (e) => {
-    useCursor.setState({
-      cursorVariant: "default",
-      isOverProject: false,
-      description: "",
-      title: "",
-    });
-  };
 
-  const { moveExcluder, removeExcluder } = useExcluder();
-  const [hovering, setHovering] = useState(false);
+  // const { moveExcluder, removeExcluder } = useExcluder();
+  // const [hovering, setHovering] = useState(false);
   const mediaWrapper = useRef();
 
   return (
     <motion.div
-      // className={styles.Wrapper}
-      onMouseLeave={() => removeExcluder()}
+      className={styles.Wrapper}
+      // onMouseLeave={() => removeExcluder()}
     >
       <Layout>
         <motion.div  ref={grid}>
@@ -85,22 +68,21 @@ export default function LandingGrid({workInGridWithDetails}) {
               >
                 <Suspense fallback={<LoadSpinner />}>
                   <motion.div
-                    onMouseOver={() => {
-                      setHovering(true);
-                      moveExcluder(mediaWrapper.current);
-                      handleHover(item);
-                    }}
-                    onMouseLeave={() => {
-                      setHovering(false);
-                      handleLeave();
-                    }}
+                    // onMouseOver={() => {
+                    //   setHovering(true);
+                    //   handleHover(item);
+                    // }}
+                    // onMouseLeave={() => {
+                    //   setHovering(false);
+                    //   handleLeave();
+                    // }}
                   >
-                    <WorkCarousel slice={slice}/>
+                    <WorkCarousel slice={slice} project={item}/>
 
                 
                   </motion.div>
 
-                    <PrismicLink href={item.url} 
+                    {/* <PrismicLink href={item.url} 
                     className={styles.Redirect}
                     onMouseOver={() => {
                       useCursor.setState({
@@ -115,11 +97,12 @@ export default function LandingGrid({workInGridWithDetails}) {
                       });
                     }}>
                       {item.data.title}
-                    </PrismicLink>
+                    </PrismicLink> */}
       
                     {width<700 &&      
                         <motion.div>
-                          <p> {item.data.description}</p>
+                          <p>{item.data.title}</p>
+                          <p>{item.data.description}</p>
                         </motion.div>
                     }
                

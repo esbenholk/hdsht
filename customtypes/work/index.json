@@ -33,6 +33,13 @@
           "placeholder": ""
         }
       },
+      "nextwork": {
+        "type": "Link",
+        "config": {
+          "label": "NextWork",
+          "select": "document"
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",

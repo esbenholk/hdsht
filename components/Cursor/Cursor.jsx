@@ -8,7 +8,8 @@ const Cursor = () => {
   const cursorVariant = useCursor((state) => state.cursorVariant);
   const projectDesc = useCursor((state) => state.description);
   const projectTitle = useCursor((state) => state.title);
-  const isOverProject = useCursor((state)=>state.isOverProject)
+  const isOverProject = useCursor((state)=>state.isOverProject);
+  const shouldrenderdetailsontop = useCursor((state)=>state.shouldrenderdetailsontop);
   const mousePosition = {
     x: useCursor((state) => state.cursorPosition.x),
     y: useCursor((state) => state.cursorPosition.y),
@@ -114,7 +115,7 @@ const Cursor = () => {
         </div>
    
         {isOverProject && projectTitle !=="" && 
-          <div className={styles.DescriptionContianer}> 
+          <div className={shouldrenderdetailsontop ? styles.DescriptionContianerTopLeft : styles.DescriptionContianer}> 
             <TypeAnimation
             sequence={[
               projectTitle

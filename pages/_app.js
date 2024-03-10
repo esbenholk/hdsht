@@ -31,11 +31,12 @@ export default function App({ Component, pageProps }) {
 
   useEffect(() => {
     const handleRouteChange = (url) => {
-      console.log(`App is changing to ${url}`);
-      useCursor.setState({ cursorVariant: "default" });
-    };
 
+      useCursor.setState({ cursorVariant: "default", url: url });
+    };
+    useCursor.setState({ cursorVariant: "default", url: router.asPath });
     router.events.on("routeChangeStart", handleRouteChange);
+    
     return () => {
       router.events.off("routeChangeStart", handleRouteChange);
     };
@@ -43,24 +44,35 @@ export default function App({ Component, pageProps }) {
 
   return (
     isMounted && (
-      <PrismicProvider internalLinkComponent={(props) => <Link {...props} />}>
-        {/* <div style={{backgroundColor: "black"}}><img src="/assets/svg/logo-symbol.svg"/></div> */}
-   
-      
+      <PrismicProvider internalLinkComponent={(props) => <Link {...props} />}>      
         <div className="body">
-        <PrismicPreview repositoryName={repositoryName}>
-          <AnimatePresence>
-            <Component {...pageProps} />
-          </AnimatePresence>
-        </PrismicPreview>
+            <PrismicPreview repositoryName={repositoryName}>
+              <AnimatePresence>
+                <Component {...pageProps} />
+              </AnimatePresence>
+            </PrismicPreview>
 
-        <section onMouseOver={() => {
+            <section onMouseOver={() => {
+                if(!router.asPath.includes("work")){
                   useCursor.setState({
                     cursorVariant: "logo",
                     isOverProject: true,
                     title: title,
                     description: desc
                   });
+                } else {
+                  useCursor.setState({
+                    cursorVariant: "hoveronlink",
+                    isOverProject: true,
+                    title: "visit the frontpage",
+                    description: "/"
+                  });
+                } 
+                }}
+                onClick={()=>{
+                  if(router.asPath.includes("work")){
+                    window.location.href = "/";  
+                  }
                 }}
                 onMouseLeave={() => {
                   useCursor.setState({
@@ -71,8 +83,10 @@ export default function App({ Component, pageProps }) {
 
                   });
                 }}>
-          <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 6rem)", margin: "3rem"}}/>
-        </section>
+       
+
+            <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 6rem)", margin: "3rem"}}/>
+          </section>
         </div>
 
 

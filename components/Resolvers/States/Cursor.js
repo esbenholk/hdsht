@@ -5,6 +5,7 @@ const useCursor = create((set) => ({
   isOverProject: false,
   description: "",
   title: "",
-  
+  shouldrenderdetailsontop: false,
+  nexturl:""
 }));
 export default useCursor;

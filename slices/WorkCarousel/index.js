@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { RichText } from "prismic-reactjs";
 import ProjectCarousel from "../../components/ProjectCarousel/ProjectCarousel";
 
-export const WorkCarousel = ({ slice, page }) => {
+export const WorkCarousel = ({ slice, project }) => {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     console.log(slice);
@@ -11,7 +11,7 @@ export const WorkCarousel = ({ slice, page }) => {
   return (
     loaded && (
       <section>
-        <ProjectCarousel slice={slice} />
+        <ProjectCarousel slice={slice} project={project}/>
       </section>
     )
   );
