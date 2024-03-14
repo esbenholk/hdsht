@@ -4,6 +4,7 @@ import LoadSpinner from "../LoadSpinner/LoadSpinner";
 import MediaResolver from "../Resolvers/MediaResolver/MediaResolver";
 import useVideo from "../Resolvers/States/Video";
 import styles from "./ProjectCarousel.module.scss";
+import PixelCanvas from "../Resolvers/pixelCanvas";
 
 const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex }) => {
   const slide = useSwiperSlide();
@@ -21,18 +22,21 @@ const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex }) => {
 
   return (<>
     {item.carouselitem &&     <Suspense fallback={<LoadSpinner />}>
+
     <MediaResolver
-      onMouseOver={() => {
-        setHovered(true);
-      }}
-      onMouseLeave={() => {
-        setHovered(false);
-      }}
-      media={item.carouselitem}
-      slide={slide}
-      videoRef={videoRef}
-      loop={false}
-    />
+    onMouseOver={() => {
+      setHovered(true);
+    }}
+    onMouseLeave={() => {
+      setHovered(false);
+    }}
+    media={item.carouselitem}
+    slide={slide}
+    videoRef={videoRef}
+    loop={false}
+  />
+
+
     
   </Suspense>}</>
 

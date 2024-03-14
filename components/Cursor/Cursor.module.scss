@@ -58,7 +58,6 @@
   flex-direction: column;
   margin: 1rem;
   margin-top: -2rem;
-
   width: 50rem;
   top:0;
   left:0;
@@ -79,10 +78,17 @@
 .DescriptionContianerTopLeft span{
   margin-bottom: 2rem;
   text-align: right;
+  font-family: var(--bubble-font);
+
 }
 .DescriptionContianer span{
   margin-bottom: 2rem;
   text-align: justify;
+  font-family: var(--bubble-font);
+}
+.DescriptionContianer span,
+.DescriptionContianerTopLeft span{
+  font-family: var(--reg-font);
 }
 
 .PinkDot,
@@ -92,6 +98,7 @@
   top:0;
   left:0;
 }
+
 .PinkDot:is(:first-child),
 .Dot:is(:first-child){
   flex-direction: row;
@@ -117,9 +124,15 @@
   border-radius: 50%;
   transition: all 0.2s ease-in-out;
 }
-// .PinkDot div{
-//   background-color: var(--main-font-color-highlight);
-
+.PinkDot div{
+ margin: -7px;
+ transition: all 3s 0.1s;
+} 
+// .PinkDot:is(:first-child) div{
+//   max-height: 1px;
+// }
+// .PinkDot:not(:first-child)  div{
+//   max-width: 1px;
 // }
 .PinkDot div:is(:nth-child(5)),
 .Dot div:is(:nth-child(5)) {
@@ -207,6 +220,27 @@
   animation-delay: 0.3s;
 }
 
+
+.littleHairVer{
+  height: 10px;
+  background-color: var(--main-font-color);
+  width: 1px;
+  transform: translate(-50%,-50%);
+  z-index: 9999999999999999999;
+  position: absolute;
+  filter: invert(1);
+}
+.littleHairHor{
+  width: 10px;
+  background-color: var(--main-font-color);
+  height: 1px;
+  transform: translate(-50%,-50%);
+  z-index: 9999999999999999999;
+  position: absolute;
+  filter: invert(1);
+
+
+}
 // .Hoveronlink .Dot{
 //   max-width: 50px;
 //   max-height: 50px;

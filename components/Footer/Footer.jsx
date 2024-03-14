@@ -52,7 +52,7 @@ const Footer = ({ slice }) => {
       <button
         onClick={() => {
           setHide(true);
-          setFooterOffset(height)
+          setFooterOffset(height/2)
         }}
         onMouseOver={() => {
           useCursor.setState({

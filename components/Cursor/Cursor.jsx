@@ -141,8 +141,8 @@ const Cursor = () => {
  
 
       </motion.div>
-      <div>
-      {/* <motion.div
+      {/* <div>
+      <motion.div
             className={styles.Fly}
             animate={{
               x: mousePosition.x -8,
@@ -157,8 +157,8 @@ const Cursor = () => {
               y: mousePosition.y -8,
             }}
             transition={{ type: "spring", mass: 1.3}}
-          /> */}
-      {/* <motion.div
+          /> 
+      <motion.div
             className={styles.Fly}
             animate={{
               x: mousePosition.x -8,
@@ -181,8 +181,8 @@ const Cursor = () => {
               y: mousePosition.y -8,
             }}
             transition={{ type: "tween" }}
-          /> */}
-      </div>
+          />
+      </div> */}
       </>)
 
 
@@ -218,6 +218,8 @@ const Cursor = () => {
           <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
         </div>
         </div>
+
+        {cursorVariant ==="logo" && <><div className={styles.littleHairVer}></div><div className={styles.littleHairHor}></div></>}
 
 
       </motion.div>

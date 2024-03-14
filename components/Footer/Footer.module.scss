@@ -16,9 +16,9 @@
   border-top-left-radius: 3rem;
   border-top-right-radius: 3rem;
   border-bottom: 0px solid white;
-  -webkit-box-shadow: 0px 10px 26px -15px rgba(255,0,255,0.6);
-  -moz-box-shadow: 0px -5px 26px -15px rgba(255,0,255,0.6);
-  box-shadow: 0px -4px 5px rgba(255,0,255, 0.75), inset 0px 7px 3px -7px rgba(255,0,255, 0.75);
+  // -webkit-box-shadow: 0px 10px 26px -15px var(--main-border-glow-color);
+  // -moz-box-shadow: 0px -5px 26px -15px var(--main-border-glow-color);
+  // box-shadow: 0px -4px 5px var(--main-border-glow-color), inset 0px 7px 3px -7px var(--main-border-glow-color);
   justify-content: space-between;
   overflow: hidden;
   z-index: 17;

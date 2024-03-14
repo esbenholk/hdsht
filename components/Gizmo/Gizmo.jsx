@@ -82,7 +82,7 @@ const Atom = () => {
       </mesh>
       <mesh rotation={[0, Math.PI, -Math.PI * 0.5]} scale={0.1} ref={greenMesh}>
         <torusGeometry args={[20, 0.5, 18, 60, Math.PI]} />
-        <meshStandardMaterial color={"#00ff00"} />
+        <meshStandardMaterial color={"rgba(0,255,0,1)"} />
       </mesh>
       <group ref={group}>
         <mesh
@@ -91,11 +91,11 @@ const Atom = () => {
           ref={redMesh}
         >
           <torusGeometry args={[20, 0.5, 18, 60, Math.PI]} />
-          <meshStandardMaterial color={"rgba(255,0,255,0.6)"} />
+          <meshStandardMaterial color={"rgba(255,0,255,1)"} />
         </mesh>
         <mesh rotation={[Math.PI * 0.5, 0, 0]} scale={0.1} ref={blueMesh}>
           <torusGeometry args={[20, 0.5, 18, 60, Math.PI]} />
-          <meshStandardMaterial color={"#008fff"} />
+          <meshStandardMaterial color={"rgba(0,0,255,1)"} />
         </mesh>
       </group>
     </>

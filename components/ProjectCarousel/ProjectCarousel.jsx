@@ -178,6 +178,10 @@ const ProjectCarousel = ({ slice, project }) => {
         onReachEnd={() => {
             if(url.includes("work") && nexturl){
               window.location.href = nexturl;              
+            } else {
+              // if(gallerySwiperRef.current && gallerySwiperRef.current.nextSibling){
+              //   gallerySwiperRef.current.nextSibling.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+              // }
             }
         }}
         modules={[FreeMode, Navigation, Thumbs, Mousewheel, Autoplay, Lazy]}
@@ -203,6 +207,10 @@ const ProjectCarousel = ({ slice, project }) => {
             thumbSwiperRef.current.swiper.slidePrev();
           }
         }}
+
+        onClick={() => {
+          gallerySwiperRef.current.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+        }}
         onMouseOver={() => {
           setHovering(true);
           handleHover(project);
@@ -218,7 +226,7 @@ const ProjectCarousel = ({ slice, project }) => {
               className={styles.GallerySlide}
               key={i}
               // onMouseOver={handleSlide}
-
+     
               onMouseOver={() => {
                 handleHover(project);
               }}

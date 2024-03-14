@@ -14,7 +14,7 @@ const CustomPlayer = ({ media, videoRef }) => {
 
 
   return (
-    <div className={url.includes("work") ? styles.VideoWrapperInWork : styles.VideoWrapper} style={{height: url.includes("work") ? `${height- 200}px` : "auto" }}>
+    <div className={url.includes("work") ? styles.VideoWrapperInWork : styles.VideoWrapper} >
       <video
         className={styles.Video}
         loop

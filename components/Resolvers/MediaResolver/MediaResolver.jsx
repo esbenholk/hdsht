@@ -46,7 +46,7 @@ const MediaResolver = ({ media, slide, videoRef, loop }) => {
       <Image
         src={media.url}
         width={media.width}
-        height={mobile && !url.includes("work") ? 150 : !mobile && media.height  > 500  && !url.includes("work") ? 500 : url.includes("work") ? height-200 : media.height }
+        height={media.height }
         alt={media.name}
         loading="eager"
       />

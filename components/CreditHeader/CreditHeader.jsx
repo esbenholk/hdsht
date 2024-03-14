@@ -16,7 +16,7 @@ const CreditHeader = ({ slice }) => {
     const userAgent = navigator.userAgent;
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
     if(!mobile){
-      setOffset(0.4);
+      setOffset(0.3);
     }
     setCreditOffset(header.current.offsetHeight);
   }, []);

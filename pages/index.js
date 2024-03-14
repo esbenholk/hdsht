@@ -15,6 +15,7 @@ import HighlightExclusion from "../components/HighlightExclusion/HighlightExclus
 import { useFooterOffset } from "../components/Resolvers/States/FooterOffset";
 import useWindowDimensions from "../components/Resolvers/UseWindowDimensions"
 import Logo from 'assets/svg/HDSHT_HD.svg';
+import Script from 'next/script'
 
 const Gizmo = dynamic(() => import("../components/Gizmo/Gizmo"), {
   ssr: false,
@@ -27,21 +28,46 @@ const Page = ({ page }) => {
   const [isDesktop, setIsDesktop] = useState(false);
   const { footerOffset } = useFooterOffset();
   const {height, width} = useWindowDimensions();
+  const bodyRef = useRef();
 
-  const logoRef = useRef();
-  const [isIntersecting, setIsIntersecting] = useState();
+  useEffect(()=>{
+
+
+  
+  },[bodyRef])
+
+  function startRaining(){
+    
+    const image = bodyRef.current;
+
+    
+    var engine = new RainyDay({
+      image,
+
+      onInitialized: () => {
+        engine.rain([[0, 0, 80]]);
+        engine.rain(
+          [
+            [3, 3, 0.1],
+            [5, 5, 0.9],
+            [6, 2, 1],
+          ],
+          500
+        );
+      },
+    });
+
+    console.log("start raining", engine);
+  }
+  
 
   useEffect(() => {
-    console.log("New Page Comp mounted", page.data.slices);
-
-
-
     const userAgent = navigator.userAgent;
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
 
     setIsDesktop(!mobile);
 
-    let incr = 60;
+    let incr = 35;
     if(mobile){
       incr = 55;
     }
@@ -51,12 +77,11 @@ const Page = ({ page }) => {
       const slice = page.data.slices[index];
       if(slice.slice_type === "sticky_header"||   !mobile && slice.slice_type === "credit_footer"|| slice.slice_type === "cookie_footer" ){
         foldedHeight_temp += incr;
-        console.log("has sticky header", slice);
       } else if(  mobile && slice.slice_type === "credit_footer"){
         foldedHeight_temp += incr*2;
-        console.log("has credit footer", slice);
       }
     }
+    foldedHeight_temp -= incr;
  
     setFoldedHeight(foldedHeight_temp);
     setIsMounted(true);
@@ -64,30 +89,6 @@ const Page = ({ page }) => {
 
   }, [width]);
 
-
-  const onScroll = () => {
-    let h3s = document.getElementsByTagName('h3');
-    if(h3s && h3s.length > 0){
-      if(h3s[0]){
-        let stickyPosY = h3s[0].getBoundingClientRect().y;
-  
-  
-        if(stickyPosY<50){
-          setIsIntersecting(true);
-        } else {
-          setIsIntersecting(false);
-        }
-      }
-    }
-   
-
-
-  };
-
-  useEffect(() => {
-    document.addEventListener('scroll', onScroll, true);
-    return () => document.removeEventListener('scroll', onScroll, true);
-  });
 
   
 
@@ -108,9 +109,14 @@ const Page = ({ page }) => {
         </Head>
         <Gizmo />
         <Cursor />
+        {/* <Script src={"rainyday.js"} onReady={()=>{
+          console.log("has rainyday");
+          startRaining();
+        }}></Script> */}
+
         {/* <HighlightExclusion /> */}
         <motion.div
-        
+          
           className={styles.Container}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -124,9 +130,10 @@ const Page = ({ page }) => {
         >
           <SliceZone slices={page.data.slices} components={components} />
         </motion.div>
-        <div ref={logoRef} style={{width: "100%", position: "fixed", zIndex: 1, top: "0", backgroundColor: "var(--main-font-color-highlight)", maxHeight: "5rem", minHeight: "4rem", overflow: "hidden", transition: "opacity 0.01s ease-in", opacity: isIntersecting ? 1 :0}}>
-          <img src={Logo.src} alt="logo" style={{width: "100%"}} />
+        <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: "8rem", backgroundColor: "var(--main-bg-color)"}}>
+
         </div>
+
       </>
     )
   );
