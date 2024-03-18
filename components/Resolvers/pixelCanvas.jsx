@@ -3,82 +3,7 @@ import { useEffect, useRef,useState, createRef, useCallback,useGenerator } from 
 import useCursor from "./States/Cursor";
 import useWindowDimensions from "./UseWindowDimensions";
 
-class Particle {
-    constructor(effect, color, x, y){
-        this.effect = effect;
-        this.x =  Math.random() * this.effect.width;
-        this.y = Math.random() * this.effect.height;
-        this.originX = Math.floor(x);
-        this.originY = Math.floor(y);
-        this.size = 7;
-        this.vx = 0;
-        this.vy = 0;
-        this.color = color;
-        this.dx = 0;
-        this.dy = 0;
-        this.distance = 0;
-        this.force = 0;
-        this.angle = 0; 
-        this.ease = 0.7;
-        this.friction = 0.9;
-        this.isExploding = false;
-        this.explosionPointx = 0;
-        this.explosionPointy = 0;
-    }
-    draw(context){
-        if(context){
-            context.fillStyle = this.color;
-            context.fillRect(this.x ,this.y, this.size, this.size);
-        }
-    }
-    shoot(x,y){
-        this.dx = x-this.x;
-        this.dy = y-this.y;
-        this.distance = (this.dx*this.dx) + (this.dy*this.dy);
-        this.force = -this.effect.mouse.radius / this.distance;
 
-        if(this.distance < this.effect.mouse.radius*1){
-            this.angle = Math.atan2(this.dx, this.dy);
-            this.vx += this.force*0.1 * Math.cos(this.angle);
-            this.vy += this.force*0.1 * Math.sin(this.angle);
-            this.isExploding = true;
-            this.color = "#ff9999";
-            this.explosionPointx = Math.random() * this.effect.width;
-            this.explosionPointy = Math.random() * this.effect.height;
-        }
-    }
-    update(){
- 
-        this.dx = this.effect.mouse.x-this.x;
-        this.dy = this.effect.mouse.y-this.y;
-        this.distance = (this.dx*this.dx) + (this.dy*this.dy);
-        this.force = -this.effect.mouse.radius / this.distance;
-
-        if(this.isExploding){
-            if(this.distance < this.effect.mouse.radius*0.5){
-                this.angle = Math.atan2(this.dx, this.dy);
-                this.vx += this.force*0.1 * Math.cos(this.angle);
-                this.vy += this.force*0.1 * Math.sin(this.angle);
-            }
-            this.x += (this.vx * this.friction) + (this.originX -this.x) * this.ease;
-            this.y += (this.vy * this.friction)  + (this.originY -this.y) * this.ease;
-
-        } else{
-
-            if(this.distance < this.effect.mouse.radius*1){
-                this.angle = Math.atan2(this.dx, this.dy);
-                this.vx += this.force * Math.cos(this.angle);
-                this.vy += this.force * Math.sin(this.angle);
-            }
-            this.x += (this.vx *= this.friction) + (this.originX -this.x) * this.ease;
-            this.y += (this.vy *= this.friction)  + (this.originY -this.y) * this.ease;
-        }
-
-
-
-    }
-
-}
 class Cell {
     constructor(effect, x, y){
         this.effect = effect;
@@ -100,6 +25,22 @@ class Cell {
         this.slideY = 0;
         this.friction = 0.9;
         this.ease = 0.05;
+        this.isExploding = false;
+    }
+    shoot(x,y){
+        this.dx = this.effect.mouse.x-this.x;
+        this.dy = this.effect.mouse.y-this.y;
+        this.distance = (this.dx*this.dx) + (this.dy*this.dy);
+        this.force = -this.effect.mouse.radius / this.distance;
+        
+        this.isExploding = true;
+
+        if(this.distance < this.effect.mouse.radius){
+            this.force = this.distance/this.effect.mouse.radius;
+            this.angle = Math.atan2(this.dx, this.dy);
+            // this.vx += this.force * Math.cos(this.angle);
+            this.vy -= this.force* Math.sin(this.angle);
+        } 
     }
     update(){
         this.dx = this.effect.mouse.x-this.x;
@@ -107,19 +48,23 @@ class Cell {
         this.distance = (this.dx*this.dx) + (this.dy*this.dy);
         this.force = -this.effect.mouse.radius / this.distance;
  
+        if(!this.isExploding){
 
-        if(this.distance < this.effect.mouse.radius){
+            if(this.distance < this.effect.mouse.radius){
 
-            this.force = this.distance/this.effect.mouse.radius;
-            this.angle = Math.atan2(this.dx, this.dy);
-            this.vx += this.force * Math.cos(this.angle);
-            this.vy += this.force* Math.sin(this.angle);
+                this.force = this.distance/this.effect.mouse.radius;
+                this.angle = Math.atan2(this.dx, this.dy);
+                this.vx += this.force * Math.cos(this.angle);
+                this.vy += this.force* Math.sin(this.angle);
+            } 
+    
+            this.slideX += (this.vx *= this.friction)- (this.slideX *this.ease);
+            this.slideY += (this.vy *= this.friction) - (this.slideY *this.ease);
+        } else {
+            this.slideX += 1;
+            this.slideY += 1;
+        }
 
-          
-        } 
-
-        this.slideX += (this.vx *= this.friction)- (this.slideX *this.ease);
-        this.slideY += (this.vy *= this.friction) - (this.slideY *this.ease);
 
         // if (distance < this.effect.mouse.radius && this.drawOffsetX < cellWidth && this.drawOffsetX > -cellWidth && this.drawOffsetY < cellHeight && this.drawOffsetY > -cellHeight && this.effect.mouse.moving){
         //         this.drawOffsetX -= dx;
@@ -135,9 +80,7 @@ class Cell {
 
 
     }
-    shoot(x,y){
-        console.log("pixel shoot", x,y);
-    }
+
     draw(context){
         if(context){
             // context.strokeRect(this.x ,this.y, this.width, this.height);

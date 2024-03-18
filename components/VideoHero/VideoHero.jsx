@@ -9,6 +9,7 @@ import Shuffle from "./Shuffle";
 import VideoCanvas from "../Resolvers/videoCanvas";
 import ThreeD from "../threeD/threeD";
 import AiVideoCanvas from "./aiImageCanvas";
+import PixelCanvas from "../Resolvers/_pixelCanvasForImages";
 
 
 const VideoHero = ({ slice }) => {
@@ -33,7 +34,8 @@ const VideoHero = ({ slice }) => {
                <AiVideoCanvas  media={slice.primary.videolink}/>
                <VideoCanvas videoUrl={slice.primary.videolink}/>
              </div>} */}
-             <AiVideoCanvas  media={slice.primary.videolink}/>
+             <PixelCanvas imageUrl={slice.primary.image.url}/>
+             {/* <AiVideoCanvas  media={slice.primary.videolink}/> */}
 
       </motion.div>
     )

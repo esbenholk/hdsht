@@ -5,10 +5,10 @@ import * as THREE from "three";
 import { lerp } from "three/src/math/MathUtils";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
+// import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useScroll } from "framer-motion";
 import useCursor from "../Resolvers/States/Cursor";
-import { KernelSize } from "postprocessing";
+// import { KernelSize } from "postprocessing";
 
 extend({ EffectComposer, RenderPass, UnrealBloomPass });
 
@@ -111,7 +111,7 @@ const Gizmo = () => {
       >
         <ambientLight intensity={6} />
         <Atom />
-        <EffectComposer multisampling={4}>
+        {/* <EffectComposer multisampling={4}>
           <Bloom
             kernelSize={1}
             luminanceThreshold={0}
@@ -124,7 +124,7 @@ const Gizmo = () => {
             luminanceSmoothing={0}
             intensity={-0.1}
           />
-        </EffectComposer>
+        </EffectComposer> */}
       </Canvas>
     </div>
   );

@@ -98,8 +98,12 @@ class Cell {
         this.vy = 0;
         this.slideX = 0;
         this.slideY = 0;
+        this.positionSlideX = 0;
+        this.positionSlideY = 0;
+
         this.friction = 0.9;
         this.ease = 0.05;
+        this.isExploding = false;
     }
     update(){
         this.dx = this.effect.mouse.x-this.x;
@@ -108,18 +112,22 @@ class Cell {
         this.force = -this.effect.mouse.radius / this.distance;
  
 
-        if(this.distance < this.effect.mouse.radius){
+        if(!this.isExploding){
 
-            this.force = this.distance/this.effect.mouse.radius;
-            this.angle = Math.atan2(this.dx, this.dy);
-            this.vx += this.force * Math.cos(this.angle);
-            this.vy += this.force* Math.sin(this.angle);
+            if(this.distance < this.effect.mouse.radius){
 
-          
-        } 
-
-        this.slideX += (this.vx *= this.friction)- (this.slideX *this.ease);
-        this.slideY += (this.vy *= this.friction) - (this.slideY *this.ease);
+                this.force = this.distance/this.effect.mouse.radius;
+                this.angle = Math.atan2(this.dx, this.dy);
+                this.vx += this.force * Math.cos(this.angle);
+                this.vy += this.force* Math.sin(this.angle);
+            } 
+    
+            this.slideX += (this.vx *= this.friction)- (this.slideX *this.ease);
+            this.slideY += (this.vy *= this.friction) - (this.slideY *this.ease);
+        } else {
+            this.positionSlideX -= (this.vx *= this.friction)- (this.slideX *this.ease);
+            this.positionSlideY -= (this.vx *= this.friction)- (this.slideX *this.ease);
+        }
 
         // if (distance < this.effect.mouse.radius && this.drawOffsetX < cellWidth && this.drawOffsetX > -cellWidth && this.drawOffsetY < cellHeight && this.drawOffsetY > -cellHeight && this.effect.mouse.moving){
         //         this.drawOffsetX -= dx;
@@ -136,13 +144,28 @@ class Cell {
 
     }
     shoot(x,y){
-        console.log("pixel shoot", x,y);
+      
+        this.dx = this.effect.mouse.x-this.x;
+        this.dy = this.effect.mouse.y-this.y;
+        this.distance = (this.dx*this.dx) + (this.dy*this.dy);
+        this.force = -this.effect.mouse.radius / this.distance;
+ 
+
+        if(!this.isExploding){
+
+            if(this.distance < this.effect.mouse.radius){
+                this.isExploding = true;
+            } 
+      
+        } 
+
+
     }
     draw(context){
         if(context){
             // context.strokeRect(this.x ,this.y, this.width, this.height);
             // context.drawImage(this.effect.image, this.x + this.drawOffsetX, this.y + this.drawOffsetY, this.cellWidth, this.cellHeight, this.x, this.y, this.cellWidth, this.cellHeight);
-            context.drawImage(this.effect.image, this.x+this.slideX ,this.y+this.slideY, this.width, this.height,this.x ,this.y, this.width, this.height)
+            context.drawImage(this.effect.image, this.x+this.slideX ,this.y+this.slideY, this.width, this.height,this.x + this.positionSlideX ,this.y + this.positionSlideY, this.width, this.height)
         }
     }
 }

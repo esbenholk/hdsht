@@ -2,7 +2,6 @@ import * as THREE from "three";
 import React, { useRef, useMemo, useState, useEffect } from "react";
 import { TextureLoader, ShaderMaterial } from "three";
 import { Canvas, useLoader, useFrame, shaderMaterial } from "@react-three/fiber";
-import Effects from "postprocessing";
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
 import rainVertShader from './rain.vert.glsl?raw';
 import rainFragShader from './rain.frag.glsl?raw';
