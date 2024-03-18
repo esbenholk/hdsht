@@ -1,11 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
+  webpack: (config, options) => {
+    config.module.rules.push({
+      test: /\.glsl/,
+      type: "asset/source",
+    })
+    return config
+  },
   images: {
     domains: ["images.prismic.io", "hdsht.cdn.prismic.io/"],
   },
 };
 
+
+
+module.exports = nextConfig
 module.exports = {
   webpack(config) {
     config.module.rules.push({

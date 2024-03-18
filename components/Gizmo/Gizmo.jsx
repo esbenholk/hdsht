@@ -109,7 +109,7 @@ const Gizmo = () => {
           position: [0, 0, 4],
         }}
       >
-        <ambientLight intensity={1} />
+        <ambientLight intensity={6} />
         <Atom />
         <EffectComposer multisampling={4}>
           <Bloom

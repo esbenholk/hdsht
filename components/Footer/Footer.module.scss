@@ -1,11 +1,11 @@
 .Container {
   position: fixed;
-  padding: 0 3rem;
+  padding: 0 2rem;
   display: flex;
   flex-direction: row;
   right:0;
   left:0;
-  font-size: 0.75rem;
+  font-size: 0.5rem;
   background-color: var(--main-bg-color);
   -ms-animation: blink 0.1s ease infinite; 
   -webkit-animation: blink 0.1s ease infinite; 
@@ -22,10 +22,12 @@
   justify-content: space-between;
   overflow: hidden;
   z-index: 17;
+
   button {
     background-color: rgba(0,0,0,0);
     border: none;
     font-family: var(--third-font-reg);
+
     color: var(--main-text-color);
     cursor:none;
     &:hover {

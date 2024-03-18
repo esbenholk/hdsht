@@ -1,4 +1,4 @@
-import { useEffect, useRef,useState, createRef, useCallback,useGenerator } from "react";
+import { useEffect, useRef,useState, createRef, useCallback,useGenerator, Component } from "react";
 // import Image from "next/image";
 import useCursor from "./States/Cursor";
 import useWindowDimensions from "./UseWindowDimensions";
@@ -7,7 +7,7 @@ class Particle {
     constructor(effect, color, x, y){
         this.effect = effect;
         this.x =  Math.random() * this.effect.width;
-        this.y = this.effect.height;
+        this.y = Math.random() * this.effect.height;
         this.originX = Math.floor(x);
         this.originY = Math.floor(y);
         this.size = 7;
@@ -141,96 +141,66 @@ class Effect {
 }
 
 
-const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
-    const {width} = useWindowDimensions();
+const VideoCanvas = ({ videoUrl, isPageTop }) => {
+    const {width, height} = useWindowDimensions();
     const [context, setContext] = useState();
     const [effect, setEffect] = useState();
     const canvas = useRef();
+    const video = useRef();
     const [animationFrameId, setAnimationId] = useState();
     
     const render = () => {
         if(context && effect && canvas.current){
-            context.clearRect(0,0,width, canvas.current.height);
+            context.drawImage(video.current, 0,0, width, height);
             effect.draw(context);
-            effect.update(context);
-            setAnimationId(window.requestAnimationFrame(render));
+            effect.update(context);   
         }
+        setAnimationId(window.requestAnimationFrame(render));
     };
 
-    const shoot = (e) =>{
-        window.cancelAnimationFrame(animationFrameId);
-        if(effect){
-            effect.shoot(e);
-        }
-       render();
-    }
-
-    useEffect(()=>{
-        
-
+    function drawVid(){
+     
         const _effect = new Effect(canvas.current);
         let _context = canvas.current.getContext('2d')
         setContext(_context); 
         setEffect(_effect);
-
-        const myImage = new Image();
-        myImage.src = imageUrl;
-    
-
+        _effect.init(_context);
+        let _video = video.current;
+        _video.play();
+        setContext(_context); 
         if(canvas.current){
-            myImage.onload = function() {
-                startImage();
-            }
+            _context.drawImage(_video,0,0,width,height);
         }
-
-        const startImage = () =>{
-            
-            if(canvas.current){
-                let imageWidthHolder = myImage.width;
-                let imageHeightHolder = myImage.height;
-                if(imageWidthHolder > width){
-                    imageWidthHolder = width;
-                    imageHeightHolder = myImage.height * (myImage.width/myImage.height);
-                }
-                imageWidthHolder = width-100;
-                imageHeightHolder = imageWidthHolder / (myImage.width/myImage.height);
+       
+        render();
+      }
     
-                _context.clearRect(0,0,width, canvas.current.height);
-                _context.drawImage(myImage, canvas.current.width*0.5-imageWidthHolder*0.5,canvas.current.height*0.5-imageHeightHolder*0.5, imageWidthHolder, imageHeightHolder);
-                _effect.init(_context);
-                _effect.draw(_context);
-    
-                render();
-            }
-      
-        }
-
-        window.addEventListener('resize', startImage);
-        return () => {
-            window.removeEventListener('resize', startImage);
-
-            window.cancelAnimationFrame(animationFrameId);
-        };
-
-  
-    },[context, canvas])
-
-
+    //   useEffect(() => {
+    //     if(canvas.current){
+    //         drawVid();
+    //     }     
+    //   });
 
 
 
     return (
-        <div style={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom: isPageTop ? "0" : "-10rem"}} >
+        <>
+            <video  ref={video} id="my_video" src={videoUrl.url} height="300" width="600" autoPlay loop muted style={{display: "none"}} corssorigin="anonymous"></video>
+            <div style={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom: isPageTop ? "0" : "-10rem"}} >
             <canvas
             // onClick={(e)=>{
             //     shoot(e);
             // }}
                 ref={canvas}
                 width={width}   
-                height={imageHeight ? imageHeight : 400} 
+                height={height} 
             />  
         </div>
+</>
+      
     );
 };
 
-export default ParticleCanvas;
+export default VideoCanvas;
+
+  

@@ -6,6 +6,10 @@ import { PrismicRichText } from "@prismicio/react";
 import Layout from "../Layout/Layout";
 import { TypeShuffle } from "./TypeShuffle";
 import Shuffle from "./Shuffle";
+import VideoCanvas from "../Resolvers/videoCanvas";
+import ThreeD from "../threeD/threeD";
+import AiVideoCanvas from "./aiImageCanvas";
+
 
 const VideoHero = ({ slice }) => {
   const videoRef = useRef();
@@ -13,43 +17,24 @@ const VideoHero = ({ slice }) => {
 
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
+    console.log("VIDEO HEADER", slice);
     setLoaded(true);
   }, []);
   return (
     loaded && (
       <motion.div className={styles.Container}>
-        <div className={styles.VideoContainer}>
-          <MediaResolver
-            media={slice.primary.videolink}
-            videoRef={videoRef}
-            loop={true}
-          />
-        </div>
-        {/* <div className={styles.HeroSection}>
-          <Layout>
-            <PrismicRichText field={slice.primary.title} />
-            {slice.primary.description.map((paragraph, key) => {
-              const words = Array.from(paragraph.text.split(" "));
+              {/* {slice.primary.image ? <ThreeD image={slice.primary.image}/> : 
+               <div className={styles.VideoContainer}>
+               <MediaResolver
+                 media={slice.primary.videolink}
+                 videoRef={videoRef}
+                 loop={true}
+               />
+               <AiVideoCanvas  media={slice.primary.videolink}/>
+               <VideoCanvas videoUrl={slice.primary.videolink}/>
+             </div>} */}
+             <AiVideoCanvas  media={slice.primary.videolink}/>
 
-              return (
-                <motion.div key={key}>
-                  {words.map((word, key) => {
-                    return (
-                      <motion.span
-                        key={key}
-                        className={styles.Word}
-                        animate={"mix"}
-                        ref={span}
-                      >
-                        <Shuffle word={word} />
-                      </motion.span>
-                    );
-                  })}
-                </motion.div>
-              );
-            })}
-          </Layout>
-        </div> */}
       </motion.div>
     )
   );

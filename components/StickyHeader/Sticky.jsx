@@ -119,8 +119,9 @@ const Sticky = ({ slice }) => {
         });
       }}
     >
-      <span className={styles.Order}>{hirarchyTitle}.</span>
-      {slice.primary.title}
+         {slice.primary.title !== "logo" &&   <span className={styles.Order}>{hirarchyTitle}.</span> }
+    
+      {slice.primary.title !== "logo" && slice.primary.title}
     </h3>
     
 
@@ -147,14 +148,14 @@ const Sticky = ({ slice }) => {
                   })
                 }}>
           {/* <img ref={logoRef} className={`${styles.Logo} ${logoInPosition && styles.StuckLogo}` } src={Logo.src} alt="logo"/> */}
-          <ParticleCanvas  imageUrl={Logo.src} isPageTop={true}/>
+          {/* <ParticleCanvas  imageUrl={Logo.src} isPageTop={true}/> */}
         </div>
    
         {/* {logoInPosition &&  <div style={{visibility: "hidden"}}>
           <img className={`${styles.Logo}` } src={Logo.src} alt="logo" style={{visibility: "hidden"}}/>
         </div>} */}
 
-        <div style={{width: "100%", position: "fixed", zIndex: 1, top: "0", backgroundColor: "var(--main-font-color-highlight)", maxHeight: "4rem", minHeight: "4rem", overflow: "hidden", transition: "opacity 0.01s ease-in", opacity: headerInPosition ? 1 :0}}>
+        <div style={{width: "100%", position: "fixed", zIndex: 1, top: "0", backgroundColor: "var(--main-font-color-highlight)", maxHeight: "2.7rem", minHeight: "2rem", overflow: "hidden", transition: "opacity 0.01s ease-in", opacity: headerInPosition ? 1 :0}}>
           <img src={Logo.src} alt="logo" className={`${styles.Logo}` } />
         </div>
 

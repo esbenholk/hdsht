@@ -736,6 +736,16 @@ interface HeroVideoSliceDefaultPrimary {
      *
      */
     videolink: prismicT.LinkToMediaField;
+    /**
+     * Image field in *HeroVideo → Primary*
+     *
+     * - **Field Type**: Image
+     * - **Placeholder**: *None*
+     * - **API ID Path**: hero_video.primary.image
+     * - **Documentation**: https://prismic.io/docs/core-concepts/image
+     *
+     */
+    image: prismicT.ImageField<never>;
 }
 /**
  * Default variation for HeroVideo Slice

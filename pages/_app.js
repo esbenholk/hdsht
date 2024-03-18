@@ -89,7 +89,7 @@ export default function App({ Component, pageProps }) {
                   });
                 }}>
                    {/* <PixelCanvas imageUrl={Logo.src} isPageTop={false}/> */}
-                   <ParticleCanvas imageUrl={Logo.src} isPageTop={false}/>
+                   {/* <ParticleCanvas imageUrl={Logo.src} isPageTop={false}/> */}
 
             {/* <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 6rem)", margin: "3rem"}}/> */}
           </section>

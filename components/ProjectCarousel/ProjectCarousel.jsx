@@ -127,7 +127,7 @@ const ProjectCarousel = ({ slice, project }) => {
   }, [seconds]);
 
   const handleHover = (item) => {
-    console.log("hovers over", item);
+    // console.log("hovers over", item);
     useCursor.setState({
       cursorVariant: "hover",
       isOverProject: true,

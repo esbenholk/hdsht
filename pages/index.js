@@ -125,12 +125,12 @@ const Page = ({ page }) => {
           style={{
       
             transition: "all 5 ease",
-            paddingTop: `calc(${height-foldedHeight}px + ${footerOffset}px)`,
+            marginTop: `calc(${height-foldedHeight}px + ${footerOffset}px)`,
           }}
         >
           <SliceZone slices={page.data.slices} components={components} />
         </motion.div>
-        <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: "8rem", backgroundColor: "var(--main-bg-color)"}}>
+        <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: "5rem", backgroundColor: "var(--main-bg-color)"}}>
 
         </div>
 

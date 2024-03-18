@@ -26,13 +26,13 @@ const Progress = ({ slice, slideIndex, paused, currentSlide }) => {
         }, [slideIndex]);
         useEffect(() => {
           if (playing && !played) {
-            console.log("playing");
+            // console.log("playing");
 
             if (paused) {
-              console.log("paused controls");
+              // console.log("paused controls");
               controls.stop();
             } else {
-              console.log("start controls");
+              // console.log("start controls");
               controls.start({
                 width: "100%",
                 transition: {
