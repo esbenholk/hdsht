@@ -148,7 +148,7 @@ const Sticky = ({ slice }) => {
                   })
                 }}>
           {/* <img ref={logoRef} className={`${styles.Logo} ${logoInPosition && styles.StuckLogo}` } src={Logo.src} alt="logo"/> */}
-          {/* <ParticleCanvas  imageUrl={Logo.src} isPageTop={true}/> */}
+          <ParticleCanvas  imageUrl={Logo.src} isPageTop={true}/>
         </div>
    
         {/* {logoInPosition &&  <div style={{visibility: "hidden"}}>

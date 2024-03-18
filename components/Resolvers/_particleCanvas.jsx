@@ -227,7 +227,7 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
             // }}
                 ref={canvas}
                 width={width}   
-                height={imageHeight ? imageHeight : 400} 
+                height={imageHeight ? imageHeight : 300} 
             />  
         </div>
     );
