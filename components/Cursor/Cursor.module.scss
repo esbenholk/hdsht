@@ -5,7 +5,11 @@
   z-index: 100;
   pointer-events: none;
   margin: 0 !important;
+
+
 }
+
+
 
 .Cross{
   position: fixed;
@@ -27,9 +31,15 @@
   left: 0;
   z-index: 100;
   pointer-events: none;
-  margin: 1rem;
+  margin-left: 2em;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
+}
+.Data span{
+  font-size: 0.6rem;
+  max-width: 500px;
+  font-family: var(--bubble-font);
 }
 
 
@@ -74,6 +84,8 @@
   right:0;
   transform: translate(-105%, -100%);
 }
+
+
 
 .DescriptionContianerTopLeft span{
   margin-bottom: 2rem;

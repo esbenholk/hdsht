@@ -1,12 +1,11 @@
-import * as THREE from "three";
-import React, { useRef, useMemo, useState, useEffect } from "react";
-import { TextureLoader, ShaderMaterial } from "three";
-import { Canvas, useLoader, useFrame, shaderMaterial } from "@react-three/fiber";
+
+import React, { useRef } from "react";
+import { TextureLoader } from "three";
+import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
 import rainVertShader from './rain.vert.glsl?raw';
 import rainFragShader from './rain.frag.glsl?raw';
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
-import { KernelSize } from "postprocessing";
+
 
 
 

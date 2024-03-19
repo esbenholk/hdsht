@@ -10,6 +10,8 @@ import VideoCanvas from "../Resolvers/videoCanvas";
 import ThreeD from "../threeD/threeD";
 import AiVideoCanvas from "./aiImageCanvas";
 import PixelCanvas from "../Resolvers/_pixelCanvasForImages";
+import PixelCanvasVideo from "../Resolvers/_pixelCanvasForVideo";
+
 
 
 const VideoHero = ({ slice }) => {
@@ -34,7 +36,9 @@ const VideoHero = ({ slice }) => {
                <AiVideoCanvas  media={slice.primary.videolink}/>
                <VideoCanvas videoUrl={slice.primary.videolink}/>
              </div>} */}
-             <PixelCanvas imageUrl={slice.primary.image.url}/>
+            <ThreeD image={slice.primary.image}/>
+
+             <PixelCanvasVideo  imageUrl={slice.primary.image.url} videoUrl={slice.primary.videolink.url}/>
              {/* <AiVideoCanvas  media={slice.primary.videolink}/> */}
 
       </motion.div>

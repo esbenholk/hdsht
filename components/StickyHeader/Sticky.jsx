@@ -28,10 +28,12 @@ const Sticky = ({ slice }) => {
   const [logoInPosition, setLogoInPosition] = useState(false);
   const [headerInPosition, setHeaderInPosition] = useState(false);
   const { footerOffset } = useFooterOffset();
+  const [isMobile, setIsMobile] = useState();
 
   useEffect(() => {
     const userAgent = navigator.userAgent;
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+    setIsMobile(mobile);
     if(!mobile){
       setOffset(0.65);
     }
@@ -147,8 +149,10 @@ const Sticky = ({ slice }) => {
 
                   })
                 }}>
-          {/* <img ref={logoRef} className={`${styles.Logo} ${logoInPosition && styles.StuckLogo}` } src={Logo.src} alt="logo"/> */}
-          <ParticleCanvas  imageUrl={Logo.src} isPageTop={true}/>
+          {/**/}
+          {isMobile ?  <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)", margin: "1rem"}}/> :<ParticleCanvas  imageUrl={Logo.src} isPageTop={true}/>}
+
+          
         </div>
    
         {/* {logoInPosition &&  <div style={{visibility: "hidden"}}>
@@ -156,7 +160,7 @@ const Sticky = ({ slice }) => {
         </div>} */}
 
         <div style={{width: "100%", position: "fixed", zIndex: 1, top: "0", backgroundColor: "var(--main-font-color-highlight)", maxHeight: "2.7rem", minHeight: "2rem", overflow: "hidden", transition: "opacity 0.01s ease-in", opacity: headerInPosition ? 1 :0}}>
-          <img src={Logo.src} alt="logo" className={`${styles.Logo}` } />
+          <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)", margin: "0rem 1rem"}}/>
         </div>
 
       </>

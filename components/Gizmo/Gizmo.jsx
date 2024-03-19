@@ -10,7 +10,7 @@ import { useScroll } from "framer-motion";
 import useCursor from "../Resolvers/States/Cursor";
 // import { KernelSize } from "postprocessing";
 
-extend({ EffectComposer, RenderPass, UnrealBloomPass });
+extend({ RenderPass, UnrealBloomPass });
 
 const Atom = () => {
   const group = useRef();

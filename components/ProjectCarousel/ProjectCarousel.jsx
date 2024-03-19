@@ -154,6 +154,7 @@ const ProjectCarousel = ({ slice, project }) => {
       animate="visible"
       exit="hidden"
       ref={carousel}
+     
     >
       <Progress
         slice={slice}
@@ -194,6 +195,12 @@ const ProjectCarousel = ({ slice, project }) => {
           }
           resetTimer();
         }}
+        onMouseOver={() => {
+          handleHover(project);
+        }}
+        onMouseLeave={() => {
+          handleLeave();
+        }}
         // onInit={() => {
         //   startTimer();
         // }}
@@ -211,14 +218,7 @@ const ProjectCarousel = ({ slice, project }) => {
         onClick={() => {
           gallerySwiperRef.current.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
         }}
-        onMouseOver={() => {
-          setHovering(true);
-          handleHover(project);
-        }}
-        onMouseLeave={() => {
-          setHovering(false);
-          handleLeave();
-        }}
+
       >
         {slice?.items.map((item, i) => {
           return (

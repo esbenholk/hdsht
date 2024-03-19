@@ -99,7 +99,7 @@ class Effect {
         this.canvas = canvas;
         this.width = canvas.width;
         this.height = canvas.height;
-        this.cellWidth = this.width  /45;
+        this.cellWidth = this.width  /20;
         this.cellHeight =  this.cellWidth;
         this.imageGrid = [];
         this.image = image;
@@ -158,16 +158,17 @@ class Effect {
 }
 
 
-const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
-    const {width} = useWindowDimensions();
+const PixelCanvasVideo  = ({ imageUrl, videoUrl, imageHeight, isPageTop }) => {
+    const {width, height} = useWindowDimensions();
     const [context, setContext] = useState();
     const [effect, setEffect] = useState();
     const canvas = useRef();
     const [animationFrameId, setAnimationId] = useState();
-    const imageRef = useRef();
+    const videoRef = useRef();
     const [gunSize, setGunSize] = useState(1);
     // const [size, setSize] = useState({x:925,y:115});
     const [size, setSize] = useState({x:width,y:width});
+
 
     const timer = useRef(null);
     const increment = () => {
@@ -207,7 +208,7 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
 
         // const myImage = new Image(100, 100);
         // myImage.src = imageUrl;
-        const myImage = imageRef.current;
+        const myImage = videoRef.current;
         
         const _effect = new Effect(canvas.current, myImage);
         setEffect(_effect);
@@ -218,6 +219,9 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
     }
 
     useEffect(()=>{
+
+        
+        console.log("VIDEO", videoUrl);
         startImage();
         window.addEventListener('resize', startImage);
         
@@ -278,10 +282,25 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
        
             />  
         </div>
-        <img src={imageUrl} ref={imageRef} style={{width: size.x+200, height: size.y, display: "none"}}/>
+        <div   style={{position: "fixed", top: 0}} >
+                <video
+                style={{position: "fixed", objectFit: "cover", display: "none"}}
+                autoPlay muted loop
+                ref={videoRef}
+                width={width}
+                height={height}
+                id="video"
+                controls="false"
+                preload="none"
+                src={videoUrl}
+                data-poster-time="10"
+                crossOrigin="anonymous"
+        
+                />
+            </div>
         </>
        
     );
 };
 
-export default PixelCanvas;
+export default PixelCanvasVideo ;
