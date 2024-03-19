@@ -32,7 +32,6 @@ export default function LandingGrid({workInGridWithDetails}) {
 
   const grid = useRef();
   const {width} = useWindowDimensions();
-  console.log("GRID HAS ARRAY", workInGridWithDetails);
  
 
 

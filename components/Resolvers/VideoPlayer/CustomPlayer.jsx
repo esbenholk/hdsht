@@ -43,7 +43,7 @@ const CustomPlayer = ({ media, videoRef }) => {
         }}
         ref={videoRef}
         onError={(e) => {
-          console.log(e);
+          // console.log(e);
         }}
         onEnded={() => {
           useVideo.setState({

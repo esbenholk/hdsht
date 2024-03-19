@@ -88,7 +88,6 @@ const Cursor = () => {
   },[projectTitle, trackedTitle])
 
   useEffect(()=>{
-    console.log("updates desc", projectDesc !== trackedDesc, projectDesc, trackedDesc);
     if(projectDesc !== trackedDesc){
       if(descRef.current){
         JumbleLettersInElement(descRef.current, projectDesc ? projectDesc : "", 1);

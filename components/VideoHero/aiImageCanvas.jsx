@@ -9,8 +9,6 @@ import useCursor from "../Resolvers/States/Cursor";
 
 
 const AiVideoCanvas = ({ media }) => {
-    const cursor = useCursor((state) => state);
-
   const videoRef = useRef();
   const [loaded, setLoaded] = useState(false);
   const [model, setModel] = useState();
@@ -22,7 +20,8 @@ const AiVideoCanvas = ({ media }) => {
   const [animationFrameId, setAnimationId] = useState();
   
   useEffect(() => {
-    console.log("MEDIA", media);
+    console.log("begins model load");
+
     setLoaded(true);  
     loadModel();
   },[]);
@@ -30,9 +29,11 @@ const AiVideoCanvas = ({ media }) => {
   async function loadModel() {
     try {
       const _model = await cocoSsd.load();
+
+      console.log("has model");
+
       setModel(_model);
       setHasModel(true);
-      console.log("gets model", _model);
  
     } catch (err) {
       console.log(err);
@@ -40,20 +41,24 @@ const AiVideoCanvas = ({ media }) => {
   } 
 
   const canvasRef = useCallback(node => {
+    console.log("canvas ref callback");
     if (node !== null) {
         let _context = node.getContext("2d");
         setContext(_context);
+        console.log("ai cnavas has context");
     }
   }, []);
 
   useEffect(()=>{
+    console.log("useeffect updates ai canvas", context, model);
+
     updateCanvas();
   }, [context, model, mouseIsDown, isActive])
 
 
   let last = 0;
-    let num = 0;
-    let speed = 0.1;
+  let num = 0;
+  let speed = 0.1;
 
 
   function updateCanvas(timeStamp) {
@@ -113,39 +118,38 @@ const AiVideoCanvas = ({ media }) => {
 
   return (
     loaded && (
-      <motion.div className={styles.Container}>
-           <div 
-            // onMouseEnter={()=>{
-            //     setIsActive(true);
-            //     updateCanvas();
+      <motion.div className={styles.Container} 
+      
 
-            // }}
-            onMouseDown={()=>{
-                setMouseIsDowm(true);
-            }}
-       
-            onMouseUp={()=>{
-                setMouseIsDowm(false);
-              
-            }}
-            onMouseOver={()=>{
-                setIsActive(true);
+        onMouseDown={()=>{
+          setMouseIsDowm(true);
+          console.log("mouse is down");
 
-            }}
-            onMouseLeave={()=>{
-                setIsActive(false);
+        }}
 
-                cancelAnimationFrame(animationFrameId);
-            }}>
+        onMouseUp={()=>{
+            setMouseIsDowm(false);
+            console.log("mouse is up");
+          
+        }}
+        onMouseOver={()=>{
+            setIsActive(true);
+            console.log("mouse is over");
 
-            <div id="canvas-container">
-                <canvas ref={canvasRef} id="aicanvas" width={width} height={height} 
-                 style={{position: "fixed", top: 0, width: width, height: height}} 
+        }}
+        onMouseLeave={()=>{
+            setIsActive(false);
+
+            cancelAnimationFrame(animationFrameId);
+        }}>
+   
+           
+          <canvas ref={canvasRef} id="aicanvas" width={width} height={height} 
+                 style={{width: width, height: height}} 
             ></canvas>
-            </div>
-            <div   style={{position: "fixed", top: 0, width: width, height: height, visibility: mouseIsDown ? "hidden" : "visible"}} >
+     
                 <video
-                style={{position: "fixed", objectFit: "cover"}}
+                style={{position: "fixed", objectFit: "cover", top: 0, width:200, height: height, visibility: mouseIsDown ? "hidden" : "visible"}}
                 autoPlay muted loop
                 ref={videoRef}
                 width={width}
@@ -158,9 +162,9 @@ const AiVideoCanvas = ({ media }) => {
                 crossOrigin="anonymous"
         
                 />
-            </div>
+      
         
-        </div>
+    
         
 
       </motion.div>

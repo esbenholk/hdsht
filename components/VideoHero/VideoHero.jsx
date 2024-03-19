@@ -11,35 +11,64 @@ import ThreeD from "../threeD/threeD";
 import AiVideoCanvas from "./aiImageCanvas";
 import PixelCanvas from "../Resolvers/_pixelCanvasForImages";
 import PixelCanvasVideo from "../Resolvers/_pixelCanvasForVideo";
-
+import useWindowDimensions from "../Resolvers/UseWindowDimensions";
 
 
 const VideoHero = ({ slice }) => {
   const videoRef = useRef();
   const span = useRef();
 
+  const [isMobile, setIsMobile] = useState();
   const [loaded, setLoaded] = useState(false);
+  const {width} = useWindowDimensions();
   useEffect(() => {
-    console.log("VIDEO HEADER", slice);
     setLoaded(true);
+    if(width < 600){
+      setIsMobile(true);
+
+    }
   }, []);
+
+
+
   return (
     loaded && (
       <motion.div className={styles.Container}>
-              {/* {slice.primary.image ? <ThreeD image={slice.primary.image}/> : 
-               <div className={styles.VideoContainer}>
-               <MediaResolver
-                 media={slice.primary.videolink}
-                 videoRef={videoRef}
-                 loop={true}
-               />
-               <AiVideoCanvas  media={slice.primary.videolink}/>
-               <VideoCanvas videoUrl={slice.primary.videolink}/>
-             </div>} */}
-            <ThreeD image={slice.primary.image}/>
+            <div className={styles.VideoContainer}>
+              {isMobile ? 
+                <>
+                {!slice.primary.videolink ?    
+                  <MediaResolver
+                    media={slice.primary.image}
+                  videoRef={videoRef}
+                  loop={true}
+                />:
+                <MediaResolver
+                  media={slice.primary.videolink}
+                  videoRef={videoRef}
+                  loop={true}
+                  />  
+                }
+                </> : <>
+           
+              {/* object recognition in video cnavas */}
+              {/* <AiVideoCanvas  media={slice.primary.videolink}/> */}
 
-             <PixelCanvasVideo  imageUrl={slice.primary.image.url} videoUrl={slice.primary.videolink.url}/>
-             {/* <AiVideoCanvas  media={slice.primary.videolink}/> */}
+                {/* simple image in pixelation canvas */}
+                {/* <PixelCanvas imageUrl={slice.primary.image.url} /> */}
+
+                {/* video in pixelation canvas */}
+                <PixelCanvasVideo  imageUrl={slice.primary.image.url} videoUrl={slice.primary.videolink.url}/>
+                
+                {/* rain shader */}
+                {/* <ThreeD image={slice.primary.image}/> */}
+              
+              </>
+              }
+            </div>
+
+   
+        
 
       </motion.div>
     )

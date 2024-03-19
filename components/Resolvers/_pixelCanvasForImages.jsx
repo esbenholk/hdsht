@@ -208,6 +208,9 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
         // const myImage = new Image(100, 100);
         // myImage.src = imageUrl;
         const myImage = imageRef.current;
+        // const aspectRatio = myImage.height / myImage.width;
+        // const _height = width / aspectRatio;
+        // setSize({x: _height})
         
         const _effect = new Effect(canvas.current, myImage);
         setEffect(_effect);
@@ -236,7 +239,7 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
     // 
     return (
         <>
-         <div style={{width: "100%", display: "flex",  alignContent: "center", justifyContent: "center", marginBottom: isPageTop ? "0" : "10rem"}} 
+         <div style={{marginBottom: isPageTop ? "0" : "10rem"}} 
             onMouseOver={() => {
                 useCursor.setState({
                     cursorVariant: "logo",
@@ -278,7 +281,7 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
        
             />  
         </div>
-        <img src={imageUrl} ref={imageRef} style={{width: size.x+200, height: size.y, display: "none"}}/>
+        <img src={imageUrl} ref={imageRef} style={{width: size.x, height: size.y, display: "none"}}/>
         </>
        
     );

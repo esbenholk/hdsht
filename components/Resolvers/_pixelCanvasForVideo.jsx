@@ -184,6 +184,8 @@ const PixelCanvasVideo  = ({ imageUrl, videoUrl, imageHeight, isPageTop }) => {
 
     
     const render = () => {
+        console.log("renders", context,effect,canvas.current);
+
         if(context && effect && canvas.current){
             context.clearRect(0,0,width, canvas.current.height);
             effect.draw(context);
@@ -202,6 +204,7 @@ const PixelCanvasVideo  = ({ imageUrl, videoUrl, imageHeight, isPageTop }) => {
 
     const startImage = () =>{
 
+
         let _context = canvas.current.getContext('2d');
         _context.globalCompositeOperation='destination-over';
         setContext(_context); 
@@ -209,6 +212,9 @@ const PixelCanvasVideo  = ({ imageUrl, videoUrl, imageHeight, isPageTop }) => {
         // const myImage = new Image(100, 100);
         // myImage.src = imageUrl;
         const myImage = videoRef.current;
+
+        console.log("start vidoe canvas", myImage);
+
         
         const _effect = new Effect(canvas.current, myImage);
         setEffect(_effect);
@@ -221,7 +227,6 @@ const PixelCanvasVideo  = ({ imageUrl, videoUrl, imageHeight, isPageTop }) => {
     useEffect(()=>{
 
         
-        console.log("VIDEO", videoUrl);
         startImage();
         window.addEventListener('resize', startImage);
         
@@ -240,7 +245,7 @@ const PixelCanvasVideo  = ({ imageUrl, videoUrl, imageHeight, isPageTop }) => {
     // 
     return (
         <>
-         <div style={{width: "100%", display: "flex",  alignContent: "center", justifyContent: "center", marginBottom: isPageTop ? "0" : "10rem"}} 
+         <div style={{marginBottom: isPageTop ? "0" : "10rem"}} 
             onMouseOver={() => {
                 useCursor.setState({
                     cursorVariant: "logo",
@@ -249,7 +254,6 @@ const PixelCanvasVideo  = ({ imageUrl, videoUrl, imageHeight, isPageTop }) => {
                     description: "hold to increase power"
                   });
             }}
-         
             onMouseLeave={() => {
                   useCursor.setState({
                     cursorVariant: "default",
@@ -260,12 +264,11 @@ const PixelCanvasVideo  = ({ imageUrl, videoUrl, imageHeight, isPageTop }) => {
                   });
                   cancelAnimationFrame(animationFrameId);
             }} >
-
-
             <canvas
                 // onClick={(e)=>{
                 //     shoot(e);
                 // }}
+                ref={canvas}
                 onMouseDown={(e)=>{
                     console.log(e, gunSize);
                     increment();
@@ -278,12 +281,11 @@ const PixelCanvasVideo  = ({ imageUrl, videoUrl, imageHeight, isPageTop }) => {
                 height={size.y}
                 width={size.x}
                 style={{maxWidth: "100%", maxHeight: "100%", backgroundColor: "#ff9999"}}
-                ref={canvas}
-       
+             
             />  
         </div>
-        <div   style={{position: "fixed", top: 0}} >
-                <video
+        <div style={{position: "fixed", top: 0}} >
+            <video
                 style={{position: "fixed", objectFit: "cover", display: "none"}}
                 autoPlay muted loop
                 ref={videoRef}
@@ -291,13 +293,13 @@ const PixelCanvasVideo  = ({ imageUrl, videoUrl, imageHeight, isPageTop }) => {
                 height={height}
                 id="video"
                 controls="false"
-                preload="none"
+                preload="true"
                 src={videoUrl}
                 data-poster-time="10"
                 crossOrigin="anonymous"
         
                 />
-            </div>
+        </div>
         </>
        
     );
