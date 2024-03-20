@@ -9,6 +9,9 @@ import Layout from "../Layout/Layout";
 import { useExcluder } from "../Resolvers/States/Excluder";
 import Marquee from "react-marquee-slider";
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
+import ClientLogoPixelCanvas from "./ClientLogoCanvas.jsx";
+
+import { ImagePixelated } from "react-pixelate";
 
 const fadeFromRight = {
   right: {
@@ -78,8 +81,100 @@ const TickerContent = ({slice}) =>{
                 </div>
   </>)
 }
-
 const ClientLogoGrid = ({ slice }) => {
+  const grid = useRef();
+  const inView = useInView(grid, { once: true });
+  const {width} = useWindowDimensions();
+  const [paused, setPaused] = useState(false);
+
+  const [isMobile, setIsMobile] = useState();
+
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent;
+    const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+    setIsMobile(mobile);
+  },[])
+
+  return (
+    <motion.div
+      className={styles.Wrapper}
+      initial="right"
+      animate={inView ? "center" : "right"}
+      ref={grid}
+      onMouseOver={()=>{
+        setPaused(true);
+      }}
+      onMouseLeave={()=>{
+        setPaused(false);
+      }}
+    >
+      <motion.div className={styles.TitleContainer}>
+        <span>{slice.primary.suborder}</span>
+        <PrismicRichText field={slice.primary.title} />
+      </motion.div>
+
+        <motion.div
+          className={styles.Container}
+          variants={fadeFromRight}
+        >
+                  {slice?.items?.map((item, index) =>  (
+                          <motion.div
+                            className={styles.LogoWrapper}
+                            key={index}
+                            variants={fadeFromRight}
+                      
+                          >
+                            {/* <a
+                              key={index}
+                              target="_blank"
+                              href={item.link.url}
+                              onMouseOver={() => {
+                                useCursor.setState({
+                                  cursorVariant: "hoveronlink",
+                                  isOverProject: true,
+                                  title: "click 2 open",
+                                  description: item.link.url
+                                });
+                              }}
+                              onMouseLeave={() => {
+                                useCursor.setState({
+                                  cursorVariant: "default",
+                                  title: "",
+                                  description: "",
+                                  isOverProject: false
+                                });
+                              }}
+                            >
+                              <img
+                                src={item.logo.url}
+                                width={100}
+                                height={90}
+                                alt={item.logo.url}
+                              />
+                            </a> */}
+                                   {/* <img
+                                src={item.logo.url}
+                                width={100}
+                                height={90}
+                                alt={item.logo.url}
+                              /> */}
+                            {/* <ImagePixelated src={item.logo.url}  fillTransparencyColor={"lightgrey"} centered={true} pixelSize={1}/> */}
+
+                            {isMobile ? <img
+                                src={item.logo.url}
+                          
+                                alt={item.logo.url}
+                              /> : <ClientLogoPixelCanvas imageUrl={item.logo.url} imageHeight={200} imageWidth={500}/>}
+                          </motion.div>
+                        
+                        ))}
+         
+        </motion.div>
+    </motion.div>
+  );
+};
+const ClientLogoCarousel = ({ slice }) => {
   const grid = useRef();
   const inView = useInView(grid, { once: true });
   const {width} = useWindowDimensions();

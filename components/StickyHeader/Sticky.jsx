@@ -97,16 +97,20 @@ const Sticky = ({ slice }) => {
       ref={header}
       id={slice.primary.title}
       onClick={() => {
+
         const nextSibling = header.current.nextSibling;
-        const offset =
-         ( nextSibling.offsetTop -
-          slice.primary.order * height * OffSetValue) - 50;
+        nextSibling.scrollIntoView()
+
+        console.log("header click", slice.primary.title, header.current, nextSibling);
+
+        // const offset =
+        //  ( nextSibling.offsetTop -
+        //   slice.primary.order * height * OffSetValue) - 50;
 
 
-        // const bodyContainer = document.getElementsByClassName("body")[0];
-        // bodyContainer.scrollTop = offset;
-        window.scrollTo( { top: offset,behavior: "smooth"});
-
+        // // const bodyContainer = document.getElementsByClassName("body")[0];
+        // // bodyContainer.scrollTop = offset;
+        // window.scrollTo( { top: offset,behavior: "smooth"});
      
  
       }}
@@ -160,7 +164,7 @@ const Sticky = ({ slice }) => {
         </div>} */}
 
         <div style={{width: "100%", position: "fixed", zIndex: 1, top: "0", backgroundColor: "var(--main-font-color-highlight)", maxHeight: "2.7rem", minHeight: "2rem", overflow: "hidden", transition: "opacity 0.01s ease-in", opacity: headerInPosition ? 1 :0}}>
-          <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)", margin: "0rem 1rem"}}/>
+          <img src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)", margin: "0 rem 1rem"}}/>
         </div>
 
       </>

@@ -1,7 +1,9 @@
+
 import { useEffect, useRef,useState, createRef, useCallback,useGenerator } from "react";
 // import Image from "next/image";
-import useCursor from "./States/Cursor";
-import useWindowDimensions from "./UseWindowDimensions";
+import useCursor from "../Resolvers/States/Cursor";
+import useWindowDimensions from "../Resolvers/UseWindowDimensions";
+
 
 
 class Cell {
@@ -42,18 +44,16 @@ class Cell {
  
         if(!this.isExploding){
 
-            if(this.distance < this.effect.mouse.radius*(2+this.effect.mouse.gunsize)){
+            // if(this.distance < this.effect.mouse.radius*(2+this.effect.mouse.gunsize)){
 
-                this.force = this.distance/this.effect.mouse.radius;
-                this.angle = Math.atan2(this.dx, this.dy);
-                this.vx += this.force * Math.cos(this.angle);
-                this.vy += this.force* Math.sin(this.angle);
-            } 
+            //     this.force = this.distance/this.effect.mouse.radius;
+            //     this.angle = Math.atan2(this.dx, this.dy);
+            //     this.vx += this.force * Math.cos(this.angle);
+            //     this.vy += this.force* Math.sin(this.angle);
+            // } 
     
-            this.slideX += (this.vx *= this.friction)- (this.slideX *this.ease);
-            this.slideY += (this.vy *= this.friction) - (this.slideY *this.ease);
-
-
+            // this.slideX += (this.vx *= this.friction)- (this.slideX *this.ease);
+            // this.slideY += (this.vy *= this.friction) - (this.slideY *this.ease);
         } else {
 
             // this.force = this.distance/this.effect.mouse.radius;
@@ -97,11 +97,11 @@ class Cell {
 }
 
 class Effect {
-    constructor(canvas, image){
+    constructor(canvas, image,imageWidth, imageHeight){
         this.canvas = canvas;
-        this.width = canvas.width;
-        this.height = canvas.height;
-        this.cellWidth = this.width  /15;
+        this.width = imageWidth;
+        this.height = imageHeight;
+        this.cellWidth = this.width  /100;
         this.cellHeight =  this.cellWidth;
         this.imageGrid = [];
         this.image = image;
@@ -112,7 +112,7 @@ class Effect {
         this.mouse = {
             x: undefined,
             y: undefined,
-            radius: 1300,
+            radius: 700,
             offsetX: 10,
             offsetY: 10,
             directionX: undefined,
@@ -158,93 +158,75 @@ class Effect {
         this.imageGrid.forEach(particle=>particle.shoot(gunSize));
     }
 }
-
-
-const PixelCanvasVideo  = ({ imageUrl, videoUrl, imageHeight, isPageTop }) => {
-    const {width, height} = useWindowDimensions();
+const ClientLogoPixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
+    const {width} = useWindowDimensions();
     const [context, setContext] = useState();
     const [effect, setEffect] = useState();
-    const [canvas, setCanvas] = useState();
+    const canvas = useRef();
     const [animationFrameId, setAnimationId] = useState();
-    const videoRef = useRef();
+    const imageRef = useRef();
     const [gunSize, setGunSize] = useState(1);
-    const [mouseIsDown, setMouseIsDowm] = useState(false);
-    const [isActive, setIsActive] = useState(false);
-
-    const [size, setSize] = useState({x:width,y:width});
-
+    // const [size, setSize] = useState({x:925,y:115});
+    const [size, setSize] = useState({x:imageWidth,y:imageHeight});
 
     const timer = useRef(null);
     const increment = () => {
-       
-        timer.current = setInterval(() => {
-            let gunSizeTemp = gunSize + 1;
-            setGunSize(prev => prev + 1);
-            effect.increaseGun(gunSize);
-        }, 100);
-       
+ 
+        timer.current = setInterval(() => setGunSize(prev => prev + 1), 100);
+        effect.increaseGun(gunSize);
     };
 
     function timeoutClear() {
         setGunSize(1);
-        effect.increaseGun(1);
         clearInterval(timer.current);
     }
 
     
     const render = () => {
-
-        if(context && effect && canvas){
-            context.clearRect(0,0,width, canvas.height);
+        if(context && effect && canvas.current){
+            context.clearRect(0,0,width, canvas.current.height);
             effect.draw(context);
             effect.update(context);
-
+            setAnimationId(window.requestAnimationFrame(render));
         }
-        setAnimationId(window.requestAnimationFrame(render));
-
     };
 
     const shoot = (e) =>{
+        window.cancelAnimationFrame(animationFrameId);
         if(effect){
             effect.shoot(e, gunSize);
         }
+       render();
     }
 
-    const canvasRef = useCallback(node => {
-        if (node !== null) {
-            let _context = node.getContext("2d");
-            _context.globalCompositeOperation='destination-over';
-            setContext(_context);
-            setCanvas(node);
-    
-            node.style.cssText = 'image-rendering: optimizeSpeed;' + // FireFox < 6.0
-            'image-rendering: -moz-crisp-edges;' + // FireFox
-            'image-rendering: -o-crisp-edges;' +  // Opera
-            'image-rendering: -webkit-crisp-edges;' + // Chrome
-            'image-rendering: crisp-edges;' + // Chrome
-            'image-rendering: -webkit-optimize-contrast;' + // Safari
-            'image-rendering: pixelated; ' + // Future browsers
-            '-ms-interpolation-mode: nearest-neighbor;'; 
-        }
-      }, []);
+    const startImage = () =>{
 
+        let _context = canvas.current.getContext('2d');
+        _context.globalCompositeOperation='destination-over';
+        
+        setContext(_context); 
 
+        // const myImage = new Image(100, 100);
+        // myImage.src = imageUrl;
+        // const myImage = imageRef.current;
+        // myImage.width = size.x;
+        // myImage.height = size.y;
+        // const aspectRatio = myImage.height / myImage.width;
+        // const _height = width / aspectRatio;
+        // setSize({x: _height})
 
-    
-    useEffect(()=>{
-        if(canvas && context){
-            startImage();
-        }
-      }, [context, canvas])
-    
-    useEffect(()=>{
-        window.requestAnimationFrame(render);
-
-      }, [effect])
-
+        
+        const _effect = new Effect(canvas.current, imageRef.current, size.x, size.y);
+        setEffect(_effect);
+        _effect.init(_context);
+        _effect.draw(_context);
+        
+        render();
+ 
+    }
 
     useEffect(()=>{
-
+        startImage();
         window.addEventListener('resize', startImage);
         
         return () => {
@@ -256,97 +238,57 @@ const PixelCanvasVideo  = ({ imageUrl, videoUrl, imageHeight, isPageTop }) => {
   
     },[context, canvas])
 
-    const startImage = () =>{
-
-        cancelAnimationFrame(animationFrameId);
-        const myImage = videoRef.current;
-
-        console.log("start image", canvasRef);
-        
-        const _effect = new Effect(canvas, myImage);
-        setEffect(_effect);
-        _effect.init(context);
-        _effect.draw(context);
-        setIsActive(true);
-        // render();
-    }
 
 
-    function toggleMouseOver(){
-        useCursor.setState({
-            cursorVariant: "logo",
-            isOverProject: true,
-            title: mouseIsDown ? "increasing power ":"click 2 shoot",
-            description: mouseIsDown ? "increasing power ": "hold to increase power"
-          });
-        setIsActive(true);
-    }
 
+    // 
     return (
         <>
          <div 
-            onMouseOver={toggleMouseOver}
-            onMouseEnter={()=>{
-                window.requestAnimationFrame(render); 
-                // setIsActive(true);
-            }}
-
-            onMouseLeave={() => {
-                // setIsActive(false);
-                cancelAnimationFrame(animationFrameId);
-
+            onMouseOver={() => {
                 useCursor.setState({
+                    cursorVariant: "logo",
+                    isOverProject: true,
+                    title: "shoot",
+                    description: "hold to increase power"
+                  });
+            }}
+         
+            onMouseLeave={() => {
+                  useCursor.setState({
                     cursorVariant: "default",
                     isOverProject: false,
                     title: "",
                     description: ""
 
                   });
+                  cancelAnimationFrame(animationFrameId);
             }} >
+
+
             <canvas
                 // onClick={(e)=>{
                 //     shoot(e);
                 // }}
-                ref={canvasRef}
                 onMouseDown={(e)=>{
+                    console.log(e, gunSize);
                     increment();
-                    setMouseIsDowm(true);
                 }}
-
                 onMouseUp={(e)=>{
                     shoot(e, gunSize);
                     timeoutClear();
-                    setMouseIsDowm(false);
                 }}
-          
                 
-       
-
                 height={size.y}
                 width={size.x}
-                style={{maxWidth: "100%", maxHeight: "100%", backgroundColor: "var( --main-bg-color)"}}
-             
-            ></canvas> 
-            <video
-                style={{position: "fixed", top:0, left:0,right:0, bottom:0,objectFit: "cover", visibility: isActive ? "hidden" : "visible"}}
-                autoPlay muted loop
-                ref={videoRef}
-                width={width}
-                height={height}
-                id="video"
-                controls="false"
-                preload="true"
-                src={videoUrl}
-                data-poster-time="10"
-                crossOrigin="anonymous"
-        
-                /> 
+                ref={canvas}
+       
+            />  
         </div>
-   
-  
+        <img src={imageUrl} ref={imageRef} width={size.x} height={size.y} style={{width: size.x, height: size.y, display: "none"}}/>
         </>
        
     );
 };
 
-export default PixelCanvasVideo ;
+export default ClientLogoPixelCanvas;

@@ -18,11 +18,14 @@ export default function App({ Component, pageProps }) {
   const [desc, setDesc] = useState("");
   const [title, setTitle] = useState("");
   const router = useRouter();
+  const [isMobile, setIsMobile] = useState();
 
 
   useEffect(() => {
-    // If the component is unmounted, unsubscribe
-    // from the event with the `off` method:
+    const userAgent = navigator.userAgent;
+    const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+    setIsMobile(mobile);
+
     console.log("App comp mounted", Component, pageProps);
     if(pageProps.page.data && pageProps.page.data.description){
       setDesc(pageProps.page.data.description);
@@ -57,7 +60,9 @@ export default function App({ Component, pageProps }) {
             </PrismicPreview>
 
          
-            <section onMouseOver={() => {
+            <section 
+            
+              onMouseOver={() => {
                 if(!router.asPath.includes("work")){
                   useCursor.setState({
                     cursorVariant: "logo",
@@ -91,7 +96,7 @@ export default function App({ Component, pageProps }) {
                    {/* <PixelCanvas imageUrl={Logo.src} isPageTop={false}/> */}
                    {/* <ParticleCanvas imageUrl={Logo.src} isPageTop={false}/> */}
 
-            {/* <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 6rem)", margin: "3rem"}}/> */}
+            {isMobile ?  <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)", margin: "1rem"}}/> :<ParticleCanvas  imageUrl={Logo.src} isPageTop={false}/>}
           </section>
         {/* </div> */}
 

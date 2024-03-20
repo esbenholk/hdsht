@@ -9,11 +9,17 @@ const nextConfig = {
     return config
   },
   images: {
-    domains: ["images.prismic.io", "hdsht.cdn.prismic.io/"],
+    domains: ["images.prismic.io", "hdsht.cdn.prismic.io/", "hdsht.cdn.prismic.io"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'hdsht.cdn.prismic.io',
+        port: '',
+      },
+    ],
   },
+
 };
-
-
 
 module.exports = nextConfig
 module.exports = {
@@ -23,6 +29,7 @@ module.exports = {
       issuer: /\.[jt]sx?$/,
       use: ["@svgr/webpack"],
     });
+
     //sass import rule
     config.module.rules.push({
       test: /\.scss$/,

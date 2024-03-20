@@ -6,24 +6,20 @@ import useWindowDimensions from "../UseWindowDimensions";
 import useCursor from "../States/Cursor";
 const MediaResolver = ({ name, media, slide, videoRef, loop }) => {
 
-  const {width, height} = useWindowDimensions();
-  
-  // useEffect(()=>{
-  //   console.log("resolver", name, media);
-  // },[])
 
   if (
+    
     media.url.match(".(mp4|mkv|wmv|m4v|mov|avi|flv|webm|flac|mka|m4a|aac|ogg)")
   ) {
 
     return <CustomPlayer media={media} videoRef={videoRef} />;
-  } else  {
+  } else if (media.kind === "image") {
     return (
       <>
        <Image
         src={media.url}
-        width={media.width ? media.width : width}
-        height={media.height ? media.height  : height}
+        width={media.width}
+        height={media.height }
         alt={media.name}
         loading="eager"
       />

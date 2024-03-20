@@ -21,6 +21,7 @@ const VideoHero = ({ slice }) => {
   const [isMobile, setIsMobile] = useState();
   const [loaded, setLoaded] = useState(false);
   const {width} = useWindowDimensions();
+
   useEffect(() => {
     setLoaded(true);
     if(width < 600){

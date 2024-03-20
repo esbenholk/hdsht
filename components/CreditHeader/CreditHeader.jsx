@@ -35,6 +35,25 @@ const CreditHeader = ({ slice }) => {
           slice.primary.negative_order * creditOffset * offset - footerOffset
         }px - ${creditOffset}px)`,
         zIndex: slice.primary.order ? slice.primary.order +10 : 10,
+        
+      }}
+      onClick={() => {
+
+        const nextSibling = header.current.nextSibling;
+        nextSibling.scrollIntoView()
+
+        console.log("header click", slice.primary.title, header.current, nextSibling);
+
+        // const offset =
+        //  ( nextSibling.offsetTop -
+        //   slice.primary.order * height * OffSetValue) - 50;
+
+
+        // // const bodyContainer = document.getElementsByClassName("body")[0];
+        // // bodyContainer.scrollTop = offset;
+        // window.scrollTo( { top: offset,behavior: "smooth"});
+     
+ 
       }}
     >
       <div className={styles.Header}>

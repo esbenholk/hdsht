@@ -4500,6 +4500,11 @@ react-merge-refs@^2.0.1:
   resolved "https://registry.yarnpkg.com/react-merge-refs/-/react-merge-refs-2.0.1.tgz#a1f8c2dadefa635333e9b91ec59f30b65228b006"
   integrity sha512-pywF6oouJWuqL26xV3OruRSIqai31R9SdJX/I3gP2q8jLxUnA1IwXcLW8werUHLZOrp4N7YOeQNZrh/BKrHI4A==
 
+react-pixelate@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/react-pixelate/-/react-pixelate-0.0.1.tgz#fc3b8a1be220605ea8b3a994ff002b3017022b09"
+  integrity sha512-g/kV87lI6bjofrUb+KGFW5WsTIjQAcptJhe4JbXW/BhaPoKGepV4/P2gLrg7ifhAcXoH+t62pOq21bbU39V6Mg==
+
 react-reconciler@^0.27.0:
   version "0.27.0"
   resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.27.0.tgz#360124fdf2d76447c7491ee5f0e04503ed9acf5b"

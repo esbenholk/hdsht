@@ -11,7 +11,7 @@
   -webkit-animation: blink 0.1s ease infinite; 
   -moz-animation: blink 0.1s ease infinite;
   animation: blink 0.1s ease infinite;
-  animation-iteration-count: 100;
+  // animation-iteration-count: 100;
   border-top: 2px solid #FFF;
   border-top-left-radius: 3rem;
   border-top-right-radius: 3rem;
@@ -27,7 +27,7 @@
     background-color: rgba(0,0,0,0);
     border: none;
     font-family: var(--third-font-reg);
-
+    font-size: 0.5rem;
     color: var(--main-text-color);
     cursor:none;
     &:hover {
