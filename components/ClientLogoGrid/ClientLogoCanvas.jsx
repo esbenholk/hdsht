@@ -101,7 +101,7 @@ class Effect {
         this.canvas = canvas;
         this.width = imageWidth;
         this.height = imageHeight;
-        this.cellWidth = this.width  /100;
+        this.cellWidth = this.width  /15;
         this.cellHeight =  this.cellWidth;
         this.imageGrid = [];
         this.image = image;
@@ -244,32 +244,29 @@ const ClientLogoPixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop })
     // 
     return (
         <>
-         <div 
-            onMouseOver={() => {
-                useCursor.setState({
-                    cursorVariant: "logo",
-                    isOverProject: true,
-                    title: "shoot",
-                    description: "hold to increase power"
-                  });
-            }}
-         
-            onMouseLeave={() => {
-                  useCursor.setState({
-                    cursorVariant: "default",
-                    isOverProject: false,
-                    title: "",
-                    description: ""
-
-                  });
-                  cancelAnimationFrame(animationFrameId);
-            }} >
+      
 
 
             <canvas
-                // onClick={(e)=>{
-                //     shoot(e);
-                // }}
+                    onMouseOver={() => {
+                        useCursor.setState({
+                            cursorVariant: "logo",
+                            isOverProject: true,
+                            title: "shoot",
+                            description: "hold to increase power"
+                        });
+                    }}
+                
+                    onMouseLeave={() => {
+                        useCursor.setState({
+                            cursorVariant: "default",
+                            isOverProject: false,
+                            title: "",
+                            description: ""
+
+                        });
+                        cancelAnimationFrame(animationFrameId);
+                    }}
                 onMouseDown={(e)=>{
                     console.log(e, gunSize);
                     increment();
@@ -281,10 +278,12 @@ const ClientLogoPixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop })
                 
                 height={size.y}
                 width={size.x}
+                // height={10}
+                // width={10}
                 ref={canvas}
        
             />  
-        </div>
+       
         <img src={imageUrl} ref={imageRef} width={size.x} height={size.y} style={{width: size.x, height: size.y, display: "none"}}/>
         </>
        

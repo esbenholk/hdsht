@@ -129,7 +129,7 @@ const Page = ({ page }) => {
         >
           <SliceZone slices={page.data.slices} components={components} />
         </motion.div>
-        <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: "5rem", backgroundColor: "var(--main-bg-color)"}}>
+        <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: "10rem", backgroundColor: "var(--main-bg-color)"}}>
 
         </div>
 

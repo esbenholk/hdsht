@@ -239,7 +239,7 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
     // 
     return (
         <>
-         <div style={{marginBottom: isPageTop ? "0" : "10rem"}} 
+         <div style={{marginBottom: isPageTop ? "0" : "10rem", position: "fixed", top:0}} 
             onMouseOver={() => {
                 useCursor.setState({
                     cursorVariant: "logo",
@@ -276,7 +276,7 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
 
                 height={size.y}
                 width={size.x}
-                style={{maxWidth: "100%", maxHeight: "100%", backgroundColor: "#ff9999"}}
+                style={{maxWidth: "100%", maxHeight: "100%", backgroundColor: "rgba(0,0,0,0)"}}
                 ref={canvas}
        
             />  

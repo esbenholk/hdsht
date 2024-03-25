@@ -48,18 +48,28 @@ const VideoHero = ({ slice }) => {
                   media={slice.primary.videolink}
                   videoRef={videoRef}
                   loop={true}
+                  isVideoHeader={true}
+
                   />  
                 }
                 </> : <>
+
+                <MediaResolver
+                  media={slice.primary.videolink}
+                  videoRef={videoRef}
+                  loop={true}
+                  isVideoHeader={true}
+                  />  
+                
            
               {/* object recognition in video cnavas */}
               {/* <AiVideoCanvas  media={slice.primary.videolink}/> */}
 
                 {/* simple image in pixelation canvas */}
-                {/* <PixelCanvas imageUrl={slice.primary.image.url} /> */}
+                <PixelCanvas imageUrl={slice.primary.image.url} />
 
                 {/* video in pixelation canvas */}
-                <PixelCanvasVideo  imageUrl={slice.primary.image.url} videoUrl={slice.primary.videolink.url}/>
+                {/* <PixelCanvasVideo  imageUrl={slice.primary.image.url} videoUrl={slice.primary.videolink.url}/> */}
                 
                 {/* rain shader */}
                 {/* <ThreeD image={slice.primary.image}/> */}
