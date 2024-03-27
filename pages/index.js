@@ -36,28 +36,7 @@ const Page = ({ page }) => {
   
   },[bodyRef])
 
-  function startRaining(){
-    
-    const image = bodyRef.current;
-
-    
-    var engine = new RainyDay({
-      image,
-
-      onInitialized: () => {
-        engine.rain([[0, 0, 80]]);
-        engine.rain(
-          [
-            [3, 3, 0.1],
-            [5, 5, 0.9],
-            [6, 2, 1],
-          ],
-          500
-        );
-      },
-    });
-
-  }
+  
   
 
   useEffect(() => {
@@ -66,7 +45,7 @@ const Page = ({ page }) => {
 
     setIsDesktop(!mobile);
 
-    let incr = 35;
+    let incr = 42;
     if(mobile){
       incr = 55;
     }
@@ -129,7 +108,7 @@ const Page = ({ page }) => {
         >
           <SliceZone slices={page.data.slices} components={components} />
         </motion.div>
-        <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: "10rem", backgroundColor: "var(--main-bg-color)"}}>
+        <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: width>600 ? "10rem" : "11rem", backgroundColor: "var(--main-bg-color)"}}>
 
         </div>
 

@@ -11,6 +11,7 @@ class Cell {
         this.y = y;
         this.width = effect.cellWidth;
         this.height = effect.cellHeight;
+
         this.dx = 0;
         this.dy = 0;
         this.distance = 0;
@@ -84,7 +85,6 @@ class Cell {
     draw(context){
         if(context){
             // context.strokeRect(this.x ,this.y, this.width, this.height);
-            // context.drawImage(this.effect.image, this.x + this.drawOffsetX, this.y + this.drawOffsetY, this.cellWidth, this.cellHeight, this.x, this.y, this.cellWidth, this.cellHeight);
             if(this.x+this.slideX < this.effect.width && this.y+this.slideY < this.effect.height || this.x+this.slideX > 0 && this.y+this.slideY > 0 ){
                 context.drawImage(this.effect.image, this.x+this.slideX ,this.y+this.slideY, this.width, this.height,this.x + this.positionSlideX ,this.y + this.positionSlideY, this.width, this.height)
             } else {
@@ -97,20 +97,17 @@ class Cell {
 class Effect {
     constructor(canvas, image){
         this.canvas = canvas;
-        this.width = canvas.width;
-        this.height = canvas.height;
-        this.cellWidth = this.width  /45;
+        this.width = image.width;
+        this.height = image.height;
+        this.cellWidth = image.width/45;
         this.cellHeight =  this.cellWidth;
         this.imageGrid = [];
         this.image = image;
-        // this.particleArray = []; 
-        // this.gap = 7;
-        // this.centerX = this.width*0.5;
-        // this.centerY = this.height*0.5;
+     
         this.mouse = {
             x: undefined,
             y: undefined,
-            radius: 700,
+            radius: 7000,
             offsetX: 10,
             offsetY: 10,
             directionX: undefined,
@@ -135,8 +132,8 @@ class Effect {
     }
 
     init(){     
-        for (let y = 0; y < this.height; y+= this.cellHeight) {
-            for (let x = 0; x < this.width; x+= this.cellWidth) {
+        for (let y = 0; y < this.image.height; y+= this.cellHeight) {
+            for (let x = 0; x < this.image.width; x+= this.cellWidth) {
                this.imageGrid.push(new Cell(this, x, y));
             } 
         } 
@@ -159,7 +156,7 @@ class Effect {
 
 
 const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
-    const {width} = useWindowDimensions();
+    const {width, height} = useWindowDimensions();
     const [context, setContext] = useState();
     const [effect, setEffect] = useState();
     const canvas = useRef();
@@ -167,7 +164,7 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
     const imageRef = useRef();
     const [gunSize, setGunSize] = useState(1);
     // const [size, setSize] = useState({x:925,y:115});
-    const [size, setSize] = useState({x:width,y:width});
+    const [size, setSize] = useState({x:width,y:height});
 
     const timer = useRef(null);
     const increment = () => {
@@ -211,6 +208,8 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
         // const aspectRatio = myImage.height / myImage.width;
         // const _height = width / aspectRatio;
         // setSize({x: _height})
+
+        // _context.drawImage(myImage, 0,0, myImage.width, myImage.height)
         
         const _effect = new Effect(canvas.current, myImage);
         setEffect(_effect);
@@ -281,7 +280,7 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
        
             />  
         </div>
-        <img src={imageUrl} ref={imageRef} style={{width: size.x, height: size.y, display: "none"}}/>
+        <img src={imageUrl} ref={imageRef} style={{width: size.x, height: size.y, position: "fixed", top:0, display: "inline-block", objectFit: "cover", visibility: "hidden"}}/>
         </>
        
     );

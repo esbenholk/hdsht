@@ -101,7 +101,7 @@ class Effect {
         this.canvas = canvas;
         this.width = imageWidth;
         this.height = imageHeight;
-        this.cellWidth = this.width  /15;
+        this.cellWidth = this.width  /50;
         this.cellHeight =  this.cellWidth;
         this.imageGrid = [];
         this.image = image;
@@ -113,8 +113,8 @@ class Effect {
             x: undefined,
             y: undefined,
             radius: 700,
-            offsetX: 10,
-            offsetY: 10,
+            // offsetX: 10,
+            // offsetY: 10,
             directionX: undefined,
             directionY: undefined,
             moving: false,
@@ -265,7 +265,7 @@ const ClientLogoPixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop })
                             description: ""
 
                         });
-                        cancelAnimationFrame(animationFrameId);
+                        // cancelAnimationFrame(animationFrameId);
                     }}
                 onMouseDown={(e)=>{
                     console.log(e, gunSize);
