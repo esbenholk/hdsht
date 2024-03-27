@@ -163,7 +163,7 @@ const Sticky = ({ slice }) => {
           <img className={`${styles.Logo}` } src={Logo.src} alt="logo" style={{visibility: "hidden"}}/>
         </div>} */}
 
-        <div style={{width: "100%", position: "fixed", zIndex: 1, top: "0", backgroundColor: "var(--main-font-color-highlight)", maxHeight: "2.7rem", minHeight: "80px", overflow: "hidden", transition: "opacity 0.01s ease-in", padding: "0rem 1rem", opacity: headerInPosition ? 1 :0}}>
+        <div style={{width: "100%", position: "fixed", zIndex: 1, top: "0", backgroundColor: "var(--main-font-color-highlight)", maxHeight: "2.6rem", minHeight: "80px", overflow: "hidden", transition: "opacity 0.01s ease-in", padding: "0rem 1rem", opacity: headerInPosition ? 1 :0}}>
           <img src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)"}}/>
         </div>
 

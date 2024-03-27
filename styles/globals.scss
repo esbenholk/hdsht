@@ -58,7 +58,10 @@
   --special-font-display: "DOTMATRI";
   --bubble-font: "displdts";
 }
-
+video{
+  background: var(--main-bg-color);
+  background-color: var(--main-bg-color);
+}
 html,
 body {
   padding: 0;
