@@ -95,8 +95,9 @@ export default function App({ Component, pageProps }) {
                 }}>
                    {/* <PixelCanvas imageUrl={Logo.src} isPageTop={false}/> */}
                    {/* <ParticleCanvas imageUrl={Logo.src} isPageTop={false}/> */}
-
-            {isMobile ?  <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)", margin: "1rem"}}/> :<ParticleCanvas  imageUrl={Logo.src} isPageTop={false}/>}
+            <div id="finallogo"> 
+              {isMobile ?  <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 4rem)", margin: "0rem 2rem -2rem 2rem"}}/> :<ParticleCanvas  imageUrl={Logo.src} isPageTop={false}/>}
+            </div>   
           </section>
         {/* </div> */}
 

@@ -253,7 +253,8 @@ const ClientLogoPixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop })
                             cursorVariant: "logo",
                             isOverProject: true,
                             title: "shoot",
-                            description: "hold to increase power"
+                            description: "hold to increase power",
+                            instruction:""
                         });
                     }}
                 
@@ -262,7 +263,8 @@ const ClientLogoPixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop })
                             cursorVariant: "default",
                             isOverProject: false,
                             title: "",
-                            description: ""
+                            description: "",
+                            instruction:""
 
                         });
                         // cancelAnimationFrame(animationFrameId);

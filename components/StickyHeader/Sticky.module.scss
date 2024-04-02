@@ -10,7 +10,7 @@
   // transform: translate(0,25px);
   padding: 0.5rem 2rem 1rem 2rem;
 
-  border-top: 2px solid #FFF;
+  border-top: 1px solid #FFF;
   border-top-left-radius: 3rem;
   border-top-right-radius: 3rem;
   // -webkit-box-shadow: 0px 10px 26px -15px var(--main-border-glow-color);
@@ -47,10 +47,30 @@
 .Header:is(:first-of-type){
   padding: 1rem 3rem;
 
+
+}
+
+.ProjectPageHeader{
+  background-color: var(--main-bg-color);
+  // background: linear-gradient(var(--main-bg-color) 100%, rgba(0,0,0,0) 100%);
+  color: var(--main-text-color);
+  font-family: var(--bubble-font);
+  font-size: 1.7rem;
+  margin: 0;
+  height: 1.3rem;
+  // transform: translate(0,25px);
+  padding: 0.5rem 2rem 1rem 2rem;
+  position: sticky;
+
+  border-top: 1px solid #FFF;
+  border-top-left-radius: 3rem;
+  border-top-right-radius: 3rem;
+
 }
 @media screen and (max-width: 768px) {
-  .Header {
+  .Header:not(:first-of-type)  {
     // transform: translateY(50%);
+    font-size: 1rem;
   }
   .Header {
 

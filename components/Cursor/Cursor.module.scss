@@ -44,13 +44,57 @@
 
 }
 
+.Cross{
+  // mix-blend-mode: difference;
 
+}
+.Cross section{
+  --s: 70px; /* the size on the corner */
+  --g: 10px; /* the gap between the border and image */
+  --t: 5px;
+
+  padding: calc(var(--g) + var(--t));
+  outline: 1px solid white; /* the color here */
+  outline-offset: calc(-1*var(--t));
+  mask:
+    conic-gradient(at var(--s) var(--s),#0000 75%,#000 0)
+    0 0/calc(100% - var(--s)) calc(100% - var(--s)),
+    linear-gradient(#000 0 0) content-box;
+  transition: .4s;
+  width: 200px;
+  height: 200px;
+  background-color: rgba(0,0,0,0);
+  transform: translate(-50%, -50%);
+  position: relative;
+  max-width: 200px;
+  max-height: 200px;
+}
+.Cross section.Focus{
+  max-width: 70px !important;
+  max-height: 70px !important;
+}
+
+.Cross section p{
+  position: absolute;
+  bottom: 0;
+  font-size: 0.6rem;
+}
+.Cross section span{
+  display: inline-block;
+  width: 100%;
+}
+.Cross section span:not(:first-of-type){
+  padding: 5rem;
+  max-width: calc(100% - 10rem);
+}
 
 ///vertical line
 .Cross div:is(:first-child){
   transform: translate(-50%, -50%);
-  width: 2px;
+  width: 1px;
   height: 10000px;
+  // background: linear-gradient(0deg, black 49%,  rgba(0,0,0,0) 49%,  rgba(0,0,0,0) 51%, black 51%);
+
   background: linear-gradient(0deg, var(--main-font-color) 49%,  rgba(0,0,0,0) 49%,  rgba(0,0,0,0) 51%, var(--main-font-color)51%);
 }
 
@@ -58,8 +102,8 @@
 .Cross div:is(:nth-child(2)){
   transform: translate(-50%, -50%);
   width: 10000px;
- mix-blend-mode: difference;
-  height: 2px;
+//  mix-blend-mode: difference;
+  height: 1px;
   background: linear-gradient(90deg, var(--main-font-color) 49%,  rgba(0,0,0,0) 49%,  rgba(0,0,0,0) 51%, var(--main-font-color)51%);
 }
 
@@ -178,41 +222,6 @@
 }
 
 
-.Fly{
-  position: fixed;
-  width: 50px;
-  height: 50px;
-  // z-index: 99999999999999;
-  pointer-events: none;
-  border-radius: 50%;
-  transform: translate(-50%,50%);
-  background-color: white;
-  mix-blend-mode: difference;
-  // -moz-filter:blur(2px);
-  // filter: blur(2px);
-  top:0;
-  z-index: 1;
-}
-.Fly:nth-child(1){
-  width: 50px;
-  height: 50px; 
-}
-.Fly:nth-child(2){
-  width: 46px;
-  height: 46px; 
-  
-}
-.Fly:nth-child(3){
-  width: 20px;
-  height: 20px; 
-  left: 0;
-}
-.Fly:nth-child(4){
-  width: 15px;
-  height: 15px; 
-  left: 0;
-  bottom: 0;
-}
 
 
 .Activecursor{

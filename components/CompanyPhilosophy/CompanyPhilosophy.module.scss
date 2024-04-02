@@ -26,9 +26,9 @@
   }
   .Content {
     border-top: 1px solid var(--main-font-color);
-    &:last-child {
-      border-bottom: 1px solid var(--main-font-color);
-    }
+    // &:last-child {
+    //   border-bottom: 1px solid var(--main-font-color);
+    // }
     display: flex;
     flex-direction: row;
     .Category {

@@ -29,6 +29,8 @@ const Page = ({ page }) => {
   const { footerOffset } = useFooterOffset();
   const {height, width} = useWindowDimensions();
   const bodyRef = useRef();
+  const logoRef = useRef();
+  const [headerInPosition, setHeaderInPosition] = useState(false);
 
   useEffect(()=>{
 
@@ -38,7 +40,38 @@ const Page = ({ page }) => {
 
   
   
+  useEffect(() => {
+    const handleScroll = () => {
+      if(logoRef.current){
+        const itemOffset = logoRef.current.getBoundingClientRect().y;
+        if (itemOffset < -50) {
+          setLogoInPosition(true);
+        } else {
+          setLogoInPosition(false);
+        }
+      }
 
+      let h3s = document.getElementsByTagName('h3');
+      if(h3s[0]){
+        let stickyPosY = h3s[1].getBoundingClientRect().y;
+  
+       
+        if(stickyPosY<50){
+          setHeaderInPosition(true);
+        } else {
+          setHeaderInPosition(false);
+        }
+      }
+
+    };
+
+   
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   useEffect(() => {
     const userAgent = navigator.userAgent;
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
@@ -47,7 +80,7 @@ const Page = ({ page }) => {
 
     let incr = 42;
     if(mobile){
-      incr = 55;
+      incr = 30;
     }
 
     let foldedHeight_temp = 0;
@@ -108,8 +141,12 @@ const Page = ({ page }) => {
         >
           <SliceZone slices={page.data.slices} components={components} />
         </motion.div>
-        <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: width>600 ? "10rem" : "11rem", backgroundColor: "var(--main-bg-color)"}}>
+        <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: width>600 ? "10rem" : "8rem", backgroundColor: "var(--main-bg-color)"}}>
 
+        </div>
+
+        <div style={{width: "100%", position: "fixed", zIndex: 1, top: "0", backgroundColor: "var(--main-font-color-highlight)", maxHeight: "4.6rem", minHeight: width<600 ? "60px" : 0,  overflow: "hidden", transition: "opacity 0.01s ease-in", padding: "0rem 1rem", opacity: headerInPosition ? 1 :0, transition: "all 0.1s"}}>
+          <img src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)"}}/>
         </div>
 
       </>

@@ -67,36 +67,13 @@ export default function LandingGrid({workInGridWithDetails}) {
               >
                 <Suspense fallback={<LoadSpinner />}>
                   <motion.div
-                    // onMouseOver={() => {
-                    //   setHovering(true);
-                    //   handleHover(item);
-                    // }}
-                    // onMouseLeave={() => {
-                    //   setHovering(false);
-                    //   handleLeave();
-                    // }}
+         
                   >
                     <WorkCarousel slice={slice} project={item}/>
 
                 
                   </motion.div>
 
-                    {/* <PrismicLink href={item.url} 
-                    className={styles.Redirect}
-                    onMouseOver={() => {
-                      useCursor.setState({
-                        cursorVariant: "hoveronlink",
-                     
-                      });
-                    }}
-                    onMouseLeave={() => {
-                      useCursor.setState({
-                        cursorVariant: "default",
-                     
-                      });
-                    }}>
-                      {item.data.title}
-                    </PrismicLink> */}
       
                     {width<700 &&      
                         <motion.div>

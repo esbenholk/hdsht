@@ -4,6 +4,7 @@ import Exit from "../../SVGR/Exit";
 import PrismicRichTextResolver from "../../Resolvers/PrismicRichTextResolver/PrismicRichTextResolver";
 import Scene from "./3D/Scene";
 import { motion, useInView } from "framer-motion";
+import useCursor from "@/components/Resolvers/States/Cursor";
 
 const DescriptionModal = ({ slice }) => {
   const div = useRef();
@@ -52,6 +53,29 @@ const DescriptionModal = ({ slice }) => {
     },
   };
 
+  const handleHover = (item) => {
+    useCursor.setState({
+      cursorVariant: "hoveronlink",
+      shouldrenderdetailsontop: false,
+      description: "",
+      title: "",
+      shouldrenderdetailsontop: false,
+      instruction: "",
+
+    });
+  };
+  const handleLeave = (e) => {
+    useCursor.setState({
+      cursorVariant: "default",
+      shouldrenderdetailsontop: false,
+      description: "",
+      title: "",
+      shouldrenderdetailsontop: false,
+      instruction: "",
+
+    });
+  };
+
   return (
     slice?.items && (
       <div className={styles.Container}>
@@ -73,6 +97,12 @@ const DescriptionModal = ({ slice }) => {
                 className={styles.RichText}
                 key={index}
                 variants={slideInFromBottom}
+                onMouseOver={() => {
+                  handleHover();
+                }}
+                onMouseLeave={() => {
+                  handleLeave();
+                }}
               >
                 <PrismicRichTextResolver
                   fields={item.text_block}

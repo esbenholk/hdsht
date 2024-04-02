@@ -3,11 +3,11 @@ import { useRef, useEffect, useState } from "react";
 import { useFooterOffset } from "../Resolvers/States/FooterOffset";
 import { useCreditOffset } from "../Resolvers/States/CreditOffset";
 import { PrismicNextImage } from "@prismicio/next";
-
+import useCursor from "../Resolvers/States/Cursor";
 
 const CreditHeader = ({ slice }) => {
   const header = useRef();
-  const [offset, setOffset] = useState(0.35);
+  const [offset, setOffset] = useState(0.25);
 
 
 
@@ -37,9 +37,20 @@ const CreditHeader = ({ slice }) => {
         zIndex: slice.primary.order ? slice.primary.order +10 : 10,
         
       }}
+      onMouseOver={() => {
+        useCursor.setState({
+          cursorVariant: "hoveronlink",
+        });
+      }}
+      onMouseLeave={() => {
+        useCursor.setState({
+          cursorVariant: "default",
+        });
+      }}
+
       onClick={() => {
 
-        const nextSibling = header.current.nextSibling;
+        const nextSibling = document.getElementById("finallogo");
         nextSibling.scrollIntoView()
 
         console.log("header click", slice.primary.title, header.current, nextSibling);
@@ -55,6 +66,7 @@ const CreditHeader = ({ slice }) => {
      
  
       }}
+
     >
       <div className={styles.Header}>
         <div className={styles.Logo}>

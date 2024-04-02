@@ -83,7 +83,14 @@
   
   }
 }
+
 .CarouselContainer{
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+.WorkCarouselContainer{
+  margin-top: 5rem;
   position: relative;
   z-index: 0;
   overflow: hidden;

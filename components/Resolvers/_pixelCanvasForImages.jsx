@@ -99,7 +99,7 @@ class Effect {
         this.canvas = canvas;
         this.width = image.width;
         this.height = image.height;
-        this.cellWidth = image.width/45;
+        this.cellWidth = image.width/100;
         this.cellHeight =  this.cellWidth;
         this.imageGrid = [];
         this.image = image;
@@ -244,8 +244,13 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
                     cursorVariant: "logo",
                     isOverProject: true,
                     title: "shoot",
-                    description: "hold to increase power"
+                    instruction: "hold to increase power",
+                    description: "",
                   });
+            }}
+
+            onMouseEnter={()=>{
+                render();
             }}
          
             onMouseLeave={() => {
@@ -253,7 +258,8 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
                     cursorVariant: "default",
                     isOverProject: false,
                     title: "",
-                    description: ""
+                    description: "",
+                    instruction: "",
 
                   });
                   cancelAnimationFrame(animationFrameId);

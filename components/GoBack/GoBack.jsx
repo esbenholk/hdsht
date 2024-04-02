@@ -51,9 +51,10 @@ const GoBack = () => {
    
     if(bool){
       useCursor.setState({
-        cursorVariant: "hoveronlink",
+        cursorVariant: "hoveronbiglink",
         title: nexturl ? "go to next work" : "go to frontpage",
         description: nexturl ? nexturl : "/",
+        instruction: "",
         isOverProject: true, 
         shouldrenderdetailsontop: true
       });
@@ -62,6 +63,7 @@ const GoBack = () => {
         cursorVariant: "default",
         title: "",
         description: "",
+        instruction: "",
         isOverProject: false, 
         shouldrenderdetailsontop: false
       });
@@ -72,9 +74,10 @@ const GoBack = () => {
    
     if(bool){
       useCursor.setState({
-        cursorVariant: "hoveronlink",
+        cursorVariant: "hoveronbiglink",
         title: "go to frontpage",
         description: "",
+        instruction: "",
         isOverProject: true, 
         shouldrenderdetailsontop: false
       });
@@ -83,6 +86,7 @@ const GoBack = () => {
         cursorVariant: "default",
         title: "",
         description: "",
+        instruction: "",
         isOverProject: false, 
         shouldrenderdetailsontop: false
       });

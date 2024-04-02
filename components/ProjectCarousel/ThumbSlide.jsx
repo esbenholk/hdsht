@@ -12,14 +12,22 @@ const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused }) => {
   const handleHover = (item) => {
     useCursor.setState({
       cursorVariant: "hoveronlink",
-      shouldrenderdetailsontop: false
+      shouldrenderdetailsontop: false,
+      description: "",
+      title: "",
+      shouldrenderdetailsontop: false,
+      instruction: "view",
 
     });
   };
   const handleLeave = (e) => {
     useCursor.setState({
       cursorVariant: "default",
-      shouldrenderdetailsontop: false
+      shouldrenderdetailsontop: false,
+      description: "",
+      title: "",
+      shouldrenderdetailsontop: false,
+      instruction: "",
 
     });
   };

@@ -32,6 +32,7 @@ import useCursor from "../Resolvers/States/Cursor";
 import Controls from "./Controls";
 import GallerySlide from "./GallerySlide";
 import ThumbSlide from "./ThumbSlide";
+import useWindowDimensions from "../Resolvers/UseWindowDimensions";
 
 const slideInFromBottom = {
   hidden: {
@@ -62,7 +63,15 @@ const ProjectCarousel = ({ slice, project }) => {
   const nexturl = useCursor((state) => state.nexturl);
   const url = useCursor((state) => state.url);
   // const [isVisible, setIsVisible] = useState(false);
+  const {width, height} = useWindowDimensions();
+  const [section, setSection] = useState();
+  const [cursorExpanded, setCursorExpanded] = useState(false);
 
+  useEffect(()=>{
+    let cursor = document.getElementById("Cross");
+    let _section = cursor.getElementsByTagName("section")[0];
+    setSection(_section);
+  },[])
   useEffect(() => {
     if (slice.items[slideIndex].carouselitem.kind === "image") {
       setCurrentSlide("image");
@@ -73,6 +82,29 @@ const ProjectCarousel = ({ slice, project }) => {
       setCurrentSlide("video");
     }
   }, [slideIndex, currentVideo]);
+
+
+  const handleScroll = () => {
+    console.log(cursorExpanded);
+
+
+      compressCursor();
+      setCursorExpanded(false);
+      useCursor.setState({
+        cursorVariant: "default",
+        isOverProject: false,
+        description:"",
+        title: "",
+        shouldrenderdetailsontop: false,
+        instruction: "click to read",
+        carouselTopLeftPos: {x:0,y: 0}
+      });
+
+    window.removeEventListener('scroll', handleScroll);
+
+  };
+
+
 
   const timer = useRef(0);
 
@@ -127,14 +159,20 @@ const ProjectCarousel = ({ slice, project }) => {
   }, [seconds]);
 
   const handleHover = (item) => {
-    // console.log("hovers over", item);
+    console.log("hovers over", item);
+    setCursorExpanded(false);
+
+  
     useCursor.setState({
-      cursorVariant: "hover",
-      isOverProject: true,
-      description: item? item.data.description : "",
-      title: item? item.data.title : "",
-      shouldrenderdetailsontop: false
-    });
+        cursorVariant: "hover",
+        isOverProject: true,
+        description: "",
+        instruction: !url.includes("work") ? "click to read" : "",
+        title: item? item.data.title : "",
+        shouldrenderdetailsontop: false
+      });
+ 
+   
   };
   const handleLeave = (e) => {
     useCursor.setState({
@@ -144,11 +182,74 @@ const ProjectCarousel = ({ slice, project }) => {
       title: "",
       shouldrenderdetailsontop: false
     });
+    compressCursor();
   };
+
+  function expandCursor(){
+    let s = section.style;
+    s.width = gallerySwiperRef.current.offsetWidth-500 +"px";
+    s.height = gallerySwiperRef.current.offsetHeight-200 +"px";
+    s.maxWidth = gallerySwiperRef.current.offsetWidth-500 +"px";
+    s.maxHeight = gallerySwiperRef.current.offsetHeight-200 +"px";
+    s.transform = "translate(0,0)";
+    s.margin = "6rem";
+    s.backgroundColor = "rgba(211, 211, 211, 0.284)";
+
+  }
+
+  
+  function compressCursor(){
+    let s = section.style;
+    s.width = 200 +"px";
+    s.height = 200 +"px";
+    s.transform = "translate(-50%,-50%)";
+    s.margin = "0";
+    s.maxWidth = "200px";
+    s.maxHeight = "200px";
+    s.backgroundColor = "rgba(0,0,0,0)";
+
+  }
+
+  const handleClick = (e, item)=>{
+  
+    if(gallerySwiperRef.current && section && !cursorExpanded ){
+      expandCursor();
+      setCursorExpanded(true);
+      useCursor.setState({
+        cursorVariant: "expanded",
+        isOverProject: false,
+        description: item? item.data.description : "",
+        title: item? item.data.title : "",
+        shouldrenderdetailsontop: false,
+        instruction: "click to close",
+        carouselTopLeftPos: {x:100,y: 120}
+      });
+
+      setTimeout(() => {
+        window.addEventListener('scroll', handleScroll);
+       }, 1000);
+
+    } else if(gallerySwiperRef.current && section && cursorExpanded){
+      compressCursor();
+      setCursorExpanded(false);
+      useCursor.setState({
+        cursorVariant: "default",
+        isOverProject: false,
+        description:"",
+        title: "",
+        shouldrenderdetailsontop: false,
+        instruction: "click to read",
+        carouselTopLeftPos: {x:"5%",y: "10%"}
+      });
+      window.removeEventListener('scroll', handleScroll);
+
+    }
+   
+  }
 
   return (
     <motion.div
-      className={styles.CarouselContainer}
+      className={`${url.includes("work") ? styles.WorkCarouselContainer : styles.CarouselContainer }` }
       variants={slideInFromBottom}
       initial="hidden"
       animate="visible"
@@ -201,6 +302,7 @@ const ProjectCarousel = ({ slice, project }) => {
         onMouseLeave={() => {
           handleLeave();
         }}
+   
         // onInit={() => {
         //   startTimer();
         // }}
@@ -215,8 +317,11 @@ const ProjectCarousel = ({ slice, project }) => {
           }
         }}
 
-        onClick={() => {
-          gallerySwiperRef.current.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+        onClick={(e) => {
+          gallerySwiperRef.current.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+          if(!url.includes("work")){
+            handleClick(e, project);
+          }
         }}
 
       >

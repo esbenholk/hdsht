@@ -6,6 +6,49 @@ import { TypeAnimation } from 'react-type-animation';
 
 
 
+function JumbleWordInElement(element, word, speed){
+  const letters = "!!ZX#¤%/&)(!?=`^*Ø?§╚╚¥┘ █Å@abcdefghijklmenopqurstpuwvxyzæøå_-_= 0172";
+  let words = word.split(" ");
+
+  let interval = null;
+
+  let iteration = 0;
+
+  
+  
+  clearInterval(interval);
+  
+  interval = setInterval(() => {
+    if(element && element.innerText){
+
+      let codedsentence = [];
+      for (let index = 0; index < words.length; index++) {
+        const singleWord = words[index];
+        let radnomcode = "";
+        for (let index = 0; index < singleWord.length; index++) {
+          const letter = letters[Math.floor(Math.random() * letters.length)];
+          radnomcode += letter;
+        }
+        codedsentence.push(radnomcode + " ");
+        codedsentence.join('   ');
+        
+      }
+  
+      element.innerText = codedsentence;
+    
+  
+    }
+    
+    
+    if(iteration >= speed){ 
+      clearInterval(interval);
+      element.innerText = word;
+    }
+    
+    iteration += 1;
+  },1);
+}
+
 
 function JumbleLettersInElement(element, word, speed){
   const letters = "!!ZX#¤%/&)(!?=`^*Ø?§╚╚¥┘ █Å@";
@@ -45,9 +88,13 @@ const Cursor = () => {
   const projectDesc = useCursor((state) => state.description);
   const projectTitle = useCursor((state) => state.title);
   const isOverProject = useCursor((state)=>state.isOverProject);
+  const instruction = useCursor((state)=> state.instruction);
+  const carouselTopLeftPos = useCursor((state)=> state.carouselTopLeftPos);
   const shouldrenderdetailsontop = useCursor((state)=>state.shouldrenderdetailsontop);
   const [trackedTitle, setTrackedTitle] = useState(null);
   const [trackedDesc, setTrackedDesc] = useState(null);
+
+
   const titleRef = useRef();
   const descRef = useRef();
   const mousePosition = {
@@ -90,7 +137,7 @@ const Cursor = () => {
   useEffect(()=>{
     if(projectDesc !== trackedDesc){
       if(descRef.current){
-        JumbleLettersInElement(descRef.current, projectDesc ? projectDesc : "", 1);
+        JumbleWordInElement(descRef.current, projectDesc ? projectDesc : "", 10);
       }
       // if(projectDesc !== ""){
       //   setTrackedDesc(projectDesc);
@@ -131,6 +178,13 @@ const Cursor = () => {
       mixBlendMode: "difference",
   
     },
+    hoveronbiglink:{
+      x: mousePosition.x + 16,
+      y: mousePosition.y + 16,
+      ease: [0.1, 0.2, 0.01, 0.99],
+      scale: 4,
+      mixBlendMode: "difference",
+    },
     cross: {
       x: mousePosition.x + 16,
       y: mousePosition.y + 16,
@@ -139,6 +193,10 @@ const Cursor = () => {
     },
     data: {
       y: mousePosition.y + 16
+    },
+    expanded: {
+      x: carouselTopLeftPos.x,
+      y: carouselTopLeftPos.y
     },
     slide: {
       x: mousePosition.x + 16,
@@ -152,6 +210,7 @@ const Cursor = () => {
 
   return (
     <>
+
     {isOverProject && isDesktop && (
       <>
       <motion.div className={styles.Data}    
@@ -162,8 +221,8 @@ const Cursor = () => {
       
       {isOverProject && projectTitle !=="" && 
       <>
-        <span ref={titleRef}>{projectTitle}</span>
-       <span ref={descRef}>{projectDesc}</span>
+        {/* <span ref={titleRef}>{projectTitle}</span>
+       <span ref={descRef}>{projectDesc}</span> */}
        </>
            
         }
@@ -173,43 +232,7 @@ const Cursor = () => {
  
 
       </motion.div>
-      <motion.div className={styles.Cross}    
-      variants={variants}
-      animate={"cross"}
-      >
-      
-        <div>
-        </div>
-        <div>
-        </div>
-   
-        {/* {isOverProject && projectTitle !=="" && 
-          <div className={shouldrenderdetailsontop ? styles.DescriptionContianerTopLeft : styles.DescriptionContianer}> 
-            <TypeAnimation
-            sequence={[
-              projectTitle
-            ]}
-              wrapper="span"
-              speed={10}
-            />
-            {projectDesc !== null && projectDesc !== "" && 
-              <TypeAnimation
-              sequence={[
-                projectDesc
-              ]}
-                wrapper="span"
-                speed={100}
-              />
-              }
-        
-           
-          </div>
-        } */}
- 
-
- 
-
-      </motion.div>
+  
       {/* <div>
       <motion.div
             className={styles.Fly}
@@ -263,28 +286,28 @@ const Cursor = () => {
         animate={cursorVariant}
       >
   
-        <div className={cursorVariant==="hoveronlink" && styles.Hoveronlink}>
+        <div className={cursorVariant==="hoveronlink" ? styles.Hoveronlink : cursorVariant==="hoveronbiglink" ? styles.Hoveronlink:null }>
         <div className={cursorVariant==="logo" ? styles.PinkDot : styles.Dot} >
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null} ></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null} ></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
           <div></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
         </div>
         <div className={cursorVariant==="logo" ? styles.PinkDot : styles.Dot}>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
           <div></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
         </div>
         </div>
 
@@ -293,6 +316,50 @@ const Cursor = () => {
 
       </motion.div>
     )}
+            <motion.div className={styles.Cross}    
+      variants={variants}
+      animate={cursorVariant === "expanded" ? "expanded" : "cross"}
+      id="Cross"
+      >
+      
+        <div>
+        </div>
+        <div>
+        </div>
+        <section className={cursorVariant==="hoveronlink" ? styles.Focus : cursorVariant==="hoveronbiglink" ? styles.Focus : cursorVariant==="logo" ? styles.Focus : null}>
+          {instruction  && <p>{instruction}</p>}
+          {projectTitle && <span ref={titleRef}>{projectTitle}</span>}
+          {cursorVariant === "expanded" ? <span  ref={descRef}> {projectDesc}</span>: null}
+          
+        </section>
+   
+        {/* {isOverProject && projectTitle !=="" && 
+          <div className={shouldrenderdetailsontop ? styles.DescriptionContianerTopLeft : styles.DescriptionContianer}> 
+            <TypeAnimation
+            sequence={[
+              projectTitle
+            ]}
+              wrapper="span"
+              speed={10}
+            />
+            {projectDesc !== null && projectDesc !== "" && 
+              <TypeAnimation
+              sequence={[
+                projectDesc
+              ]}
+                wrapper="span"
+                speed={100}
+              />
+              }
+        
+           
+          </div>
+        } */}
+ 
+
+ 
+
+      </motion.div>
     </>
   );
 };
