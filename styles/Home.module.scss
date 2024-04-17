@@ -5,3 +5,20 @@
   // border-top-left-radius: 3rem;
   // border-top-right-radius: 3rem;
 }
+
+.LogoHeader{
+  background-color: var(--main-bg-color);
+  -ms-animation: blink 0.1s ease infinite; 
+  -webkit-animation: blink 0.1s ease infinite; 
+  -moz-animation: blink 0.1s ease infinite;
+  animation: blink 0.1s ease infinite;
+}
+
+@keyframes blink {
+  0% {
+    background-color: black;
+  }
+  100% {
+    background-color: var(--main-font-color-highlight);
+  }
+}

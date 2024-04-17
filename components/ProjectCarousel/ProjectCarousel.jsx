@@ -123,7 +123,7 @@ const ProjectCarousel = ({ slice, project }) => {
   };
   useEffect(() => {
     const gallerySwiper = gallerySwiperRef.current?.swiper;
-    const thumbnailSwiper = thumbSwiperRef.current.swiper;
+    const thumbnailSwiper = thumbSwiperRef.current?.swiper;
 
     if (gallerySwiper.controller && thumbnailSwiper.controller) {
       gallerySwiper.controller.control = thumbnailSwiper;
@@ -152,9 +152,11 @@ const ProjectCarousel = ({ slice, project }) => {
   }, []);
 
   useEffect(() => {
-    const trigger = currentSlide === "image" ? 5 : duration;
-    if (seconds > trigger && !paused) {
-      gallerySwiperRef.current.swiper.slideNext();
+    if(hovered){
+      const trigger = currentSlide === "image" ? 5 : duration;
+      if (seconds > trigger && !paused) {
+        gallerySwiperRef.current.swiper.slideNext();
+      }
     }
   }, [seconds]);
 
@@ -255,14 +257,21 @@ const ProjectCarousel = ({ slice, project }) => {
       animate="visible"
       exit="hidden"
       ref={carousel}
+      onMouseOver={()=>{
+        setHovered(true);
+      }}
+      onMouseLeave={()=>{
+        setHovered(false);
+      }}
      
     >
-      <Progress
+      {hovered &&  <Progress
         slice={slice}
         slideIndex={slideIndex}
         paused={paused}
         currentSlide={currentSlide}
-      />
+      />}
+
       {/* <Controls
         hovered={hovered}
         setHovered={setHovered}
@@ -270,6 +279,7 @@ const ProjectCarousel = ({ slice, project }) => {
         setPaused={setPaused}
       /> */}
       <Swiper
+
         ref={gallerySwiperRef}
         className={styles.SwiperTop}
         slidesPerView={1}
@@ -286,7 +296,7 @@ const ProjectCarousel = ({ slice, project }) => {
               // }
             }
         }}
-        modules={[FreeMode, Navigation, Thumbs, Mousewheel, Autoplay, Lazy]}
+        modules={[FreeMode, Navigation, Thumbs, Mousewheel, Lazy]}
         mousewheel={false}
         lazy={true}
         onSlideChange={() => {
@@ -337,12 +347,16 @@ const ProjectCarousel = ({ slice, project }) => {
               }}
               onMouseLeave={handleLeave}
             >
-              <GallerySlide
+              {({ isActive }) => (
+                   <GallerySlide
                 item={item}
                 gallerySwiperRef={gallerySwiperRef}
                 slice={slice}
+                isActive={isActive}
                 slideIndex={slideIndex}
               />
+              )}
+           
             </SwiperSlide>
           );
         })}

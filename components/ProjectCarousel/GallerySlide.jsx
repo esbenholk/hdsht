@@ -6,7 +6,7 @@ import useVideo from "../Resolvers/States/Video";
 import styles from "./ProjectCarousel.module.scss";
 import PixelCanvas from "../Resolvers/pixelCanvas";
 
-const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex }) => {
+const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex, isActive }) => {
   const slide = useSwiperSlide();
   const videoRef = useRef();
   const { setCurrentVideo } = useVideo();
@@ -30,6 +30,7 @@ const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex }) => {
     onMouseLeave={() => {
       setHovered(false);
     }}
+    isActive={isActive}
     media={item.carouselitem}
     slide={slide}
     videoRef={videoRef}

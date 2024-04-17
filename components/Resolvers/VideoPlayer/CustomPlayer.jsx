@@ -4,13 +4,15 @@ import { useRef, useEffect } from "react";
 import useCursor from "../States/Cursor";
 import useWindowDimensions from "../UseWindowDimensions";
 
-const CustomPlayer = ({ media, videoRef }) => {
+const CustomPlayer = ({ media, videoRef, isActive }) => {
   //make a custom video player that uses the media.url as src and scales to it's dimensions, as well as updates the currentTime and duration of useVideo
   //   make a regex that checks the media.rul prefix and returns a source JSX elemt with the correct type
   //   make a useEffect that updates the currentTime and duration of useVideo
   const url = useCursor((state) => state.url);
 
-  const {height} = useWindowDimensions();
+
+
+
 
 
   return (
@@ -18,7 +20,7 @@ const CustomPlayer = ({ media, videoRef }) => {
       <video
         className={styles.Video}
         loop
-        autoPlay
+        autoPlay={isActive}
         playsInline
         muted
         controls={false}
@@ -49,6 +51,16 @@ const CustomPlayer = ({ media, videoRef }) => {
           useVideo.setState({
             ended: true,
           });
+        }}
+        onMouseEnter={()=>{
+          if(videoRef.current){
+            videoRef.current.play();
+          }
+        }}
+        onMouseLeave={()=>{
+          if(videoRef.current){
+            videoRef.current.pause();
+          }
         }}
       >
         {media.url.match(/.mp4/) && <source src={media.url} type="video/mp4" />}
