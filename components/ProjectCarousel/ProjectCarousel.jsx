@@ -69,8 +69,11 @@ const ProjectCarousel = ({ slice, project }) => {
 
   useEffect(()=>{
     let cursor = document.getElementById("Cross");
-    let _section = cursor.getElementsByTagName("section")[0];
-    setSection(_section);
+    if(cursor){
+      let _section = cursor.getElementsByTagName("section")[0];
+      setSection(_section);
+    }
+
   },[])
   useEffect(() => {
     if (slice.items[slideIndex].carouselitem.kind === "image") {
@@ -188,19 +191,25 @@ const ProjectCarousel = ({ slice, project }) => {
   };
 
   function expandCursor(){
-    let s = section.style;
-    s.width = gallerySwiperRef.current.offsetWidth-500 +"px";
-    s.height = gallerySwiperRef.current.offsetHeight-200 +"px";
-    s.maxWidth = gallerySwiperRef.current.offsetWidth-500 +"px";
-    s.maxHeight = gallerySwiperRef.current.offsetHeight-200 +"px";
-    s.transform = "translate(0,0)";
-    s.margin = "6rem";
-    s.backgroundColor = "rgba(211, 211, 211, 0.284)";
+    if(section){
+      let s = section.style;
+      s.width = gallerySwiperRef.current.offsetWidth-500 +"px";
+      s.height = gallerySwiperRef.current.offsetHeight-200 +"px";
+      s.maxWidth = gallerySwiperRef.current.offsetWidth-500 +"px";
+      s.maxHeight = gallerySwiperRef.current.offsetHeight-200 +"px";
+      s.transform = "translate(0,0)";
+      s.margin = "6rem";
+      s.backgroundColor = "rgba(211, 211, 211, 0.284)";
+
+    }
 
   }
 
   
   function compressCursor(){
+    if(section){
+
+
     let s = section.style;
     s.width = 200 +"px";
     s.height = 200 +"px";
@@ -209,6 +218,7 @@ const ProjectCarousel = ({ slice, project }) => {
     s.maxWidth = "200px";
     s.maxHeight = "200px";
     s.backgroundColor = "rgba(0,0,0,0)";
+  }
 
   }
 
@@ -224,7 +234,7 @@ const ProjectCarousel = ({ slice, project }) => {
         title: item? item.data.title : "",
         shouldrenderdetailsontop: false,
         instruction: "click to close",
-        carouselTopLeftPos: {x:100,y: 120}
+        carouselTopLeftPos: {x:width>600 ? 100 : 0,y: width>600 ?120 : 0}
       });
 
       setTimeout(() => {
@@ -241,7 +251,8 @@ const ProjectCarousel = ({ slice, project }) => {
         title: "",
         shouldrenderdetailsontop: false,
         instruction: "click to read",
-        carouselTopLeftPos: {x:"5%",y: "10%"}
+        carouselTopLeftPos: {x:width>600 ? 100 : 0,y: width>600 ?120 : 0}
+
       });
       window.removeEventListener('scroll', handleScroll);
 
@@ -329,7 +340,7 @@ const ProjectCarousel = ({ slice, project }) => {
 
         onClick={(e) => {
           gallerySwiperRef.current.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-          if(!url.includes("work")){
+          if(!url.includes("work") && section){
             handleClick(e, project);
           }
         }}

@@ -211,7 +211,7 @@ const Cursor = () => {
   return (
     <>
 
-    {isOverProject && isDesktop && (
+    {isOverProject && isDesktop  && (
       <>
       <motion.div className={styles.Data}    
       variants={variants}
@@ -279,7 +279,7 @@ const Cursor = () => {
 
 
     }
-    {isDesktop && (
+    {isDesktop  && (
       <motion.div
         className={styles.Cursor}
         variants={variants}
@@ -316,7 +316,9 @@ const Cursor = () => {
 
       </motion.div>
     )}
-            <motion.div className={styles.Cross}    
+
+{isDesktop   &&
+  <motion.div className={styles.Cross}    
       variants={variants}
       animate={cursorVariant === "expanded" ? "expanded" : "cross"}
       id="Cross"
@@ -359,7 +361,8 @@ const Cursor = () => {
 
  
 
-      </motion.div>
+      </motion.div> }
+    
     </>
   );
 };

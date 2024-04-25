@@ -7,6 +7,68 @@
   width: fit-content;
   position: relative;
 }
+.Button{
+  --s: 15px; /* the size on the corner */
+  --g: 2px; /* the gap between the border and image */
+  --t: 5px;
+  position: relative;
+
+  padding: calc(var(--g) + var(--t));
+  outline: 1px solid white; /* the color here */
+  outline-offset: calc(-1*var(--t));
+  mask:
+    conic-gradient(at var(--s) var(--s),#0000 75%,#000 0)
+    0 0/calc(100% - var(--s)) calc(100% - var(--s)),
+    linear-gradient(#000 0 0) content-box;
+  transition: .4s;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(0,0,0,0);
+
+
+
+  max-width: 200px;
+  max-height: 200px;
+}
+.ButtonExpanded{
+  --s: 50px; /* the size on the corner */
+  --g: 2px; /* the gap between the border and image */
+  --t: 5px;
+
+  padding: calc(var(--g) + var(--t));
+  outline: 1px solid white; /* the color here */
+  outline-offset: calc(-1*var(--t));
+  mask:
+    conic-gradient(at var(--s) var(--s),#0000 75%,#000 0)
+    0 0/calc(100% - var(--s)) calc(100% - var(--s)),
+    linear-gradient(#000 0 0) content-box;
+  transition: .4s;
+  width: calc(100% - 1rem);
+  height: 100%;
+  background-color: rgba(255,255,255,0.2);
+
+  position: relative;
+  max-width: calc(100% - 2rem);
+  max-height: calc(100% - 2rem);
+  .Content{
+  padding: 1rem !important;
+  visibility: visible !important;
+ }
+}
+.InfoContainer{
+  position: absolute;
+  top: 3rem;
+  left: 2rem;
+  display: flex;
+  gap: 1rem;
+  p{
+    padding: 0;
+    margin: 0;
+  }
+  .Content{
+    visibility: hidden;
+   }
+}
 .Wrapper {
   // border-top-left-radius: 1rem;
   // border-top-right-radius: 1rem;
@@ -86,6 +148,7 @@
   margin-bottom: 50px;
   display: flex;
   flex-direction: column;
+  position: relative;
 
 }
 

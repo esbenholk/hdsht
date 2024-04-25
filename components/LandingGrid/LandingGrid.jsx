@@ -32,7 +32,8 @@ export default function LandingGrid({workInGridWithDetails}) {
 
   const grid = useRef();
   const {width} = useWindowDimensions();
- 
+  const [infoIsExpanded, setINfoIsExpanded] = useState(false);
+  const {infoRef} = useRef();
 
 
   // const { moveExcluder, removeExcluder } = useExcluder();
@@ -65,8 +66,8 @@ export default function LandingGrid({workInGridWithDetails}) {
                 }}
              
               >
-                <Suspense fallback={<LoadSpinner />}>
-                  <motion.div
+                <Suspense fallback={<LoadSpinner />} style={{position: "relative"}}>
+                  <motion.div 
          
                   >
                     <WorkCarousel slice={slice} project={item}/>
@@ -76,9 +77,15 @@ export default function LandingGrid({workInGridWithDetails}) {
 
       
                     {width<700 &&      
-                        <motion.div>
+                        <motion.div className={styles.InfoContainer}>
+                          {item.data.description && item.data.description.length > 0 &&      <div ref={infoRef} className={!infoIsExpanded ? `${styles.Button}`  : `${styles.Button} ${styles.ButtonExpanded}`  } onClick={()=>{
+                            setINfoIsExpanded(!infoIsExpanded);
+                          }}>
+                            <p className={styles.Content}>{item.data.description}</p>
+                          </div>}
+                     
                           <p>{item.data.title}</p>
-                          <p>{item.data.description}</p>
+                          
                         </motion.div>
                     }
                
