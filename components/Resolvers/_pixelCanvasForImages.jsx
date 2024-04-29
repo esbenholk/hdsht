@@ -2,7 +2,7 @@ import { useEffect, useRef,useState, createRef, useCallback,useGenerator } from 
 // import Image from "next/image";
 import useCursor from "./States/Cursor";
 import useWindowDimensions from "./UseWindowDimensions";
-
+import Logo from 'assets/svg/HDSHT_HD.svg';
 
 class Cell {
     constructor(effect, x, y){
@@ -166,6 +166,11 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
     // const [size, setSize] = useState({x:925,y:115});
     const [size, setSize] = useState({x:width,y:height});
 
+    const [audio, setAudio] = useState();
+    const [shootIsPLaying, setShootIsPLaying] = useState(false);
+
+    
+
     const timer = useRef(null);
     const increment = () => {
  
@@ -188,16 +193,20 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
         }
     };
 
+
     const shoot = (e) =>{
+ 
+      
         window.cancelAnimationFrame(animationFrameId);
         if(effect){
             effect.shoot(e, gunSize);
         }
+      
        render();
     }
 
     const startImage = () =>{
-
+        setAudio(document.getElementsByTagName("audio")[0])
         let _context = canvas.current.getContext('2d');
         _context.globalCompositeOperation='destination-over';
         setContext(_context); 
@@ -220,6 +229,8 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
     }
 
     useEffect(()=>{
+
+
         startImage();
         window.addEventListener('resize', startImage);
         
@@ -231,6 +242,16 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
 
   
     },[context, canvas])
+
+    useEffect(() => {
+        if(audio){
+            audio.addEventListener('ended', () => setShootIsPLaying(false));
+            return () => {
+              audio.removeEventListener('ended', () => setShootIsPLaying(false));
+            };
+        }
+
+      }, [audio]);
 
 
 
@@ -265,6 +286,7 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
                   cancelAnimationFrame(animationFrameId);
             }} >
 
+            <audio> <source src="/sniper.mp3"></source></audio>
 
             <canvas
                 // onClick={(e)=>{
@@ -277,6 +299,20 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
                 onMouseUp={(e)=>{
                     shoot(e, gunSize);
                     timeoutClear();
+                }}
+
+                onClick={()=>{
+                    let sounds = ["/blasterv1.mp3", "/sniper.mp3"]
+
+                        if(audio  ){
+                            audio.src = sounds[(Math.floor(Math.random() * sounds.length))]
+                            audio.load();
+                            audio.play();
+                            setShootIsPLaying(true);
+                        } 
+                  
+                    
+              
                 }}
 
                 height={size.y}

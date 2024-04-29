@@ -7,11 +7,11 @@
 }
 
 .LogoHeader{
-  background-color: var(--main-bg-color);
-  -ms-animation: blink 0.1s ease infinite; 
-  -webkit-animation: blink 0.1s ease infinite; 
-  -moz-animation: blink 0.1s ease infinite;
-  animation: blink 0.1s ease infinite;
+  background-color: black;
+  // -ms-animation: blink 0.1s ease infinite; 
+  // -webkit-animation: blink 0.1s ease infinite; 
+  // -moz-animation: blink 0.1s ease infinite;
+  // animation: blink 0.1s ease infinite;
 }
 
 @keyframes blink {
@@ -19,6 +19,6 @@
     background-color: black;
   }
   100% {
-    background-color: var(--main-font-color-highlight);
+    background-color: rgba(0,0,0,0);
   }
 }

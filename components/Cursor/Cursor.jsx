@@ -5,7 +5,6 @@ import useCursor from "../Resolvers/States/Cursor";
 import { TypeAnimation } from 'react-type-animation';
 
 
-
 function JumbleWordInElement(element, word, speed){
   const letters = "!!ZX#¤%/&)(!?=`^*Ø?§╚╚¥┘ █Å@abcdefghijklmenopqurstpuwvxyzæøå_-_= 0172";
   let words = word.split(" ");
@@ -95,6 +94,7 @@ const Cursor = () => {
   const [trackedDesc, setTrackedDesc] = useState(null);
 
 
+
   const titleRef = useRef();
   const descRef = useRef();
   const mousePosition = {
@@ -102,6 +102,11 @@ const Cursor = () => {
     y: useCursor((state) => state.cursorPosition.y),
   };
   const [isDesktop, setIsDesktop] = useState(false);
+
+
+
+
+
   useEffect(() => {
     // get device type by useragent
     const userAgent = navigator.userAgent;
