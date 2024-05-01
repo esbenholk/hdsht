@@ -124,7 +124,7 @@ const Sticky = ({ slice, isProjectPage }) => {
                   })
                 }}>
           {/**/}
-          {isMobile ?  <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)", margin: "1rem"}}/> :<ParticleCanvas  imageUrl={Logo.src} isPageTop={true}/>}
+          {/* {isMobile ?  <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)", margin: "1rem"}}/> :<ParticleCanvas  imageUrl={Logo.src} isPageTop={true}/>} */}
 
           
         </div>

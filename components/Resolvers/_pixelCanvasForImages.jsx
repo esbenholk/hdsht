@@ -86,7 +86,10 @@ class Cell {
         if(context){
             // context.strokeRect(this.x ,this.y, this.width, this.height);
             if(this.x+this.slideX < this.effect.width && this.y+this.slideY < this.effect.height || this.x+this.slideX > 0 && this.y+this.slideY > 0 ){
-                context.drawImage(this.effect.image, this.x+this.slideX ,this.y+this.slideY, this.width, this.height,this.x + this.positionSlideX ,this.y + this.positionSlideY, this.width, this.height)
+
+                // context.fillRect(this.x+this.slideX ,this.y+this.slideY, this.width,this.height,this.x + this.positionSlideX ,this.y + this.positionSlideY, this.width,this.height);
+                context.drawImage(this.effect.image, this.x+this.slideX ,this.y+this.slideY, this.width,this.height,this.x + this.positionSlideX ,this.y + this.positionSlideY, this.width,this.height)
+                // context.drawImage(this.effect.image, this.x+this.slideX ,this.y+this.slideY, this.effect.width,this.effect.height);
             } else {
                 this.effect.removeCell(this);
             }
@@ -95,11 +98,11 @@ class Cell {
 }
 
 class Effect {
-    constructor(canvas, image){
+    constructor(canvas, image, width, height){
         this.canvas = canvas;
-        this.width = image.width;
-        this.height = image.height;
-        this.cellWidth = image.width/100;
+        this.width = width;
+        this.height = height;
+        this.cellWidth = width/150;
         this.cellHeight =  this.cellWidth;
         this.imageGrid = [];
         this.image = image;
@@ -132,8 +135,8 @@ class Effect {
     }
 
     init(){     
-        for (let y = 0; y < this.image.height; y+= this.cellHeight) {
-            for (let x = 0; x < this.image.width; x+= this.cellWidth) {
+        for (let y = 0; y < this.height; y+= this.cellHeight) {
+            for (let x = 0; x < this.width; x+= this.cellWidth) {
                this.imageGrid.push(new Cell(this, x, y));
             } 
         } 
@@ -208,7 +211,7 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
     const startImage = () =>{
         setAudio(document.getElementsByTagName("audio")[0])
         let _context = canvas.current.getContext('2d');
-        _context.globalCompositeOperation='destination-over';
+    //    _context.globalCompositeOperation='destination-over';
         setContext(_context); 
 
         // const myImage = new Image(100, 100);
@@ -217,10 +220,13 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
         // const aspectRatio = myImage.height / myImage.width;
         // const _height = width / aspectRatio;
         // setSize({x: _height})
-
+        let ratio = myImage.height/myImage.width;
         // _context.drawImage(myImage, 0,0, myImage.width, myImage.height)
         
-        const _effect = new Effect(canvas.current, myImage);
+        console.log("image,", myImage, width, size.y);
+        const _effect = new Effect(canvas.current, myImage, width,width*ratio);
+     
+        
         setEffect(_effect);
         _effect.init(_context);
         _effect.draw(_context);
@@ -322,7 +328,7 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
        
             />  
         </div>
-        <img src={imageUrl} ref={imageRef} style={{width: size.x, height: size.y, position: "fixed", top:0, display: "inline-block", objectFit: "cover", visibility: "hidden"}}/>
+        <img src={imageUrl} ref={imageRef} style={{width: "100%", height: size.y, position: "fixed", top:0, display: "inline-block", objectFit: "cover", visibility: "hidden"}}/>
         </>
        
     );

@@ -145,8 +145,8 @@ const Page = ({ page }) => {
 
         </div>
 
-        <div className={styles.LogoHeader}style={{width: "100%", position: "fixed", zIndex: 1, top: "0", maxHeight: "4.6rem", minHeight: width<600 ? "60px" : 0,  overflow: "hidden", transition: "opacity 0.01s ease-in", padding: "0rem 1rem", opacity: headerInPosition ? 1 :0, transition: "all 0.1s"}}>
-          <img src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)"}}/>
+        <div className={styles.LogoHeader}style={{display: "flex", justifyContent: "center",  alignItems:"center", width: "100%", position: "fixed", zIndex: 1, top: "0", maxHeight: "4.6rem", minHeight: width<600 ? "60px" : 0,  overflow: "hidden", transition: "opacity 0.0s ease-in", padding: "0rem 1rem", opacity: headerInPosition ? 1 :0, transition: "all 0.1s"}}>
+          <img src={Logo.src} alt="logo" style={{width: "calc(100% - 100px)"}}/>
         </div>
 
       </>
