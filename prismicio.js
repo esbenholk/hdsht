@@ -34,9 +34,10 @@ export const createClient = (config = {}) => {
   const client = prismic.createClient(sm.apiEndpoint, {
     routes,
     ...config,
+    accessToken: process.env.PRISMIC_ACCESS_TOKEN,
 
   });
-
+ 
   prismicNext.enableAutoPreviews({
     client,
     previewData: config.previewData,

@@ -5,13 +5,13 @@ import useWindowDimensions from "./UseWindowDimensions";
 import Logo from 'assets/svg/HDSHT_HD.svg';
 
 class Cell {
-    constructor(effect, x, y){
+    constructor(effect, x, y, imageData){
         this.effect = effect;
         this.x =  x;
         this.y = y;
         this.width = effect.cellWidth;
         this.height = effect.cellHeight;
-
+        this.imageData = imageData;
         this.dx = 0;
         this.dy = 0;
         this.distance = 0;
@@ -87,6 +87,8 @@ class Cell {
             // context.strokeRect(this.x ,this.y, this.width, this.height);
             if(this.x+this.slideX < this.effect.width && this.y+this.slideY < this.effect.height || this.x+this.slideX > 0 && this.y+this.slideY > 0 ){
 
+
+                
                 // context.fillRect(this.x+this.slideX ,this.y+this.slideY, this.width,this.height,this.x + this.positionSlideX ,this.y + this.positionSlideY, this.width,this.height);
                 context.drawImage(this.effect.image, this.x+this.slideX ,this.y+this.slideY, this.width,this.height,this.x + this.positionSlideX ,this.y + this.positionSlideY, this.width,this.height)
                 // context.drawImage(this.effect.image, this.x+this.slideX ,this.y+this.slideY, this.effect.width,this.effect.height);
@@ -134,12 +136,18 @@ class Effect {
         }
     }
 
-    init(){     
+    init(context){ 
+        
+
+        const imageData = context.getImageData(0,0, this.width, this.height);
         for (let y = 0; y < this.height; y+= this.cellHeight) {
             for (let x = 0; x < this.width; x+= this.cellWidth) {
-               this.imageGrid.push(new Cell(this, x, y));
+
+               this.imageGrid.push(new Cell(this, x, y, imageData));
             } 
-        } 
+        }
+        
+        
     }
     update(){ 
      
@@ -211,21 +219,22 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
     const startImage = () =>{
         setAudio(document.getElementsByTagName("audio")[0])
         let _context = canvas.current.getContext('2d');
-    //    _context.globalCompositeOperation='destination-over';
+        _context.imageSmoothingEnabled = false;
+        _context.globalCompositeOperation='destination-over';
         setContext(_context); 
 
         // const myImage = new Image(100, 100);
         // myImage.src = imageUrl;
         const myImage = imageRef.current;
-        // const aspectRatio = myImage.height / myImage.width;
-        // const _height = width / aspectRatio;
-        // setSize({x: _height})
         let ratio = myImage.height/myImage.width;
-        // _context.drawImage(myImage, 0,0, myImage.width, myImage.height)
+    
+
+        
+        _context.drawImage(myImage, 0,0, myImage.width, myImage.height)
         
         console.log("image,", myImage, width, size.y);
         const _effect = new Effect(canvas.current, myImage, width,width*ratio);
-     
+        
         
         setEffect(_effect);
         _effect.init(_context);
@@ -320,7 +329,7 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
                     
               
                 }}
-
+                
                 height={size.y}
                 width={size.x}
                 style={{maxWidth: "100%", maxHeight: "100%", backgroundColor: "rgba(0,0,0,0)"}}
@@ -328,7 +337,7 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
        
             />  
         </div>
-        <img src={imageUrl} ref={imageRef} style={{width: "100%", height: size.y, position: "fixed", top:0, display: "inline-block", objectFit: "cover", visibility: "hidden"}}/>
+        <img crossOrigin="anonymous" src={imageUrl} ref={imageRef} style={{width: width, height: size.y, position: "fixed", top:0, display: "inline-block", objectFit: "cover", visibility: "hidden"}}/>
         </>
        
     );
