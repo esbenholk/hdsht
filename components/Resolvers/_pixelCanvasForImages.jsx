@@ -2,16 +2,15 @@ import { useEffect, useRef,useState, createRef, useCallback,useGenerator } from 
 // import Image from "next/image";
 import useCursor from "./States/Cursor";
 import useWindowDimensions from "./UseWindowDimensions";
-import Logo from 'assets/svg/HDSHT_HD.svg';
+import { PrismicImage } from "@prismicio/react";
 
 class Cell {
-    constructor(effect, x, y, imageData){
+    constructor(effect, x, y){
         this.effect = effect;
         this.x =  x;
         this.y = y;
         this.width = effect.cellWidth;
         this.height = effect.cellHeight;
-        this.imageData = imageData;
         this.dx = 0;
         this.dy = 0;
         this.distance = 0;
@@ -86,11 +85,8 @@ class Cell {
         if(context){
             // context.strokeRect(this.x ,this.y, this.width, this.height);
             if(this.x+this.slideX < this.effect.width && this.y+this.slideY < this.effect.height || this.x+this.slideX > 0 && this.y+this.slideY > 0 ){
-
-
-                
                 // context.fillRect(this.x+this.slideX ,this.y+this.slideY, this.width,this.height,this.x + this.positionSlideX ,this.y + this.positionSlideY, this.width,this.height);
-                context.drawImage(this.effect.image, this.x+this.slideX ,this.y+this.slideY, this.width,this.height,this.x + this.positionSlideX ,this.y + this.positionSlideY, this.width,this.height)
+                context.drawImage(this.effect.image, this.x+this.slideX,this.y+this.slideY , this.width,this.height,this.x + this.positionSlideX ,this.y + this.positionSlideY, this.effect.cellWidth,this.height)
                 // context.drawImage(this.effect.image, this.x+this.slideX ,this.y+this.slideY, this.effect.width,this.effect.height);
             } else {
                 this.effect.removeCell(this);
@@ -104,8 +100,8 @@ class Effect {
         this.canvas = canvas;
         this.width = width;
         this.height = height;
-        this.cellWidth = width/150;
-        this.cellHeight =  this.cellWidth;
+        this.cellWidth = 30;
+        this.cellHeight =  30;
         this.imageGrid = [];
         this.image = image;
      
@@ -139,11 +135,10 @@ class Effect {
     init(context){ 
         
 
-        const imageData = context.getImageData(0,0, this.width, this.height);
         for (let y = 0; y < this.height; y+= this.cellHeight) {
             for (let x = 0; x < this.width; x+= this.cellWidth) {
 
-               this.imageGrid.push(new Cell(this, x, y, imageData));
+               this.imageGrid.push(new Cell(this, x, y));
             } 
         }
         
@@ -166,7 +161,7 @@ class Effect {
 }
 
 
-const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
+const PixelCanvas = ({ imageUrl, image, isPageTop }) => {
     const {width, height} = useWindowDimensions();
     const [context, setContext] = useState();
     const [effect, setEffect] = useState();
@@ -233,6 +228,8 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
         _context.drawImage(myImage, 0,0, myImage.width, myImage.height)
         
         console.log("image,", myImage, width, size.y);
+
+        setSize({x:width,y:width*ratio})
         const _effect = new Effect(canvas.current, myImage, width,width*ratio);
         
         
@@ -337,7 +334,15 @@ const PixelCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
        
             />  
         </div>
-        <img crossOrigin="anonymous" src={imageUrl} ref={imageRef} style={{width: width, height: size.y, position: "fixed", top:0, display: "inline-block", objectFit: "cover", visibility: "hidden"}}/>
+        <PrismicImage 
+        alt="" 
+        field={image} 
+        imgixParams={{fit: 'crop', w: size.x, h: size.y}} 
+        width={size.x} 
+        height={size.y} 
+        ref={imageRef}
+        />
+        {/* <img crossOrigin="anonymous" src={imageUrl} ref={imageRef} style={{width: width, height: size.y, position: "fixed", top:0, display: "inline-block", objectFit: "cover", visibility: "hidden"}}/> */}
         </>
        
     );

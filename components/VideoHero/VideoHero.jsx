@@ -42,7 +42,7 @@ const VideoHero = ({ slice }) => {
                 <>
                 {!slice.primary.videolink ?    
                   <MediaResolver
-                    media={slice.primary.image}
+                  media={slice.primary.image}
                   videoRef={videoRef}
                   loop={true}
                 />:
@@ -68,7 +68,7 @@ const VideoHero = ({ slice }) => {
               {/* <AiVideoCanvas  media={slice.primary.videolink}/> */}
 
                 {/* simple image in pixelation canvas */}
-                <PixelCanvas imageUrl={slice.primary.image.url} />
+                <PixelCanvas imageUrl={slice.primary.image.url} image={slice.primary.image} />
 
                 {/* video in pixelation canvas */}
                 {/* <PixelCanvasVideo  imageUrl={slice.primary.image.url} videoUrl={slice.primary.videolink.url}/> */}

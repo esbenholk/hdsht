@@ -26,21 +26,21 @@ const CustomPlayer = ({ media, videoRef, isActive }) => {
         controls={false}
         onLoadedMetadata={() => {
           useVideo.setState({
-            duration: videoRef.current.duration,
-            currentTime: videoRef.current.currentTime,
+            duration: videoRef && videoRef.current.duration,
+            currentTime: videoRef && videoRef.current.currentTime,
             ended: false,
           });
         }}
         onTimeUpdate={() => {
           useVideo.setState({
-            currentTime: videoRef.current.currentTime,
-            duration: videoRef.current.duration,
+            currentTime: videoRef && videoRef.current.currentTime,
+            duration: videoRef && videoRef.current.duration,
             ended: false,
           });
         }}
         onDurationChange={() => {
           useVideo.setState({
-            duration: videoRef.current.duration,
+            duration: videoRef && videoRef.current.duration,
           });
         }}
         ref={videoRef}
@@ -53,17 +53,18 @@ const CustomPlayer = ({ media, videoRef, isActive }) => {
           });
         }}
         onMouseEnter={()=>{
-          if(videoRef.current){
+          if(videoRef && videoRef.current){
             videoRef.current.play();
           }
         }}
         onMouseLeave={()=>{
-          if(videoRef.current){
+          if(videoRef && videoRef.current){
             videoRef.current.pause();
           }
         }}
       >
-        {media.url.match(/.mp4/) && <source src={media.url} type="video/mp4" />}
+        <source src={media.url} />
+        {/* {media.url.match(/.mp4/) && <source src={media.url} type="video/mp4" />}
         {media.url.match(/.webm/) && (
           <source src={media.url} type="video/webm" />
         )}
@@ -73,7 +74,7 @@ const CustomPlayer = ({ media, videoRef, isActive }) => {
         {media.url.match(/.avi/) && <source src={media.url} type="video/avi" />}
         {media.url.match(/.flv/) && <source src={media.url} type="video/flv" />}
         {media.url.match(/.wmv/) && <source src={media.url} type="video/wmv" />}
-        {media.url.match(/.mkv/) && <source src={media.url} type="video/mkv" />}
+        {media.url.match(/.mkv/) && <source src={media.url} type="video/mkv" />} */}
       </video>
     </div>
   );
