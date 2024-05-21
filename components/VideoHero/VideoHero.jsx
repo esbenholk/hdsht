@@ -68,7 +68,7 @@ const VideoHero = ({ slice }) => {
               {/* <AiVideoCanvas  media={slice.primary.videolink}/> */}
 
                 {/* simple image in pixelation canvas */}
-                <PixelCanvas imageUrl={slice.primary.image.url} image={slice.primary.image} />
+                {/* <PixelCanvas imageUrl={slice.primary.image.url} image={slice.primary.image} /> */}
 
                 {/* video in pixelation canvas */}
                 {/* <PixelCanvasVideo  imageUrl={slice.primary.image.url} videoUrl={slice.primary.videolink.url}/> */}
