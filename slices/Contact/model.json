@@ -45,20 +45,12 @@
             "multi": "list-item"
           }
         },
-        "maps_link": {
-          "type": "Link",
-          "config": {
-            "label": "Maps Link",
-            "placeholder": "",
-            "select": null
-          }
-        },
         "phone": {
           "type": "Link",
           "config": {
             "label": "Phone",
             "placeholder": "tel:1234567890",
-            "allowTargetBlank": false,
+            "allowTargetBlank": true,
             "select": null
           }
         },
@@ -71,11 +63,47 @@
             "select": null
           }
         },
-        "timezone": {
-          "type": "Text",
+        "link": {
+          "type": "Link",
           "config": {
-            "label": "TimeZone",
-            "placeholder": "America/New_York"
+            "label": "link",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "select": null
+          }
+        },
+        "link2": {
+          "type": "Link",
+          "config": {
+            "label": "link2",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "select": null
+          }
+        },
+        "link3": {
+          "type": "Link",
+          "config": {
+            "label": "link3",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "select": null
+          }
+        },
+        "link4": {
+          "type": "Link",
+          "config": {
+            "label": "link4",
+            "placeholder": "",
+            "select": null
+          }
+        },
+        "link5": {
+          "type": "Link",
+          "config": {
+            "label": "link5",
+            "placeholder": "",
+            "select": null
           }
         }
       },

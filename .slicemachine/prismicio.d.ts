@@ -57,7 +57,7 @@ interface LandingDocumentData {
  * Slice for *landing → Slice Zone*
  *
  */
-type LandingDocumentDataSlicesSlice = ClientLogosSlice | StickyHeaderSlice | WorkGridSlice | ContactSlice | HeroVideoSlice | CreditFooterSlice | CookieFooterSlice | PhilosophySlice;
+type LandingDocumentDataSlicesSlice = ClientLogosSlice | StickyHeaderSlice | WorkGridSlice | ContactSlice | HeroVideoSlice | CookieFooterSlice | PhilosophySlice | ProfileWorkGridSlice;
 /**
  * landing document from Prismic
  *
@@ -204,6 +204,91 @@ type WorkDocumentDataSlicesSlice = WorkCarouselSlice | TextSlice;
  */
 export type WorkDocument<Lang extends string = string> = prismicT.PrismicDocumentWithUID<Simplify<WorkDocumentData>, "work", Lang>;
 export type AllDocumentTypes = LandingDocument | PageDocument | WorkDocument;
+/**
+ * Primary content in Address → Primary
+ *
+ */
+interface AddressSliceDefaultPrimary {
+    /**
+     * Title field in *Address → Primary*
+     *
+     * - **Field Type**: Title
+     * - **Placeholder**: This is where it all begins...
+     * - **API ID Path**: address.primary.title
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    title: prismicT.TitleField;
+    /**
+     * Description field in *Address → Primary*
+     *
+     * - **Field Type**: Rich Text
+     * - **Placeholder**: A nice description of your feature
+     * - **API ID Path**: address.primary.description
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    description: prismicT.RichTextField;
+}
+/**
+ * Item in Address → Items
+ *
+ */
+export interface AddressSliceDefaultItem {
+    /**
+     * AddressLine field in *Address → Items*
+     *
+     * - **Field Type**: Rich Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: address.items[].addressline
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    addressline: prismicT.RichTextField;
+    /**
+     * PhoneLine field in *Address → Items*
+     *
+     * - **Field Type**: Rich Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: address.items[].phoneline
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    phoneline: prismicT.RichTextField;
+    /**
+     * EmailLine field in *Address → Items*
+     *
+     * - **Field Type**: Rich Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: address.items[].emailline
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    emailline: prismicT.RichTextField;
+}
+/**
+ * Default variation for Address Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: `Address`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type AddressSliceDefault = prismicT.SharedSliceVariation<"default", Simplify<AddressSliceDefaultPrimary>, Simplify<AddressSliceDefaultItem>>;
+/**
+ * Slice variation for *Address*
+ *
+ */
+type AddressSliceVariation = AddressSliceDefault;
+/**
+ * Address Shared Slice
+ *
+ * - **API ID**: `address`
+ * - **Description**: `Address`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type AddressSlice = prismicT.SharedSlice<"address", AddressSliceVariation>;
 /**
  * Primary content in Article → Primary
  *
@@ -471,16 +556,6 @@ export interface ContactSliceDefaultItem {
      */
     address: prismicT.RichTextField;
     /**
-     * Maps Link field in *Contact → Items*
-     *
-     * - **Field Type**: Link
-     * - **Placeholder**: *None*
-     * - **API ID Path**: contact.items[].maps_link
-     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
-     *
-     */
-    maps_link: prismicT.LinkField;
-    /**
      * Phone field in *Contact → Items*
      *
      * - **Field Type**: Link
@@ -501,15 +576,55 @@ export interface ContactSliceDefaultItem {
      */
     email: prismicT.LinkField;
     /**
-     * TimeZone field in *Contact → Items*
+     * link field in *Contact → Items*
      *
-     * - **Field Type**: Text
-     * - **Placeholder**: America/New_York
-     * - **API ID Path**: contact.items[].timezone
-     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     * - **Field Type**: Link
+     * - **Placeholder**: *None*
+     * - **API ID Path**: contact.items[].link
+     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
      *
      */
-    timezone: prismicT.KeyTextField;
+    link: prismicT.LinkField;
+    /**
+     * link2 field in *Contact → Items*
+     *
+     * - **Field Type**: Link
+     * - **Placeholder**: *None*
+     * - **API ID Path**: contact.items[].link2
+     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
+     *
+     */
+    link2: prismicT.LinkField;
+    /**
+     * link3 field in *Contact → Items*
+     *
+     * - **Field Type**: Link
+     * - **Placeholder**: *None*
+     * - **API ID Path**: contact.items[].link3
+     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
+     *
+     */
+    link3: prismicT.LinkField;
+    /**
+     * link4 field in *Contact → Items*
+     *
+     * - **Field Type**: Link
+     * - **Placeholder**: *None*
+     * - **API ID Path**: contact.items[].link4
+     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
+     *
+     */
+    link4: prismicT.LinkField;
+    /**
+     * link5 field in *Contact → Items*
+     *
+     * - **Field Type**: Link
+     * - **Placeholder**: *None*
+     * - **API ID Path**: contact.items[].link5
+     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
+     *
+     */
+    link5: prismicT.LinkField;
 }
 /**
  * Default variation for Contact Slice
@@ -1010,6 +1125,91 @@ type PhilosophySliceVariation = PhilosophySliceDefault;
  */
 export type PhilosophySlice = prismicT.SharedSlice<"philosophy", PhilosophySliceVariation>;
 /**
+ * Primary content in ProfileWorkGrid → Primary
+ *
+ */
+interface ProfileWorkGridSliceDefaultPrimary {
+    /**
+     * Title field in *ProfileWorkGrid → Primary*
+     *
+     * - **Field Type**: Title
+     * - **Placeholder**: This is where it all begins...
+     * - **API ID Path**: profile_work_grid.primary.title
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    title: prismicT.TitleField;
+    /**
+     * Description field in *ProfileWorkGrid → Primary*
+     *
+     * - **Field Type**: Rich Text
+     * - **Placeholder**: A nice description of your feature
+     * - **API ID Path**: profile_work_grid.primary.description
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    description: prismicT.RichTextField;
+}
+/**
+ * Item in ProfileWorkGrid → Items
+ *
+ */
+export interface ProfileWorkGridSliceDefaultItem {
+    /**
+     * image field in *ProfileWorkGrid → Items*
+     *
+     * - **Field Type**: Image
+     * - **Placeholder**: *None*
+     * - **API ID Path**: profile_work_grid.items[].image
+     * - **Documentation**: https://prismic.io/docs/core-concepts/image
+     *
+     */
+    image: prismicT.ImageField<never>;
+    /**
+     * projectLink field in *ProfileWorkGrid → Items*
+     *
+     * - **Field Type**: Link
+     * - **Placeholder**: *None*
+     * - **API ID Path**: profile_work_grid.items[].projectlink
+     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
+     *
+     */
+    projectlink: prismicT.LinkField;
+    /**
+     * title field in *ProfileWorkGrid → Items*
+     *
+     * - **Field Type**: Rich Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: profile_work_grid.items[].title
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    title: prismicT.RichTextField;
+}
+/**
+ * Default variation for ProfileWorkGrid Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: `ProfileWorkGrid`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type ProfileWorkGridSliceDefault = prismicT.SharedSliceVariation<"default", Simplify<ProfileWorkGridSliceDefaultPrimary>, Simplify<ProfileWorkGridSliceDefaultItem>>;
+/**
+ * Slice variation for *ProfileWorkGrid*
+ *
+ */
+type ProfileWorkGridSliceVariation = ProfileWorkGridSliceDefault;
+/**
+ * ProfileWorkGrid Shared Slice
+ *
+ * - **API ID**: `profile_work_grid`
+ * - **Description**: `ProfileWorkGrid`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type ProfileWorkGridSlice = prismicT.SharedSlice<"profile_work_grid", ProfileWorkGridSliceVariation>;
+/**
  * Primary content in StickyHeader → Primary
  *
  */
@@ -1348,6 +1548,6 @@ declare module "@prismicio/client" {
         (repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
     }
     namespace Content {
-        export type { LandingDocumentData, LandingDocumentDataSlicesSlice, LandingDocument, PageDocumentData, PageDocumentDataSlicesSlice, PageDocument, WorkDocumentData, WorkDocumentDataSlicesSlice, WorkDocument, AllDocumentTypes, RichTextSliceDefaultPrimary, RichTextSliceDefaultItem, RichTextSliceDefault, RichTextSliceVariation, RichTextSlice, TextSliceDefaultPrimary, TextSliceDefaultItem, TextSliceDefault, TextSliceVariation, TextSlice, ClientLogosSliceDefaultPrimary, ClientLogosSliceDefaultItem, ClientLogosSliceDefault, ClientLogosSliceVariation, ClientLogosSlice, ContactSliceDefaultPrimary, ContactSliceDefaultItem, ContactSliceDefault, ContactSliceVariation, ContactSlice, CookieFooterSliceDefaultPrimary, CookieFooterSliceDefault, CookieFooterSliceVariation, CookieFooterSlice, CreditFooterSliceDefaultPrimary, CreditFooterSliceDefault, CreditFooterSliceVariation, CreditFooterSlice, HeroTextSliceDefaultItem, HeroTextSliceDefault, HeroTextSliceVariation, HeroTextSlice, HeroVideoSliceDefaultPrimary, HeroVideoSliceDefault, HeroVideoSliceVariation, HeroVideoSlice, ImageSliceSliceDefaultPrimary, ImageSliceSliceDefault, ImageSliceSliceVariation, ImageSliceSlice, MediaArraySliceDefaultPrimary, MediaArraySliceDefaultItem, MediaArraySliceDefault, MediaArraySliceVariation, MediaArraySlice, PhilosophySliceDefaultPrimary, PhilosophySliceDefaultItem, PhilosophySliceDefault, PhilosophySliceVariation, PhilosophySlice, StickyHeaderSliceDefaultPrimary, StickyHeaderSliceDefault, StickyHeaderSliceVariation, StickyHeaderSlice, StructureSliceDefaultPrimary, StructureSliceDefaultItem, StructureSliceDefault, StructureSliceVariation, StructureSlice, WorkCarouselSliceDefaultPrimary, WorkCarouselSliceDefaultItem, WorkCarouselSliceDefault, WorkCarouselSliceVariation, WorkCarouselSlice, WorkGridSliceDefaultPrimary, WorkGridSliceDefaultItem, WorkGridSliceDefault, WorkGridSliceVariation, WorkGridSlice };
+        export type { LandingDocumentData, LandingDocumentDataSlicesSlice, LandingDocument, PageDocumentData, PageDocumentDataSlicesSlice, PageDocument, WorkDocumentData, WorkDocumentDataSlicesSlice, WorkDocument, AllDocumentTypes, AddressSliceDefaultPrimary, AddressSliceDefaultItem, AddressSliceDefault, AddressSliceVariation, AddressSlice, RichTextSliceDefaultPrimary, RichTextSliceDefaultItem, RichTextSliceDefault, RichTextSliceVariation, RichTextSlice, TextSliceDefaultPrimary, TextSliceDefaultItem, TextSliceDefault, TextSliceVariation, TextSlice, ClientLogosSliceDefaultPrimary, ClientLogosSliceDefaultItem, ClientLogosSliceDefault, ClientLogosSliceVariation, ClientLogosSlice, ContactSliceDefaultPrimary, ContactSliceDefaultItem, ContactSliceDefault, ContactSliceVariation, ContactSlice, CookieFooterSliceDefaultPrimary, CookieFooterSliceDefault, CookieFooterSliceVariation, CookieFooterSlice, CreditFooterSliceDefaultPrimary, CreditFooterSliceDefault, CreditFooterSliceVariation, CreditFooterSlice, HeroTextSliceDefaultItem, HeroTextSliceDefault, HeroTextSliceVariation, HeroTextSlice, HeroVideoSliceDefaultPrimary, HeroVideoSliceDefault, HeroVideoSliceVariation, HeroVideoSlice, ImageSliceSliceDefaultPrimary, ImageSliceSliceDefault, ImageSliceSliceVariation, ImageSliceSlice, MediaArraySliceDefaultPrimary, MediaArraySliceDefaultItem, MediaArraySliceDefault, MediaArraySliceVariation, MediaArraySlice, PhilosophySliceDefaultPrimary, PhilosophySliceDefaultItem, PhilosophySliceDefault, PhilosophySliceVariation, PhilosophySlice, ProfileWorkGridSliceDefaultPrimary, ProfileWorkGridSliceDefaultItem, ProfileWorkGridSliceDefault, ProfileWorkGridSliceVariation, ProfileWorkGridSlice, StickyHeaderSliceDefaultPrimary, StickyHeaderSliceDefault, StickyHeaderSliceVariation, StickyHeaderSlice, StructureSliceDefaultPrimary, StructureSliceDefaultItem, StructureSliceDefault, StructureSliceVariation, StructureSlice, WorkCarouselSliceDefaultPrimary, WorkCarouselSliceDefaultItem, WorkCarouselSliceDefault, WorkCarouselSliceVariation, WorkCarouselSlice, WorkGridSliceDefaultPrimary, WorkGridSliceDefaultItem, WorkGridSliceDefault, WorkGridSliceVariation, WorkGridSlice };
     }
 }

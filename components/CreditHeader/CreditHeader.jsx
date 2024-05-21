@@ -30,13 +30,13 @@ const CreditHeader = ({ slice }) => {
     <div
       className={styles.Container}
       ref={header}
-      style={{
-        bottom: `calc(${
-          slice.primary.negative_order * creditOffset * offset - footerOffset
-        }px - ${creditOffset}px)`,
-        zIndex: slice.primary.order ? slice.primary.order +10 : 10,
+      // style={{
+      //   bottom: `calc(${
+      //     slice.primary.negative_order * creditOffset * offset - footerOffset
+      //   }px - ${creditOffset}px)`,
+      //   zIndex: slice.primary.order ? slice.primary.order +10 : 10,
         
-      }}
+      // }}
       onMouseOver={() => {
         useCursor.setState({
           cursorVariant: "hoveronlink",
@@ -68,7 +68,7 @@ const CreditHeader = ({ slice }) => {
       }}
 
     >
-      <div className={styles.Header}>
+      {/* <div className={styles.Header}>
         <div className={styles.Logo}>
           <PrismicNextImage field={slice.primary.logo} />
         </div>
@@ -79,7 +79,7 @@ const CreditHeader = ({ slice }) => {
           {slice.primary.line_two}
         </span>
 
-      </div>
+      </div> */}
    
     </div>
   );

@@ -43,6 +43,23 @@ const Footer = ({ slice }) => {
       initial="visible"
       animate={hide ? "hidden" : "visible"}
       ref={footer}
+
+      onClick={() => {
+        setHide(true);
+        setFooterOffset(height/2)
+      }}
+      onMouseOver={() => {
+        useCursor.setState({
+          cursorVariant: "hoveronlink",
+       
+        });
+      }}
+      onMouseLeave={() => {
+        useCursor.setState({
+          cursorVariant: "default",
+       
+        });
+      }}
     >
       <PrismicLink field={slice.primary.imprintlink}>
         <PrismicRichText field={slice.primary.content} />
@@ -50,22 +67,6 @@ const Footer = ({ slice }) => {
       {/* make a div that hast 2 divs inside that form an x */}
 
       <button
-        onClick={() => {
-          setHide(true);
-          setFooterOffset(height/2)
-        }}
-        onMouseOver={() => {
-          useCursor.setState({
-            cursorVariant: "hoveronlink",
-         
-          });
-        }}
-        onMouseLeave={() => {
-          useCursor.setState({
-            cursorVariant: "default",
-         
-          });
-        }}
       >
         OK
       </button>

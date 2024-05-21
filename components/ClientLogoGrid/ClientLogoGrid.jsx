@@ -125,7 +125,7 @@ const ClientLogoGrid = ({ slice }) => {
                             variants={fadeFromRight}
                       
                           >
-                            {/* <a
+                            <a
                               key={index}
                               target="_blank"
                               href={item.link.url}
@@ -152,7 +152,7 @@ const ClientLogoGrid = ({ slice }) => {
                                 height={90}
                                 alt={item.logo.url}
                               />
-                            </a> */}
+                            </a>
                                    {/* <img
                                 src={item.logo.url}
                                 width={100}
@@ -161,11 +161,11 @@ const ClientLogoGrid = ({ slice }) => {
                               /> */}
                             {/* <ImagePixelated src={item.logo.url}  fillTransparencyColor={"lightgrey"} centered={true} pixelSize={1}/> */}
 
-                            {isMobile ? <img
+                            {/* {isMobile ? <img
                                 src={item.logo.url}
                           
                                 alt={item.logo.url}
-                              /> : <ClientLogoPixelCanvas imageUrl={item.logo.url} imageHeight={200} imageWidth={500}/>}
+                              /> : <ClientLogoPixelCanvas imageUrl={item.logo.url} imageHeight={200} imageWidth={500}/>} */}
                           </motion.div>
                         
                         ))}

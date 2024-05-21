@@ -1,0 +1,79 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "title": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "heading1",
+            "content": {
+              "text": "Lonely"
+            }
+          }
+        ]
+      },
+      "description": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Eiusmod ad occaecat in consectetur magna et incididunt cupidatat excepteur velit ullamco mollit magna."
+            }
+          }
+        ]
+      }
+    },
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": [
+          [
+            "addressline",
+            {
+              "__TYPE__": "StructuredTextContent",
+              "value": [
+                {
+                  "type": "paragraph",
+                  "content": {
+                    "text": "Proident nostrud anim ex dolor incididunt elit aute minim commodo culpa adipisicing deserunt aliqua quis. Velit sit nulla fugiat ipsum deserunt amet sint occaecat irure cillum aliquip proident voluptate aliquip in."
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            "phoneline",
+            {
+              "__TYPE__": "StructuredTextContent",
+              "value": [
+                {
+                  "type": "paragraph",
+                  "content": {
+                    "text": "Lorem officia proident elit ea occaecat fugiat sit irure cillum Lorem incididunt proident non eiusmod."
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            "emailline",
+            {
+              "__TYPE__": "StructuredTextContent",
+              "value": [
+                {
+                  "type": "paragraph",
+                  "content": {
+                    "text": "Aliqua ullamco exercitation non duis do quis veniam nisi."
+                  }
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    ]
+  }
+]

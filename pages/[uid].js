@@ -34,7 +34,7 @@ const Page = ({ page }) => {
           <meta charSet="UTF-8" />
         </Head>
         <Gizmo />
-        <Cursor />
+        {/* <Cursor /> */}
         <GoBack />
         <Layout>
           <SliceZone slices={page.data.slices} components={components} />

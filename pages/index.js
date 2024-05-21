@@ -37,9 +37,6 @@ const Page = ({ page }) => {
 
   
   },[bodyRef])
-
-  
-  
   useEffect(() => {
     const handleScroll = () => {
       if(logoRef.current){
@@ -72,13 +69,14 @@ const Page = ({ page }) => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
   useEffect(() => {
     const userAgent = navigator.userAgent;
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
 
     setIsDesktop(!mobile);
 
-    let incr = 42;
+    let incr = 45;
     if(mobile){
       incr = 30;
     }
@@ -86,11 +84,9 @@ const Page = ({ page }) => {
     let foldedHeight_temp = 0;
     for (let index = 0; index < page.data.slices.length; index++) {
       const slice = page.data.slices[index];
-      if(slice.slice_type === "sticky_header"||   !mobile && slice.slice_type === "credit_footer"|| slice.slice_type === "cookie_footer" ){
+      if(slice.slice_type === "sticky_header" || !mobile && slice.slice_type === "credit_footer" || slice.slice_type === "cookie_footer" ){
         foldedHeight_temp += incr;
-      } else if(  mobile && slice.slice_type === "credit_footer"){
-        foldedHeight_temp += incr*2;
-      }
+      } 
     }
     foldedHeight_temp -= incr;
  
@@ -141,8 +137,8 @@ const Page = ({ page }) => {
         >
           <SliceZone slices={page.data.slices} components={components} />
         </motion.div>
-        <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: width>600 ? "10rem" : "8rem", backgroundColor: "var(--main-bg-color)"}}>
 
+        <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: width>600 ? `calc(100% - ${height-foldedHeight+45}px - ${footerOffset*2}px)`: "8rem", backgroundColor: "var(--main-bg-color)"}}>
         </div>
 
         <div className={styles.LogoHeader}style={{display: "flex", justifyContent: "center",  alignItems:"center", width: "100%", position: "fixed", zIndex: 1, top: "0", maxHeight: "4.6rem", minHeight: width<600 ? "60px" : 0,  overflow: "hidden", transition: "opacity 0.0s ease-in", padding: "0rem 1rem", opacity: headerInPosition ? 1 :0, transition: "all 0.1s"}}>

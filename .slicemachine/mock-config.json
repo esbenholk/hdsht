@@ -97,6 +97,8 @@
       "default": {
         "primary": {}
       }
-    }
+    },
+    "Address": {},
+    "ProfileWorkGrid": {}
   }
 }

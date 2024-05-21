@@ -35,7 +35,7 @@ const Sticky = ({ slice, isProjectPage }) => {
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
     setIsMobile(mobile);
     if(!mobile){
-      setOffset(0.8);
+      setOffset(1);
     }
     setHeight(header.current.offsetHeight);
 
@@ -58,9 +58,10 @@ const Sticky = ({ slice, isProjectPage }) => {
       className={`${styles.Header},  ${isProjectPage ? styles.ProjectPageHeader : styles.Header}`}
       style={{
         top: isNotInAHirarchy ? `calc(${1 * height}px` : `calc(${slice.primary.order * height * OffSetValue}px - ${height}px)`,
-        bottom: `calc(${
-          slice.primary.negative_order * height * OffSetValue - footerOffset
+        bottom: isNotInAHirarchy ? `calc(${1 * height}px` : `calc(${
+          slice.primary.negative_order * height * OffSetValue - footerOffset - 25
         }px - ${height}px)`,
+      
         zIndex: slice.primary.order ? slice.primary.order + 10 : 10,
       }}
       ref={header}
@@ -70,7 +71,6 @@ const Sticky = ({ slice, isProjectPage }) => {
         const nextSibling = header.current.nextSibling;
         nextSibling.scrollIntoView()
 
-        console.log("header click", slice.primary.title, header.current, nextSibling);
 
         // const offset =
         //  ( nextSibling.offsetTop -
@@ -94,47 +94,11 @@ const Sticky = ({ slice, isProjectPage }) => {
         });
       }}
     >
-      {slice.primary.title !== "logo" &&   <span className={styles.Order}>{hirarchyTitle}.</span> }
+      {/* {slice.primary.title !== "logo" &&   <span className={styles.Order}>{hirarchyTitle}.</span> } */}
     
       {slice.primary.title !== "logo" && slice.primary.title}
     </h3>
-    
-
-
-    {slice.primary.title === "logo" &&  
-      <>       
-        <div className={`${styles.LogoContainer} ${logoInPosition && styles.StuckLogoContainer}` } 
-                onMouseOver={() => {
-                  useCursor.setState({
-                    cursorVariant: "hoveronlink",
-                    isOverProject: true,
-                    title: "HDSHT",
-                    instruction: "welcome",
-                    description: "score:" + 0
-                  });
-                }}
-             
-                onMouseLeave={() => {
-                  useCursor.setState({
-                    cursorVariant: "default",
-                    isOverProject: false,
-                    title: "",
-                    description: ""
-
-                  })
-                }}>
-          {/**/}
-          {/* {isMobile ?  <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)", margin: "1rem"}}/> :<ParticleCanvas  imageUrl={Logo.src} isPageTop={true}/>} */}
-
-          
-        </div>
-   
-
-
-
-      </>
-    }
-     
+  
     </>
   );
 };
