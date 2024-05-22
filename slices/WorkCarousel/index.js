@@ -4,6 +4,8 @@ import ProjectCarousel from "../../components/ProjectCarousel/ProjectCarousel";
 
 export const WorkCarousel = ({ slice, project }) => {
   const [loaded, setLoaded] = useState(false);
+
+
   useEffect(() => {
     console.log(slice);
     setLoaded(true);
@@ -12,6 +14,8 @@ export const WorkCarousel = ({ slice, project }) => {
     loaded && (
       <section>
         <ProjectCarousel slice={slice} project={project}/>
+
+      
       </section>
     )
   );

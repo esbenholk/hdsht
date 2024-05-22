@@ -57,7 +57,7 @@ interface LandingDocumentData {
  * Slice for *landing → Slice Zone*
  *
  */
-type LandingDocumentDataSlicesSlice = ClientLogosSlice | StickyHeaderSlice | WorkGridSlice | ContactSlice | HeroVideoSlice | CookieFooterSlice | PhilosophySlice | ProfileWorkGridSlice;
+type LandingDocumentDataSlicesSlice = ClientLogosSlice | StickyHeaderSlice | WorkGridSlice | ContactSlice | HeroVideoSlice | CookieFooterSlice | PhilosophySlice | ProfileWorkGridSlice | AddressSlice;
 /**
  * landing document from Prismic
  *
@@ -144,17 +144,6 @@ interface WorkDocumentData {
      */
     title: prismicT.KeyTextField;
     /**
-     * Description field in *Work*
-     *
-     * - **Field Type**: Text
-     * - **Placeholder**: *None*
-     * - **API ID Path**: work.description
-     * - **Tab**: Main
-     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
-     *
-     */
-    description: prismicT.KeyTextField;
-    /**
      * Keywords field in *Work*
      *
      * - **Field Type**: Text
@@ -176,6 +165,28 @@ interface WorkDocumentData {
      *
      */
     nextwork: prismicT.RelationField;
+    /**
+     * Description field in *Work*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: work.description
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    description: prismicT.KeyTextField;
+    /**
+     * Credits field in *Work*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: work.credits
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    credits: prismicT.KeyTextField;
     /**
      * Slice Zone field in *Work*
      *
@@ -1039,7 +1050,7 @@ export interface PhilosophySliceDefaultItem {
      * - **Documentation**: https://prismic.io/docs/core-concepts/select
      *
      */
-    type: prismicT.SelectField<"Description with image" | "List">;
+    type: prismicT.SelectField<"Description with image" | "List" | "client logo grid" | "work example carousel">;
     /**
      * Category field in *Philosophy → Items*
      *

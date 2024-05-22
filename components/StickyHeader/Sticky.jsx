@@ -20,13 +20,8 @@ const Sticky = ({ slice, isProjectPage }) => {
   const header = useRef();
   const [height, setHeight] = useState(0);
   const [OffSetValue, setOffset] = useState(0.7);
-  const {width} = useWindowDimensions();
   const [isNotInAHirarchy, setIsNotInAHirarchy] = useState(true);
   const [hirarchyTitle, setHirarchyTitle] = useState("");
-
-
-
-  const [logoInPosition, setLogoInPosition] = useState(false);
   const { footerOffset } = useFooterOffset();
   const [isMobile, setIsMobile] = useState();
 
@@ -35,7 +30,7 @@ const Sticky = ({ slice, isProjectPage }) => {
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
     setIsMobile(mobile);
     if(!mobile){
-      setOffset(1);
+      setOffset(0.8);
     }
     setHeight(header.current.offsetHeight);
 
@@ -69,17 +64,13 @@ const Sticky = ({ slice, isProjectPage }) => {
       onClick={() => {
 
         const nextSibling = header.current.nextSibling;
-        nextSibling.scrollIntoView()
+        nextSibling.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" })
+
+        // const y = nextSibling.getBoundingClientRect().top;
+
+        // window.scrollTo({top: y, behavior: 'smooth'});
 
 
-        // const offset =
-        //  ( nextSibling.offsetTop -
-        //   slice.primary.order * height * OffSetValue) - 50;
-
-
-        // // const bodyContainer = document.getElementsByClassName("body")[0];
-        // // bodyContainer.scrollTop = offset;
-        // window.scrollTo( { top: offset,behavior: "smooth"});
      
  
       }}

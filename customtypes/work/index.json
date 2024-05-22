@@ -19,13 +19,6 @@
           "placeholder": ""
         }
       },
-      "description": {
-        "type": "Text",
-        "config": {
-          "label": "Description",
-          "placeholder": ""
-        }
-      },
       "keywords": {
         "type": "Text",
         "config": {
@@ -38,6 +31,20 @@
         "config": {
           "label": "NextWork",
           "select": "document"
+        }
+      },
+      "description": {
+        "type": "Text",
+        "config": {
+          "label": "Description",
+          "placeholder": ""
+        }
+      },
+      "credits": {
+        "type": "Text",
+        "config": {
+          "label": "Credits",
+          "placeholder": ""
         }
       },
       "slices": {

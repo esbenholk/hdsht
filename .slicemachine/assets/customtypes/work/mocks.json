@@ -1,21 +1,16 @@
 {
   "uid": {
     "__TYPE__": "UIDContent",
-    "value": "bowl"
+    "value": "recognize"
   },
   "title": {
     "__TYPE__": "FieldContent",
-    "value": "hidden",
-    "type": "Text"
-  },
-  "description": {
-    "__TYPE__": "FieldContent",
-    "value": "its",
+    "value": "horn",
     "type": "Text"
   },
   "keywords": {
     "__TYPE__": "FieldContent",
-    "value": "actual",
+    "value": "on",
     "type": "Text"
   },
   "nextwork": {
@@ -25,11 +20,21 @@
       "id": "mock_document_id"
     }
   },
+  "description": {
+    "__TYPE__": "FieldContent",
+    "value": "rapidly",
+    "type": "Text"
+  },
+  "credits": {
+    "__TYPE__": "FieldContent",
+    "value": "mental",
+    "type": "Text"
+  },
   "slices": {
     "__TYPE__": "SliceContentType",
     "value": [
       {
-        "key": "work_carousel$fefb041c-2e41-4ec8-9707-425046542ad3",
+        "key": "work_carousel$37a19788-cd11-4741-8cca-841c1e0dd405",
         "name": "work_carousel",
         "widget": {
           "__TYPE__": "SharedSliceContent",
@@ -41,7 +46,7 @@
                 {
                   "type": "heading1",
                   "content": {
-                    "text": "Ground"
+                    "text": "Divide"
                   }
                 }
               ]
@@ -85,7 +90,7 @@
         }
       },
       {
-        "key": "text$3b54f7ba-a2a9-4518-9749-7f926e5295fb",
+        "key": "text$c2e32565-41af-4f2c-95ee-627e9138f13d",
         "name": "text",
         "widget": {
           "__TYPE__": "SharedSliceContent",
@@ -97,7 +102,7 @@
                 {
                   "type": "heading1",
                   "content": {
-                    "text": "Familiar"
+                    "text": "Please"
                   }
                 }
               ]
@@ -108,7 +113,7 @@
                 {
                   "type": "paragraph",
                   "content": {
-                    "text": "Tempor qui consequat ad laboris pariatur ex voluptate dolore quis. In ad labore non adipisicing ad. Quis nisi sunt eu veniam quis non anim."
+                    "text": "Veniam proident laboris pariatur quis cillum eiusmod elit."
                   }
                 }
               ]
@@ -126,7 +131,7 @@
                       {
                         "type": "paragraph",
                         "content": {
-                          "text": "Sint pariatur adipisicing nulla nisi aliqua non in magna ullamco et elit duis excepteur. Sunt excepteur ipsum incididunt enim adipisicing ut id ullamco qui incididunt exercitation enim."
+                          "text": "Aliqua ut adipisicing veniam qui enim consectetur nostrud ea laboris dolor incididunt veniam esse quis."
                         }
                       }
                     ]

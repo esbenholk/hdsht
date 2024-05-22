@@ -10,7 +10,6 @@ function WorkGrid({ slice }){
   async function getWorkDetails(work){
     const client = createClient();
     const workdetails = await client.getByUID("work", work.uid);
-    console.log("has slice/work",workdetails);
     setWorkInGridWithDetails(workInGridWithDetails => [...workInGridWithDetails,workdetails] );
   }
 

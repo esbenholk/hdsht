@@ -43,7 +43,9 @@
             "placeholder": "",
             "options": [
               "Description with image",
-              "List"
+              "List",
+              "client logo grid",
+              "work example carousel"
             ]
           }
         },

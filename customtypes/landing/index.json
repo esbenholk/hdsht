@@ -54,6 +54,9 @@
             },
             "profile_work_grid": {
               "type": "SharedSlice"
+            },
+            "address": {
+              "type": "SharedSlice"
             }
           }
         }

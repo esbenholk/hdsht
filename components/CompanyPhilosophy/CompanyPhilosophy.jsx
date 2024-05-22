@@ -73,12 +73,12 @@ const CompanyPhilosophy = ({ slice }) => {
                     style={{
                       borderRadius: ".5rem",
                     }}
-                    onMouseOver={() => {
-                      moveExcluder(IMGref.current);
-                    }}
-                    onMouseLeave={() => {
-                      removeExcluder();
-                    }}
+                    // onMouseOver={() => {
+                    //   moveExcluder(IMGref.current);
+                    // }}
+                    // onMouseLeave={() => {
+                    //   removeExcluder();
+                    // }}
                   >
                     <PrismicNextImage field={item.image} />
 
@@ -116,8 +116,7 @@ const CompanyPhilosophy = ({ slice }) => {
                       );
                     })}
                   </ul>
-                  {/* (Placeholder for map)
-                  <SvgAfrica /> */}
+           
                 </div>
               </motion.div>
             )}

@@ -9,7 +9,6 @@ import useCursor from "../Resolvers/States/Cursor";
 import Layout from "../Layout/Layout";
 import { useExcluder } from "../Resolvers/States/Excluder";
 import {WorkCarousel} from "../../slices/WorkCarousel"
-import useWindowDimensions from "../Resolvers/UseWindowDimensions";
 
 const blendIn = {
   hidden: {
@@ -31,9 +30,6 @@ const blendIn = {
 export default function LandingGrid({workInGridWithDetails}) {
 
   const grid = useRef();
-  const {width} = useWindowDimensions();
-  const [infoIsExpanded, setINfoIsExpanded] = useState(false);
-  const {infoRef} = useRef();
 
 
   // const { moveExcluder, removeExcluder } = useExcluder();
@@ -75,19 +71,7 @@ export default function LandingGrid({workInGridWithDetails}) {
                 
                   </motion.div>
 
-      
-                    {width<700 &&      
-                        <motion.div className={styles.InfoContainer}>
-                          {item.data.description && item.data.description.length > 0 &&      <div ref={infoRef} className={!infoIsExpanded ? `${styles.Button}`  : `${styles.Button} ${styles.ButtonExpanded}`  } onClick={()=>{
-                            setINfoIsExpanded(!infoIsExpanded);
-                          }}>
-                            <p className={styles.Content}>{item.data.description}</p>
-                          </div>}
-                     
-                          <p>{item.data.title}</p>
-                          
-                        </motion.div>
-                    }
+
                
                 </Suspense>
               </motion.div> 

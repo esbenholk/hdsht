@@ -15,7 +15,7 @@ import GoBack from "../../components/GoBack/GoBack";
 import Logo from 'assets/svg/HDSHT_HD.svg';
 import Sticky from "@/components/StickyHeader/Sticky";
 import useWindowDimensions from "@/components/Resolvers/UseWindowDimensions";
-
+import styles from "./style.module.scss"
 
 const Page = ({ page }) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -53,15 +53,24 @@ const Page = ({ page }) => {
         <Cursor />
         <div className="singleWork" >
         <Sticky slice={slice} isProjectPage={true}/>
-        <SliceZone
-          slices={page.data.slices}
-          components={components}
-          page={page}
-        />    
+        <motion.div        
+          className={styles.Container}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <SliceZone
+            slices={page.data.slices}
+            components={components}
+            page={page}
+          />    
+        </motion.div>
+    
          <GoBack />
         </div>
-        <div style={{width: "100%", position: "fixed", zIndex: 0, top: "0", backgroundColor: "var(--main-font-color-highlight)", maxHeight: "5rem", minHeight: width<600 ? "90px" : 0,  overflow: "hidden", transition: "opacity 0.01s ease-in", padding: "0rem 1rem", transition: "all 0.1s"}}>
-          <img src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)"}}/>
+        <div style={{width: "100%", position: "fixed", zIndex: 0, top: "0", backgroundColor: "#8daccf", maxHeight: "6.5rem", minHeight: width<600 ? "90px" : 0,  overflow: "hidden", transition: "opacity 0.01s ease-in", padding: "0rem 1rem", transition: "all 0.1s"}}>
+          <img src={Logo.src} alt="logo" style={{width: "100%"}}/>
         </div>
       </>
     )
