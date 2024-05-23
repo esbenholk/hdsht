@@ -27,10 +27,10 @@ export default function App({ Component, pageProps }) {
     setIsMobile(mobile);
 
     console.log("App comp mounted", Component, pageProps);
-    if(pageProps.page.data && pageProps.page.data.description){
+    if(pageProps.page && pageProps.page.data && pageProps.page.data.description){
       setDesc(pageProps.page.data.description);
     }
-    if(pageProps.page.data && pageProps.page.data.title){
+    if(pageProps.page && pageProps.page.data && pageProps.page.data.title){
       setTitle(pageProps.page.data.title);
     }
     setIsMounted(true);
@@ -52,7 +52,7 @@ export default function App({ Component, pageProps }) {
   return (
     isMounted && (
       <PrismicProvider internalLinkComponent={(props) => <Link {...props} />}>      
-        {/* <div className="body"> */}
+            
             <PrismicPreview repositoryName={repositoryName}>
               <AnimatePresence>
                 <Component {...pageProps} />
@@ -99,7 +99,6 @@ export default function App({ Component, pageProps }) {
               {isMobile ?  <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 4rem)", margin: "0rem 2rem -2rem 2rem"}}/> :<ParticleCanvas  imageUrl={Logo.src} isPageTop={false}/>}
             </div>   
           </section>
-        {/* </div> */}
 
 
       </PrismicProvider>

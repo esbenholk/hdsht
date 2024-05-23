@@ -3,8 +3,6 @@ import { motion, useInView } from "framer-motion";
 import { PrismicRichText } from "@prismicio/react";
 import { PrismicNextImage } from "@prismicio/next";
 import { useRef } from "react";
-import { useExcluder } from "../Resolvers/States/Excluder";
-import SvgAfrica from "./SvgAfrica";
 
 const CompanyPhilosophy = ({ slice }) => {
   const container = useRef();
@@ -45,8 +43,6 @@ const CompanyPhilosophy = ({ slice }) => {
         console.log(item.list);
 
         const IMGref = useRef();
-
-        const { moveExcluder, removeExcluder } = useExcluder();
         return (
           <motion.div
             className={styles.Content}
@@ -73,12 +69,7 @@ const CompanyPhilosophy = ({ slice }) => {
                     style={{
                       borderRadius: ".5rem",
                     }}
-                    // onMouseOver={() => {
-                    //   moveExcluder(IMGref.current);
-                    // }}
-                    // onMouseLeave={() => {
-                    //   removeExcluder();
-                    // }}
+          
                   >
                     <PrismicNextImage field={item.image} />
 
@@ -95,16 +86,11 @@ const CompanyPhilosophy = ({ slice }) => {
                   <ul>
                     {item.list.map((listItem, index) => {
                       const listRef = useRef();
-                      const { moveExcluder, removeExcluder } = useExcluder();
+                      // const { moveExcluder, removeExcluder } = useExcluder();
                       return listItem.type === "list-item" ? (
                         <motion.li
                           ref={listRef}
-                          onMouseOver={() => {
-                            moveExcluder(listRef.current);
-                          }}
-                          onMouseLeave={() => {
-                            removeExcluder();
-                          }}
+                     
                           style={{
                             borderRadius: ".5rem",
                           }}

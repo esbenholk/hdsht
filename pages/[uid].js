@@ -14,7 +14,6 @@ import GoBack from "../components/GoBack/GoBack";
 
 const Page = ({ page }) => {
   const [isMounted, setIsMounted] = useState(false);
-
   useEffect(() => {
     console.log("page mounted");
     setIsMounted(true);
@@ -48,9 +47,10 @@ export default Page;
 
 export async function getStaticProps({ params, previewData }) {
   const client = createClient({ previewData });
+  console.log(params);
 
   const page = await client.getByUID("page", params.uid);
-  console.log("STATIC PATH", page)
+ 
   return {
     props: {
       page,
@@ -58,19 +58,12 @@ export async function getStaticProps({ params, previewData }) {
   };
 }
 
+
+
 export async function getStaticPaths() {
   const client = createClient();
 
-  // const pages = await client.getAllByType("page");
-
-  const pages = await client.getAllByType('page', {
-    orderings: {
-      field: 'document.first_publication_date',
-      direction: 'desc',
-    },
-    lang: 'en-us',
-  })
-  console.log("STATIC PATH", pages)
+  const pages = await client.getAllByType('page', {})
 
   return {
     paths: pages.map((page) => prismicH.asLink(page)),

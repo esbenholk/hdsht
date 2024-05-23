@@ -82,6 +82,7 @@ const TickerContent = ({slice}) =>{
   </>)
 }
 const ClientLogoGrid = ({ slice }) => {
+  const container = useRef();
   const grid = useRef();
   const inView = useInView(grid, { once: true });
   const {width} = useWindowDimensions();
@@ -89,7 +90,7 @@ const ClientLogoGrid = ({ slice }) => {
 
   const [isMobile, setIsMobile] = useState();
 
-
+console.log("client logo grid", slice);
   useEffect(() => {
     const userAgent = navigator.userAgent;
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
@@ -97,29 +98,31 @@ const ClientLogoGrid = ({ slice }) => {
   },[])
 
   return (
-    <motion.div
-      className={styles.Wrapper}
-      initial="right"
-      animate={inView ? "center" : "right"}
-      ref={grid}
-      onMouseOver={()=>{
-        setPaused(true);
-      }}
-      onMouseLeave={()=>{
-        setPaused(false);
-      }}
-    >
-      <motion.div className={styles.TitleContainer}>
-        <span>{slice.primary.suborder}</span>
-        <PrismicRichText field={slice.primary.title} />
-      </motion.div>
 
-        <motion.div
-          className={styles.Container}
-          variants={fadeFromRight}
-        >
-                  {slice?.items?.map((item, index) =>  (
-                          <motion.div
+    <motion.div
+    className={styles.Container}
+    // variants={bounceInFromBottom}
+    animate={inView ? "visible" : "hidden"}
+    ref={container}
+  >
+    <motion.div
+    className={styles.Content}
+
+  >
+    <motion.div
+      className={styles.Category}
+    >
+      <PrismicRichText field={slice.primary.title} />
+    </motion.div>
+    <motion.div
+      className={styles.List}
+    >
+
+                    {slice?.items?.map((item, index) => {
+                      // const { moveExcluder, removeExcluder } = useExcluder();
+                      return (
+                       
+                         <motion.div
                             className={styles.LogoWrapper}
                             key={index}
                             variants={fadeFromRight}
@@ -148,8 +151,7 @@ const ClientLogoGrid = ({ slice }) => {
                             >
                               <img
                                 src={item.logo.url}
-                                width={100}
-                                height={90}
+                        
                                 alt={item.logo.url}
                               />
                             </a>
@@ -167,11 +169,15 @@ const ClientLogoGrid = ({ slice }) => {
                                 alt={item.logo.url}
                               /> : <ClientLogoPixelCanvas imageUrl={item.logo.url} imageHeight={200} imageWidth={500}/>} */}
                           </motion.div>
-                        
-                        ))}
-         
+                    
+                      ) 
+                    })}
+
+
         </motion.div>
-    </motion.div>
+  </motion.div>
+  </motion.div>
+    
   );
 };
 const ClientLogoCarousel = ({ slice }) => {

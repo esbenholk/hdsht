@@ -32,8 +32,9 @@ const Sticky = ({ slice, isProjectPage }) => {
     if(!mobile){
       setOffset(0.8);
     }
-    setHeight(header.current.offsetHeight);
-
+    if(header){
+      setHeight(header.current.offsetHeight);
+    }
     if(isNaN(slice.primary.order)){
       setHirarchyTitle(slice.primary.order);
       slice.primary.order = 1;
@@ -48,47 +49,40 @@ const Sticky = ({ slice, isProjectPage }) => {
 
 
   return (
+  
     <>
-    <h3 
-      className={`${styles.Header},  ${isProjectPage ? styles.ProjectPageHeader : styles.Header}`}
-      style={{
-        top: isNotInAHirarchy ? `calc(${1 * height}px` : `calc(${slice.primary.order * height * OffSetValue}px - ${height}px)`,
-        bottom: isNotInAHirarchy ? `calc(${1 * height}px` : `calc(${
-          slice.primary.negative_order * height * OffSetValue - footerOffset - 25
-        }px - ${height}px)`,
-      
-        zIndex: slice.primary.order ? slice.primary.order + 10 : 10,
-      }}
-      ref={header}
-      id={slice.primary.title}
-      onClick={() => {
+      {!isMobile ? 
+      <h3 
+        className={`${styles.Header},  ${isProjectPage ? styles.ProjectPageHeader : styles.Header}`}
+        style={{
+          top: isNotInAHirarchy ? `calc(${1 * height}px` : `calc(${slice.primary.order * height * OffSetValue}px - ${height}px)`,
+          bottom: isNotInAHirarchy ? `calc(${1 * height}px` : `calc(${
+            slice.primary.negative_order * height * OffSetValue - footerOffset - 25
+          }px - ${height}px)`,
+          zIndex: slice.primary.order ? slice.primary.order + 10 : 10,
+        }}
+        ref={header}
+        id={slice.primary.title}
+        onClick={() => {
+          const nextSibling = header.current.nextSibling;
+          nextSibling.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" })
+        }}
+        onMouseOver={() => {
+          useCursor.setState({
+            cursorVariant: "hoveronlink",
+          });
+        }}
+        onMouseLeave={() => {
+          useCursor.setState({
+            cursorVariant: "default",
+          });
+        }}
+      >    
+        {slice.primary.title !== "logo" && slice.primary.title}
+      </h3> :
+      <h3>{slice.primary.title !== "logo" && slice.primary.title}</h3>
+      }
 
-        const nextSibling = header.current.nextSibling;
-        nextSibling.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" })
-
-        // const y = nextSibling.getBoundingClientRect().top;
-
-        // window.scrollTo({top: y, behavior: 'smooth'});
-
-
-     
- 
-      }}
-      onMouseOver={() => {
-        useCursor.setState({
-          cursorVariant: "hoveronlink",
-        });
-      }}
-      onMouseLeave={() => {
-        useCursor.setState({
-          cursorVariant: "default",
-        });
-      }}
-    >
-      {/* {slice.primary.title !== "logo" &&   <span className={styles.Order}>{hirarchyTitle}.</span> } */}
-    
-      {slice.primary.title !== "logo" && slice.primary.title}
-    </h3>
   
     </>
   );

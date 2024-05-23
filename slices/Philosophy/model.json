@@ -58,10 +58,10 @@
             "single": "heading2"
           }
         },
-        "description": {
+        "bigtext": {
           "type": "StructuredText",
           "config": {
-            "label": "Description",
+            "label": "Big Text",
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "paragraph"

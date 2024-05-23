@@ -1062,15 +1062,15 @@ export interface PhilosophySliceDefaultItem {
      */
     category: prismicT.TitleField;
     /**
-     * Description field in *Philosophy → Items*
+     * Big Text field in *Philosophy → Items*
      *
      * - **Field Type**: Rich Text
      * - **Placeholder**: *None*
-     * - **API ID Path**: philosophy.items[].description
+     * - **API ID Path**: philosophy.items[].bigtext
      * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
      *
      */
-    description: prismicT.RichTextField;
+    bigtext: prismicT.RichTextField;
     /**
      * Image field in *Philosophy → Items*
      *

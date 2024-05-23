@@ -1,31 +1,22 @@
 import React from 'react'
-import { RichText } from 'prismic-reactjs'
+import { useState, useEffect } from "react";
+import ProfileWorkExample from "../../components/ProfileWorkExamples/ProfileWorkExample";
 
-const ProfileWorkGrid = ({ slice }) => (
-  <section>
-    <span className="title">
-      {
-        slice.primary.title ?
-        <RichText render={slice.primary.title}/>
-        : <h2>Template slice, update me!</h2>
-      }
-    </span>
-    {
-      slice.primary.description ?
-      <RichText render={slice.primary.description}/>
-      : <p>start by editing this slice from inside Slice Machine!</p>
-    }
-    <style jsx>{`
-        section {
-          max-width: 600px;
-          margin: 4em auto;
-          text-align: center;
-        }
-        .title {
-          color: #8592e0;
-        }
-    `}</style>
-  </section>
-)
+const ProfileWorkGrid  = ({ slice, project }) => {
+  const [loaded, setLoaded] = useState(false);
+
+
+  useEffect(() => {
+    console.log(slice);
+    setLoaded(true);
+  }, []);
+  return (
+    loaded && (
+      <section>
+        <ProfileWorkExample slice={slice} project={project}/>
+      </section>
+    )
+  );
+};
 
 export default ProfileWorkGrid

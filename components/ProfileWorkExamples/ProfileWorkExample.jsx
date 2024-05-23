@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, Suspense } from "react";
-import styles from "./ProjectCarousel.module.scss";
+import styles from "./ProfileWorkExample.module.scss";
 import { Swiper, SwiperSlide, useSwiperSlide, useSwiper } from "swiper/react";
 import { PrismicLink } from "@prismicio/react";
 import throttle from "lodash.throttle";
@@ -19,10 +19,7 @@ import {
   Lazy,
   Autoplay,
 } from "swiper";
-import LoadSpinner from "../LoadSpinner/LoadSpinner";
-import DescriptionModal from "./Description/Description";
-import MediaResolver from "../Resolvers/MediaResolver/MediaResolver";
-import Progress from "./Progress/Progress";
+
 import useVideo from "../Resolvers/States/Video";
 import {
   checkTargetForNewValues,
@@ -30,108 +27,11 @@ import {
   useAnimationControls,
 } from "framer-motion";
 import useCursor from "../Resolvers/States/Cursor";
-import Controls from "./Controls";
-import GallerySlide from "./GallerySlide";
-import ThumbSlide from "./ThumbSlide";
+import GallerySlide from "../ProjectCarousel/GallerySlide";
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
-import PrismicRichTextResolver from "../Resolvers/PrismicRichTextResolver/PrismicRichTextResolver";
 
 
-const slideInFromBottom = {
-  hidden: {
-    opacity: 0,
-    y: 100,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeInOut",
-    },
-  },
-};
-
-
-function JumbleWordInElement(element, word, speed){
-  const letters = "!!ZX#¤%/&)(!?=`^*Ø?§╚╚¥┘ █Å@abcdefghijklmenopqurstpuwvxyzæøå_-_= 0172";
-  let words = word.split(" ");
-
-  let interval = null;
-
-  let iteration = 0;
-
-  
-  
-  clearInterval(interval);
-  
-  interval = setInterval(() => {
-    if(element && element.innerText){
-
-      let codedsentence = [];
-      for (let index = 0; index < words.length; index++) {
-        const singleWord = words[index];
-        let radnomcode = "";
-        for (let index = 0; index < singleWord.length; index++) {
-          const letter = letters[Math.floor(Math.random() * letters.length)];
-          radnomcode += letter;
-        }
-        codedsentence.push(radnomcode + " ");
-        codedsentence.join('   ');
-        
-      }
-  
-      element.innerText = codedsentence;
-    
-  
-    }
-    
-    
-    if(iteration >= speed){ 
-      clearInterval(interval);
-      element.innerText = word;
-    }
-    
-    iteration += 1;
-  },1);
-}
-
-
-function JumbleLettersInElement(element, word, speed){
-  const letters = "!!ZX#¤%/&)(!?=`^*Ø?§╚╚¥┘ █Å@";
-
-  let interval = null;
-
-  let iteration = 0;
-  
-  clearInterval(interval);
-  
-  interval = setInterval(() => {
-    if(element && element.innerText){
-      element.innerText = word
-      .split("")
-      .map((letter, index) => {
-        if(index < iteration) {
-          return word[index];
-        }
-      
-        return letters[Math.floor(Math.random() * letters.length)]
-      })
-      .join("");
-    }
-    
-    
-    if(iteration >= word.length){ 
-      clearInterval(interval);
-    }
-    
-    iteration += 1;
-  },speed);
-}
-
-
-
-const ProjectCarousel = ({ slice, project }) => {
+const ProfileWorkExample = ({ slice, project }) => {
   const gallerySwiperRef = useRef();
   const carousel = useRef();
   const thumbSwiperRef = useRef();
@@ -257,17 +157,7 @@ const ProjectCarousel = ({ slice, project }) => {
         shouldrenderdetailsontop: false
       });
   };
-  const handleHoverButton = (item) => {
-    useCursor.setState({
-        cursorVariant: "hoveronlink",
 
-        instruction: !url.includes("work") ? "click to read" : "",
-        title: item? item.data.title : "",
-   
-      });
- 
-   
-  };
   const handleLeave = (e) => {
     useCursor.setState({
       cursorVariant: "default",
@@ -279,53 +169,12 @@ const ProjectCarousel = ({ slice, project }) => {
   };
 
 
-  const handleClick = (e, item)=>{
-  
-    if(infoIsExpanded){
-      setINfoIsExpanded(false);
-    }
-    // if(gallerySwiperRef.current && section && !cursorExpanded ){
-    //   expandCursor();
-    //   setCursorExpanded(true);
-    //   useCursor.setState({
-    //     cursorVariant: "expanded",
-    //     isOverProject: false,
-    //     description: item? item.data.description : "",
-    //     title: item? item.data.title : "",
-    //     shouldrenderdetailsontop: false,
-    //     instruction: "click to close",
-    //     carouselTopLeftPos: {x:width>600 ? 100 : 0,y: width>600 ?120 : 0}
-    //   });
-
-    //   setTimeout(() => {
-    //     window.addEventListener('scroll', handleScroll);
-    //    }, 1000);
-
-    // } else if(gallerySwiperRef.current && section && cursorExpanded){
-    //   compressCursor();
-    //   setCursorExpanded(false);
-    //   useCursor.setState({
-    //     cursorVariant: "default",
-    //     isOverProject: false,
-    //     description:"",
-    //     title: "",
-    //     shouldrenderdetailsontop: false,
-    //     instruction: "click to read",
-    //     carouselTopLeftPos: {x:width>600 ? 100 : 0,y: width>600 ?120 : 0}
-
-    //   });
-    //   window.removeEventListener('scroll', handleScroll);
-
-    // }
-   
-  }
-
 
   // url.includes("work") ? styles.WorkCarouselContainer : 
   return (
     <motion.div
       className={`${styles.CarouselContainer }` }
-      variants={slideInFromBottom}
+
       initial="hidden"
       animate="visible"
       exit="hidden"
@@ -343,19 +192,8 @@ const ProjectCarousel = ({ slice, project }) => {
       }}
      
     >
-      {hovered &&  <Progress
-        slice={slice}
-        slideIndex={slideIndex}
-        paused={paused}
-        currentSlide={currentSlide}
-      />}
 
-      {/* <Controls
-        hovered={hovered}
-        setHovered={setHovered}
-        paused={paused}
-        setPaused={setPaused}
-      /> */}
+
       <Swiper
 
         ref={gallerySwiperRef}
@@ -437,113 +275,9 @@ const ProjectCarousel = ({ slice, project }) => {
           );
         })}
       </Swiper>
-      <Swiper
-        onSwiper={setThumbsSwiper}
-        ref={thumbSwiperRef}
-        className={styles.ThumbSwiper}
-        modules={[FreeMode, Thumbs, Mousewheel]}
-        mousewheel
-        // spaceBetween={10}
-        direction={"horizontal"}
-        slideToClickedSlide={true}
-        slidesPerView={"auto"}
-        loop
-        freeMode={true}
-        centeredSlides
-      >
-        {slice?.items.map((item, i) => {
-          return (
-            <SwiperSlide
-              className={styles.ThumbSlide}
-              key={i}
-              // onMouseOver={handleSlide}
-              onMouseLeave={handleLeave}
-            >
-              <Suspense fallback={<LoadSpinner />}>
-           
-                <ThumbSlide
-                  item={item}
-                  slideIndex={slideIndex}
-                  slice={slice}
-                  gallerySwiperRef={gallerySwiperRef}
-                  paused={paused}
-                />
-              </Suspense>
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
 
-
-{project && <>
-      <div className={styles.InfoDiv}>
-        <PrismicLink href={project.url}
-          onMouseOver={() => {
-            handleHoverButton(project);
-          }}>
-          <p>[{project.data.title}]</p>
-        </PrismicLink>
-        
-        {project.data.description && <>
-          <p 
-          className={styles.InfoDiv}
-          style={{width: "2rem"}}
-          onMouseOver={() => {
-            handleHoverButton(project);
-          }}
-          onClick={(e) => {
-
-            if(width>700 && !infoIsExpanded){
-              gallerySwiperRef.current.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-            }
-
-            if(infoRef){
-              JumbleWordInElement(infoRef.current, project.data.description, 15);
-            }
-            if(creditRef){
-              JumbleWordInElement(creditRef.current, project.data.credits, 15);
-
-            }
-            setINfoIsExpanded(!infoIsExpanded);
-
-            if(!url.includes("work") && section){
-              handleClick(e, project);
-            }
-          }}
-  
-          >
-          [<span>{infoIsExpanded ? "-" : "+"}</span>]
-        </p>
-        </>}
-  
-      </div>
-
-          
-              <motion.div className={`${styles.InfoContainer} ${infoIsExpanded ? styles.Open : styles.Closed} ${width>700 ? styles.InfoContainerDeskTop : styles.InfoContainerMobile}` }>
-           
-                  <div className={styles.Content}>
-                    <div>
-                      <p ref={infoRef} >
-                        {project.data.description}
-                      </p>
-                      <div className={styles.Background}>.</div>
-
-                    </div>
-
-                    <div>
-                      <div className={styles.Background}>.</div>
-
-                      <p ref={creditRef} className={styles.Credits}>
-                        credits:<br></br>
-                        {project.data.credits}
-                      </p>
-                    </div>
-                    
-                  </div>
-              </motion.div>
-              </>}
     </motion.div>
   );
 };
 
-export default ProjectCarousel;
+export default ProfileWorkExample;

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { RichText } from "prismic-reactjs";
 import ProjectCarousel from "../../components/ProjectCarousel/ProjectCarousel";
 
 export const WorkCarousel = ({ slice, project }) => {

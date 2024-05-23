@@ -1,112 +1,170 @@
-.Wrapper {
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-  position: relative;
-  padding: 1rem 2rem;
 
+
+
+
+.Container {
   font-family: var(--secondary-font-reg);
-  background-color: var(--main-bg-color);
-  overflow-x: hidden;
-
-  .TitleContainer {
-    border-bottom: 1px solid var(--main-font-color);
-    // margin: 1rem 2rem;
-    font-size: 0.75rem;
-    background-color: var(--main-bg-color);
+  svg {
+    width: 100%;
+    height: 100%;
+    path {
+      transition: all 0.5s ease-in-out;
+      fill: var(--secondary-bg-color) !important;
+      &:hover {
+        fill: var(--main-font-color-highlight) !important;
+        transition: all 0.5s ease-in-out;
+      }
+    }
+  }
+  .Title {
     display: flex;
     flex-direction: row;
     align-items: center;
-
+    padding: 1rem 3rem;
+    font-size: 0.75rem;
+    // border-top: 1px solid var(--main-font-color);
     span {
-      margin-right: 1rem; 
       font-family: var(--third-font-display);
+      margin-right: 1rem;
     }
   }
-  .Container {
+  .Content {
+
     display: flex;
-    // place-content: center;
-    // grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-    // grid-template-rows: repeat(auto-fit, minmax(1rem, 1fr));
-    gap: 1rem;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    .LogoWrapper {
-      // background-color: blue;
-
-      // filter: brightness(1);
-      // height: fit-content;
-      // width: 48%;
-     
-      // display: flex;
-      // flex-direction: column;
-      // border-radius: 1rem;
-      // justify-content: center;
+    flex-direction: row;
+    .Category {
+      width: 33%;
+      display: flex;
+      flex-direction: column;
       // align-items: center;
-      // margin: 1rem;
+      // justify-content: center;
+      // border-right: 1px solid var(--main-font-color);
+      h2 {
+        position: sticky;
+        padding-left: 3rem;
+        top: 50%;
+        font-size: 1.7rem;
+        margin: 0;
+      }
 
-      // canvas {
-      //   max-width: 100%;
-      
-      //   // max-width: 10rem;
-      //   object-fit: contain;
-      //   // transition: opacity 0.15s ease-in-out;
-      // }
-      // &:hover {
-      //   filter: brightness(1.2);
-      //   background-color: var(--secondary-bg-color);
-      //   transition: filter 0.3s ease-in-out;
-      // }
+    }
+    .Description {
+      // padding: 1rem;
+      width: 66% !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .DescriptionWImage {
+        padding: 1rem;
+      }
+      .Image {
+        // width: 100%;
+        // height: 100%;
+        // overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+    .List {
+      width: calc(66% - 4rem);
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: auto;
+      grid-column-gap: 5rem;
+      grid-row-gap: 1rem;
+      justify-items: stretch;
+      align-items: center;
+      h3{
+        font-size: 3rem;
+        margin:0;
+      }
+      h4, p{
+        font-size: 1.5rem;
+        margin:0;
+      }
+      img{
+        object-fit: contain;
+        max-width: 100%;
+       }
     }
   }
 }
 
+
 @media screen and (max-width: 768px) {
-  .Wrapper {
-    position: relative;
-    // margin-top: -1rem;
+  .Container {
     font-family: var(--secondary-font-reg);
-    background-color: var(--main-bg-color);
-    overflow-x: hidden;
-    padding: 1rem 0rem;
-    .TitleContainer {
-      padding-left: 3rem;
-      margin-bottom: 1rem;
+    svg {
+      width: 100%;
+      height: 100%;
+      path {
+        transition: all 0.5s ease-in-out;
+        fill: var(--secondary-bg-color) !important;
+        &:hover {
+          fill: var(--main-font-color-highlight) !important;
+          transition: all 0.5s ease-in-out;
+        }
+      }
     }
-    .Container {
-      .LogoWrapper {
+    .Title {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+ 
+      font-size: 0.75rem;
+      // border-top: 1px solid var(--main-font-color);
+      span {
+        font-family: var(--third-font-display);
+      }
+    }
+    .Content {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      .Category {
+        width: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        img{
-          max-width: calc(100% - 4rem);
+        justify-content: center;
+        // border-right: 1px solid var(--main-font-color);
+        h2 {
+          position: relative;
+          padding: 0;
+          top:0;
+          font-size: 1.7rem;
+          margin: 0;
         }
-        // background-color: blue;
-        // filter: brightness(1);
-        // height: fit-content;
-        // width: 90%;
-       
-        // display: flex;
-        // flex-direction: column;
-        // // border-radius: 1rem;
-        // justify-content: center;
-        // align-items: center;
-        // margin: 1rem;
   
-        // canvas {
-        //   max-width: 100%;
-        
-        //   // max-width: 10rem;
-        //   object-fit: contain;
-        //   // transition: opacity 0.15s ease-in-out;
-        // }
-        // &:hover {
-        //   filter: brightness(1.2);
-        //   background-color: var(--secondary-bg-color);
-        //   transition: filter 0.3s ease-in-out;
-        // }
+      }
+    
+      .List {
+        width: calc(100% - 2rem);
+        padding: 1rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        justify-items: stretch;
+        align-items: center;
+        h3{
+          font-size: 3rem;
+          margin:0;
+        }
+        h4, p{
+          font-size: 1.5rem;
+          margin:0;
+        }
+        img{
+          object-fit: contain;
+          max-width: 100%;
+         }
       }
     }
   }

@@ -8,14 +8,11 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Cursor from "../components/Cursor/Cursor";
 import useCursor from "../components/Resolvers/States/Cursor";
-import ClientLogoGrid from "../components/ClientLogoGrid/ClientLogoGrid";
 import dynamic from "next/dynamic";
-import DateTime from "../components/DateTime/DateTime";
-import HighlightExclusion from "../components/HighlightExclusion/HighlightExclusion";
+
 import { useFooterOffset } from "../components/Resolvers/States/FooterOffset";
 import useWindowDimensions from "../components/Resolvers/UseWindowDimensions"
 import Logo from 'assets/svg/HDSHT_HD.svg';
-import Script from 'next/script'
 
 const Gizmo = dynamic(() => import("../components/Gizmo/Gizmo"), {
   ssr: false,
@@ -28,18 +25,16 @@ const Page = ({ page }) => {
   const [isDesktop, setIsDesktop] = useState(false);
   const { footerOffset } = useFooterOffset();
   const {height, width} = useWindowDimensions();
-  const bodyRef = useRef();
+
   const logoRef = useRef();
   const [headerInPosition, setHeaderInPosition] = useState(false);
 
-  useEffect(()=>{
 
-
-  
-  },[bodyRef])
   useEffect(() => {
     const handleScroll = () => {
-      if(logoRef.current){
+
+
+      if(logoRef.current ){
         const itemOffset = logoRef.current.getBoundingClientRect().y;
         if (itemOffset < -50) {
           setLogoInPosition(true);
@@ -53,7 +48,7 @@ const Page = ({ page }) => {
         let stickyPosY = h3s[1].getBoundingClientRect().y;
   
        
-        if(stickyPosY<50){
+        if(stickyPosY<50 ){
           setHeaderInPosition(true);
         } else {
           setHeaderInPosition(false);
@@ -141,8 +136,14 @@ const Page = ({ page }) => {
         <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: width>600 ? `calc(100% - ${height-foldedHeight+45}px - ${footerOffset*2}px)`: "8rem", backgroundColor: "var(--main-bg-color)"}}>
         </div>
 
-        <div className={styles.LogoHeader}style={{display: "flex", justifyContent: "center",  alignItems:"center", width: "100%", position: "fixed", zIndex: 1, top: "0", maxHeight: "4.6rem", minHeight: width<600 ? "60px" : 0,  overflow: "hidden", transition: "opacity 0.0s ease-in", padding: "0rem 1rem", opacity: headerInPosition ? 1 :0, transition: "all 0.1s"}}>
-          <img src={Logo.src} alt="logo" style={{width: "calc(100%)"}}/>
+        {isDesktop && 
+          <div className={styles.LogoHeader}style={{display: "flex", justifyContent: "center",  alignItems:"center", width: "100%", position: "fixed", zIndex: 1, top: "0", maxHeight: "4.6rem", minHeight: width<600 ? "60px" : 0,  overflow: "hidden", transition: "opacity 0.0s ease-in", padding: "0rem 1rem", opacity: headerInPosition ? 1 :0, transition: "all 0.1s"}}>
+            <img src={Logo.src} alt="logo" style={{width: "calc(100%)"}}/>
+          </div>
+        }
+   
+
+        <div style={{width: "100%", position: "fixed", zIndex: -1, top: 0, bottom:0, backgroundColor: "var(--main-bg-color)", opacity: headerInPosition ? 1 :0, transition: "all 0.1s"}}>
         </div>
 
       </>
@@ -154,13 +155,7 @@ export default Page;
 
 export async function getStaticProps({ previewData }) {
   const client = createClient({ previewData });
-
-
-  const page = await client.getSingle("landing", {
-
-  })
-
-
+  const page = await client.getSingle("landing", {});
 
   return {
     props: {

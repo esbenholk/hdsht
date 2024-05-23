@@ -52,20 +52,6 @@
             }
           ],
           [
-            "description",
-            {
-              "__TYPE__": "StructuredTextContent",
-              "value": [
-                {
-                  "type": "paragraph",
-                  "content": {
-                    "text": "Eu Lorem labore deserunt commodo duis esse anim fugiat esse."
-                  }
-                }
-              ]
-            }
-          ],
-          [
             "image",
             {
               "origin": {
@@ -128,6 +114,20 @@
                   "type": "paragraph",
                   "content": {
                     "text": "Cillum adipisicing nisi ipsum occaecat occaecat eiusmod. Exercitation aliquip commodo pariatur quis eiusmod cillum. Incididunt duis fugiat excepteur amet mollit commodo aliqua duis velit enim commodo sit aliqua minim occaecat."
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            "bigtext",
+            {
+              "__TYPE__": "StructuredTextContent",
+              "value": [
+                {
+                  "type": "paragraph",
+                  "content": {
+                    "text": "Cillum est sint non."
                   }
                 }
               ]
