@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import useCursor from "../Resolvers/States/Cursor";
 import dynamic from "next/dynamic";
+import Logo from 'assets/svg/HDSHT_HD.svg';
 const Gizmo = dynamic(() => import("../Gizmo/Gizmo"), { ssr: false });
 export function Navigation({ slice }) {
   const [isMounted, setIsMounted] = useState(false);
@@ -68,61 +69,7 @@ export function Navigation({ slice }) {
   return (
     isMounted && (
       <>
-        <div className={styles.NavContainer}>
-          <div>
-            {/* <PrismicLink href="/">
-              <HdshtFont />
-            </PrismicLink> */}
-            <Gizmo />
-          </div>
-        </div>
-        <div
-          className={styles.ToggleBtn}
-          onClick={SlideIn}
-          ref={toggle}
-          onMouseOver={handleHover}
-          onMouseLeave={handleMouseLeave}
-        >
-          <motion.div
-            animate={menu ? "open" : "closed"}
-            variants={{
-              open: {
-                rotate: 45,
-                y: 5,
-                transition: {
-                  duration: 0.2,
-                },
-              },
-              closed: {
-                rotate: 0,
-                y: 0,
-                transition: {
-                  duration: 0.1,
-                },
-              },
-            }}
-          ></motion.div>
-          <motion.div
-            animate={menu ? "open" : "closed"}
-            variants={{
-              open: {
-                rotate: -45,
-                y: -5,
-                transition: {
-                  duration: 0.2,
-                },
-              },
-              closed: {
-                rotate: 0,
-                y: 0,
-                transition: {
-                  duration: 0.1,
-                },
-              },
-            }}
-          ></motion.div>
-        </div>
-        <motion.div
+             <motion.div
           className={styles.NavLinksContainer}
           variants={slideInFromRightContainer}
           animate={menu ? "open" : "closed"}
@@ -178,6 +125,80 @@ export function Navigation({ slice }) {
             })}
           </motion.ul>
         </motion.div>
+        <div className={styles.NavContainer}>
+          <div
+            className={styles.ToggleBtn}
+            onClick={SlideIn}
+            ref={toggle}
+            onMouseOver={handleHover}
+            onMouseLeave={handleMouseLeave}
+          >
+            <motion.div
+              animate={menu ? "open" : "closed"}
+              variants={{
+                open: {
+                  rotate: 45,
+                  y: 5,
+                  transition: {
+                    duration: 0.2,
+                  },
+                },
+                closed: {
+                  rotate: 0,
+                  y: 0,
+                  transition: {
+                    duration: 0.1,
+                  },
+                },
+              }}
+            ></motion.div>
+            <motion.div
+              animate={menu ? "open" : "closed"}
+              variants={{
+                open: {
+                  rotate: -45,
+                  y: -5,
+                  transition: {
+                    duration: 0.2,
+                  },
+                },
+                closed: {
+                  rotate: 0,
+                  y: 0,
+                  transition: {
+                    duration: 0.1,
+                  },
+                },
+              }}
+            ></motion.div>
+            <motion.div
+              animate={menu ? "open" : "closed"}
+              variants={{
+                open: {
+                  rotate: -45,
+                  y: -5,
+                  transition: {
+                    duration: 0.2,
+                  },
+                  opacity: 0
+                },
+                closed: {
+                  rotate: 0,
+                  y: 0,
+                  transition: {
+                    duration: 0.1,
+                  },
+                  opacity: 1
+                },
+              }}
+            ></motion.div>
+          </div>
+        </div>
+  
+        <div className={styles.BottomNavContainer}>
+        <img src={Logo.src} alt="logo" style={{width: "calc(100%)"}}/>
+
+        </div>
       </>
     )
   );

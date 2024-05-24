@@ -2,13 +2,14 @@ import styles from "./ContactSection.module.scss";
 import { PrismicRichText } from "@prismicio/react";
 import { PrismicLink } from "@prismicio/react";
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import useCursor from "../Resolvers/States/Cursor";
 import DateTime from "../DateTime/DateTime";
 import { useExcluder } from "../Resolvers/States/Excluder";
 
 const ContactSection = ({ slice }) => {
   const container = useRef(null);
+  const [links, setLinks] = useState([]);
   const inView = useInView(container, {
     once: true,
   });
@@ -31,12 +32,15 @@ const ContactSection = ({ slice }) => {
     },
   };
 
+
+
   return (
     <motion.div className={styles.Container} exit="closed" ref={container}>
+
+    <motion.div className={styles.Grid} exit="closed" ref={container}>
       {slice.items.map((item, index) => {
-        console.log(item.phone, item.mail);
+        console.log(item);
         const [hovered, setHovered] = useState(false);
-        const { moveExcluder, removeExcluder } = useExcluder();
         const container = useRef();
         return (
           <motion.div
@@ -60,69 +64,125 @@ const ContactSection = ({ slice }) => {
               <PrismicRichText field={item.title} />
             </motion.div>
             <motion.div className={styles.Address}>
-              <PrismicLink
-                field={item.maps_link}
-                target="_blank"
-                onMouseOver={() => {
-                  useCursor.setState({
-                    cursorVariant: "hoveronlink",
-                    isOverProject: true,
-                    title: "visit us"
-                  });
-                }}
-                onMouseLeave={() => {
-                  useCursor.setState({
-                    cursorVariant: "default",
-                    isOverProject: false
+              <PrismicRichText field={item.address} />
 
-                  });
-                }}
-              >
-                <PrismicRichText field={item.address} />
-              </PrismicLink>
-              <PrismicLink
-                field={item.phone}
-                target="_blank"
-                onMouseOver={() => {
-                  useCursor.setState({
-                    cursorVariant: "hoveronlink",
-                    isOverProject: true,
-                    title: "call us"
-                  });
-                }}
-                onMouseLeave={() => {
-                  useCursor.setState({
-                    cursorVariant: "default",
-                    isOverProject: false
+                {item.link1 && 
+                    <>
+                    <PrismicLink
+                        href={item.link1.url}
+                        onMouseOver={() => {
+                            useCursor.setState({
+                              cursorVariant: "hoveronlink",
+                              isOverProject: true,
+                              title: "link"
+                            });
+                          }}
+                        onMouseLeave={() => {
+                            useCursor.setState({
+                              cursorVariant: "default",
+                              isOverProject: false
+                            });
+                          }}
+                        >
+                           {item.text1}            
+                    </PrismicLink>
+                    </>
+                }
+                {item.link2 && 
+                    <>
+                    <PrismicLink
+                        href={item.link2.url}
+                        onMouseOver={() => {
+                            useCursor.setState({
+                              cursorVariant: "hoveronlink",
+                              isOverProject: true,
+                              title: "link"
+                            });
+                          }}
+                        onMouseLeave={() => {
+                            useCursor.setState({
+                              cursorVariant: "default",
+                              isOverProject: false
+                            });
+                          }}
+                        >
+                           {item.text2}            
+                    </PrismicLink>
+                    </>
+                }
+                {item.link3 && 
+                    <>
+                    <PrismicLink
+                        href={item.link3.url}
+                        onMouseOver={() => {
+                            useCursor.setState({
+                              cursorVariant: "hoveronlink",
+                              isOverProject: true,
+                              title: "link"
+                            });
+                          }}
+                        onMouseLeave={() => {
+                            useCursor.setState({
+                              cursorVariant: "default",
+                              isOverProject: false
+                            });
+                          }}
+                        >
+                           {item.text3}            
+                    </PrismicLink>
+                    </>
+                }
+                {item.link4 && 
+                    <>
+                    <PrismicLink
+                        href={item.link4.url}
+                        onMouseOver={() => {
+                            useCursor.setState({
+                              cursorVariant: "hoveronlink",
+                              isOverProject: true,
+                              title: "link"
+                            });
+                          }}
+                        onMouseLeave={() => {
+                            useCursor.setState({
+                              cursorVariant: "default",
+                              isOverProject: false
+                            });
+                          }}
+                        >
+                           {item.text4}            
+                    </PrismicLink>
+                    </>
+                }
 
-                  });
-                }}
-              >
-                {item.phone.url && <span>{item.phone.url.replace("tel:", "")}</span>}
-              </PrismicLink>
-              <PrismicLink
-                field={item.email}
-                target="_blank"
-                onMouseOver={() => {
-                  useCursor.setState({
-                    cursorVariant: "hoveronlink",
-                    isOverProject: true,
-                    title: "send us an email"
-                  });
-                }}
-                onMouseLeave={() => {
-                  useCursor.setState({
-                    cursorVariant: "default",
-                    isOverProject: false
-                  });
-                }}
-              >
-               { item.email.url && <span>{item.email.url.replace("mailto:", "")}</span>}
-              </PrismicLink>
-            </motion.div>
+                {item.link5 && 
+                    <>
+                    <PrismicLink
+                        href={item.link5.url}
+                        onMouseOver={() => {
+                            useCursor.setState({
+                              cursorVariant: "hoveronlink",
+                              isOverProject: true,
+                              title: "link"
+                            });
+                          }}
+                        onMouseLeave={() => {
+                            useCursor.setState({
+                              cursorVariant: "default",
+                              isOverProject: false
+                            });
+                          }}
+                        >
+                           {item.text5}            
+                    </PrismicLink>
+                    </>
+                } 
+       
+              </motion.div>
           </motion.div>
         );
       })}
+    </motion.div>
     </motion.div>
   );
 };

@@ -567,35 +567,25 @@ export interface ContactSliceDefaultItem {
      */
     address: prismicT.RichTextField;
     /**
-     * Phone field in *Contact → Items*
-     *
-     * - **Field Type**: Link
-     * - **Placeholder**: tel:1234567890
-     * - **API ID Path**: contact.items[].phone
-     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
-     *
-     */
-    phone: prismicT.LinkField;
-    /**
-     * Email field in *Contact → Items*
-     *
-     * - **Field Type**: Link
-     * - **Placeholder**: mailto:abc@def.gh
-     * - **API ID Path**: contact.items[].email
-     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
-     *
-     */
-    email: prismicT.LinkField;
-    /**
-     * link field in *Contact → Items*
+     * link1 field in *Contact → Items*
      *
      * - **Field Type**: Link
      * - **Placeholder**: *None*
-     * - **API ID Path**: contact.items[].link
+     * - **API ID Path**: contact.items[].link1
      * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
      *
      */
-    link: prismicT.LinkField;
+    link1: prismicT.LinkField;
+    /**
+     * text1 field in *Contact → Items*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: contact.items[].text1
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    text1: prismicT.KeyTextField;
     /**
      * link2 field in *Contact → Items*
      *
@@ -607,6 +597,16 @@ export interface ContactSliceDefaultItem {
      */
     link2: prismicT.LinkField;
     /**
+     * text2 field in *Contact → Items*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: contact.items[].text2
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    text2: prismicT.KeyTextField;
+    /**
      * link3 field in *Contact → Items*
      *
      * - **Field Type**: Link
@@ -616,6 +616,16 @@ export interface ContactSliceDefaultItem {
      *
      */
     link3: prismicT.LinkField;
+    /**
+     * text3 field in *Contact → Items*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: contact.items[].text3
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    text3: prismicT.KeyTextField;
     /**
      * link4 field in *Contact → Items*
      *
@@ -627,6 +637,16 @@ export interface ContactSliceDefaultItem {
      */
     link4: prismicT.LinkField;
     /**
+     * text4 field in *Contact → Items*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: contact.items[].text4
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    text4: prismicT.KeyTextField;
+    /**
      * link5 field in *Contact → Items*
      *
      * - **Field Type**: Link
@@ -636,6 +656,16 @@ export interface ContactSliceDefaultItem {
      *
      */
     link5: prismicT.LinkField;
+    /**
+     * text5 field in *Contact → Items*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: contact.items[].text5
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    text5: prismicT.KeyTextField;
 }
 /**
  * Default variation for Contact Slice
@@ -1167,16 +1197,6 @@ interface ProfileWorkGridSliceDefaultPrimary {
  */
 export interface ProfileWorkGridSliceDefaultItem {
     /**
-     * image field in *ProfileWorkGrid → Items*
-     *
-     * - **Field Type**: Image
-     * - **Placeholder**: *None*
-     * - **API ID Path**: profile_work_grid.items[].image
-     * - **Documentation**: https://prismic.io/docs/core-concepts/image
-     *
-     */
-    image: prismicT.ImageField<never>;
-    /**
      * projectLink field in *ProfileWorkGrid → Items*
      *
      * - **Field Type**: Link
@@ -1187,15 +1207,25 @@ export interface ProfileWorkGridSliceDefaultItem {
      */
     projectlink: prismicT.LinkField;
     /**
-     * title field in *ProfileWorkGrid → Items*
+     * media field in *ProfileWorkGrid → Items*
      *
-     * - **Field Type**: Rich Text
+     * - **Field Type**: Link to Media
      * - **Placeholder**: *None*
-     * - **API ID Path**: profile_work_grid.items[].title
-     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     * - **API ID Path**: profile_work_grid.items[].media
+     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
      *
      */
-    title: prismicT.RichTextField;
+    media: prismicT.LinkToMediaField;
+    /**
+     * title field in *ProfileWorkGrid → Items*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: profile_work_grid.items[].title
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    title: prismicT.KeyTextField;
 }
 /**
  * Default variation for ProfileWorkGrid Slice
@@ -1471,16 +1501,6 @@ interface WorkGridSliceDefaultPrimary {
  */
 export interface WorkGridSliceDefaultItem {
     /**
-     * Project Link field in *WorkGrid → Items*
-     *
-     * - **Field Type**: Content Relationship
-     * - **Placeholder**: *None*
-     * - **API ID Path**: work_grid.items[].worklink
-     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
-     *
-     */
-    worklink: prismicT.RelationField;
-    /**
      * Project Title field in *WorkGrid → Items*
      *
      * - **Field Type**: Text
@@ -1491,16 +1511,6 @@ export interface WorkGridSliceDefaultItem {
      */
     project_title: prismicT.KeyTextField;
     /**
-     * MediaForGrid field in *WorkGrid → Items*
-     *
-     * - **Field Type**: Link to Media
-     * - **Placeholder**: *None*
-     * - **API ID Path**: work_grid.items[].mediaforgrid
-     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
-     *
-     */
-    mediaforgrid: prismicT.LinkToMediaField;
-    /**
      * Description field in *WorkGrid → Items*
      *
      * - **Field Type**: Rich Text
@@ -1510,16 +1520,6 @@ export interface WorkGridSliceDefaultItem {
      *
      */
     description: prismicT.RichTextField;
-    /**
-     * Year field in *WorkGrid → Items*
-     *
-     * - **Field Type**: Number
-     * - **Placeholder**: *None*
-     * - **API ID Path**: work_grid.items[].year
-     * - **Documentation**: https://prismic.io/docs/core-concepts/number
-     *
-     */
-    year: prismicT.NumberField;
     /**
      * Work field in *WorkGrid → Items*
      *

@@ -7,9 +7,9 @@
         "__TYPE__": "StructuredTextContent",
         "value": [
           {
-            "type": "heading1",
+            "type": "heading2",
             "content": {
-              "text": "Wrong"
+              "text": "Guard"
             }
           }
         ]
@@ -31,30 +31,6 @@
         "__TYPE__": "GroupItemContent",
         "value": [
           [
-            "image",
-            {
-              "__TYPE__": "ImageContent",
-              "origin": {
-                "id": "main",
-                "url": "https://images.unsplash.com/photo-1587613865763-4b8b0d19e8ab",
-                "width": 12288,
-                "height": 16384
-              },
-              "url": "https://images.unsplash.com/photo-1587613865763-4b8b0d19e8ab",
-              "width": 12288,
-              "height": 16384,
-              "edit": {
-                "zoom": 1,
-                "crop": {
-                  "x": 0,
-                  "y": 0
-                },
-                "background": "transparent"
-              },
-              "thumbnails": {}
-            }
-          ],
-          [
             "projectlink",
             {
               "__TYPE__": "LinkContent",
@@ -67,15 +43,23 @@
           [
             "title",
             {
-              "__TYPE__": "StructuredTextContent",
-              "value": [
-                {
-                  "type": "paragraph",
-                  "content": {
-                    "text": "In sint aliqua voluptate tempor occaecat nisi non magna qui."
-                  }
-                }
-              ]
+              "__TYPE__": "FieldContent",
+              "value": "slabs",
+              "type": "Text"
+            }
+          ],
+          [
+            "media",
+            {
+              "__TYPE__": "LinkContent",
+              "value": {
+                "id": "mock_Media_link",
+                "kind": "image/jpeg",
+                "name": "mock_name",
+                "url": "https://source.unsplash.com/daily",
+                "size": "0",
+                "__TYPE__": "FileLink"
+              }
             }
           ]
         ]

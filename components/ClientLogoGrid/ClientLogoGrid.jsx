@@ -90,7 +90,6 @@ const ClientLogoGrid = ({ slice }) => {
 
   const [isMobile, setIsMobile] = useState();
 
-console.log("client logo grid", slice);
   useEffect(() => {
     const userAgent = navigator.userAgent;
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);

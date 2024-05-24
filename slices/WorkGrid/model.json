@@ -27,26 +27,11 @@
         }
       },
       "items": {
-        "worklink": {
-          "type": "Link",
-          "config": {
-            "label": "Project Link",
-            "select": "document"
-          }
-        },
         "project_title": {
           "type": "Text",
           "config": {
             "label": "Project Title",
             "placeholder": ""
-          }
-        },
-        "mediaforgrid": {
-          "type": "Link",
-          "config": {
-            "label": "MediaForGrid",
-            "placeholder": "",
-            "select": "media"
           }
         },
         "description": {
@@ -56,13 +41,6 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-          }
-        },
-        "year": {
-          "type": "Number",
-          "config": {
-            "label": "Year",
-            "placeholder": ""
           }
         },
         "work": {

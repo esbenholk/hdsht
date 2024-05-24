@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef, Suspense } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import styles from "./ProfileWorkExample.module.scss";
+import layoutStyles from "../CompanyPhilosophy/CompanyPhilosophy.module.scss"
 import { Swiper, SwiperSlide, useSwiperSlide, useSwiper } from "swiper/react";
 import { PrismicLink } from "@prismicio/react";
-import throttle from "lodash.throttle";
 import "swiper/scss";
 import "swiper/scss/thumbs";
 import "swiper/scss/pagination";
@@ -24,11 +24,13 @@ import useVideo from "../Resolvers/States/Video";
 import {
   checkTargetForNewValues,
   motion,
-  useAnimationControls,
+  useInView,
 } from "framer-motion";
 import useCursor from "../Resolvers/States/Cursor";
 import GallerySlide from "../ProjectCarousel/GallerySlide";
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
+import MediaResolver from "../Resolvers/MediaResolver/MediaResolver";
+import { PrismicRichText } from "@prismicio/react";
 
 
 const ProfileWorkExample = ({ slice, project }) => {
@@ -39,7 +41,7 @@ const ProfileWorkExample = ({ slice, project }) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [hovered, setHovered] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const { duration, setCurrentVideo, currentVideo } = useVideo();
   const [paused, setPaused] = useState(false);
   const nexturl = useCursor((state) => state.nexturl);
@@ -50,30 +52,36 @@ const ProfileWorkExample = ({ slice, project }) => {
   const [cursorExpanded, setCursorExpanded] = useState(false);
 
   const [infoIsExpanded, setINfoIsExpanded] = useState(false);
-  const infoRef = useRef();
-  const creditRef = useRef();
+  const [projectTitle, setProjectTitle] = useState("");
+  const [projectLink, setProjectLink] = useState("");
+  const [projectIndex, setProjectIndex] = useState(1);
 
+  const container = useRef();
+  const inView = useInView({
+    once: true,
+    margin: "100%",
+  });
 
-  useEffect(()=>{
-    let cursor = document.getElementById("Cross");
-    if(cursor){
-      let _section = cursor.getElementsByTagName("section")[0];
-      setSection(_section);
-    }
+  // useEffect(()=>{
+  //   let cursor = document.getElementById("Cross");
+  //   if(cursor){
+  //     let _section = cursor.getElementsByTagName("section")[0];
+  //     setSection(_section);
+  //   }
     
-    console.log("PROJECT", project, slice);
+  //   console.log("PROJECT", project, slice);
 
-  },[])
-  useEffect(() => {
-    if (slice.items[slideIndex].carouselitem.kind === "image") {
-      setCurrentSlide("image");
-      setCurrentVideo(null);
-      useVideo.setState({ duration: null, currentTime: null });
-    }
-    if (slice.items[slideIndex].carouselitem.kind === "document") {
-      setCurrentSlide("video");
-    }
-  }, [slideIndex, currentVideo]);
+  // },[])
+  // useEffect(() => {
+  //   if (slice.items[slideIndex].carouselitem.kind === "image") {
+  //     setCurrentSlide("image");
+  //     setCurrentVideo(null);
+  //     useVideo.setState({ duration: null, currentTime: null });
+  //   }
+  //   if (slice.items[slideIndex].carouselitem.kind === "document") {
+  //     setCurrentSlide("video");
+  //   }
+  // }, [slideIndex, currentVideo]);
 
 
   const handleScroll = () => {
@@ -92,30 +100,7 @@ const ProfileWorkExample = ({ slice, project }) => {
     window.removeEventListener('scroll', handleScroll);
 
   };
-  const timer = useRef(0);
 
-  useEffect(() => {
-    timer.current = setInterval(() => {
-      if (!paused) {
-        setSeconds((seconds) => seconds + 1);
-      }
-    }, 1000);
-    return () => {
-      clearInterval(timer.current);
-    };
-  }, [paused]);
-  const resetTimer = () => {
-    setSeconds(0);
-  };
-  useEffect(() => {
-    const gallerySwiper = gallerySwiperRef.current?.swiper;
-    const thumbnailSwiper = thumbSwiperRef.current?.swiper;
-
-    if (gallerySwiper.controller && thumbnailSwiper.controller) {
-      gallerySwiper.controller.control = thumbnailSwiper;
-      thumbnailSwiper.controller.control = gallerySwiper;
-    }
-  }, []);
 
   useEffect(() => {
     gallerySwiperRef.current.swiper.on("slideChange", () => {
@@ -138,13 +123,35 @@ const ProfileWorkExample = ({ slice, project }) => {
   }, []);
 
   useEffect(() => {
-    if(hovered){
-      const trigger = currentSlide === "image" ? 5 : duration;
-      if (seconds > trigger && !paused) {
-        gallerySwiperRef.current.swiper.slideNext();
-      }
+    setProjectIndex(1);
+    setProjectLink(slice?.items[0].projectlink);
+    setProjectTitle(slice?.items[0].title);
+  }, []);
+
+  const updateIndex = useCallback(
+    () => 
+      {
+        setProjectIndex(gallerySwiperRef.current.swiper.realIndex + 1);
+        setProjectLink(slice?.items[gallerySwiperRef.current.swiper.realIndex].projectlink);
+        setProjectTitle(slice?.items[gallerySwiperRef.current.swiper.realIndex].title);
+        setCurrentSlide(gallerySwiperRef.current.swiper.realIndex);
+      },
+    []
+  );
+  // Add eventlisteners for swiper after initializing
+  useEffect(() => {
+    const swiperInstance = gallerySwiperRef.current.swiper;
+
+    if (swiperInstance) {
+      swiperInstance.on("slideChange", updateIndex);
     }
-  }, [seconds]);
+
+    return () => {
+      if (swiperInstance) {
+        swiperInstance.off("slideChange", updateIndex);
+      }
+    };
+  }, [updateIndex]);
 
   const handleHover = (item) => {
 
@@ -172,110 +179,110 @@ const ProfileWorkExample = ({ slice, project }) => {
 
   // url.includes("work") ? styles.WorkCarouselContainer : 
   return (
+
     <motion.div
-      className={`${styles.CarouselContainer }` }
-
-      initial="hidden"
-      animate="visible"
-      exit="hidden"
-      ref={carousel}
-      onMouseOver={()=>{
-        setHovered(true);
-      }}
-      onMouseLeave={()=>{
-        setHovered(false);
-      }}
-      onClick={(e)=>{
-        if(!url.includes("work")){
-          handleClick(e, project);
-        }
-      }}
-     
+    className={layoutStyles.Container}
+    animate={inView ? "visible" : "hidden"}
+    ref={container}
     >
-
-
-      <Swiper
-
-        ref={gallerySwiperRef}
-        className={styles.SwiperTop}
-        slidesPerView={1}
-        loop={true}
-        thumbs={{
-          swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
-        }}
-        onReachEnd={() => {
-            if(url.includes("work") && nexturl){
-              window.location.href = nexturl;              
-            } else {
-              // if(gallerySwiperRef.current && gallerySwiperRef.current.nextSibling){
-              //   gallerySwiperRef.current.nextSibling.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-              // }
-            }
-        }}
-        modules={[FreeMode, Navigation, Thumbs, Mousewheel, Lazy]}
-        mousewheel={false}
-        lazy={true}
-        onSlideChange={() => {
-          if (slice?.items[slideIndex].carouselitem.kind === "document") {
-          } else {
-            setCurrentVideo(null);
-          }
-          resetTimer();
-        }}
-        onMouseOver={() => {
-          handleHover(project);
-        }}
-        onMouseLeave={() => {
-          handleLeave();
-        }}
-   
-        // onInit={() => {
-        //   startTimer();
-        // }}
-        onSlideNextTransitionStart={() => {
-          if (thumbSwiperRef.current?.swiper) {
-            thumbSwiperRef.current.swiper.slideNext();
-          }
-        }}
-        onSlidePrevTransitionStart={() => {
-          if (thumbSwiperRef.current?.swiper) {
-            thumbSwiperRef.current.swiper.slidePrev();
-          }
-        }}
-
-        onClick={(e) => {
-          gallerySwiperRef.current.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-   
-        }}
-
+    <motion.div className={layoutStyles.Content}>
+      <motion.div
+        className={layoutStyles.Category}
       >
-        {slice?.items.map((item, i) => {
-          return (
-            <SwiperSlide
-              className={styles.GallerySlide}
-              key={i}
-              // onMouseOver={handleSlide}
-     
-              onMouseOver={() => {
-                handleHover(project);
-              }}
-              onMouseLeave={handleLeave}
-            >
-              {({ isActive }) => (
-                   <GallerySlide
-                item={item}
-                gallerySwiperRef={gallerySwiperRef}
-                slice={slice}
-                isActive={isActive}
-                slideIndex={slideIndex}
-              />
-              )}
-           
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
+        <PrismicRichText field={slice.primary.title} />
+      </motion.div>
 
+
+      <motion.div
+        className={`${styles.CarouselContainer }` }
+
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        ref={carousel}
+        onMouseOver={()=>{
+          setHovered(true);
+        }}
+        onMouseLeave={()=>{
+          setHovered(false);
+        }}  
+      >
+
+
+        <Swiper
+
+          ref={gallerySwiperRef}
+          className={styles.SwiperTop}
+          slidesPerView={1}
+          loop={true}
+          mousewheel={false}
+          lazy={true}
+          centeredSlides={true}
+          // onRealIndexChange={(element)=>{
+          //   setProjectIndex(slideIndex + 1);
+          //   setProjectLink(slice?.items[slideIndex].projectlink);
+          //   setProjectTitle(slice?.items[slideIndex].title);
+
+          // }}
+          // onSlideChange={() => {
+          //   setProjectIndex(slideIndex + 1);
+          //   setProjectLink(slice?.items[slideIndex].projectlink);
+          //   setProjectTitle(slice?.items[slideIndex].title);
+          // }}
+          onMouseOver={() => {
+            handleHover(project);
+          }}
+          onMouseLeave={() => {
+            handleLeave();
+          }}
+    
+          onInit={() => {
+            setProjectIndex(slideIndex + 1);
+            setProjectLink(slice?.items[slideIndex].projectlink);
+            setProjectTitle(slice?.items[slideIndex].title);
+          }}
+         
+
+        >
+          {slice?.items.map((item, i) => {
+            return (
+              <SwiperSlide
+                className={styles.GallerySlide}
+                key={i}
+                // onMouseOver={handleSlide}
+      
+                onMouseOver={() => {
+                  handleHover(project);
+                }}
+                onMouseLeave={handleLeave}
+              >
+                {({ isActive }) => (
+               
+                    <MediaResolver
+                        isActive={isActive}
+                        media={item.media}
+                        height={width < 600 ? width : null}
+                        loop={false}
+                      />  
+                )}  
+            
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+        <div className={styles.InfoDiv}>
+                        <PrismicLink href={projectLink}>
+                          <p>[{projectTitle}]</p>
+                        </PrismicLink>
+                        <p >
+                          [<span>{projectIndex} / {slice?.items.length} </span>]
+                        </p>
+    
+        </div>
+
+      </motion.div>
+      
+    </motion.div>
     </motion.div>
   );
 };

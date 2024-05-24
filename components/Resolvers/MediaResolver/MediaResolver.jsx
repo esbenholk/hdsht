@@ -4,7 +4,7 @@ import { PrismicNextImage } from "@prismicio/next";
 import CustomPlayer from "../VideoPlayer/CustomPlayer";
 import useWindowDimensions from "../UseWindowDimensions";
 import useCursor from "../States/Cursor";
-const MediaResolver = ({ name, media, slide, videoRef, isVideoHeader, isActive }) => {
+const MediaResolver = ({ name, media, slide, videoRef, isVideoHeader, isActive, height }) => {
 
   // if (
   //   media.kind === "document" &&
@@ -32,7 +32,7 @@ const MediaResolver = ({ name, media, slide, videoRef, isVideoHeader, isActive }
     return  <Image
     src={media.url}
     width={media.width}
-    height={media.height }
+    height={height? height : media.height }
     alt={media.name}
     loading="eager"
   />;

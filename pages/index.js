@@ -45,7 +45,7 @@ const Page = ({ page }) => {
 
       let h3s = document.getElementsByTagName('h3');
       if(h3s[0]){
-        let stickyPosY = h3s[1].getBoundingClientRect().y;
+        let stickyPosY = h3s[0].getBoundingClientRect().y;
   
        
         if(stickyPosY<50 ){
@@ -72,9 +72,7 @@ const Page = ({ page }) => {
     setIsDesktop(!mobile);
 
     let incr = 45;
-    if(mobile){
-      incr = 30;
-    }
+
 
     let foldedHeight_temp = 0;
     for (let index = 0; index < page.data.slices.length; index++) {
@@ -83,7 +81,7 @@ const Page = ({ page }) => {
         foldedHeight_temp += incr;
       } 
     }
-    foldedHeight_temp -= incr;
+    // foldedHeight_temp -= incr;
  
     setFoldedHeight(foldedHeight_temp);
     setIsMounted(true);
@@ -109,8 +107,10 @@ const Page = ({ page }) => {
           />
           <meta charSet="UTF-8" />
         </Head>
-        <Gizmo />
-        <Cursor />
+        {isDesktop ? <><Gizmo />   <Cursor /></>:    <Navigation />}
+      
+     
+      
         {/* <Script src={"rainyday.js"} onReady={()=>{
           console.log("has rainyday");
           startRaining();
@@ -127,14 +127,17 @@ const Page = ({ page }) => {
           style={{
       
             transition: "all 5 ease",
-            marginTop: `calc(${height-foldedHeight}px + ${footerOffset}px)`,
+            marginTop: isDesktop ? `calc(${height-foldedHeight}px + ${footerOffset}px)` : `calc(${height}px)`,
           }}
         >
           <SliceZone slices={page.data.slices} components={components} />
         </motion.div>
 
-        <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: width>600 ? `calc(100% - ${height-foldedHeight+45}px - ${footerOffset*2}px)`: "8rem", backgroundColor: "var(--main-bg-color)"}}>
-        </div>
+
+        {isDesktop && 
+          <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: width>600 ? `calc(100% - ${height-foldedHeight+45}px - ${footerOffset*2}px)`: "8rem", backgroundColor: "var(--main-bg-color)"}}>
+          </div>
+        }
 
         {isDesktop && 
           <div className={styles.LogoHeader}style={{display: "flex", justifyContent: "center",  alignItems:"center", width: "100%", position: "fixed", zIndex: 1, top: "0", maxHeight: "4.6rem", minHeight: width<600 ? "60px" : 0,  overflow: "hidden", transition: "opacity 0.0s ease-in", padding: "0rem 1rem", opacity: headerInPosition ? 1 :0, transition: "all 0.1s"}}>

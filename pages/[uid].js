@@ -15,7 +15,6 @@ import GoBack from "../components/GoBack/GoBack";
 const Page = ({ page }) => {
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
-    console.log("page mounted");
     setIsMounted(true);
   }, []);
   return (

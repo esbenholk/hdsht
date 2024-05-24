@@ -19,30 +19,6 @@
         "__TYPE__": "GroupItemContent",
         "value": [
           [
-            "worklink",
-            {
-              "__TYPE__": "LinkContent",
-              "value": {
-                "__TYPE__": "DocumentLink",
-                "id": "mock_document_id"
-              }
-            }
-          ],
-          [
-            "mediaforgrid",
-            {
-              "__TYPE__": "LinkContent",
-              "value": {
-                "id": "mock_Media_link",
-                "kind": "image/jpeg",
-                "name": "mock_name",
-                "url": "https://source.unsplash.com/daily",
-                "size": "0",
-                "__TYPE__": "FileLink"
-              }
-            }
-          ],
-          [
             "project_title",
             {
               "__TYPE__": "FieldContent",
@@ -62,14 +38,6 @@
                   }
                 }
               ]
-            }
-          ],
-          [
-            "year",
-            {
-              "__TYPE__": "FieldContent",
-              "value": "9",
-              "type": "Number"
             }
           ],
           [

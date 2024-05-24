@@ -1,4 +1,6 @@
-.Header:not(:first-of-type) {
+
+.MobileHeader,
+.Header {
   position: sticky;
   background-color: var(--main-bg-color);
   // background: linear-gradient(var(--main-bg-color) 100%, rgba(0,0,0,0) 100%);
@@ -46,11 +48,7 @@
 .StuckLogo{
 
 }
-.Header:is(:first-of-type){
-  padding: 1rem 3rem;
 
-
-}
 
 .ProjectPageHeader{
   background-color: var(--main-bg-color);

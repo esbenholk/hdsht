@@ -1,14 +1,59 @@
+
+.BottomNavContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  background-color: var(--main-bg-color);
+  // background: linear-gradient(var(--main-bg-color) 100%, rgba(0,0,0,0) 100%);
+  color: var(--main-text-color);
+  font-family: var(--bubble-font);
+  font-size: 2.1rem;;
+  margin: 0;
+  height: 2.3rem;
+  // transform: translate(0,25px);
+  padding: 0.5rem 2rem 1rem 2rem;
+  border: 1px solid #FFF;
+  border-bottom: 0px solid #FFF;
+  border-top-left-radius: 3rem;
+  border-top-right-radius: 3rem;
+}
 .NavContainer {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
-  padding: 0.5rem;
-  width: 5rem;
-  height: 5rem;
+  right: 0;
+
   display: flex;
-  justify-content: space-between;
-  z-index: 3;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  background-color: var(--main-bg-color);
+  // background: linear-gradient(var(--main-bg-color) 100%, rgba(0,0,0,0) 100%);
+  color: var(--main-text-color);
+  font-family: var(--bubble-font);
+  font-size: 2.1rem;;
+  margin: 0;
+  height: 2.3rem;
+  // transform: translate(0,25px);
+  padding: 0.5rem 2rem 1rem 2rem;
+  border: 1px solid #FFF;
+  border-top: 0px solid #FFF;
+  border-bottom-left-radius: 3rem;
+  border-bottom-right-radius: 3rem;
+  // -webkit-box-shadow: 0px 10px 26px -15px var(--main-border-glow-color);
+  // -moz-box-shadow: 0px -5px 26px -15pxvar(--main-border-glow-color);
+  // box-shadow: 0px -4px 5px var(--main-border-glow-color), inset 0px 7px 3px -7px var(--main-border-glow-color);
+  .Order {
+    margin-right: 1rem;
+    font-family: var(--bubble-font);
+
+  }
 
   svg {
     display: flex;
@@ -23,18 +68,14 @@
 }
 
 .ToggleBtn {
-  position: fixed;
-  z-index: 10;
-  top: 0;
-  right: 0;
+ 
   display: flex;
   flex-direction: column;
-  padding: 0.5rem;
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  padding-top: 0.8rem;
   mix-blend-mode: var(--mix-blend-mode);
   div {
-    width: 2rem;
+    width: 3rem;
     height: 0.15rem;
     background-color: var(--main-font-color);
     margin: 0.2rem;

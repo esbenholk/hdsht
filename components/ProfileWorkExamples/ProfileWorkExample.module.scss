@@ -1,23 +1,26 @@
 .SwiperTop {
-  height: 75vh;
+  height: 50vh;
   width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 
   .GallerySlide {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-content: center;
     position: relative;
     overflow: hidden;
 
     width: inherit !important;
-    height: inherit !important;
+    height: 100% !important;
 
     img {
       width: 100% !important;
       max-height: 100%;
       object-fit: cover;
       border-radius: 2rem;
-      border: 1px solid  white;
     }
 
     video {
@@ -27,7 +30,6 @@
       top: 0;
       object-fit: cover !important;
       border-radius: 2rem;
-      border: 1px solid  white;
 
     }
   }
@@ -36,136 +38,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem;
   p{
     font-size: 1.7rem;
     margin: 0;
   }
 }
 
-.InfoContainerDeskTop{
-  position: absolute;
-  width: 70%;
-  max-width: 70%;
-  top: 0;
-  right: 0;
-  height: fit-content;
-  z-index: 9999999;
-}
-
-.InfoContainer {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.5s ease-out;
-}
-
-.Open {
-  grid-template-rows: 2fr;
-}
-
-
-.Content {
-  overflow: hidden;
-  div{
-    margin: 2rem;
-    padding: 2rem;
-    border-radius: 2rem;
-    overflow: hidden;
-    position: relative;
-
-    .Background{
-      background-color: rgba(0,0,0, 0.8);
-      position: absolute; 
-      z-index: -1;
-      width: 200%;
-      top:-50%;
-      bottom:0;
-      left:-25%;
-      right:0;
-      height: 200%;     
-      filter: blur(5px);
-    }
-
-    p{
-      margin: 0;
-      font-size: 1.5rem;
-      line-height: 2rem;
-      font-family: var(--secondary-font-reg);
-      font-weight: 705;
-      color: rgba(255,255,255,0.7);
-      z-index: 1;
-
-    }
-    .Credits{
-      font-size: 1rem;
-      line-height: 1.2rem;
-      font-family: var( --secondary-font-reg);
-      font-weight: 705;
-      color: rgba(255,255,255,0.7);
-      z-index: 1;
-    }
-    
-  }
- 
-}
-
-.ThumbSwiper {
-  height: 5vh;
-  padding-bottom: 0.5vh !important;
-  border-radius: 1rem;
-  bottom: 0;
-  z-index: 5;
-  opacity: 0.7;
-  transform: translate(0,-110%);
-  flex-shrink: 100 !important;
-  --mask: linear-gradient(to left, 
-      rgba(0,0,0, 0) 0,   rgba(0,0,0, 1) 15%, 
-      rgba(0,0,0,1) 85%, rgba(0,0,0, 0) 100%
-  ) 100% 50% / 100% 100% repeat-x;
-  
-  -webkit-mask: var(--mask); 
-  mask: var(--mask);
-  .Scrubber {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: var(--main-font-color-highlight);
-    height: 100%;
-    width: 20px;
-  }
-  .ThumbSlide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.5rem;
-
-    margin: 0 !important;
-    margin-bottom: 2rem !important;
-    border: 0.1rem solid var(--main-font-color);
-    overflow: hidden;
-    max-width: 5rem;
-    flex-shrink: 0 !important;
-    flex-grow: 0 !important;
-    // width: fit-content !important;
-    -webkit-logical-width: fit-content !important;
-
-    img {
-      width: 100%;
-      height: 10vh;
-      object-fit: cover !important;
-      -webkit-logical-width: max-content !important;
-    }
-  }
-  .ThumbSlide:hover{
-    border: 0.1rem solid black;
-    filter: invert(1);
-  
-  }
-}
 
 .CarouselContainer{
   position: relative;
   z-index: 0;
   overflow: hidden;
+  width: calc(66% - 4rem);
+  padding: 1rem;
 }
 .WorkCarouselContainer{
   margin-top: 5rem;
@@ -196,4 +82,85 @@
       cursor: none;
     }
   }
+}
+
+
+@media screen and (max-width: 768px) {
+
+  .CarouselContainer{
+    position: relative;
+    z-index: 0;
+    overflow: visible;
+    width: calc(100% );
+
+    padding: 0rem;
+  }
+  .SwiperTop {
+    height: fit-content;
+    width: 100%;
+  
+    .GallerySlide {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-content: center;
+      position: relative;
+      overflow: hidden;
+
+      width: inherit !important;
+      height: 100% !important;
+
+      
+ 
+  
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        aspect-ratio: 1 / 1;
+      }
+  
+      video {
+        position: relative;
+        height: 100% !important;
+        width: 100% !important;
+        top: 0;
+        object-fit: cover !important;
+        border-radius: 2rem;  
+        aspect-ratio: 1 / 1;
+
+      }
+    }
+  }
+  .WorkCarouselContainer{
+    margin-top: 5rem;
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .Controls {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.5rem;
+    opacity: 0.5;
+    button {
+      background-color: var(--main-font-color);
+      font-family: var(--sepcial-font-display);
+      border: 0.1rem solid var(--secondary-bg-color);
+      color: var(--secondary-bg-color);
+      padding: 0.5rem;
+      border-radius: 1rem;
+      width: 6rem;
+      &:hover {
+        opacity: 1 !important;
+        color: var(--main-font-color-highlight);
+        cursor: none;
+      }
+    }
+  }
+  
 }

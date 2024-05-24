@@ -5,5 +5,5 @@ export default {
 }
 
 
-export const _Default = () => <MyComponent slice={{"variation":"default","version":"sktwi1xtmkfgx8626","items":[{"image":{"dimensions":{"width":12288,"height":16384},"alt":null,"copyright":null,"url":"https://images.unsplash.com/photo-1587613865763-4b8b0d19e8ab"},"projectlink":{"link_type":"Web","url":"http://google.com"},"title":[{"type":"paragraph","text":"In sint aliqua voluptate tempor occaecat nisi non magna qui.","spans":[]}]}],"primary":{"title":[{"type":"heading1","text":"Wrong","spans":[]}],"description":[{"type":"paragraph","text":"Magna eiusmod nostrud ullamco commodo pariatur sunt reprehenderit magna commodo.","spans":[]}]},"id":"_Default","slice_type":"profile_work_grid"}} />
+export const _Default = () => <MyComponent slice={{"variation":"default","version":"sktwi1xtmkfgx8626","items":[{"projectlink":{"link_type":"Web","url":"http://google.com"},"media":{"link_type":"Media","name":"mock","kind":"image","url":"https://source.unsplash.com/random","size":"10kB"},"title":"slabs"}],"primary":{"title":[{"type":"heading2","text":"Guard","spans":[]}],"description":[{"type":"paragraph","text":"Magna eiusmod nostrud ullamco commodo pariatur sunt reprehenderit magna commodo.","spans":[]}]},"id":"_Default","slice_type":"profile_work_grid"}} />
 _Default.storyName = ''

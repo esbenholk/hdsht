@@ -44,6 +44,23 @@
 
 .InfoContainerDeskTop{
   position: absolute;
+  width: 0%;
+  max-width: 0%;
+  top: 0;
+  right: 0;
+  max-height: 100%;
+  height: fit-content;
+  z-index: 9999999;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.InfoContainer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.InfoContainer:has(.Open){
+  position: absolute;
   width: 70%;
   max-width: 70%;
   top: 0;
@@ -51,15 +68,12 @@
   height: fit-content;
   z-index: 9999999;
 }
-
-.InfoContainer {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.5s ease-out;
-}
-
 .Open {
   grid-template-rows: 2fr;
+  width: 70%;
+  max-width: 70%;
+  max-height: 100%;
+  height: fit-content;
 }
 
 
