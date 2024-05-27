@@ -13,7 +13,7 @@ import PixelCanvas from "../components/Resolvers/pixelCanvas";
 import ParticleCanvas from "@/components/Resolvers/_particleCanvas";
 import useWindowDimensions from "../components/Resolvers/UseWindowDimensions";
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps, page }) {
   const [isMounted, setIsMounted] = useState(false);
   const [desc, setDesc] = useState("");
   const [title, setTitle] = useState("");
@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }) {
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
     setIsMobile(mobile);
 
-    console.log("App comp mounted", Component, pageProps);
+    console.log("App comp mounted", page);
     if(pageProps.page && pageProps.page.data && pageProps.page.data.description){
       setDesc(pageProps.page.data.description);
     }
@@ -59,49 +59,11 @@ export default function App({ Component, pageProps }) {
               </AnimatePresence>
             </PrismicPreview>
 
-         
-            <section 
-            
-              onMouseOver={() => {
-                if(!router.asPath.includes("work")){
-                  useCursor.setState({
-                    cursorVariant: "logo",
-                    isOverProject: true,
-                    title: title,
-                    description: desc
-                  });
-                } else {
-                  useCursor.setState({
-                    cursorVariant: "hoveronlink",
-                    isOverProject: true,
-                    title: "visit the frontpage",
-                    description: "/"
-                  });
-                } 
-                }}
-                onClick={()=>{
-                  if(router.asPath.includes("work")){
-                    window.location.href = "/";  
-                  }
-                }}
-                onMouseLeave={() => {
-                  useCursor.setState({
-                    cursorVariant: "default",
-                    isOverProject: false,
-                    title: "",
-                    description: ""
 
-                  });
-                }}>
-                   {/* <PixelCanvas imageUrl={Logo.src} isPageTop={false}/> */}
-                   {/* <ParticleCanvas imageUrl={Logo.src} isPageTop={false}/> */}
-            <div id="finallogo"> 
-              {isMobile ?  <img className="logo"src={Logo.src} alt="logo" style={{width: "calc(100% - 4rem)", margin: "0rem 2rem -2rem 2rem"}}/> :<ParticleCanvas  imageUrl={Logo.src} isPageTop={false}/>}
-            </div>   
-          </section>
 
 
       </PrismicProvider>
     )
   );
 }
+

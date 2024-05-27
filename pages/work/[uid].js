@@ -83,6 +83,9 @@ export async function getStaticProps({ params, previewData }) {
   const client = createClient({ previewData });
 
   const page = await client.getByUID("work", params.uid);
+  const settings = await client.getSingle("settings", {});
+  page.settings = settings;
+  
   return {
     props: {
       page,

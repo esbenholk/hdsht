@@ -1,0 +1,104 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {},
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": [
+          [
+            "link1",
+            {
+              "__TYPE__": "LinkContent",
+              "value": {
+                "__TYPE__": "ExternalLink",
+                "url": "http://twitter.com"
+              }
+            }
+          ],
+          [
+            "text1",
+            {
+              "__TYPE__": "FieldContent",
+              "value": "percent",
+              "type": "Text"
+            }
+          ],
+          [
+            "link2",
+            {
+              "__TYPE__": "LinkContent",
+              "value": {
+                "__TYPE__": "ExternalLink",
+                "url": "https://slicemachine.dev"
+              }
+            }
+          ],
+          [
+            "text2",
+            {
+              "__TYPE__": "FieldContent",
+              "value": "cap",
+              "type": "Text"
+            }
+          ],
+          [
+            "link3",
+            {
+              "__TYPE__": "LinkContent",
+              "value": {
+                "__TYPE__": "ExternalLink",
+                "url": "https://slicemachine.dev"
+              }
+            }
+          ],
+          [
+            "text3",
+            {
+              "__TYPE__": "FieldContent",
+              "value": "current",
+              "type": "Text"
+            }
+          ],
+          [
+            "link4",
+            {
+              "__TYPE__": "LinkContent",
+              "value": {
+                "__TYPE__": "ExternalLink",
+                "url": "http://google.com"
+              }
+            }
+          ],
+          [
+            "text4",
+            {
+              "__TYPE__": "FieldContent",
+              "value": "push",
+              "type": "Text"
+            }
+          ],
+          [
+            "link5",
+            {
+              "__TYPE__": "LinkContent",
+              "value": {
+                "__TYPE__": "ExternalLink",
+                "url": "https://slicemachine.dev"
+              }
+            }
+          ],
+          [
+            "text5",
+            {
+              "__TYPE__": "FieldContent",
+              "value": "draw",
+              "type": "Text"
+            }
+          ]
+        ]
+      }
+    ]
+  }
+]

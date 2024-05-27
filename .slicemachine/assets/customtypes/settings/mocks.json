@@ -1,0 +1,176 @@
+{
+  "logo": {
+    "__TYPE__": "ImageContent",
+    "origin": {
+      "id": "main",
+      "url": "https://images.unsplash.com/photo-1600861194802-a2b11076bc51",
+      "width": 2545,
+      "height": 2545
+    },
+    "url": "https://images.unsplash.com/photo-1600861194802-a2b11076bc51",
+    "width": 2545,
+    "height": 2545,
+    "edit": {
+      "zoom": 1,
+      "crop": {
+        "x": 0,
+        "y": 0
+      },
+      "background": "transparent"
+    },
+    "thumbnails": {}
+  },
+  "slices": {
+    "__TYPE__": "SliceContentType",
+    "value": [
+      {
+        "key": "media_array$a2cf8f2e-217c-4233-bd7c-2d6f58333319",
+        "name": "media_array",
+        "widget": {
+          "__TYPE__": "SharedSliceContent",
+          "variation": "default",
+          "primary": {
+            "title": {
+              "__TYPE__": "StructuredTextContent",
+              "value": [
+                {
+                  "type": "heading1",
+                  "content": {
+                    "text": "Serve"
+                  }
+                }
+              ]
+            }
+          },
+          "items": [
+            {
+              "__TYPE__": "GroupItemContent",
+              "value": [
+                [
+                  "media",
+                  {
+                    "__TYPE__": "LinkContent",
+                    "value": {
+                      "id": "mock_Media_link",
+                      "kind": "image/jpeg",
+                      "name": "mock_name",
+                      "url": "https://source.unsplash.com/daily",
+                      "size": "0",
+                      "__TYPE__": "FileLink"
+                    }
+                  }
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "key": "links$f9d77355-8296-4f18-89b0-d85d16a20015",
+        "name": "links",
+        "widget": {
+          "__TYPE__": "SharedSliceContent",
+          "variation": "default",
+          "primary": {},
+          "items": [
+            {
+              "__TYPE__": "GroupItemContent",
+              "value": [
+                [
+                  "link1",
+                  {
+                    "__TYPE__": "LinkContent",
+                    "value": {
+                      "__TYPE__": "ExternalLink",
+                      "url": "http://google.com"
+                    }
+                  }
+                ],
+                [
+                  "text1",
+                  {
+                    "__TYPE__": "FieldContent",
+                    "value": "mother",
+                    "type": "Text"
+                  }
+                ],
+                [
+                  "link2",
+                  {
+                    "__TYPE__": "LinkContent",
+                    "value": {
+                      "__TYPE__": "ExternalLink",
+                      "url": "https://prismic.io"
+                    }
+                  }
+                ],
+                [
+                  "text2",
+                  {
+                    "__TYPE__": "FieldContent",
+                    "value": "moon",
+                    "type": "Text"
+                  }
+                ],
+                [
+                  "link3",
+                  {
+                    "__TYPE__": "LinkContent",
+                    "value": {
+                      "__TYPE__": "ExternalLink",
+                      "url": "https://prismic.io"
+                    }
+                  }
+                ],
+                [
+                  "text3",
+                  {
+                    "__TYPE__": "FieldContent",
+                    "value": "separate",
+                    "type": "Text"
+                  }
+                ],
+                [
+                  "link4",
+                  {
+                    "__TYPE__": "LinkContent",
+                    "value": {
+                      "__TYPE__": "ExternalLink",
+                      "url": "http://twitter.com"
+                    }
+                  }
+                ],
+                [
+                  "text4",
+                  {
+                    "__TYPE__": "FieldContent",
+                    "value": "fight",
+                    "type": "Text"
+                  }
+                ],
+                [
+                  "link5",
+                  {
+                    "__TYPE__": "LinkContent",
+                    "value": {
+                      "__TYPE__": "ExternalLink",
+                      "url": "https://slicemachine.dev"
+                    }
+                  }
+                ],
+                [
+                  "text5",
+                  {
+                    "__TYPE__": "FieldContent",
+                    "value": "similar",
+                    "type": "Text"
+                  }
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

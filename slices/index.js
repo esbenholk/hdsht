@@ -10,6 +10,7 @@ import CreditFooter from './CreditFooter';
 import HeroText from './HeroText';
 import HeroVideo from './HeroVideo';
 import ImageSlice from './ImageSlice';
+import Links from './Links';
 import MediaArray from './MediaArray';
 import Philosophy from './Philosophy';
 import ProfileWorkGrid from './ProfileWorkGrid';
@@ -29,6 +30,7 @@ export {
 	HeroText,
 	HeroVideo,
 	ImageSlice,
+	Links,
 	MediaArray,
 	Philosophy,
 	ProfileWorkGrid,
@@ -49,6 +51,7 @@ export const components = {
 	hero_text: HeroText,
 	hero_video: HeroVideo,
 	image_slice: ImageSlice,
+	links: Links,
 	media_array: MediaArray,
 	philosophy: Philosophy,
 	profile_work_grid: ProfileWorkGrid,

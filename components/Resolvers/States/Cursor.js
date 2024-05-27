@@ -8,6 +8,7 @@ const useCursor = create((set) => ({
   shouldrenderdetailsontop: false,
   nexturl:"",
   instruction: "",
-  carouselTopLeftPos: {x:0,y:0}
+  carouselTopLeftPos: {x:0,y:0},
+  isLoader: false
 }));
 export default useCursor;

@@ -3,7 +3,8 @@
     "landing": {},
     "work": {},
     "about": {},
-    "page": {}
+    "page": {},
+    "settings": {}
   },
   "slices": {
     "Article": {
@@ -103,6 +104,12 @@
       "default": {
         "items": {},
         "primary": {}
+      }
+    },
+    "Links": {
+      "default": {
+        "primary": {},
+        "items": {}
       }
     }
   }

@@ -7,55 +7,64 @@ import useCursor from "../Resolvers/States/Cursor";
 import dynamic from "next/dynamic";
 import Logo from 'assets/svg/HDSHT_HD.svg';
 const Gizmo = dynamic(() => import("../Gizmo/Gizmo"), { ssr: false });
-export function Navigation({ slice }) {
+
+
+
+export function Navigation({ slice, logo, links }) {
   const [isMounted, setIsMounted] = useState(false);
   const [menu, setMenu] = useState(false);
   const slider = useRef();
   const toggle = useRef();
   const nestedLinks = useRef();
   const [scrolled, setScrolled] = useState(0);
+
   const SlideIn = () => {
     setMenu(!menu);
   };
+
   useEffect(() => {
+    console.log("NAVIGATIOn", slice, logo, links);
     setIsMounted(true);
   }, []);
+
   const slideInFromRightContainer = {
     open: {
-      transform: "translateX(0)",
+      transform: "translateY(0)",
       opacity: 1,
       transition: {
-        duration: 0.2,
+        duration: 1,
         staggerChildren: 0.1,
       },
     },
     closed: {
-      transform: "translateX(100%)",
-      opacity: 0,
+      transform: "translateY(100%)",
+      opacity:1,
       transition: {
-        duration: 0.1,
+        duration: 1,
         staggerChildren: 0.1,
       },
     },
   };
-  const slideInFromRightParent = {
-    open: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.2,
-        staggerChildren: 0.025,
-      },
-    },
-    closed: {
-      opacity: 0,
-      x: "100%",
-      transition: {
-        duration: 0.1,
-        staggerChildren: 0.005,
-      },
-    },
-  };
+  // const slideInFromRightParent = {
+  //   open: {
+  //     opacity: 1,
+  //     y: 0,
+  //     transition: {
+  //       duration: 0.2,
+  //       staggerChildren: 0.025,
+  //     },
+  //   },
+  //   closed: {
+  //     opacity: 1,
+  //     x: "100%",
+  //     transition: {
+  //       duration: 0.1,
+  //       staggerChildren: 0.005,
+  //     },
+  //   },
+  // };
+
+
   const handleHover = () => {
     useCursor.setState({
       cursorVariant: "hover",
@@ -69,62 +78,68 @@ export function Navigation({ slice }) {
   return (
     isMounted && (
       <>
-             <motion.div
-          className={styles.NavLinksContainer}
-          variants={slideInFromRightContainer}
-          animate={menu ? "open" : "closed"}
+        <motion.div
+          className={`${styles.NavLinksContainer}  ${menu ? styles.Open : styles.Closed}`}
         >
           <motion.ul className={styles.NavLinks} ref={slider}>
-            {slice?.data.slices.map((item, key) => {
-              if (item.items[0]?.childlink.url) {
-                return (
+           {links.map((item, key)=>{
+              return (
                   <motion.li
-                    key={key}
-                    variants={slideInFromRightParent}
-                    onMouseOver={handleHover}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    <PrismicLink
-                      href={item.primary.link.url ? item.primary.link.url : "#"}
+                      key={key}
+           
                     >
-                      <PrismicText field={item.primary.title} />
-                    </PrismicLink>
-                    <ul className={styles.NestedLinks}>
-                      {item.items.map((item, key) => {
-                        return (
-                          <motion.li
-                            className={styles.ListChild}
-                            key={key}
-                            variants={slideInFromRightParent}
-                            onMouseOver={handleHover}
-                            onMouseLeave={handleMouseLeave}
-                          >
-                            <PrismicLink href={item.childlink.url}>
-                              <motion.span>{item.childname}</motion.span>
-                            </PrismicLink>
-                          </motion.li>
-                        );
-                      })}
-                    </ul>
+                    {item.link1 && 
+                        <>
+                      
+                        <PrismicLink
+                            href={item.link1.url}>
+                              {item.text1}            
+                        </PrismicLink>
+                        </>
+                    }
+                    {item.link2 && 
+                        <>
+                        <PrismicLink
+                            href={item.link2.url}>
+                              {item.text2}            
+                        </PrismicLink>
+                        </>
+                    }
+                    {item.link3 && 
+                        <>
+                        <PrismicLink
+                            href={item.link3.url} >
+                              {item.text3}            
+                        </PrismicLink>
+                        </>
+                    }
+                    {item.link4 && 
+                        <>
+                        <PrismicLink
+                            href={item.link4.url}>
+                              {item.text4}            
+                        </PrismicLink>
+                        </>
+                    }
+
+                    {item.link5 && 
+                        <>
+                        <PrismicLink
+                            href={item.link5.url}>
+                              {item.text5}            
+                        </PrismicLink>
+                        </>
+                    } 
+            
                   </motion.li>
-                );
-              } else {
-                return (
-                  <motion.li
-                    key={key}
-                    variants={slideInFromRightParent}
-                    onMouseOver={handleHover}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    <PrismicLink href={item.primary.link.url}>
-                      <PrismicText field={item.primary.title} />
-                    </PrismicLink>
-                  </motion.li>
-                );
-              }
+              )
             })}
+            <p>Sound On/Off</p>
           </motion.ul>
+
+          
         </motion.div>
+
         <div className={styles.NavContainer}>
           <div
             className={styles.ToggleBtn}
@@ -196,8 +211,7 @@ export function Navigation({ slice }) {
         </div>
   
         <div className={styles.BottomNavContainer}>
-        <img src={Logo.src} alt="logo" style={{width: "calc(100%)"}}/>
-
+          <img src={logo.url} alt="logo"/>
         </div>
       </>
     )

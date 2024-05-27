@@ -48,6 +48,43 @@
   // mix-blend-mode: difference;
 
 }
+.Stuck{
+  position: fixed;
+  top: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+}
+
+.LoaderFrame{
+  z-index: 9999999999999999999999999;
+  --s: 70px; /* the size on the corner */
+  --g: 100px; /* the gap between the border and image */
+  --t: 5px;
+  pointer-events: none;
+
+  padding: calc(var(--g) + var(--t));
+  outline: 1px solid white; /* the color here */
+  outline-offset: calc(-1*var(--t));
+  mask:
+    conic-gradient(at var(--s) var(--s),#0000 75%,#000 0)
+    0 0/calc(100% - var(--s)) calc(100% - var(--s)),
+    linear-gradient(#000 0 0) content-box;
+  transition: .4s;
+
+  background-color: rgba(0,0,0,0);
+  // transform: translate(-50%, -50%);
+
+}
+.Free{
+  width: 200px;
+  height: 200px;
+  transform: translate(-50%, -50%);
+
+  position: relative;
+  max-width: 200px;
+  max-height: 200px;
+}
 .Cross section{
   --s: 70px; /* the size on the corner */
   --g: 10px; /* the gap between the border and image */

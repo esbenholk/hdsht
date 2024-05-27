@@ -175,6 +175,7 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
 
         const myImage = new Image();
         myImage.src = imageUrl;
+        myImage.crossOrigin = "anonymous";
     
 
         if(canvas.current){
@@ -220,7 +221,7 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
 
 
     return (
-        <div style={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom: isPageTop ? "0" : "8rem"}} >
+        <div style={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom: isPageTop ? "0" : "5rem"}} >
             <canvas
             // onClick={(e)=>{
             //     shoot(e);

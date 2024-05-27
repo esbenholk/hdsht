@@ -88,8 +88,10 @@ const Cursor = () => {
   const projectTitle = useCursor((state) => state.title);
   const isOverProject = useCursor((state)=>state.isOverProject);
   const instruction = useCursor((state)=> state.instruction);
+  const isLoader = useCursor((state)=> state.isLoader);
+
   const carouselTopLeftPos = useCursor((state)=> state.carouselTopLeftPos);
-  const shouldrenderdetailsontop = useCursor((state)=>state.shouldrenderdetailsontop);
+
   const [trackedTitle, setTrackedTitle] = useState(null);
   const [trackedDesc, setTrackedDesc] = useState(null);
 
@@ -293,26 +295,26 @@ const Cursor = () => {
   
         <div className={cursorVariant==="hoveronlink" ? styles.Hoveronlink : cursorVariant==="hoveronbiglink" ? styles.Hoveronlink:null }>
         <div className={cursorVariant==="logo" ? styles.PinkDot : styles.Dot} >
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null} ></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null} ></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
           <div></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
         </div>
         <div className={cursorVariant==="logo" ? styles.PinkDot : styles.Dot}>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
           <div></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
-          <div className={cursorVariant==="hover" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
+          <div className={cursorVariant==="default" ? styles.Activecursor : cursorVariant==="logo" ? styles.Activecursor : cursorVariant==="hoveronbiglink" ? styles.Activecursor : null}></div>
         </div>
         </div>
 
@@ -322,8 +324,9 @@ const Cursor = () => {
       </motion.div>
     )}
 
-{isDesktop   &&
-  <motion.div className={styles.Cross}    
+  {isDesktop   &&
+    <>
+    <motion.div className={styles.Cross}    
       variants={variants}
       animate={cursorVariant === "expanded" ? "expanded" : "cross"}
       id="Cross"
@@ -333,41 +336,35 @@ const Cursor = () => {
         </div>
         <div>
         </div>
-        <section className={cursorVariant==="hoveronlink" ? styles.Focus : cursorVariant==="hoveronbiglink" ? styles.Focus : cursorVariant==="logo" ? styles.Focus : null}>
-          {instruction  && <p>{instruction}</p>}
-          {projectTitle && <span ref={titleRef}>{projectTitle}</span>}
-          {cursorVariant === "expanded" ? <span  ref={descRef}> {projectDesc}</span>: null}
-          
-        </section>
-   
-        {/* {isOverProject && projectTitle !=="" && 
-          <div className={shouldrenderdetailsontop ? styles.DescriptionContianerTopLeft : styles.DescriptionContianer}> 
-            <TypeAnimation
-            sequence={[
-              projectTitle
-            ]}
-              wrapper="span"
-              speed={10}
-            />
-            {projectDesc !== null && projectDesc !== "" && 
-              <TypeAnimation
-              sequence={[
-                projectDesc
-              ]}
-                wrapper="span"
-                speed={100}
-              />
-              }
-        
-           
-          </div>
-        } */}
- 
+      
+          <section className={cursorVariant==="hoveronlink" ? styles.Focus : cursorVariant==="hoveronbiglink" ? styles.Focus : cursorVariant==="logo" ? styles.Focus : null}>
+            {instruction  && <p>{instruction}</p>}
+            {projectTitle && <span ref={titleRef}>{projectTitle}</span>}
+            {cursorVariant === "expanded" ? <span  ref={descRef}> {projectDesc}</span>: null}
+            
+          </section>
+      
 
- 
 
-      </motion.div> }
     
+   
+        
+ 
+
+ 
+
+    </motion.div> 
+
+    
+    </>
+    
+    
+    }
+    
+     
+    
+          
+       
     </>
   );
 };
