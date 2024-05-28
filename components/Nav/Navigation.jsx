@@ -101,40 +101,39 @@ export function Navigation({ slice, logo, links, settings }) {
           className={`${styles.NavLinksContainer}  ${menu ? styles.Open : styles.Closed}`}
         >
           <motion.div className={styles.NavLinks} ref={slider}>
-           {links.map((item)=>{
-              return (
-                    <>
-                    {item.link1 && item.link1.url && 
-                      <>
-                        {generateLink(item.link1, item.text1)}
-                      </>
-                    }
-                    
-                    {item.link2 && item.link2.url && 
-                      <>
-                        {generateLink(item.link2, item.text2)}
-                      </>
-                    }
-                    {item.link3 && item.link3.url && 
-                      <>
-                        {generateLink(item.link3, item.text3)}
-                      </>
-                    }
-                    {item.link4 && item.link4.url && 
-                      <>
-                        {generateLink(item.link4, item.text4)}
-                      </>
-                    }
 
-                    {item.link5 && item.link5.url && 
-                      <>
-                        {generateLink(item.link5, item.text5)}
-                      </>
-                    } 
-            
-                </>
-              )
-            })}
+            {links[0] && 
+                <>
+                {links[0].link1 && links[0].link1.url && 
+                  <>
+                    {generateLink(links[0].link1, links[0].text1)}
+                  </>
+                }
+                
+                {links[0].link2 && links[0].link2.url && 
+                  <>
+                    {generateLink(links[0].link2, links[0].text2)}
+                  </>
+                }
+                {links[0].link3 && links[0].link3.url && 
+                  <>
+                    {generateLink(links[0].link3, links[0].text3)}
+                  </>
+                }
+                {links[0].link4 && links[0].link4.url && 
+                  <>
+                    {generateLink(links[0].link4, links[0].text4)}
+                  </>
+                }
+
+                {links[0].link5 && links[0].link5.url && 
+                  <>
+                    {generateLink(links[0].link5, links[0].text5)}
+                  </>
+                } 
+            </>   
+            }
+     
             <p onClick={()=>{
               setSoundSettings();
             }}>SOUND {muted ? " ON": " OFF"}</p>

@@ -40,7 +40,6 @@ const CompanyPhilosophy = ({ slice }) => {
       </motion.div>
 
       {slice.items.map((item, index) => {
-        console.log(item.list);
 
         const IMGref = useRef();
         return (
@@ -48,6 +47,7 @@ const CompanyPhilosophy = ({ slice }) => {
             className={styles.Content}
             key={index}
             variants={bounceInFromBottom}
+         
           >
             <motion.div
               className={styles.Category}
@@ -90,7 +90,7 @@ const CompanyPhilosophy = ({ slice }) => {
                       return listItem.type === "list-item" ? (
                         <motion.li
                           ref={listRef}
-                     
+                          key={index}
                           style={{
                             borderRadius: ".5rem",
                           }}
@@ -98,7 +98,7 @@ const CompanyPhilosophy = ({ slice }) => {
                           {listItem.text}
                         </motion.li>
                       ) : (
-                        <h4>{listItem.text}</h4>
+                        <h4 key={index}>{listItem.text}</h4>
                       );
                     })}
                   </ul>
