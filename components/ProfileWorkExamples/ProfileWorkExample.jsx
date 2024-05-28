@@ -126,7 +126,7 @@ const ProfileWorkExample = ({ slice, project }) => {
 
     console.log("looking for projekt link", slice);
     setProjectIndex(1);
-    setProjectLink(slice?.items[0].projectlink.url);
+    setProjectLink(slice?.items[0].projectlink ? slice?.items[0].projectlink.url : "");
     setProjectTitle(slice?.items[0].title);
   }, []);
 

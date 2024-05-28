@@ -16,6 +16,7 @@ import Logo from 'assets/svg/HDSHT_HD.svg';
 import Sticky from "@/components/StickyHeader/Sticky";
 import useWindowDimensions from "@/components/Resolvers/UseWindowDimensions";
 import styles from "./style.module.scss"
+import Loader from "@/components/Loader/Loader";
 
 const Page = ({ page }) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -55,7 +56,8 @@ const Page = ({ page }) => {
           />
           <meta charSet="UTF-8" />
         </Head>
-        {isDesktop ? <><Gizmo />   <Cursor /></>:    <Navigation logo={page.settings?.data.logo} links={page.settings?.data.slices[1].items} settings={page.settings}/>}
+        {isDesktop ? <><Gizmo />   <Cursor />         <Loader settings={page.settings}/>
+        </>:    <Navigation logo={page.settings?.data.logo} links={page.settings?.data.slices[1].items} settings={page.settings}/>}
 
         <div className={styles.SingleWork}>
         <Sticky slice={slice} isProjectPage={true}/>
