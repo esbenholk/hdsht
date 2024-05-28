@@ -44,6 +44,9 @@ export default function Loader({settings}) {
   function closeLoader(){
     World.remove(engine.current.world, [floor])
     setUserHasEntered(true);
+    useCursor.setState({
+      muted: false
+    });
   }
   const randomNumberInRange = (min, max) => {
     return Math.floor(Math.random()
@@ -51,7 +54,7 @@ export default function Loader({settings}) {
   };
 
   function fragmentBlock(adjacentPosition){
-    const randomNumber = randomNumberInRange(2,10)
+    const randomNumber = randomNumberInRange(3, 10)
 
       for (let x = 0; x < randomNumber ; x++) {
         for (let y = 0; y < randomNumber; y++) {
@@ -121,17 +124,24 @@ export default function Loader({settings}) {
       World.remove(engine.current.world, clickedBody)
       fragmentBlock(clickedBody.position);
 
-      World.add(engine.current.world, [
-        Bodies.circle(clickedBody.position.x, clickedBody.position.y, 300, { isStatic: false,         restitution: 0.001,
-          friction: 9.9,
-          density: 0.1,
-          applyForce: 30,
-          render: {
-            fillStyle: "rgba(0,0,0,0)",
-      
-          }, })
+      var explosionCircle = Bodies.circle(clickedBody.position.x, clickedBody.position.y, 300, { isStatic: false,         restitution: 0.001,
+        friction: 9.9,
+        density: 0.1,
+        applyForce: 30,
+        render: {
+          fillStyle: "rgba(0,0,0,0)"},
+      })
 
+
+
+      World.add(engine.current.world, [
+        explosionCircle
       ])
+
+      setTimeout(() => {
+        World.remove(engine.current.world, explosionCircle)
+      }, 1500);
+
     }
   };
 

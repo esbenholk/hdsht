@@ -80,7 +80,7 @@ const Sticky = ({ slice, isProjectPage }) => {
       >    
         {slice.primary.title !== "logo" && slice.primary.title}
       </h3> :
-      <h3  className={`${styles.MobileHeader}`}>{slice.primary.title !== "logo" && slice.primary.title}</h3>
+      <h3 id={slice.primary.title} className={`${styles.MobileHeader}`}>{slice.primary.title !== "logo" && slice.primary.title}</h3>
       }
 
   

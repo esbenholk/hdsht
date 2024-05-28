@@ -1,30 +1,32 @@
 import { PrismicLink, PrismicText } from "@prismicio/react";
 import styles from "./Navigation.module.scss";
-import HdshtFont from "../SVGR/HdshtFont";
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import useCursor from "../Resolvers/States/Cursor";
-import dynamic from "next/dynamic";
-import Logo from 'assets/svg/HDSHT_HD.svg';
-const Gizmo = dynamic(() => import("../Gizmo/Gizmo"), { ssr: false });
+import Loader from "../Loader/Loader";
 
 
 
-export function Navigation({ slice, logo, links }) {
+
+export function Navigation({ slice, logo, links, settings }) {
   const [isMounted, setIsMounted] = useState(false);
   const [menu, setMenu] = useState(false);
   const slider = useRef();
   const toggle = useRef();
-  const nestedLinks = useRef();
-  const [scrolled, setScrolled] = useState(0);
-
+  const muted = useCursor((state) => state.muted);
+  const url = useCursor((state) => state.url);
+  
   const SlideIn = () => {
     setMenu(!menu);
   };
 
   useEffect(() => {
-    console.log("NAVIGATIOn", slice, logo, links);
+    console.log("NAVIGATIOn", slice, logo, links, url);
     setIsMounted(true);
+    if(url.includes("#")){
+      goToAnchor(url.slice(2));
+      setMenu(false);
+    }
   }, []);
 
   const slideInFromRightContainer = {
@@ -45,24 +47,22 @@ export function Navigation({ slice, logo, links }) {
       },
     },
   };
-  // const slideInFromRightParent = {
-  //   open: {
-  //     opacity: 1,
-  //     y: 0,
-  //     transition: {
-  //       duration: 0.2,
-  //       staggerChildren: 0.025,
-  //     },
-  //   },
-  //   closed: {
-  //     opacity: 1,
-  //     x: "100%",
-  //     transition: {
-  //       duration: 0.1,
-  //       staggerChildren: 0.005,
-  //     },
-  //   },
-  // };
+
+  function setSoundSettings(){
+    useCursor.setState({
+      muted: !muted
+    });
+  }
+
+  function goToAnchor(id){
+    const element = document.getElementById(id);
+    
+    console.log(element, id);
+    if (element) {
+      element.scrollIntoView();
+      
+    }
+  }
 
 
   const handleHover = () => {
@@ -75,67 +75,70 @@ export function Navigation({ slice, logo, links }) {
       cursorVariant: "default",
     });
   };
+
+  function generateLink(link, text){
+    return (<>
+      {link.url.includes("#") && url.length < 2 ? <p onClick={()=>{
+        goToAnchor(link.url.slice(1));
+        setMenu(!menu);
+      }}>{text}</p> : link.url.includes("#") ?
+        <PrismicLink
+          href={"/" + link.url}>
+            {text}            
+        </PrismicLink>  
+      : <PrismicLink
+          href={link.url}>
+            {text}            
+        </PrismicLink>}
+      </>)
+  }
   return (
     isMounted && (
       <>
+        <Loader settings={settings}/>
+
         <motion.div
           className={`${styles.NavLinksContainer}  ${menu ? styles.Open : styles.Closed}`}
         >
-          <motion.ul className={styles.NavLinks} ref={slider}>
-           {links.map((item, key)=>{
+          <motion.div className={styles.NavLinks} ref={slider}>
+           {links.map((item)=>{
               return (
-                  <motion.li
-                      key={key}
-           
-                    >
-                    {item.link1 && 
-                        <>
-                      
-                        <PrismicLink
-                            href={item.link1.url}>
-                              {item.text1}            
-                        </PrismicLink>
-                        </>
+                    <>
+                    {item.link1 && item.link1.url && 
+                      <>
+                        {generateLink(item.link1, item.text1)}
+                      </>
                     }
-                    {item.link2 && 
-                        <>
-                        <PrismicLink
-                            href={item.link2.url}>
-                              {item.text2}            
-                        </PrismicLink>
-                        </>
+                    
+                    {item.link2 && item.link2.url && 
+                      <>
+                        {generateLink(item.link2, item.text2)}
+                      </>
                     }
-                    {item.link3 && 
-                        <>
-                        <PrismicLink
-                            href={item.link3.url} >
-                              {item.text3}            
-                        </PrismicLink>
-                        </>
+                    {item.link3 && item.link3.url && 
+                      <>
+                        {generateLink(item.link3, item.text3)}
+                      </>
                     }
-                    {item.link4 && 
-                        <>
-                        <PrismicLink
-                            href={item.link4.url}>
-                              {item.text4}            
-                        </PrismicLink>
-                        </>
+                    {item.link4 && item.link4.url && 
+                      <>
+                        {generateLink(item.link4, item.text4)}
+                      </>
                     }
 
-                    {item.link5 && 
-                        <>
-                        <PrismicLink
-                            href={item.link5.url}>
-                              {item.text5}            
-                        </PrismicLink>
-                        </>
+                    {item.link5 && item.link5.url && 
+                      <>
+                        {generateLink(item.link5, item.text5)}
+                      </>
                     } 
             
-                  </motion.li>
+                </>
               )
             })}
-            <p>Sound On/Off</p>
-          </motion.ul>
+            <p onClick={()=>{
+              setSoundSettings();
+            }}>SOUND {muted ? " ON": " OFF"}</p>
+          </motion.div>
 
           
         </motion.div>

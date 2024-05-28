@@ -4,6 +4,12 @@
 
   // margin-bottom: -10rem;
 }
+.SingleWork{
+  padding-top: 4.5rem;
+  h3{
+    height: fit-content !important;
+  }
+}
 @media screen and (max-width: 768px) {
   .Container {
    padding: 1rem 1rem 10rem 1rem;

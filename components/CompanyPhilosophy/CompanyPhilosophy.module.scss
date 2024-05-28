@@ -35,6 +35,7 @@
       width: 33%;
       display: flex;
       flex-direction: column;
+      padding-bottom: 1rem;
       // align-items: center;
       // justify-content: center;
       // border-right: 1px solid var(--main-font-color);
@@ -47,6 +48,7 @@
       }
 
     }
+
     .Description {
       // padding: 1rem;
       width: 66% !important;

@@ -9,6 +9,7 @@ const useCursor = create((set) => ({
   nexturl:"",
   instruction: "",
   carouselTopLeftPos: {x:0,y:0},
-  isLoader: false
+  isLoader: false,
+  muted: true
 }));
 export default useCursor;

@@ -534,7 +534,7 @@ const ProjectCarousel = ({ slice, project }) => {
                       <div className={styles.Background}>.</div>
 
                       <p ref={creditRef} className={styles.Credits}>
-                        credits:<br></br>
+                        <span>credits:</span><br></br>
                         {project.data.credits}
                       </p>
                     </div>

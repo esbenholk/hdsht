@@ -38,30 +38,14 @@ const VideoHero = ({ slice }) => {
     loaded && (
       <motion.div className={styles.Container}>
             <div className={styles.VideoContainer}>
-              {isMobile ? 
-                <>
-                {!slice.primary.videolink ?    
-                  <MediaResolver
-                  media={slice.primary.image}
-                  videoRef={videoRef}
-                  loop={true}
-                />:
-                <MediaResolver
+              <MediaResolver
                   media={slice.primary.videolink}
                   videoRef={videoRef}
                   loop={true}
                   isVideoHeader={true}
+                  />
 
-                  />  
-                }
-                </> : <>
-
-                <MediaResolver
-                  media={slice.primary.videolink}
-                  videoRef={videoRef}
-                  loop={true}
-                  isVideoHeader={true}
-                  />  
+                 
                 
            
               {/* object recognition in video cnavas */}
@@ -76,8 +60,8 @@ const VideoHero = ({ slice }) => {
                 {/* rain shader */}
                 {/* <ThreeD image={slice.primary.image}/> */}
               
-              </>
-              }
+       
+           
             </div>
 
    

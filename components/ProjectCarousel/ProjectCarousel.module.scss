@@ -76,6 +76,31 @@
   height: fit-content;
 }
 
+.InfoContainerMobile{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  .Content{
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    .Background{
+      display: none;
+    }
+    div{
+      margin: 0;
+      padding: 0;
+      margin-top: 1rem; 
+      border-radius: 0;
+      p{
+        color: var(--main-font-color);
+      }
+    }
+  }
+}
+
 
 .Content {
   overflow: hidden;
