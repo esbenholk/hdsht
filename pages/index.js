@@ -110,7 +110,7 @@ const Page = ({ page }) => {
           />
           <meta charSet="UTF-8" />
         </Head>
-        {isDesktop ? <><Gizmo />   <Cursor />         <Loader settings={page.settings}/>
+        {isDesktop ? <><Gizmo />   <Cursor />  <Loader settings={page.settings}/>
         </>:    <Navigation logo={page.settings?.data.logo} links={page.settings?.data.slices[1].items} settings={page.settings}/>}
       
         <motion.div

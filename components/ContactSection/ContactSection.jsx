@@ -39,7 +39,6 @@ const ContactSection = ({ slice }) => {
 
     <motion.div className={styles.Grid} exit="closed" ref={container}>
       {slice.items.map((item, index) => {
-        console.log(item);
         const [hovered, setHovered] = useState(false);
         const container = useRef();
         return (
@@ -66,7 +65,7 @@ const ContactSection = ({ slice }) => {
             <motion.div className={styles.Address}>
               <PrismicRichText field={item.address} />
 
-                {item.link1 && 
+                {item.link1 && item.link1.url && 
                     <>
                     <PrismicLink
                         href={item.link1.url}
@@ -88,7 +87,7 @@ const ContactSection = ({ slice }) => {
                     </PrismicLink>
                     </>
                 }
-                {item.link2 && 
+                {item.link2 && item.link2.url && 
                     <>
                     <PrismicLink
                         href={item.link2.url}
@@ -110,7 +109,7 @@ const ContactSection = ({ slice }) => {
                     </PrismicLink>
                     </>
                 }
-                {item.link3 && 
+                {item.link3 && item.link3.url && 
                     <>
                     <PrismicLink
                         href={item.link3.url}
@@ -132,7 +131,7 @@ const ContactSection = ({ slice }) => {
                     </PrismicLink>
                     </>
                 }
-                {item.link4 && 
+                {item.link4 && item.link4.url && 
                     <>
                     <PrismicLink
                         href={item.link4.url}
@@ -155,7 +154,7 @@ const ContactSection = ({ slice }) => {
                     </>
                 }
 
-                {item.link5 && 
+                {item.link5 && item.link5.url && 
                     <>
                     <PrismicLink
                         href={item.link5.url}
