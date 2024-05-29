@@ -324,7 +324,7 @@ const Cursor = () => {
       </motion.div>
     )}
 
-  {isDesktop   &&
+  {/* {isDesktop   &&
     <>
     <motion.div className={styles.Cross}    
       variants={variants}
@@ -359,7 +359,7 @@ const Cursor = () => {
     </>
     
     
-    }
+    } */}
     
      
     

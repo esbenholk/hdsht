@@ -435,11 +435,11 @@ const ProjectCarousel = ({ slice, project }) => {
           );
         })}
       </Swiper>
-      {!infoIsExpanded && 
+     
           <Swiper
           onSwiper={setThumbsSwiper}
           ref={thumbSwiperRef}
-          className={styles.ThumbSwiper}
+          className={`${styles.ThumbSwiper}  ${infoIsExpanded && styles.Hidden}`}
           modules={[FreeMode, Thumbs, Mousewheel]}
           mousewheel
           // spaceBetween={10}
@@ -472,7 +472,7 @@ const ProjectCarousel = ({ slice, project }) => {
             );
           })}
         </Swiper>
-      }
+ 
 
 
 

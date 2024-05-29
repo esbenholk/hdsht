@@ -191,10 +191,10 @@
   height: 5vh;
   padding-bottom: 0.5vh !important;
   border-radius: 1rem;
-  bottom: 5vh;
+  bottom: 7vh;
   z-index: 5;
   opacity: 0.7;
-  position: absolute;
+  // position: absolute;
   
   // transform: translate(0,-110%);
   flex-shrink: 100 !important;
@@ -326,4 +326,9 @@
   }
   
   
+}
+
+
+.Hidden{
+  visibility: hidden;
 }
