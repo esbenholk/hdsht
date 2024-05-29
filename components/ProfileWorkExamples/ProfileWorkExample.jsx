@@ -62,44 +62,21 @@ const ProfileWorkExample = ({ slice, project }) => {
     margin: "100%",
   });
 
-  // useEffect(()=>{
-  //   let cursor = document.getElementById("Cross");
-  //   if(cursor){
-  //     let _section = cursor.getElementsByTagName("section")[0];
-  //     setSection(_section);
-  //   }
-    
-  //   console.log("PROJECT", project, slice);
+  // const handleScroll = () => {
+  //     setCursorExpanded(false);
+  //     useCursor.setState({
+  //       cursorVariant: "default",
+  //       isOverProject: false,
+  //       description:"",
+  //       title: "",
+  //       shouldrenderdetailsontop: false,
+  //       instruction: "click to read",
+  //       carouselTopLeftPos: {x:0,y: 0}
+  //     });
 
-  // },[])
-  // useEffect(() => {
-  //   if (slice.items[slideIndex].carouselitem.kind === "image") {
-  //     setCurrentSlide("image");
-  //     setCurrentVideo(null);
-  //     useVideo.setState({ duration: null, currentTime: null });
-  //   }
-  //   if (slice.items[slideIndex].carouselitem.kind === "document") {
-  //     setCurrentSlide("video");
-  //   }
-  // }, [slideIndex, currentVideo]);
+  //   window.removeEventListener('scroll', handleScroll);
 
-
-  const handleScroll = () => {
-    console.log(cursorExpanded);
-      setCursorExpanded(false);
-      useCursor.setState({
-        cursorVariant: "default",
-        isOverProject: false,
-        description:"",
-        title: "",
-        shouldrenderdetailsontop: false,
-        instruction: "click to read",
-        carouselTopLeftPos: {x:0,y: 0}
-      });
-
-    window.removeEventListener('scroll', handleScroll);
-
-  };
+  // };
 
 
   useEffect(() => {
@@ -124,7 +101,6 @@ const ProfileWorkExample = ({ slice, project }) => {
 
   useEffect(() => {
 
-    console.log("looking for projekt link", slice);
     setProjectIndex(1);
     setProjectLink(slice?.items[0].projectlink ? slice?.items[0].projectlink.url : "");
     setProjectTitle(slice?.items[0].title);
@@ -183,13 +159,13 @@ const ProfileWorkExample = ({ slice, project }) => {
   return (
 
     <motion.div
-    className={layoutStyles.Container}
+    className={styles.Container}
     animate={inView ? "visible" : "hidden"}
     ref={container}
     >
-    <motion.div className={layoutStyles.Content}>
+    <motion.div className={styles.Content}>
       <motion.div
-        className={layoutStyles.Category}
+        className={styles.Category}
       >
         <PrismicRichText field={slice.primary.title} />
       </motion.div>

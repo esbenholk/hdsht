@@ -21,7 +21,6 @@ export function Navigation({ slice, logo, links, settings }) {
   };
 
   useEffect(() => {
-    console.log("NAVIGATIOn", slice, logo, links, url);
     setIsMounted(true);
     if(url.includes("#")){
       goToAnchor(url.slice(2));
@@ -52,12 +51,12 @@ export function Navigation({ slice, logo, links, settings }) {
     useCursor.setState({
       muted: !muted
     });
+    setMenu(false);
   }
 
   function goToAnchor(id){
     const element = document.getElementById(id);
     
-    console.log(element, id);
     if (element) {
       element.scrollIntoView();
       

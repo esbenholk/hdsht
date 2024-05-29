@@ -24,7 +24,6 @@ const VideoHero = ({ slice }) => {
 
   useEffect(() => {
 
-    console.log("loading video hero");
     setLoaded(true);
     if(width < 600){
       setIsMobile(true);

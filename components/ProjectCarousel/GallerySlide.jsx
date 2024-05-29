@@ -35,6 +35,7 @@ const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex, isActive }) =
     slide={slide}
     videoRef={videoRef}
     loop={false}
+    localMuted={true}
   />
 
 

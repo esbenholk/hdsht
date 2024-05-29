@@ -2,15 +2,12 @@ import styles from "./VideoPlayer.module.scss";
 import useVideo from "../States/Video";
 import useCursor from "../States/Cursor";
 
-const CustomPlayer = ({ media, videoRef, isActive }) => {
+const CustomPlayer = ({ media, videoRef, isActive, localMuted }) => {
   //make a custom video player that uses the media.url as src and scales to it's dimensions, as well as updates the currentTime and duration of useVideo
   //   make a regex that checks the media.rul prefix and returns a source JSX elemt with the correct type
   //   make a useEffect that updates the currentTime and duration of useVideo
   const url = useCursor((state) => state.url);
   const muted = useCursor((state) => state.muted);
-
-
-
 
 
   return (
@@ -20,7 +17,7 @@ const CustomPlayer = ({ media, videoRef, isActive }) => {
         loop
         autoPlay={isActive}
         playsInline
-        muted={muted}
+        muted={localMuted ? localMuted : muted}
         controls={false}
         onLoadedMetadata={() => {
           useVideo.setState({

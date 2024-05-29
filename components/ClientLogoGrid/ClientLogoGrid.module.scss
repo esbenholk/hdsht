@@ -43,7 +43,7 @@
         position: sticky;
         padding-left: 3rem;
         top: 50%;
-        font-size: 1.7rem;
+        font-size: var(--reg-font-size-mobile);
         margin: 0;
       }
 
@@ -71,7 +71,7 @@
     }
     .List {
       width: calc(66% - 4rem);
-      padding: 1rem;
+      padding: 2rem 1rem;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
       grid-template-rows: auto;
@@ -111,17 +111,7 @@
         }
       }
     }
-    .Title {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
- 
-      font-size: 0.75rem;
-      // border-top: 1px solid var(--main-font-color);
-      span {
-        font-family: var(--third-font-display);
-      }
-    }
+
     .Content {
       display: flex;
       flex-direction: column;
@@ -132,14 +122,15 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-bottom: 3rem;
         // border-right: 1px solid var(--main-font-color);
         h2 {
           position: relative;
           padding: 0;
           top:0;
-          font-size: 1.5rem;
+          font-size: var(--reg-font-size-mobile);
           margin: 0;
-          padding-bottom: 1rem;
+      
         }
   
       }

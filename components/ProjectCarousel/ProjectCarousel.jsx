@@ -161,7 +161,6 @@ const ProjectCarousel = ({ slice, project }) => {
       setSection(_section);
     }
     
-    console.log("PROJECT", project, slice);
 
   },[])
   useEffect(() => {
@@ -176,22 +175,21 @@ const ProjectCarousel = ({ slice, project }) => {
   }, [slideIndex, currentVideo]);
 
 
-  const handleScroll = () => {
-    console.log(cursorExpanded);
-      setCursorExpanded(false);
-      useCursor.setState({
-        cursorVariant: "default",
-        isOverProject: false,
-        description:"",
-        title: "",
-        shouldrenderdetailsontop: false,
-        instruction: "click to read",
-        carouselTopLeftPos: {x:0,y: 0}
-      });
+  // const handleScroll = () => {
+  //     setCursorExpanded(false);
+  //     useCursor.setState({
+  //       cursorVariant: "default",
+  //       isOverProject: false,
+  //       description:"",
+  //       title: "",
+  //       shouldrenderdetailsontop: false,
+  //       instruction: "click to read",
+  //       carouselTopLeftPos: {x:0,y: 0}
+  //     });
 
-    window.removeEventListener('scroll', handleScroll);
+  //   window.removeEventListener('scroll', handleScroll);
 
-  };
+  // };
   const timer = useRef(0);
 
   useEffect(() => {
@@ -343,12 +341,12 @@ const ProjectCarousel = ({ slice, project }) => {
       }}
      
     >
-      {hovered &&  <Progress
+      {/* {hovered &&  <Progress
         slice={slice}
         slideIndex={slideIndex}
         paused={paused}
         currentSlide={currentSlide}
-      />}
+      />} */}
 
       {/* <Controls
         hovered={hovered}
@@ -437,42 +435,45 @@ const ProjectCarousel = ({ slice, project }) => {
           );
         })}
       </Swiper>
-      <Swiper
-        onSwiper={setThumbsSwiper}
-        ref={thumbSwiperRef}
-        className={styles.ThumbSwiper}
-        modules={[FreeMode, Thumbs, Mousewheel]}
-        mousewheel
-        // spaceBetween={10}
-        direction={"horizontal"}
-        slideToClickedSlide={true}
-        slidesPerView={"auto"}
-        loop
-        freeMode={true}
-        centeredSlides
-      >
-        {slice?.items.map((item, i) => {
-          return (
-            <SwiperSlide
-              className={styles.ThumbSlide}
-              key={i}
-              // onMouseOver={handleSlide}
-              onMouseLeave={handleLeave}
-            >
-              <Suspense fallback={<LoadSpinner />}>
-           
-                <ThumbSlide
-                  item={item}
-                  slideIndex={slideIndex}
-                  slice={slice}
-                  gallerySwiperRef={gallerySwiperRef}
-                  paused={paused}
-                />
-              </Suspense>
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
+      {!infoIsExpanded && 
+          <Swiper
+          onSwiper={setThumbsSwiper}
+          ref={thumbSwiperRef}
+          className={styles.ThumbSwiper}
+          modules={[FreeMode, Thumbs, Mousewheel]}
+          mousewheel
+          // spaceBetween={10}
+          direction={"horizontal"}
+          slideToClickedSlide={true}
+          slidesPerView={"auto"}
+          loop
+          freeMode={true}
+          centeredSlides
+        >
+          {slice?.items.map((item, i) => {
+            return (
+              <SwiperSlide
+                className={styles.ThumbSlide}
+                key={i}
+                // onMouseOver={handleSlide}
+                onMouseLeave={handleLeave}
+              >
+                <Suspense fallback={<LoadSpinner />}>
+            
+                  <ThumbSlide
+                    item={item}
+                    slideIndex={slideIndex}
+                    slice={slice}
+                    gallerySwiperRef={gallerySwiperRef}
+                    paused={paused}
+                  />
+                </Suspense>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      }
+
 
 
 {project && <>
@@ -486,8 +487,8 @@ const ProjectCarousel = ({ slice, project }) => {
         
         {project.data.description && <>
           <p 
-          className={styles.InfoDiv}
-          style={{width: "2rem"}}
+          className={styles.InfoButton}
+    
           onMouseOver={() => {
             handleHoverButton(project);
           }}
@@ -512,17 +513,17 @@ const ProjectCarousel = ({ slice, project }) => {
           }}
   
           >
-          [<span>{infoIsExpanded ? "-" : "+"}</span>]
+          {width < 700 ? <> [<span>{infoIsExpanded ? "-" : "+"}</span>]</> : "[info]"}
+          
         </p>
         </>}
-  
       </div>
 
           
               <motion.div className={`${styles.InfoContainer} ${infoIsExpanded ? styles.Open : styles.Closed} ${width>700 ? styles.InfoContainerDeskTop : styles.InfoContainerMobile}` }>
            
                   <div className={styles.Content}>
-                    <div>
+                    <div className={styles.Description}>
                       <p ref={infoRef} >
                         {project.data.description}
                       </p>
@@ -530,18 +531,17 @@ const ProjectCarousel = ({ slice, project }) => {
 
                     </div>
 
-                    <div>
+                    <div className={styles.Credits}>
                       <div className={styles.Background}>.</div>
 
-                      <p ref={creditRef} className={styles.Credits}>
-                        <span>credits:</span><br></br>
-                        {project.data.credits}
-                      </p>
+                      <span ref={creditRef} >
+                        <p>{project.data.credits}</p>
+                      </span>
                     </div>
                     
                   </div>
               </motion.div>
-              </>}
+    </> }
     </motion.div>
   );
 };

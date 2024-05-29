@@ -30,7 +30,7 @@ const Sticky = ({ slice, isProjectPage }) => {
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
     setIsMobile(mobile);
     if(!mobile){
-      setOffset(0.8);
+      setOffset(0.65);
     }
     if(header){
       setHeight(header.current.offsetHeight);

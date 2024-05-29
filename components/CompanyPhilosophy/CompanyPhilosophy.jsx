@@ -32,12 +32,12 @@ const CompanyPhilosophy = ({ slice }) => {
       animate={inView ? "visible" : "hidden"}
       ref={container}
     >
-      <motion.div className={styles.Title} variants={bounceInFromBottom}>
+      {/* <motion.div className={styles.Title} variants={bounceInFromBottom}>
         <motion.span variants={bounceInFromBottom}>
           {slice.primary.suborder}
         </motion.span>
         <PrismicRichText field={slice.primary.title} />
-      </motion.div>
+      </motion.div> */}
 
       {slice.items.map((item, index) => {
 

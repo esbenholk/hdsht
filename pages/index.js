@@ -70,13 +70,13 @@ const Page = ({ page }) => {
 
   useEffect(() => {
 
-    console.log("PAGE", page);
+    // console.log("PAGE", page);
     const userAgent = navigator.userAgent;
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
 
     setIsDesktop(!mobile);
 
-    let incr = 45;
+    let incr = 55;
 
 
     let foldedHeight_temp = 0;

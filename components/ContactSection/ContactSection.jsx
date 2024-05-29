@@ -65,7 +65,7 @@ const ContactSection = ({ slice }) => {
             <motion.div className={styles.Address}>
               <PrismicRichText field={item.address} />
 
-                {item.link1 && item.link1.url && 
+                {item.link1 !== null && item.link1.url && 
                     <>
                     <PrismicLink
                         href={item.link1.url}
@@ -87,7 +87,7 @@ const ContactSection = ({ slice }) => {
                     </PrismicLink>
                     </>
                 }
-                {item.link2 && item.link2.url && 
+                {item.link2 !== null  && item.link2.url && 
                     <>
                     <PrismicLink
                         href={item.link2.url}
@@ -109,7 +109,7 @@ const ContactSection = ({ slice }) => {
                     </PrismicLink>
                     </>
                 }
-                {item.link3 && item.link3.url && 
+                {item.link3 !== null   && item.link3.url && 
                     <>
                     <PrismicLink
                         href={item.link3.url}
@@ -131,7 +131,7 @@ const ContactSection = ({ slice }) => {
                     </PrismicLink>
                     </>
                 }
-                {item.link4 && item.link4.url && 
+                {item.link4 !== null && item.link4.url && 
                     <>
                     <PrismicLink
                         href={item.link4.url}
@@ -154,7 +154,7 @@ const ContactSection = ({ slice }) => {
                     </>
                 }
 
-                {item.link5 && item.link5.url && 
+                {item.link5 !== null  && item.link5.url && 
                     <>
                     <PrismicLink
                         href={item.link5.url}

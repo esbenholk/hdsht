@@ -6,7 +6,6 @@ export const WorkCarousel = ({ slice, project }) => {
 
 
   useEffect(() => {
-    console.log(slice);
     setLoaded(true);
   }, []);
   return (

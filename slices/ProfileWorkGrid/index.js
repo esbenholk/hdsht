@@ -7,7 +7,6 @@ const ProfileWorkGrid  = ({ slice, project }) => {
 
 
   useEffect(() => {
-    console.log(slice);
     setLoaded(true);
   }, []);
   return (

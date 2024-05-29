@@ -48,181 +48,181 @@ export default function Loader({settings}) {
       muted: false
     });
   }
-  const randomNumberInRange = (min, max) => {
-    return Math.floor(Math.random()
-        * (max - min + 1)) + min;
-  };
+  // const randomNumberInRange = (min, max) => {
+  //   return Math.floor(Math.random()
+  //       * (max - min + 1)) + min;
+  // };
 
-  function fragmentBlock(adjacentPosition){
-    const randomNumber = randomNumberInRange(3, 10)
+  // function fragmentBlock(adjacentPosition){
+  //   const randomNumber = randomNumberInRange(3, 10)
 
-      for (let x = 0; x < randomNumber ; x++) {
-        for (let y = 0; y < randomNumber; y++) {
-          World.add(engine.current.world, [
-            Bodies.rectangle(adjacentPosition.x+x, adjacentPosition.y+y, Math.floor(squareSize/randomNumber),  Math.floor(squareSize/randomNumber), { isStatic: false,         restitution: 0.001,
-              friction: 9.9,
-              density: 0.1,
-              applyForce: 30,
-              render: {
-                fillStyle: "#ff9999",
+  //     for (let x = 0; x < randomNumber ; x++) {
+  //       for (let y = 0; y < randomNumber; y++) {
+  //         World.add(engine.current.world, [
+  //           Bodies.rectangle(adjacentPosition.x+x, adjacentPosition.y+y, Math.floor(squareSize/randomNumber),  Math.floor(squareSize/randomNumber), { isStatic: false,         restitution: 0.001,
+  //             friction: 9.9,
+  //             density: 0.1,
+  //             applyForce: 30,
+  //             render: {
+  //               fillStyle: "#ff9999",
           
-              }, })
+  //             }, })
     
-          ])
+  //         ])
           
-        } 
-      }
-  }
-  function getAdjacentBlocks(block, parameter) {
-    const adjacentPositions = [
-      { x: block.position.x - squareSize *parameter, y: block.position.y }, // Left
-      { x: block.position.x + squareSize *parameter, y: block.position.y }, // Right
-      { x: block.position.x, y: block.position.y - squareSize *parameter }, // Up
-      { x: block.position.x, y: block.position.y + squareSize*parameter }, // Down
-      { x: block.position.x + squareSize *parameter, y: block.position.y + squareSize *parameter}, // Left top coorner
-      { x: block.position.x - squareSize *parameter, y: block.position.y - squareSize *parameter }, // Right  bottom corner
-      { x: block.position.x + squareSize *parameter, y: block.position.y - squareSize *parameter }, // Up right corner
-      { x: block.position.x - squareSize *parameter, y: block.position.y + squareSize*parameter }, // Down left corner
-    ];
+  //       } 
+  //     }
+  // }
+  // function getAdjacentBlocks(block, parameter) {
+  //   const adjacentPositions = [
+  //     { x: block.position.x - squareSize *parameter, y: block.position.y }, // Left
+  //     { x: block.position.x + squareSize *parameter, y: block.position.y }, // Right
+  //     { x: block.position.x, y: block.position.y - squareSize *parameter }, // Up
+  //     { x: block.position.x, y: block.position.y + squareSize*parameter }, // Down
+  //     { x: block.position.x + squareSize *parameter, y: block.position.y + squareSize *parameter}, // Left top coorner
+  //     { x: block.position.x - squareSize *parameter, y: block.position.y - squareSize *parameter }, // Right  bottom corner
+  //     { x: block.position.x + squareSize *parameter, y: block.position.y - squareSize *parameter }, // Up right corner
+  //     { x: block.position.x - squareSize *parameter, y: block.position.y + squareSize*parameter }, // Down left corner
+  //   ];
 
 
-    const adjacentBlocks = adjacentPositions
-      .map((pos) => Query.point(engine.current.world.bodies, pos))
-      .flat()
-      .filter((foundBlock) => foundBlock !== block);
+  //   const adjacentBlocks = adjacentPositions
+  //     .map((pos) => Query.point(engine.current.world.bodies, pos))
+  //     .flat()
+  //     .filter((foundBlock) => foundBlock !== block);
 
 
 
 
-    return adjacentBlocks;
-  }
+  //   return adjacentBlocks;
+  // }
 
-  const handleMouseDown = (e) => {
-    const mousePosition = {
-      x: e.clientX - scene.current.getBoundingClientRect().left,
-      y: e.clientY - scene.current.getBoundingClientRect().top,
-    };
-    const bodiesUnderMouse = Query.point(
-      engine.current.world.bodies,
-      mousePosition
-    );
+  // const handleMouseDown = (e) => {
+  //   const mousePosition = {
+  //     x: e.clientX - scene.current.getBoundingClientRect().left,
+  //     y: e.clientY - scene.current.getBoundingClientRect().top,
+  //   };
+  //   const bodiesUnderMouse = Query.point(
+  //     engine.current.world.bodies,
+  //     mousePosition
+  //   );
     
-    if (bodiesUnderMouse.length > 0) {
-      setShotsFired(shotsFired + 1);
+  //   if (bodiesUnderMouse.length > 0) {
+  //     setShotsFired(shotsFired + 1);
       
-      if(shotsFired > 1 || width < 600){
-        closeLoader();
-      } 
-      const clickedBody = bodiesUnderMouse[0];
-      const nearBlocks = getAdjacentBlocks(clickedBody, 1);
+  //     if(shotsFired > 1 || width < 600){
+  //       closeLoader();
+  //     } 
+  //     const clickedBody = bodiesUnderMouse[0];
+  //     const nearBlocks = getAdjacentBlocks(clickedBody, 1);
  
-      nearBlocks.forEach(element => {
-        World.remove(engine.current.world, element);
-        fragmentBlock(element.position);
-      });
+  //     nearBlocks.forEach(element => {
+  //       World.remove(engine.current.world, element);
+  //       fragmentBlock(element.position);
+  //     });
 
-      World.remove(engine.current.world, clickedBody)
-      fragmentBlock(clickedBody.position);
+  //     World.remove(engine.current.world, clickedBody)
+  //     fragmentBlock(clickedBody.position);
 
-      var explosionCircle = Bodies.circle(clickedBody.position.x, clickedBody.position.y, 300, { isStatic: false,         restitution: 0.001,
-        friction: 9.9,
-        density: 0.1,
-        applyForce: 30,
-        render: {
-          fillStyle: "rgba(0,0,0,0)"},
-      })
+  //     var explosionCircle = Bodies.circle(clickedBody.position.x, clickedBody.position.y, 300, { isStatic: false,         restitution: 0.001,
+  //       friction: 9.9,
+  //       density: 0.1,
+  //       applyForce: 30,
+  //       render: {
+  //         fillStyle: "rgba(0,0,0,0)"},
+  //     })
 
 
 
-      World.add(engine.current.world, [
-        explosionCircle
-      ])
+  //     World.add(engine.current.world, [
+  //       explosionCircle
+  //     ])
 
-      setTimeout(() => {
-        World.remove(engine.current.world, explosionCircle)
-      }, 1500);
+  //     setTimeout(() => {
+  //       World.remove(engine.current.world, explosionCircle)
+  //     }, 1500);
 
-    }
-  };
+  //   }
+  // };
 
-  function initializeBlocks() {
-    const initialBlocks = [];
+  // function initializeBlocks() {
+  //   const initialBlocks = [];
 
-    const rows = (height)/squareSize + 4;
-    const columns = (width )/squareSize;
+  //   const rows = (height)/squareSize + 4;
+  //   const columns = (width )/squareSize;
 
-    const offsetX = (cw - columns * squareSize) / 2; // Center the grid
-    const offsetY = 0; // Starting Y position
+  //   const offsetX = (cw - columns * squareSize) / 2; // Center the grid
+  //   const offsetY = 0; // Starting Y position
 
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < columns; col++) {
-        const x = offsetX + col * squareSize + squareSize / 2;
-        const y = offsetY + row * squareSize + squareSize / 2;
-        const block = Bodies.rectangle(x, y, squareSize, squareSize, {
-          restitution: 0.001,
-          friction: 0,
-          density: 0.1,
-          render: {
-            fillStyle: "#ff9999",
+  //   for (let row = 0; row < rows; row++) {
+  //     for (let col = 0; col < columns; col++) {
+  //       const x = offsetX + col * squareSize + squareSize / 2;
+  //       const y = offsetY + row * squareSize + squareSize / 2;
+  //       const block = Bodies.rectangle(x, y, squareSize, squareSize, {
+  //         restitution: 0.001,
+  //         friction: 0,
+  //         density: 0.1,
+  //         render: {
+  //           fillStyle: "#ff9999",
       
-          },
-          isStatic: false
-        });
-        block.id = `block-${row}-${col}`;
+  //         },
+  //         isStatic: false
+  //       });
+  //       block.id = `block-${row}-${col}`;
 
-        World.add(engine.current.world, [block]);
-        initialBlocks.push(block);
-      }
-    }
-    setBlocks(initialBlocks);
-  }
-  useEffect(() => {
+  //       World.add(engine.current.world, [block]);
+  //       initialBlocks.push(block);
+  //     }
+  //   }
+  //   setBlocks(initialBlocks);
+  // }
+  // useEffect(() => {
 
 
-    const render = Render.create({
-      element: scene.current,
-      engine: engine.current,
-      options: {
-        width: cw,
-        height: ch,
-        wireframes: false,
-        background: 'transparent'
-      }
-    })
+  //   const render = Render.create({
+  //     element: scene.current,
+  //     engine: engine.current,
+  //     options: {
+  //       width: cw,
+  //       height: ch,
+  //       wireframes: false,
+  //       background: 'transparent'
+  //     }
+  //   })
 
-    var _floor = Bodies.rectangle(cw / 2, ch + 70, cw, 20, { isStatic: true });
+  //   var _floor = Bodies.rectangle(cw / 2, ch + 70, cw, 20, { isStatic: true });
 
-    setFloor(_floor);
+  //   setFloor(_floor);
 
-    World.add(engine.current.world, [_floor]);
-    World.add(engine.current.world, [
-      Bodies.rectangle(-70, ch / 2, 20, ch, { isStatic: true }),
+  //   World.add(engine.current.world, [_floor]);
+  //   World.add(engine.current.world, [
+  //     Bodies.rectangle(-70, ch / 2, 20, ch, { isStatic: true }),
       
-      Bodies.rectangle(cw / 2, -70, cw, 20, { isStatic: true }),
-      Bodies.rectangle(cw + 70, ch / 2, 20, ch, { isStatic: true })
-    ])
+  //     Bodies.rectangle(cw / 2, -70, cw, 20, { isStatic: true }),
+  //     Bodies.rectangle(cw + 70, ch / 2, 20, ch, { isStatic: true })
+  //   ])
 
    
 
     
 
-    initializeBlocks(true);
+  //   initializeBlocks(true);
 
-    Engine.run(engine.current)
-    Render.run(render)
+  //   Engine.run(engine.current)
+  //   Render.run(render)
 
-    Runner.enabled = false;
+  //   Runner.enabled = false;
 
-    return () => {
-      Render.stop(render)
-      World.clear(engine.current.world)
-      Engine.clear(engine.current)
-      render.canvas.remove()
-      render.canvas = null
-      render.context = null
-      render.textures = {}
-    }
-  }, [])
+  //   return () => {
+  //     Render.stop(render)
+  //     World.clear(engine.current.world)
+  //     Engine.clear(engine.current)
+  //     render.canvas.remove()
+  //     render.canvas = null
+  //     render.context = null
+  //     render.textures = {}
+  //   }
+  // }, [])
 
 
 
@@ -256,18 +256,17 @@ export default function Loader({settings}) {
     <motion.div
       className={`${styles.Container}  ${!userHasEntered ? styles.On : styles.Off}`}
       onClick={(e)=>{
-        // startMatter();
-        handleMouseDown(e);
-        // console.log("sets user has entered", userHasEntered);
+        //handleMouseDown(e);
 
-        // setUserHasEntered(true);
-        // useCursor.setState({
-        //   isLoader: false
-        // })
+        setUserHasEntered(true);
+        useCursor.setState({
+          muted: false
+        });
+    
       }}
     >
    
-        <div className={styles.BackgroundGame}>
+        {/* <div className={styles.BackgroundGame}>
              <div
               // onMouseDown={handleDown}
               // onMouseUp={handleUp}
@@ -276,7 +275,7 @@ export default function Loader({settings}) {
               <div ref={scene} style={{ width: '100%', height: '100%' }} />
             </div>
         </div>
-   
+    */}
     
         <img src={settings.data.slices[0].items[index].media.url} alt="loading gif" 
             onMouseOver={()=>{

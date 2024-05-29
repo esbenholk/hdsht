@@ -30,6 +30,8 @@
   --special-font-regular: "Displdts";
   --special-font-display: "DOTMATRI";
   --bubble-font: "displdts";
+  --container-margin: 25px;
+  --reg-font-size-mobile: 20px;
 }
 video{
   background: var(--main-bg-color);
@@ -120,15 +122,10 @@ ul {
   }
 }
 
-.swiper-slide-thumb-active {
-  border: 0.1rem solid var(--main-font-color-highlight) !important;
-}
+
 
 /* Fix the control bar due to us resetting the line-height on the video-js */
 
 
 
 
-.Expanded{
-  background-color: red;
-}

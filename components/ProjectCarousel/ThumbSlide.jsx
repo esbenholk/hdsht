@@ -5,7 +5,7 @@ import styles from "./ProjectCarousel.module.scss";
 import Scrubber from "./Scrubber";
 import useCursor from "../Resolvers/States/Cursor";
 
-const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused }) => {
+const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused}) => {
   const [activeVideo, setActiveVideo] = useState(false);
   const { duration } = useVideo();
 
@@ -51,7 +51,7 @@ const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused }) => {
         onMouseLeave={() => {
           handleLeave();
         }}>
-        <MediaResolver media={item.thumb} className={styles.VideoThumb} />
+        <MediaResolver media={item.thumb} className={styles.VideoThumb} localMuted={true}/>
 
         {activeVideo && (
           <Scrubber
@@ -73,7 +73,7 @@ const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused }) => {
       onMouseLeave={() => {
         handleLeave();
       }}>
-      <MediaResolver media={item.carouselitem} className={styles.ImageThumb} />
+      <MediaResolver media={item.carouselitem} className={styles.ImageThumb} localMuted={true}/>
      
       </div>
     );
