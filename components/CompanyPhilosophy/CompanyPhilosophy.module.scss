@@ -158,7 +158,7 @@
         padding: 0rem;
         display: flex;
         flex-direction: column;
-
+        padding-bottom: 3rem;
         h3{
           font-size: 2rem;
           margin:0;
@@ -200,7 +200,7 @@
       }
     }
   }
-  .Container:is(:last-child){
-    padding-bottom: 3rem;
-  }
+  // .Container:is(:last-child){
+  //   padding-bottom: 3rem;
+  // }
 }

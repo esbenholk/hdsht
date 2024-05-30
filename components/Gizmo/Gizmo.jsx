@@ -102,8 +102,19 @@ const Atom = () => {
   );
 };
 const Gizmo = () => {
+  const muted = useCursor((state) => state.muted);
+
+  function setSoundSettings(){
+    useCursor.setState({
+      muted: !muted
+    });
+  }
+
   return (
-    <div className={styles.Canvas}>
+    <div className={styles.Canvas} onClick={()=>{
+      setSoundSettings();
+    }}>
+      <p>SOUND {muted ? " ON": " OFF"}</p>
       <Canvas
         camera={{
           position: [0, 0, 4],

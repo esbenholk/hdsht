@@ -468,10 +468,10 @@ const ProjectCarousel = ({ slice, project }) => {
               gallerySwiperRef.current.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
             }
 
-            if(infoRef){
+            if(!infoIsExpanded && infoRef){
               JumbleWordInElement(infoRef.current, project.data.description, 15);
             }
-            if(creditRef){
+            if(!infoIsExpanded && creditRef){
               JumbleWordInElement(creditRef.current, project.data.credits, 15);
 
             }

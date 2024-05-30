@@ -221,7 +221,7 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
 
 
     return (
-        <div style={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom: isPageTop ? "0" : "5rem"}} >
+        <div style={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom: isPageTop ? "0" : "12rem"}} >
             <canvas
             // onClick={(e)=>{
             //     shoot(e);

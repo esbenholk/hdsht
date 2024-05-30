@@ -107,9 +107,7 @@
       max-width: 0%;
       direction: rtl;
       overflow: hidden;
-      transition: all 10s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  
-   
+      transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .Description.Open{
       max-height: 70%;
@@ -122,8 +120,7 @@
   
     }
     .Credits{
-      transition: all 10s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  
+      transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       max-height: 0%;
       max-width: 0%;
       height:0%;
@@ -237,7 +234,7 @@
 
 @media screen and (max-width: 768px) {
   .InfoDiv{
-    padding: 0.5rem;
+    padding: 1rem 0.5rem ;
     // margin-top: -2.5rem;
     a,
     h3,
@@ -265,7 +262,7 @@
     position: relative;
     height: 0px;
     max-height: 0px;
-    width: 100%;
+    width: calc(100% - 1rem);
     max-width: 100%;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -354,14 +351,14 @@
       align-content: center;
       position: relative;
       overflow: hidden;
-  
+      height: 65vh !important;
       width: inherit !important;
-      height: inherit !important;
+      // height: inherit !important;
       img {
         width: 100%;
-        height: auto;
+        height: 100%;
         object-fit: cover;
-        aspect-ratio: 1 / 1;
+        // aspect-ratio: 1 / 1;
         border: 1px solid  white;
 
       }
@@ -373,7 +370,7 @@
         top: 0;
         object-fit: cover !important;
         border-radius: 2rem;  
-        aspect-ratio: 1 / 1;
+        // aspect-ratio: 1 / 1;
         border: 1px solid  white;
 
       }
