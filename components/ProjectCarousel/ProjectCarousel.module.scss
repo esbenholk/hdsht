@@ -36,155 +36,130 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: var(--reg-font-size-mobile);
+  margin-top: -40px;
   p{
     font-size: var(--reg-font-size-mobile);
     margin: 0;
   }
   .InfoButton{
     text-align: right;
+    // height: 3rem;
+    width: 50rem;
   }
 }
 
-.InfoContainerDeskTop{
-  position: absolute;
-  width: 0%;
-  max-width: 0%;
-  top: 0;
-  right: 0;
-  max-height: 80%;
-  height: fit-content;
-  z-index: 9999999;
-  // transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+
 
 .InfoContainer {
+  z-index: 9999999;
+  position: absolute;
+  top: 0;
+  right: 0;
   display: grid;
   align-items: normal;
-  transition: all 3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  grid-template-rows: 2fr;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  grid-template-rows: 0fr;
   width: 70%;
   max-width: 70%;
-  height: fit-content;
-  p{
-    max-height: 100%;
-    overflow-y: scroll;
-
-  }
-}
-
-.InfoContainerMobile{
-  width: calc(100% - 1rem);
-  max-width: 100%;
-  max-height: 100%;
-  margin: 0 0.5rem;
-  .Content{
-    margin: 0;
-    padding: 0;
-    border-radius: 0;
-    span,
-    a,
-      h3,
-      h4, p{
-        margin:0;
-        font-size: 1.25rem;
-        font-weight: 705;
-        line-height: 26px;
-        letter-spacing: 0.02em;
-        text-align: left;
-        color: var(--main-font-color);
-      }
-    .Background{
-      display: none;
-    }
+  pointer-events: none;
+  max-height: 0px;
+  height: 0px;
+  .Content {
+    max-height: 50vh;
+    margin: var(--container-margin);
+    direction: rtl;
+    pointer-events: none;
+  
+  
     div{
-      margin: 0;
-      padding: 0;
-      margin-top: 1rem; 
-      border-radius: 0;
+      position: relative;
+      padding: 0rem;
+      border-radius: 0rem;
+      margin-bottom: 1rem;
+      overflow-y: scroll;
+      background-color: rgba(0,0,0, 0.21);
+      backdrop-filter: blur(10px);
+  
+  
+      span,
+      p{
+        margin: 0;
+        // font-size: 1.5rem;
+        // line-height: 2rem;
+        // font-family: var(--secondary-font-reg);
+        // font-weight: 705;
+        color: rgba(255,255,255,0.7);
+        z-index: 1;
+        font-size: 30px;
+        font-weight: 705;
+        line-height: 41.4px;
+        text-align: left;
+  
+        max-height: 100%;
+      }
+      
+      
+    }
+    .Description{
+      height:0%;
+      width:0%;
+      max-height: 0%;
+      max-width: 0%;
+      direction: rtl;
+      overflow: hidden;
+      transition: all 10s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+   
+    }
+    .Description.Open{
+      max-height: 70%;
+      max-width: 100%;
+      height: auto;
+      width: 100%;
+      padding: 2rem;
+      border-radius: 2rem;
+      overflow-y: scroll;
   
     }
-  }
-}
-
-
-
-.Open {
-  height: fit-content;
-  max-height: 300vh;
-}
-
-.Closed{
-  height: 0;
-  overflow: hidden;
-  max-height: 0;
-
-}
-
-
-.Content {
-  // overflow: hidden;
-  margin: var(--container-margin);
-  max-height: 65vh;
-
-  div{
-    padding: 2rem;
-    border-radius: 2rem;
-    margin-bottom: 1rem;
-    overflow: hidden;
-    position: relative;
-
-    .Background{
-      background-color: rgba(0,0,0, 0.21);
-      position: absolute; 
-      z-index: -1;
-      // width: 200%;
-      top:0;
-      bottom:0;
-      left:0;
-      right:0;
-      // height: 200%;     
-      // filter: blur(50px) invert(0);
-      backdrop-filter: blur(10px);
+    .Credits{
+      transition: all 10s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+      max-height: 0%;
+      max-width: 0%;
+      height:0%;
+      width:0%;
+      direction: ltr;
+      overflow: hidden;
+      p,span{
+        font-family: Oxygen Mono;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 19.63px;
+        letter-spacing: 0.06em;
+        text-align: left;
+  
+      }
     }
-    span,
-    p{
-      margin: 0;
-      // font-size: 1.5rem;
-      // line-height: 2rem;
-      // font-family: var(--secondary-font-reg);
-      // font-weight: 705;
-      color: rgba(255,255,255,0.7);
-      z-index: 1;
-      font-size: 30px;
-      font-weight: 705;
-      line-height: 41.4px;
-      text-align: left;
+    .Credits.Open{
+      max-height: 20%;
+      max-width: 100%;
+      height: auto;
+      width: 100%;
+      padding: 2rem;
+      border-radius: 2rem;
       overflow-y: scroll;
-
-
-
-
+  
+     
     }
-    
-    
+   
   }
-  .Description{
-    max-height: 70%;
-  }
-  .Credits{
-    max-height: 20%;
-    p,span{
-      font-family: Oxygen Mono;
-      font-size: 13px;
-      font-weight: 400;
-      line-height: 19.63px;
-      letter-spacing: 0.06em;
-      text-align: left;
+  
+}
+.InfoContainer.Open {
+  max-height: 100%;
+  height: auto;
+  grid-template-rows: 2fr;
 
-    }
-  }
- 
 }
 
 .ThumbSwiper {
@@ -197,10 +172,10 @@
   // position: absolute;
   
   // transform: translate(0,-110%);
-  flex-shrink: 100 !important;
+  flex-shrink: 10 !important;
   --mask: linear-gradient(to left, 
-      rgba(0,0,0, 0) 0,   rgba(0,0,0, 1) 15%, 
-      rgba(0,0,0,1) 85%, rgba(0,0,0, 0) 100%
+      rgba(0,0,0, 0) 0,   rgba(0,0,0, 1) 5%, 
+      rgba(0,0,0,1) 95%, rgba(0,0,0, 0) 100%
   ) 100% 50% / 100% 100% repeat-x;
   
   -webkit-mask: var(--mask); 
@@ -209,9 +184,9 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: var(--main-font-color-highlight);
+    background-color: white;
     height: 100%;
-    width: 20px;
+    width: 1px;
   }
   .ThumbSlide {
     display: flex;
@@ -274,17 +249,98 @@
       line-height: 26px;
       letter-spacing: 0.02em;
     }
+    .InfoButton{
+      text-align: right;
+      // height: 3rem;
+      width: 5rem;
+    }
   }
-  .Content {
+  .InfoContainer.Open {
+    max-height: 5000px;
+    height: 100%;
+    grid-template-rows: 0fr;
 
-    .Description{
-      max-height: none;
-    }
-    .Credits{
-      max-height: none;
-    }
-   
   }
+  .InfoContainer {
+    position: relative;
+    height: 0px;
+    max-height: 0px;
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    .Content {
+      max-height: none;
+      margin: 0;
+      direction: rtl;
+      pointer-events: none;
+
+      div{
+        position: relative;
+        padding: 0rem;
+        border-radius: 0rem;
+        margin-bottom: 1rem;
+        height: fit-content;
+        background-color: rgba(0,0,0, 0);
+        backdrop-filter: blur(10px);
+
+        span,
+        p{
+          margin: 0;
+      
+          color: var(--main-font-color);
+          z-index: 1;
+          font-size: var(--reg-font-size-mobile);
+          font-weight: 705;
+          line-height: 1.5rem;
+          text-align: left;
+          max-height: 100%;
+        }
+      }
+      .Description{
+        max-height: none;
+        max-width: 100%;
+        height: auto;
+        width: 100%;
+        padding: 0rem;
+        border-radius: 0rem;
+  
+      }
+     
+      .Credits{
+        max-height: 20%;
+        max-width: 100%;
+        height: auto;
+
+        width: 100%;
+        padding: 0rem;
+        border-radius: 0rem;
+        p,span{
+          margin: 0;
+    
+          color: var(--main-font-color);
+          z-index: 1;
+          font-size: var(--reg-font-size-mobile);
+          font-weight: 705;
+          line-height: 1.5rem;
+
+          text-align: left;
+          max-height: 100%;
+    
+        }
+      }
+      .Description.Open,
+      .Credits.Open{
+
+        padding: 0rem;
+        border-radius: 0rem;
+        max-height: 100%;
+
+       
+      }
+    }
+  }
+
   .ThumbSwiper {
     visibility:hidden;
   }

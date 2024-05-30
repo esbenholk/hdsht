@@ -133,6 +133,17 @@ export type PageDocument<Lang extends string = string> = prismicT.PrismicDocumen
 /** Content for settings documents */
 interface SettingsDocumentData {
     /**
+     * Title field in *settings*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: settings.title
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    title: prismicT.KeyTextField;
+    /**
      * logo field in *settings*
      *
      * - **Field Type**: Image

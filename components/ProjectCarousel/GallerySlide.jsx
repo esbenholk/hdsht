@@ -3,8 +3,7 @@ import { useSwiperSlide } from "swiper/react";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
 import MediaResolver from "../Resolvers/MediaResolver/MediaResolver";
 import useVideo from "../Resolvers/States/Video";
-import styles from "./ProjectCarousel.module.scss";
-import PixelCanvas from "../Resolvers/pixelCanvas";
+
 
 const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex, isActive }) => {
   const slide = useSwiperSlide();
@@ -24,19 +23,19 @@ const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex, isActive }) =
     {item.carouselitem &&     <Suspense fallback={<LoadSpinner />}>
 
     <MediaResolver
-    onMouseOver={() => {
-      setHovered(true);
-    }}
-    onMouseLeave={() => {
-      setHovered(false);
-    }}
-    isActive={isActive}
-    media={item.carouselitem}
-    slide={slide}
-    videoRef={videoRef}
-    loop={false}
-    localMuted={true}
-  />
+        onMouseOver={() => {
+          setHovered(true);
+        }}
+        onMouseLeave={() => {
+          setHovered(false);
+        }}
+        isActive={isActive}
+        media={item.carouselitem}
+        slide={slide}
+        videoRef={videoRef}
+        loop={false}
+        localMuted={true}
+      />
 
 
     

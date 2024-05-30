@@ -97,37 +97,7 @@ function JumbleWordInElement(element, word, speed){
 }
 
 
-function JumbleLettersInElement(element, word, speed){
-  const letters = "!!ZX#¤%/&)(!?=`^*Ø?§╚╚¥┘ █Å@";
 
-  let interval = null;
-
-  let iteration = 0;
-  
-  clearInterval(interval);
-  
-  interval = setInterval(() => {
-    if(element && element.innerText){
-      element.innerText = word
-      .split("")
-      .map((letter, index) => {
-        if(index < iteration) {
-          return word[index];
-        }
-      
-        return letters[Math.floor(Math.random() * letters.length)]
-      })
-      .join("");
-    }
-    
-    
-    if(iteration >= word.length){ 
-      clearInterval(interval);
-    }
-    
-    iteration += 1;
-  },speed);
-}
 
 
 
@@ -520,19 +490,17 @@ const ProjectCarousel = ({ slice, project }) => {
       </div>
 
           
-              <motion.div className={`${styles.InfoContainer} ${infoIsExpanded ? styles.Open : styles.Closed} ${width>700 ? styles.InfoContainerDeskTop : styles.InfoContainerMobile}` }>
+              <motion.div className={`${styles.InfoContainer} ${infoIsExpanded ? styles.Open : styles.Closed}` }>
            
                   <div className={styles.Content}>
-                    <div className={styles.Description}>
+                    <div className={`${infoIsExpanded ? styles.Open : styles.Closed} ${styles.Description}`}>
                       <p ref={infoRef} >
                         {project.data.description}
                       </p>
-                      <div className={styles.Background}>.</div>
 
                     </div>
 
-                    <div className={styles.Credits}>
-                      <div className={styles.Background}>.</div>
+                    <div className={`${infoIsExpanded ? styles.Open : styles.Closed} ${styles.Credits}`}>
 
                       <span ref={creditRef} >
                         <p>{project.data.credits}</p>

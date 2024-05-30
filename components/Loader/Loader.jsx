@@ -276,8 +276,10 @@ export default function Loader({settings}) {
             </div>
         </div>
     */}
-    
-        <img src={settings.data.slices[0].items[index].media.url} alt="loading gif" 
+        <div className={styles.BackgroundGame}>
+          <img src={settings.data.slices[1].items[Math.floor(Math.random() * settings.data.slices[1].items.length)].media.url} alt="loading gif" />
+         </div>
+        <img src={settings.data.slices[0].items[index].media.url} alt="loading gif" className={`${!userHasEntered ? styles.Opaque : styles.Transparent}`}
             onMouseOver={()=>{
                    useCursor.setState({
                     cursorVariant: "hoveronbiglink",
