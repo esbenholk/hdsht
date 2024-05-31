@@ -276,28 +276,38 @@ export default function Loader({settings}) {
             </div>
         </div>
     */}
+      {settings.data.slices[1] && settings.data.slices[1].items.length>0 && 
+      
         <div className={styles.BackgroundGame}>
           <img src={settings.data.slices[1].items[Math.floor(Math.random() * settings.data.slices[1].items.length)].media.url} alt="loading gif" />
-         </div>
+        </div>
+      }
+
+      {settings.data.slices[0] && settings.data.slices[0].items.length>0  &&
+      
         <img src={settings.data.slices[0].items[index].media.url} alt="loading gif" className={`${!userHasEntered ? styles.Opaque : styles.Transparent}`}
-            onMouseOver={()=>{
-                   useCursor.setState({
-                    cursorVariant: "hoveronbiglink",
-                    isOverProject: false,
-                    title: "click to enter",
-                    description: ""
-                  })
-            }}
- 
-            onMouseLeave={()=>{
-              useCursor.setState({
-               cursorVariant: "default",
-               isOverProject: false,
-               title: "HDSHT",
-               description: ""
-              });
-            }}
-        />
+              onMouseOver={()=>{
+                    useCursor.setState({
+                      cursorVariant: "hoveronbiglink",
+                      isOverProject: false,
+                      title: "click to enter",
+                      description: ""
+                    })
+              }}
+  
+              onMouseLeave={()=>{
+                useCursor.setState({
+                cursorVariant: "default",
+                isOverProject: false,
+                title: "HDSHT",
+                description: ""
+                });
+              }}
+          />
+        
+      }
+
+  
         {isLoaded && isPageLoaded && 
           <h2 
       
