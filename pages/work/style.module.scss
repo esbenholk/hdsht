@@ -1,11 +1,11 @@
 .Container {
-  padding: 6.1rem 3rem 1rem 3rem;
+  padding: var(--container-margin) var(--container-margin) 6rem var(--container-margin) ;
 
 
   // margin-bottom: -10rem;
 }
 .SingleWork{
-  padding-top: 4.5rem;
+  padding-top: 3rem;
   h3{
     height: fit-content !important;
   }

@@ -111,7 +111,11 @@ const Gizmo = () => {
   }
 
   return (
-    <div className={styles.Canvas} onClick={()=>{
+    <div className={styles.Canvas} onMouseOver={()=>{
+      useCursor.setState({
+        cursorVariant: "hoveronlink",
+      });
+    }}onClick={()=>{
       setSoundSettings();
     }}>
       <p>SOUND {muted ? " ON": " OFF"}</p>
