@@ -61,14 +61,12 @@
   grid-template-rows: 0fr;
   width: 70%;
   max-width: 70%;
-  pointer-events: none;
   max-height: 0px;
   height: 0px;
   .Content {
-    max-height: 50vh;
+    max-height: 70vh;
     margin: var(--container-margin);
     direction: rtl;
-    pointer-events: none;
   
   
     div{
@@ -270,7 +268,6 @@
       max-height: none;
       margin: 0;
       direction: rtl;
-      pointer-events: none;
 
       div{
         position: relative;
