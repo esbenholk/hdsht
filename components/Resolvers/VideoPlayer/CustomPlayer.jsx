@@ -58,18 +58,24 @@ const CustomPlayer = ({ media, videoRef, isActive, localMuted }) => {
           }
         }}
       >
-        <source src={media.url} />
-        {/* {media.url.match(/.mp4/) && <source src={media.url} type="video/mp4" />}
-        {media.url.match(/.webm/) && (
-          <source src={media.url} type="video/webm" />
-        )}
-        {media.url.match(/.ogg/) && <source src={media.url} type="video/ogg" />}
-        {media.url.match(/.m4v/) && <source src={media.url} type="video/m4v" />}
-        {media.url.match(/.mov/) && <source src={media.url} type="video/mov" />}
-        {media.url.match(/.avi/) && <source src={media.url} type="video/avi" />}
-        {media.url.match(/.flv/) && <source src={media.url} type="video/flv" />}
-        {media.url.match(/.wmv/) && <source src={media.url} type="video/wmv" />}
-        {media.url.match(/.mkv/) && <source src={media.url} type="video/mkv" />} */}
+        {
+          media.url && <>
+              {/* <source src={media.url} /> */}
+              {media.url.match(/.mp4/) && <source src={media.url} type="video/mp4" />}
+              {media.url.match(/.webm/) && (
+                <source src={media.url} type="video/webm" />
+              )}
+              {media.url.match(/.ogg/) && <source src={media.url} type="video/ogg" />}
+              {media.url.match(/.m4v/) && <source src={media.url} type="video/m4v" />}
+              {media.url.match(/.mov/) && <source src={media.url} type="video/mov" />}
+              {media.url.match(/.avi/) && <source src={media.url} type="video/avi" />}
+              {media.url.match(/.flv/) && <source src={media.url} type="video/flv" />}
+              {media.url.match(/.wmv/) && <source src={media.url} type="video/wmv" />}
+              {media.url.match(/.mkv/) && <source src={media.url} type="video/mkv" />}
+          
+          </>
+        }
+
       </video>
     </div>
   );

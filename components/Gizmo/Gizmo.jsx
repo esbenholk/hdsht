@@ -103,6 +103,7 @@ const Atom = () => {
 };
 const Gizmo = () => {
   const muted = useCursor((state) => state.muted);
+  const [isHovering, setIsHovering] = useState(false);
 
   function setSoundSettings(){
     useCursor.setState({
@@ -111,14 +112,35 @@ const Gizmo = () => {
   }
 
   return (
-    <div className={styles.Canvas} onMouseOver={()=>{
-      useCursor.setState({
-        cursorVariant: "hoveronlink",
-      });
-    }}onClick={()=>{
-      setSoundSettings();
-    }}>
-      <p>SOUND {muted ? " ON": " OFF"}</p>
+    <div className={styles.Canvas} 
+      onMouseOver={()=>{
+        setIsHovering(true);
+        useCursor.setState({
+          cursorVariant: "hoveronlink",
+        });
+      }}
+      onMouseLeave={()=>{
+        setIsHovering(false);
+
+        useCursor.setState({
+          cursorVariant: "default",
+        });
+      }}
+    
+      onClick={()=>{
+        setSoundSettings();
+      }}
+    >
+      <div className={`${styles.icon}` }>
+        <div className={`${styles.message}  ${isHovering && styles.Open}`}><p>SOUND {muted ? " ON": " OFF"}</p>
+        </div>
+
+        <div>
+            <span />
+            <span />
+            <span />
+        </div>
+      </div>
       <Canvas
         camera={{
           position: [0, 0, 4],

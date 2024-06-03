@@ -28,6 +28,7 @@ export default function Loader({settings}) {
   const isPressed = useRef(false)
   const engine = useRef(Engine.create())
   const {width, height} = useWindowDimensions();
+  const url = useCursor((state) => state.url);
 
 
   useEffect(() => {
@@ -258,9 +259,11 @@ export default function Loader({settings}) {
       onClick={(e)=>{
         //handleMouseDown(e);
 
-        setUserHasEntered(true);
+        if(!window.location.href.includes("pink")){
+          setUserHasEntered(true);
+        }
         useCursor.setState({
-          muted: false
+          muted: true
         });
     
       }}
@@ -308,7 +311,7 @@ export default function Loader({settings}) {
       }
 
   
-        {isLoaded && isPageLoaded && 
+        {!window.location.href.includes("pink") && isLoaded && isPageLoaded && 
           <h2 
       
             onMouseLeave={()=>{
