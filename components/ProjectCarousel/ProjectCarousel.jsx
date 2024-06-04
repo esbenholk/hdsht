@@ -10,6 +10,8 @@ import "swiper/scss/effect-fade";
 import "swiper/scss/navigation";
 import "swiper/scss/free-mode";
 import "swiper/scss/mousewheel";
+
+
 import {
   Navigation,
   Thumbs,
@@ -18,23 +20,18 @@ import {
   Mousewheel,
   Lazy,
   Autoplay,
+  EffectFade
 } from "swiper";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
-import DescriptionModal from "./Description/Description";
-import MediaResolver from "../Resolvers/MediaResolver/MediaResolver";
-import Progress from "./Progress/Progress";
+
 import useVideo from "../Resolvers/States/Video";
 import {
-  checkTargetForNewValues,
   motion,
-  useAnimationControls,
 } from "framer-motion";
 import useCursor from "../Resolvers/States/Cursor";
-import Controls from "./Controls";
 import GallerySlide from "./GallerySlide";
 import ThumbSlide from "./ThumbSlide";
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
-import PrismicRichTextResolver from "../Resolvers/PrismicRichTextResolver/PrismicRichTextResolver";
 
 
 const slideInFromBottom = {
@@ -325,11 +322,12 @@ const ProjectCarousel = ({ slice, project }) => {
         setPaused={setPaused}
       /> */}
       <Swiper
-
         ref={gallerySwiperRef}
         className={styles.SwiperTop}
         slidesPerView={1}
         loop={true}
+        effect={"fade"}
+
         thumbs={{
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
@@ -342,7 +340,7 @@ const ProjectCarousel = ({ slice, project }) => {
               // }
             }
         }}
-        modules={[FreeMode, Navigation, Thumbs, Mousewheel, Lazy]}
+        modules={[EffectFade, FreeMode, Navigation, Thumbs, Mousewheel, Lazy]}
         mousewheel={false}
         lazy={true}
         onSlideChange={() => {
@@ -483,8 +481,7 @@ const ProjectCarousel = ({ slice, project }) => {
           }}
   
           >
-          {width < 700 ? <> [<span>{infoIsExpanded ? "-" : "+"}</span>]</> : "[info]"}
-          
+          <> [<span>{infoIsExpanded ? "-" : "+"}</span>]</>          
         </p>
         </>}
       </div>

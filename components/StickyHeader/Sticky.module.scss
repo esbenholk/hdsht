@@ -68,10 +68,10 @@
 
 }
 @media screen and (max-width: 768px) {
-  .Header:not(:first-of-type)  {
-    // transform: translateY(50%);
-    font-size: 1rem;
-  }
+  // .Header:not(:first-of-type)  {
+  //   // transform: translateY(50%);
+  //   font-size: 1rem;
+  // }
   .Header {
 
     border-top-left-radius: 1.5rem;

@@ -43,7 +43,7 @@
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",
     "styled-components": "^6.1.8",
-    "swiper": "^8.4.5",
+    "swiper": "8.4.5",
     "three": "^0.162.0",
     "zustand": "^4.3.2"
   },

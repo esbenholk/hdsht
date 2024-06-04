@@ -19,9 +19,9 @@ export default function Loader({settings}) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPageLoaded, setIsPageLoaded] = useState(false); 
   const [userHasEntered, setUserHasEntered] = useState(false);
+  const [userIsIn, setUserIsIn] = useState(false);
   const [blocks, setBlocks] = useState([]);
   const blocksRef = useRef(blocks);
-  const [shotsFired, setShotsFired] = useState(0);
   const [floor, setFloor] = useState();
 
   const scene = useRef()
@@ -254,83 +254,76 @@ export default function Loader({settings}) {
   }, []);
 
   return (
-    <motion.div
+    <>
+    {!userIsIn && 
+
+<>
+      {settings.data.slices[1] && settings.data.slices[1].items.length>0 && 
+        <div className={`${styles.BackgroundGame}  ${!userHasEntered ? styles.BackGroundOn : styles.BackGroundOff}`}>
+        </div>
+      }
+      <motion.div
       className={`${styles.Container}  ${!userHasEntered ? styles.On : styles.Off}`}
+      style={{backgroundImage: `url(${settings.data.slices[1] && settings.data.slices[1].items.length>0 && settings.data.slices[1].items[Math.floor(Math.random() * settings.data.slices[1].items.length)].media.url})`}}
       onClick={(e)=>{
         //handleMouseDown(e);
 
         if(!window.location.href.includes("pink")){
           setUserHasEntered(true);
+
+          setTimeout(() => {
+            setUserIsIn(true);
+          }, 1500);
         }
         useCursor.setState({
-          muted: true
+          muted: false
         });
     
       }}
     >
-   
-        {/* <div className={styles.BackgroundGame}>
-             <div
-              // onMouseDown={handleDown}
-              // onMouseUp={handleUp}
-              // onMouseMove={handleAddCircle}
-            >
-              <div ref={scene} style={{ width: '100%', height: '100%' }} />
-            </div>
-        </div>
-    */}
-      {settings.data.slices[1] && settings.data.slices[1].items.length>0 && 
+    </motion.div>
+    {settings.data.slices[0] && settings.data.slices[0].items.length>0  &&
       
-        <div className={styles.BackgroundGame}>
-          <img src={settings.data.slices[1].items[Math.floor(Math.random() * settings.data.slices[1].items.length)].media.url} alt="loading gif" />
-        </div>
-      }
+      <img src={settings.data.slices[0].items[index].media.url} alt="loading gif" className={`${!userHasEntered ? styles.Opaque : styles.Transparent}`}
+            onMouseOver={()=>{
+                  useCursor.setState({
+                    cursorVariant: "hoveronbiglink",
+                    isOverProject: false,
+                    title: "click to enter",
+                    description: ""
+                  })
+            }}
+            onClick={(e)=>{
+              //handleMouseDown(e);
+      
+              if(!window.location.href.includes("pink")){
+                setUserHasEntered(true);
+      
+                setTimeout(() => {
+                  setUserIsIn(true);
+                }, 1500);
+              }
+              useCursor.setState({
+                muted: false
+              });
+          
+            }}
 
-      {settings.data.slices[0] && settings.data.slices[0].items.length>0  &&
-      
-        <img src={settings.data.slices[0].items[index].media.url} alt="loading gif" className={`${!userHasEntered ? styles.Opaque : styles.Transparent}`}
-              onMouseOver={()=>{
-                    useCursor.setState({
-                      cursorVariant: "hoveronbiglink",
-                      isOverProject: false,
-                      title: "click to enter",
-                      description: ""
-                    })
-              }}
-  
-              onMouseLeave={()=>{
-                useCursor.setState({
-                cursorVariant: "default",
-                isOverProject: false,
-                title: "HDSHT",
-                description: ""
-                });
-              }}
-          />
-        
-      }
-
-  
-        {!window.location.href.includes("pink") && isLoaded && isPageLoaded && 
-          <h2 
-      
             onMouseLeave={()=>{
               useCursor.setState({
               cursorVariant: "default",
               isOverProject: false,
-              title: "",
+              title: "HDSHT",
               description: ""
               });
             }}
-            onMouseOver={()=>{
-              useCursor.setState({
-               cursorVariant: "hoveronlink",
-               isOverProject: false,
-               title: "click to enter",
-               description: ""
-             })
-       }} >[ENTER]</h2>}
-    </motion.div>
+        />
+      
+    }
+    </>
+    }
+    
+  </>
   );
 };
 

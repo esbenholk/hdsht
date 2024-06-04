@@ -1,6 +1,5 @@
 import { useEffect, useRef,useState, createRef, useCallback,useGenerator } from "react";
 // import Image from "next/image";
-import useCursor from "./States/Cursor";
 import useWindowDimensions from "./UseWindowDimensions";
 
 class Particle {
@@ -146,6 +145,7 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
     const [context, setContext] = useState();
     const [effect, setEffect] = useState();
     const canvas = useRef();
+    const imageRef = useRef();
     const [animationFrameId, setAnimationId] = useState();
     
     const render = () => {
@@ -166,24 +166,6 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
     }
 
     useEffect(()=>{
-        
-
-        const _effect = new Effect(canvas.current);
-        let _context = canvas.current.getContext('2d')
-        setContext(_context); 
-        setEffect(_effect);
-
-        const myImage = new Image();
-        myImage.src = imageUrl;
-        myImage.crossOrigin = "anonymous";
-    
-
-        if(canvas.current){
-            myImage.onload = function() {
-                startImage();
-            }
-        }
-
         const startImage = () =>{
             
             if(canvas.current){
@@ -197,6 +179,8 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
                 imageHeightHolder = imageWidthHolder / (myImage.width/myImage.height);
     
                 _context.clearRect(0,0,width, canvas.current.height);
+                // _context.drawImage(myImage, 100, 100, 100, 100);
+
                 _context.drawImage(myImage, canvas.current.width*0.5-imageWidthHolder*0.5,canvas.current.height*0.5-imageHeightHolder*0.5, imageWidthHolder, imageHeightHolder);
                 _effect.init(_context);
                 _effect.draw(_context);
@@ -206,9 +190,41 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
       
         }
 
-        window.addEventListener('resize', startImage);
+        const _effect = new Effect(canvas.current);
+        let _context = canvas.current.getContext('2d')
+        setContext(_context); 
+        setEffect(_effect);
+
+        const myImage = imageRef.current;
+        // myImage.src = imageUrl;
+    
+
+        myImage.onerror = function(e){
+            console.log("error", e);
+        }
+        if(myImage.complete){
+            console.log("image complete", myImage);
+            myImage.crossOrigin = "anonymous";
+            startImage();
+         } else {
+            console.log("image not complate");
+
+            myImage.onload = function() {
+                console.log("image loaded", myImage);
+                myImage.crossOrigin = "anonymous";
+                startImage();
+    
+            }
+         } 
+ 
+
+
+
+    
+
+        // window.addEventListener('resize', startImage);
         return () => {
-            window.removeEventListener('resize', startImage);
+            // window.removeEventListener('resize', startImage);
 
             window.cancelAnimationFrame(animationFrameId);
         };
@@ -222,6 +238,7 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
 
     return (
         <div style={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom: isPageTop ? "0" : "12rem"}} >
+            <img style={{width: "0px"}} src={imageUrl} ref={imageRef}/>
             <canvas
             // onClick={(e)=>{
             //     shoot(e);
