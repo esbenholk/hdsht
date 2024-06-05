@@ -36,6 +36,8 @@ const Page = ({ page }) => {
 
 
   useEffect(() => {
+
+    console.log("loading index");
     const handleScroll = () => {
 
 

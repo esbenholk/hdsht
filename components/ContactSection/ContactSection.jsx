@@ -73,13 +73,16 @@ const ContactSection = ({ slice }) => {
                             useCursor.setState({
                               cursorVariant: "hoveronlink",
                               isOverProject: true,
-                              title: "link"
+                              title: "link",
+                              isPhoneNumberLink: item.link1.url.includes("tel:")
                             });
                           }}
                         onMouseLeave={() => {
                             useCursor.setState({
                               cursorVariant: "default",
-                              isOverProject: false
+                              isOverProject: false,
+                              isPhoneNumberLink: false
+
                             });
                           }}
                         >
@@ -95,13 +98,16 @@ const ContactSection = ({ slice }) => {
                             useCursor.setState({
                               cursorVariant: "hoveronlink",
                               isOverProject: true,
-                              title: "link"
+                              title: "link",
+                              isPhoneNumberLink: item.link2.url.includes("tel:")
                             });
                           }}
                         onMouseLeave={() => {
                             useCursor.setState({
                               cursorVariant: "default",
-                              isOverProject: false
+                              isOverProject: false,
+                              isPhoneNumberLink: false
+
                             });
                           }}
                         >
@@ -117,17 +123,20 @@ const ContactSection = ({ slice }) => {
                             useCursor.setState({
                               cursorVariant: "hoveronlink",
                               isOverProject: true,
-                              title: "link"
+                              title: "link",
+                              isPhoneNumberLink: item.link3.url.includes("tel:")
                             });
                           }}
                         onMouseLeave={() => {
                             useCursor.setState({
                               cursorVariant: "default",
-                              isOverProject: false
+                              isOverProject: false,
+                              isPhoneNumberLink: false
+
                             });
                           }}
                         >
-                           {item.text3}            
+                           {item.text3 }            
                     </PrismicLink>
                     </>
                 }
@@ -139,13 +148,15 @@ const ContactSection = ({ slice }) => {
                             useCursor.setState({
                               cursorVariant: "hoveronlink",
                               isOverProject: true,
-                              title: "link"
+                              title: "link",
+                              isPhoneNumberLink: item.link4.url.includes("tel:")
                             });
                           }}
                         onMouseLeave={() => {
                             useCursor.setState({
                               cursorVariant: "default",
-                              isOverProject: false
+                              isOverProject: false,
+                              isPhoneNumberLink: false
                             });
                           }}
                         >
@@ -162,13 +173,16 @@ const ContactSection = ({ slice }) => {
                             useCursor.setState({
                               cursorVariant: "hoveronlink",
                               isOverProject: true,
-                              title: "link"
+                              title: "link",
+                              isPhoneNumberLink: item.link5.url.includes("tel:")
                             });
                           }}
                         onMouseLeave={() => {
                             useCursor.setState({
                               cursorVariant: "default",
-                              isOverProject: false
+                              isOverProject: false,
+                              isPhoneNumberLink: false
+
                             });
                           }}
                         >

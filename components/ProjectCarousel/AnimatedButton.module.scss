@@ -1,0 +1,156 @@
+.Button {
+  position: relative;
+  pointer-events: none;
+  margin: 0 !important;
+  width: 4rem;
+  height: 4rem;
+  transition: all 1s ease-in-out;
+
+}
+
+.Open{
+  transform: rotate(45deg);
+  .Dot div {
+
+    margin: 0px;
+  }
+}
+
+
+// .Dot{
+//   display: flex;
+//   position: absolute;
+//   top:0;
+//   left:0;
+// }
+
+.Dot:is(:first-child){
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  transform: translate(-50%, -50%);
+  // background-color: black;
+  // height: 5px;
+  width: 100%;
+
+}
+.Dot:is(:last-child){
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%);
+  // background-color: black;
+  // width: 5px;
+  height: 100%;
+
+}
+
+.Dot div {
+  background-color: var(--main-font-color);
+  // mix-blend-mode: difference;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 1px;
+  transition: all 0.2s ease-in-out;
+}
+
+// .PinkDot:is(:first-child) div{
+//   max-height: 1px;
+// }
+// .PinkDot:not(:first-child)  div{
+//   max-width: 1px;
+// }
+
+.Dot div:is(:nth-child(4)) {
+  width: 3px;
+  height: 3px;
+
+  visibility: hidden;
+}
+
+.Dot div:is(:nth-child(7)),
+.Dot div:is(:nth-child(1)) {
+  width: 3px;
+  height: 3px;
+}
+
+.Dot div:is(:nth-child(6)),
+.Dot div:is(:nth-child(2)) {
+  width: 5px;
+  height: 5px;
+}
+
+.Dot div:is(:nth-child(5)),
+.Dot div:is(:nth-child(3)) {
+  width: 4px;
+  height: 4px;
+}
+
+
+.Activecursor{
+  -ms-animation: move 2s ease infinite; 
+  -webkit-animation: move 2s ease infinite; 
+  -moz-animation: move 2s ease infinite;
+  animation: move 2s ease infinite;
+}
+
+
+.Activecursor:is(:last-child),
+.Activecursor:is(:first-child){
+  animation-delay: 0.7s;
+}
+.Activecursor:is(:nth-child(1)),
+.Activecursor:is(:nth-child(7)){
+  animation-delay: 0.5s;
+}
+.Activecursor:is(:nth-child(2)),
+.Activecursor:is(:nth-child(6)){
+  animation-delay: 0.3s;
+}
+
+
+@keyframes move {
+  0% {
+    -webkit-transform-origin: bottom top;
+    -moz-transform-origin: bottom top;
+    -ms-transform-origin: bottom top;
+    -o-transform-origin: bottom top;
+    transform-origin: bottom top;
+    transform: scale(0);
+    -ms-transform: scale(0);
+    -webkit-transform: scale(0);
+    -o-transform: scale(0);
+    -moz-transform: scale(0);
+  }
+  10% {
+    transform: scale(1);
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    -o-transform: scale(1);
+    -moz-transform: scale(1);
+  }
+  80% {
+    transform: scale(1.7);
+    -ms-transform: scale(1.7);
+    -webkit-transform: scale(1.7);
+    -o-transform: scale(1.7);
+    -moz-transform: scale(1.7);
+  }
+  100%{
+    transform: scale(0);
+    -ms-transform: scale(0);
+    -webkit-transform: scale(0);
+    -o-transform: scale(0);
+    -moz-transform: scale(0);
+  }
+}

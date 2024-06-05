@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, Suspense } from "react";
 import styles from "./ProjectCarousel.module.scss";
 import { Swiper, SwiperSlide, useSwiperSlide, useSwiper } from "swiper/react";
 import { PrismicLink } from "@prismicio/react";
-import throttle from "lodash.throttle";
+import AnimatedButton from "./AnimatedButton";
 import "swiper/scss";
 import "swiper/scss/thumbs";
 import "swiper/scss/pagination";
@@ -249,39 +249,6 @@ const ProjectCarousel = ({ slice, project }) => {
     if(infoIsExpanded){
       setINfoIsExpanded(false);
     }
-    // if(gallerySwiperRef.current && section && !cursorExpanded ){
-    //   expandCursor();
-    //   setCursorExpanded(true);
-    //   useCursor.setState({
-    //     cursorVariant: "expanded",
-    //     isOverProject: false,
-    //     description: item? item.data.description : "",
-    //     title: item? item.data.title : "",
-    //     shouldrenderdetailsontop: false,
-    //     instruction: "click to close",
-    //     carouselTopLeftPos: {x:width>600 ? 100 : 0,y: width>600 ?120 : 0}
-    //   });
-
-    //   setTimeout(() => {
-    //     window.addEventListener('scroll', handleScroll);
-    //    }, 1000);
-
-    // } else if(gallerySwiperRef.current && section && cursorExpanded){
-    //   compressCursor();
-    //   setCursorExpanded(false);
-    //   useCursor.setState({
-    //     cursorVariant: "default",
-    //     isOverProject: false,
-    //     description:"",
-    //     title: "",
-    //     shouldrenderdetailsontop: false,
-    //     instruction: "click to read",
-    //     carouselTopLeftPos: {x:width>600 ? 100 : 0,y: width>600 ?120 : 0}
-
-    //   });
-    //   window.removeEventListener('scroll', handleScroll);
-
-    // }
    
   }
 
@@ -454,10 +421,8 @@ const ProjectCarousel = ({ slice, project }) => {
         </PrismicLink>
         
         {project.data.description && <>
-          <p 
-          className={styles.InfoButton}
-    
-          onMouseOver={() => {
+   
+        <div onMouseOver={() => {
             handleHoverButton(project);
           }}
           onClick={(e) => {
@@ -478,15 +443,13 @@ const ProjectCarousel = ({ slice, project }) => {
             if(!url.includes("work") && section){
               handleClick(e, project);
             }
-          }}
-  
-          >
-          <> [<span>{infoIsExpanded ? "-" : "+"}</span>]</>          
-        </p>
+          }}>
+          <AnimatedButton open={infoIsExpanded}/> 
+        </div>
+
         </>}
       </div>
 
-          
               <motion.div className={`${styles.InfoContainer} ${infoIsExpanded ? styles.Open : styles.Closed}` }>
            
                   <div className={styles.Content}>

@@ -3,6 +3,10 @@ import { motion } from "framer-motion";
 import styles from "./Cursor.module.scss";
 import useCursor from "../Resolvers/States/Cursor";
 import { TypeAnimation } from 'react-type-animation';
+import useSound from "use-sound";
+// import buttonHoverSound1 from 'sounds/1.mp3';
+
+const sounds = ["sounds/2.mp3", "sounds/3.mp3", "sounds/4.mp3"]
 
 
 function JumbleWordInElement(element, word, speed){
@@ -84,11 +88,15 @@ function JumbleLettersInElement(element, word, speed){
 
 const Cursor = () => {
   const cursorVariant = useCursor((state) => state.cursorVariant);
+  const isPhoneNumberLink = useCursor((state) => state.isPhoneNumberLink);
   const projectDesc = useCursor((state) => state.description);
   const projectTitle = useCursor((state) => state.title);
   const isOverProject = useCursor((state)=>state.isOverProject);
   const instruction = useCursor((state)=> state.instruction);
   const isLoader = useCursor((state)=> state.isLoader);
+
+  const [soundUrl, setSoundUrl] = useState();
+  const  [play, { stop, sound, pause }] = useSound(soundUrl, {interrupt: true,});
 
   const carouselTopLeftPos = useCursor((state)=> state.carouselTopLeftPos);
 
@@ -106,8 +114,36 @@ const Cursor = () => {
   const [isDesktop, setIsDesktop] = useState(false);
 
 
+  useEffect(()=>{
 
+    if(isPhoneNumberLink){
+      setSoundUrl("sounds/phone.mp3");
+    } else{
+      setSoundUrl(sounds[Math.floor(Math.random() * sounds.length)]);
+    }
+  },[isPhoneNumberLink, cursorVariant])
 
+  useEffect(()=>{
+    if(isPhoneNumberLink){
+      setSoundUrl("sounds/phone.mp3");
+    } else{
+      setSoundUrl(sounds[Math.floor(Math.random() * sounds.length)]);
+    }
+    console.log("cursor registers change to", cursorVariant, isPhoneNumberLink, soundUrl);
+
+    if(cursorVariant === "hoveronlink"){
+      play();
+      sound.fade(0, 1, 1000);
+    } else  if(cursorVariant === "hoveronbiglink"){
+      play();
+      sound.fade(0, 1, 1000);
+    } else {
+      pause();
+      stop();
+    }
+   
+
+  },[cursorVariant]);
 
   useEffect(() => {
     // get device type by useragent
@@ -218,74 +254,7 @@ const Cursor = () => {
   return (
     <>
 
-    {isOverProject && isDesktop  && (
-      <>
-      <motion.div className={styles.Data}    
-      variants={variants}
-      animate={"data"}
-      style={{maxWidth: `calc(${mousePosition.x}px - 3rem`}}
-      >
-      
-      {isOverProject && projectTitle !=="" && 
-      <>
-        {/* <span ref={titleRef}>{projectTitle}</span>
-       <span ref={descRef}>{projectDesc}</span> */}
-       </>
-           
-        }
-
- 
-
- 
-
-      </motion.div>
   
-      {/* <div>
-      <motion.div
-            className={styles.Fly}
-            animate={{
-              x: mousePosition.x -8,
-              y: mousePosition.y -8,
-            }}
-            transition={{ type: "spring", mass: 2}}
-          />
-               <motion.div
-            className={styles.Fly}
-            animate={{
-              x: mousePosition.x -8,
-              y: mousePosition.y -8,
-            }}
-            transition={{ type: "spring", mass: 1.3}}
-          /> 
-      <motion.div
-            className={styles.Fly}
-            animate={{
-              x: mousePosition.x -8,
-              y: mousePosition.y -8,
-            }}
-            transition={{ type: "spring" }}
-          />
-      <motion.div
-            className={styles.Fly}
-            animate={{
-              x: mousePosition.x -8,
-              y: mousePosition.y -8,
-            }}
-            transition={{ type: "circIn" }}
-          />
-      <motion.div
-            className={styles.Fly}
-            animate={{
-              x: mousePosition.x -8,
-              y: mousePosition.y -8,
-            }}
-            transition={{ type: "tween" }}
-          />
-      </div> */}
-      </>)
-
-
-    }
     {isDesktop  && (
       <motion.div
         className={styles.Cursor}

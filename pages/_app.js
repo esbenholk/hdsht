@@ -8,10 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import useCursor from "../components/Resolvers/States/Cursor";
 import { useRouter } from "next/router";
-import Logo from 'assets/svg/HDSHT_HD.svg';
-import PixelCanvas from "../components/Resolvers/pixelCanvas";
-import ParticleCanvas from "@/components/Resolvers/_particleCanvas";
-import useWindowDimensions from "../components/Resolvers/UseWindowDimensions";
+
 
 export default function App({ Component, pageProps, page }) {
   const [isMounted, setIsMounted] = useState(false);

@@ -10,6 +10,7 @@ const useCursor = create((set) => ({
   instruction: "",
   carouselTopLeftPos: {x:0,y:0},
   isLoader: false,
-  muted: true
+  muted: true,
+  isPhoneNumberLink: false
 }));
 export default useCursor;

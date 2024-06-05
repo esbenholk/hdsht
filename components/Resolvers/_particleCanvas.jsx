@@ -101,9 +101,13 @@ class Effect {
     }
     init(context){
             
+
+            
             const pixelsObject = context.getImageData(0,0, this.width, this.height);
             const pixels = pixelsObject.data;
   
+
+            console.log("inits effect", context, pixels);
             for (let y = 0; y < this.height; y+= this.gap) {
                 for (let x = 0; x < this.width; x+= this.gap) {
                     const index = (y * this.width + x) * 4;
@@ -112,10 +116,10 @@ class Effect {
                     const blue = pixels[index+2];
                     const alpha = pixels[index+3];
                     const color = 'rgba('+ red+','+green+','+ blue+','+alpha+')';
-                
-                    if(alpha>0){
+
+                    if(alpha>0.9 && !color.includes("rgba(0,0,0")){
                         this.particleArray.push(new Particle(this,color,x,y));
-                    }
+                    } 
                 
                    
                 } 
@@ -145,10 +149,73 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
     const [context, setContext] = useState();
     const [effect, setEffect] = useState();
     const canvas = useRef();
-    const imageRef = useRef();
+    const [image, setImage ]= useState();
     const [animationFrameId, setAnimationId] = useState();
     
+
+    useEffect(()=>{
+
+        
+        const _effect = new Effect(canvas.current);
+        let _context = canvas.current.getContext('2d');
+
+        console.log("loads particle canvas", _effect, _context);
+        setContext(_context); 
+        setEffect(_effect);
+
+
+        const myImage = new Image();
+        myImage.src = imageUrl;
+        myImage.onerror = function(e){
+            console.log("error", e);
+        }
+
+        myImage.onload = function() {
+            console.log("image loaded", myImage);
+            myImage.crossOrigin = "anonymous";
+            startImage(myImage, _context, _effect);
+        }
+
+        setImage(myImage);
+
+
+
+        // if(myImage.complete){
+        //     console.log("image complete", myImage);
+        //     myImage.crossOrigin = "anonymous";
+        //     startImage(myImage, _context, _effect);
+        //  } else {
+        //     console.log("image not complate");
+        //     myImage.onload = function() {
+        //         console.log("image loaded", myImage);
+        //         myImage.crossOrigin = "anonymous";
+        //         startImage(myImage, _context, _effect);
+        //     }
+        //  } 
+
+        window.addEventListener('resize', restartImage);
+
+        return () => {
+            window.removeEventListener('resize', restartImage);
+
+            window.cancelAnimationFrame(animationFrameId);
+        };
+
+    },[])
+
+
+    useEffect(()=>{
+        if(effect && context){
+            render();
+        }
+    },[effect, context])
+
+
+
+
     const render = () => {
+
+        // console.log("renders", context, effect, canvas.current);
         if(context && effect && canvas.current){
             context.clearRect(0,0,width, canvas.current.height);
             effect.draw(context);
@@ -156,6 +223,35 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
             setAnimationId(window.requestAnimationFrame(render));
         }
     };
+
+    const startImage = (image, _context, _effect) =>{
+            
+        if(canvas.current){
+            console.log("has canvas");
+
+            let imageWidthHolder = image.width;
+            let imageHeightHolder = image.height;
+            if(imageWidthHolder > width){
+                imageWidthHolder = width;
+                imageHeightHolder = image.height * (image.width/image.height);
+            }
+            imageWidthHolder = width-100;
+            imageHeightHolder = imageWidthHolder / (image.width/image.height);
+
+            _context.clearRect(0,0,width, canvas.current.height);
+            // _context.drawImage(myImage, 100, 100, 100, 100);
+
+            _context.drawImage(image, canvas.current.width*0.5-imageWidthHolder*0.5,canvas.current.height*0.5-imageHeightHolder*0.5, imageWidthHolder, imageHeightHolder);
+            _effect.init(_context);
+            _effect.draw(_context);
+
+           
+
+        } else {
+            console.log("doesnt have canvas");
+        }
+  
+    }
 
     const shoot = (e) =>{
         window.cancelAnimationFrame(animationFrameId);
@@ -165,72 +261,16 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
        render();
     }
 
-    useEffect(()=>{
-        const startImage = () =>{
-            
-            if(canvas.current){
-                let imageWidthHolder = myImage.width;
-                let imageHeightHolder = myImage.height;
-                if(imageWidthHolder > width){
-                    imageWidthHolder = width;
-                    imageHeightHolder = myImage.height * (myImage.width/myImage.height);
-                }
-                imageWidthHolder = width-100;
-                imageHeightHolder = imageWidthHolder / (myImage.width/myImage.height);
-    
-                _context.clearRect(0,0,width, canvas.current.height);
-                // _context.drawImage(myImage, 100, 100, 100, 100);
 
-                _context.drawImage(myImage, canvas.current.width*0.5-imageWidthHolder*0.5,canvas.current.height*0.5-imageHeightHolder*0.5, imageWidthHolder, imageHeightHolder);
-                _effect.init(_context);
-                _effect.draw(_context);
-    
-                render();
-            }
-      
+    function restartImage(){
+        if(context && effect && image){
+            startImage(image, context, effect);
+
         }
-
-        const _effect = new Effect(canvas.current);
-        let _context = canvas.current.getContext('2d')
-        setContext(_context); 
-        setEffect(_effect);
-
-        const myImage = imageRef.current;
-        // myImage.src = imageUrl;
-    
-
-        myImage.onerror = function(e){
-            console.log("error", e);
-        }
-        if(myImage.complete){
-            console.log("image complete", myImage);
-            myImage.crossOrigin = "anonymous";
-            startImage();
-         } else {
-            console.log("image not complate");
-
-            myImage.onload = function() {
-                console.log("image loaded", myImage);
-                myImage.crossOrigin = "anonymous";
-                startImage();
-    
-            }
-         } 
- 
+    }
 
 
 
-    
-
-        // window.addEventListener('resize', startImage);
-        return () => {
-            // window.removeEventListener('resize', startImage);
-
-            window.cancelAnimationFrame(animationFrameId);
-        };
-
-  
-    },[context, canvas])
 
 
 
@@ -238,11 +278,10 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
 
     return (
         <div style={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom: isPageTop ? "0" : "12rem"}} >
-            <img style={{width: "0px"}} src={imageUrl} ref={imageRef}/>
+            
+            {/* <img style={{width: 0}}src={imageUrl} ref={imageRef}/> */}
+            
             <canvas
-            // onClick={(e)=>{
-            //     shoot(e);
-            // }}
                 ref={canvas}
                 width={width}   
                 height={imageHeight ? imageHeight : 300} 

@@ -2,19 +2,7 @@ import styles from "./Sticky.module.scss";
 import { useRef, useEffect, useState } from "react";
 import useCursor from "../Resolvers/States/Cursor";
 import { useFooterOffset } from "../Resolvers/States/FooterOffset";
-import useWindowDimensions from "../Resolvers/UseWindowDimensions";
-import ParticleCanvas from "../Resolvers/_particleCanvas";
-import Logo from 'assets/svg/HDSHT_HD.svg';
 
-// if(bodyContainer.scrollTop < offset){
-//   for (let i = bodyContainer.scrollTop; i <= offset; i++) {
-//     setTimeout(() => (bodyContainer.scrollTop = i), 4);
-//   }
-// } else {
-//   for (let i = bodyContainer.scrollTop; i >= offset; i--) {
-//     setTimeout(() => (bodyContainer.scrollTop = i), 4);
-//   }
-// }
 
 const Sticky = ({ slice, isProjectPage }) => {
   const header = useRef();
