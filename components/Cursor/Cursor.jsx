@@ -91,9 +91,8 @@ const Cursor = () => {
   const isPhoneNumberLink = useCursor((state) => state.isPhoneNumberLink);
   const projectDesc = useCursor((state) => state.description);
   const projectTitle = useCursor((state) => state.title);
-  const isOverProject = useCursor((state)=>state.isOverProject);
-  const instruction = useCursor((state)=> state.instruction);
-  const isLoader = useCursor((state)=> state.isLoader);
+
+  const muted = useCursor((state)=> state.muted);
 
   const [soundUrl, setSoundUrl] = useState();
   const  [play, { stop, sound, pause }] = useSound(soundUrl, {interrupt: true,});
@@ -124,25 +123,26 @@ const Cursor = () => {
   },[isPhoneNumberLink, cursorVariant])
 
   useEffect(()=>{
-    if(isPhoneNumberLink){
-      setSoundUrl("sounds/phone.mp3");
-    } else{
-      setSoundUrl(sounds[Math.floor(Math.random() * sounds.length)]);
+    if(!muted){
+      if(isPhoneNumberLink){
+        setSoundUrl("sounds/phone.mp3");
+      } else{
+        setSoundUrl(sounds[Math.floor(Math.random() * sounds.length)]);
+      }
+      console.log("cursor registers change to", cursorVariant, isPhoneNumberLink, soundUrl);
+  
+      if(cursorVariant === "hoveronlink"){
+        play();
+        sound.fade(0, 1, 1000);
+      } else  if(cursorVariant === "hoveronbiglink"){
+        play();
+        sound.fade(0, 1, 1000);
+      } else {
+        pause();
+        stop();
+      }
     }
-    console.log("cursor registers change to", cursorVariant, isPhoneNumberLink, soundUrl);
-
-    if(cursorVariant === "hoveronlink"){
-      play();
-      sound.fade(0, 1, 1000);
-    } else  if(cursorVariant === "hoveronbiglink"){
-      play();
-      sound.fade(0, 1, 1000);
-    } else {
-      pause();
-      stop();
-    }
-   
-
+  
   },[cursorVariant]);
 
   useEffect(() => {
