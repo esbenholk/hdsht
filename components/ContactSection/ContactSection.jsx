@@ -6,10 +6,15 @@ import { useRef, useState, useEffect } from "react";
 import useCursor from "../Resolvers/States/Cursor";
 import DateTime from "../DateTime/DateTime";
 import { useExcluder } from "../Resolvers/States/Excluder";
+import useSound from "use-sound";
 
 const ContactSection = ({ slice }) => {
   const container = useRef(null);
   const [links, setLinks] = useState([]);
+  const muted = useCursor((state)=> state.muted);
+
+  const  [play, { stop }] = useSound("sounds/phone.mp3", {interrupt: true});
+
   const inView = useInView(container, {
     once: true,
   });
@@ -68,6 +73,7 @@ const ContactSection = ({ slice }) => {
                 {item.link1 !== null && item.link1.url && 
                     <>
                     <PrismicLink
+                        data-glitch="Explore"
                         href={item.link1.url}
                         onMouseOver={() => {
                             useCursor.setState({
@@ -76,6 +82,10 @@ const ContactSection = ({ slice }) => {
                               title: "link",
                               isPhoneNumberLink: item.link1.url.includes("tel:")
                             });
+                            if(item.link1.url.includes("tel:") && !muted){
+                              play();
+                            }
+
                           }}
                         onMouseLeave={() => {
                             useCursor.setState({
@@ -84,6 +94,7 @@ const ContactSection = ({ slice }) => {
                               isPhoneNumberLink: false
 
                             });
+                            stop();
                           }}
                         >
                            {item.text1}            
@@ -93,6 +104,7 @@ const ContactSection = ({ slice }) => {
                 {item.link2 !== null  && item.link2.url && 
                     <>
                     <PrismicLink
+                        data-glitch="Explore"
                         href={item.link2.url}
                         onMouseOver={() => {
                             useCursor.setState({
@@ -101,6 +113,9 @@ const ContactSection = ({ slice }) => {
                               title: "link",
                               isPhoneNumberLink: item.link2.url.includes("tel:")
                             });
+                            if(item.link2.url.includes("tel:") && !muted){
+                              play();
+                            }
                           }}
                         onMouseLeave={() => {
                             useCursor.setState({
@@ -109,6 +124,8 @@ const ContactSection = ({ slice }) => {
                               isPhoneNumberLink: false
 
                             });
+                            stop();
+
                           }}
                         >
                            {item.text2}            
@@ -118,6 +135,7 @@ const ContactSection = ({ slice }) => {
                 {item.link3 !== null   && item.link3.url && 
                     <>
                     <PrismicLink
+                        data-glitch="Explore"
                         href={item.link3.url}
                         onMouseOver={() => {
                             useCursor.setState({
@@ -126,6 +144,9 @@ const ContactSection = ({ slice }) => {
                               title: "link",
                               isPhoneNumberLink: item.link3.url.includes("tel:")
                             });
+                            if(item.link3.url.includes("tel:")){
+                              play();
+                            }
                           }}
                         onMouseLeave={() => {
                             useCursor.setState({
@@ -134,6 +155,8 @@ const ContactSection = ({ slice }) => {
                               isPhoneNumberLink: false
 
                             });
+                            stop();
+
                           }}
                         >
                            {item.text3 }            
@@ -143,6 +166,7 @@ const ContactSection = ({ slice }) => {
                 {item.link4 !== null && item.link4.url && 
                     <>
                     <PrismicLink
+                        data-glitch="Explore"
                         href={item.link4.url}
                         onMouseOver={() => {
                             useCursor.setState({
@@ -151,6 +175,9 @@ const ContactSection = ({ slice }) => {
                               title: "link",
                               isPhoneNumberLink: item.link4.url.includes("tel:")
                             });
+                            if(item.link4.url.includes("tel:") && !muted){
+                              play();
+                            }
                           }}
                         onMouseLeave={() => {
                             useCursor.setState({
@@ -158,6 +185,8 @@ const ContactSection = ({ slice }) => {
                               isOverProject: false,
                               isPhoneNumberLink: false
                             });
+                            stop();
+
                           }}
                         >
                            {item.text4}            
@@ -168,6 +197,7 @@ const ContactSection = ({ slice }) => {
                 {item.link5 !== null  && item.link5.url && 
                     <>
                     <PrismicLink
+                        data-glitch="Explore"
                         href={item.link5.url}
                         onMouseOver={() => {
                             useCursor.setState({
@@ -176,6 +206,9 @@ const ContactSection = ({ slice }) => {
                               title: "link",
                               isPhoneNumberLink: item.link5.url.includes("tel:")
                             });
+                            if(item.link5.url.includes("tel:") && !muted){
+                              play();
+                            }
                           }}
                         onMouseLeave={() => {
                             useCursor.setState({
@@ -184,6 +217,8 @@ const ContactSection = ({ slice }) => {
                               isPhoneNumberLink: false
 
                             });
+                            stop();
+
                           }}
                         >
                            {item.text5}            

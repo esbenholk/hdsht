@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import * as React from "react";
 import { Engine, Render, Bodies, World, Query, Runner} from 'matter-js'
 
+import useSound from "use-sound";
 
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
 
@@ -29,6 +30,10 @@ export default function Loader({settings}) {
   const engine = useRef(Engine.create())
   const {width, height} = useWindowDimensions();
   const url = useCursor((state) => state.url);
+
+  const sounds = settings.data.slices[3].items;
+  const [soundUrl, setSoundUrl] = useState(sounds[Math.floor(Math.random() * sounds.length)].media.url);
+  const  [play, { stop, pause }] = useSound(soundUrl, {interrupt: true});
 
 
   useEffect(() => {
@@ -226,7 +231,10 @@ export default function Loader({settings}) {
   // }, [])
 
 
-
+  useEffect(()=>{
+    setSoundUrl(sounds[Math.floor(Math.random() * sounds.length)].media.url);
+  },[]);
+  
   useEffect(() => {
     setIsLoaded(true);
     useCursor.setState({
@@ -298,9 +306,12 @@ export default function Loader({settings}) {
       
               if(!window.location.href.includes("pink")){
                 setUserHasEntered(true);
+
+                play();
       
                 setTimeout(() => {
                   setUserIsIn(true);
+                  // stop();
                 }, 1500);
               }
               useCursor.setState({
