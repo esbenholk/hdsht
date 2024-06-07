@@ -24,6 +24,7 @@
 
     a{
       white-space: nowrap;
+      max-width: 100%;
     }
     a,
     h3,
@@ -123,6 +124,8 @@
         margin:0;
         // font-family: Cooper Hewitt;
         font-size: 1.8rem;
+        word-break: break-word;
+   
         font-weight: 705;
         line-height: 40.3px;
         letter-spacing: 0.02em;
