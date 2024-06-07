@@ -315,10 +315,12 @@ export default function Loader({settings}) {
                   setUserIsIn(true);
                   // stop();
                 }, 1500);
+
+                useCursor.setState({
+                  muted: false
+                });
               }
-              useCursor.setState({
-                muted: false
-              });
+        
           
             }}
 
