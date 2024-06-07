@@ -277,6 +277,8 @@ export default function Loader({settings}) {
         //handleMouseDown(e);
 
         if(!window.location.href.includes("pink")){
+
+          console.log("user goes in through loader" );
           setUserHasEntered(true);
 
           setTimeout(() => {
