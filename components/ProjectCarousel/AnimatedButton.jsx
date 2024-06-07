@@ -79,7 +79,7 @@ const AnimatedButton = ({open}) => {
 
   return (
     <>
-    {isDesktop  && (
+
       <motion.div
         className={`${styles.Button} ${open ? styles.Open : styles.Closed}`}
         animate={cursorVariant}
@@ -107,7 +107,7 @@ const AnimatedButton = ({open}) => {
 
 
       </motion.div>
-    )}
+
 
  
      

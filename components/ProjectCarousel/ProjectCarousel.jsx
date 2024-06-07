@@ -444,6 +444,7 @@ const ProjectCarousel = ({ slice, project }) => {
               handleClick(e, project);
             }
           }}>
+      
           <AnimatedButton open={infoIsExpanded}/> 
         </div>
 
