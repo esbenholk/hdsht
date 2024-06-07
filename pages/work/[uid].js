@@ -28,7 +28,7 @@ const Page = ({ page }) => {
 
   slice.primary = {order:"_", title: page.data.title};
   useEffect(() => {
-    console.log("work page mounted", page);
+    console.log("work page mounted", page, page.settings);
     useCursor.setState({ cursor: "default" });
     setIsMounted(true);
 
@@ -57,7 +57,7 @@ const Page = ({ page }) => {
           <meta charSet="UTF-8" />
         </Head>
         {isDesktop ? <><Gizmo />   <Cursor />         <Loader settings={page.settings}/>
-        </>:    <Navigation logo={page.settings?.data.logo} links={page.settings?.data.slices[1].items} settings={page.settings}/>}
+        </>:    <Navigation logo={page.settings?.data.logo} links={page.settings?.data.slices[2].items} settings={page.settings}/>}
 
         <div className={styles.SingleWork}>
         <Sticky slice={slice} isProjectPage={true}/>

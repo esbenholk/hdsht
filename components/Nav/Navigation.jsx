@@ -21,6 +21,7 @@ export function Navigation({ slice, logo, links, settings }) {
   };
 
   useEffect(() => {
+
     setIsMounted(true);
     if(url.includes("#")){
       goToAnchor(url.slice(2));
@@ -28,24 +29,6 @@ export function Navigation({ slice, logo, links, settings }) {
     }
   }, []);
 
-  const slideInFromRightContainer = {
-    open: {
-      transform: "translateY(0)",
-      opacity: 1,
-      transition: {
-        duration: 1,
-        staggerChildren: 0.1,
-      },
-    },
-    closed: {
-      transform: "translateY(100%)",
-      opacity:1,
-      transition: {
-        duration: 1,
-        staggerChildren: 0.1,
-      },
-    },
-  };
 
   function setSoundSettings(){
     useCursor.setState({
@@ -77,7 +60,9 @@ export function Navigation({ slice, logo, links, settings }) {
 
   function generateLink(link, text){
     return (<>
-      {link.url.includes("#") && url.length < 2 ? <p onClick={()=>{
+      {link.url.includes("#") && url.length < 2 ? 
+      
+      <p onClick={()=>{
         goToAnchor(link.url.slice(1));
         setMenu(!menu);
       }}>{text}</p> : link.url.includes("#") ?
