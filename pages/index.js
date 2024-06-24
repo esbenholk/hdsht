@@ -24,20 +24,16 @@ const Gizmo = dynamic(() => import("../components/Gizmo/Gizmo"), {
 const Page = ({ page }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [foldedHeight, setFoldedHeight] = useState(0);
-
   const [isDesktop, setIsDesktop] = useState(false);
   const { footerOffset } = useFooterOffset();
   const {height, width} = useWindowDimensions();
-
   const logoRef = useRef();
   const [headerInPosition, setHeaderInPosition] = useState(false);
-
   const router = useRouter();
 
 
   useEffect(() => {
-
-    console.log("loading index");
+    console.log("welcome to HDSHT");
     const handleScroll = () => {
 
 
@@ -95,9 +91,6 @@ const Page = ({ page }) => {
   }, [width]);
 
 
-  
-
-
   return (
     isMounted && (
       <>
@@ -112,84 +105,81 @@ const Page = ({ page }) => {
           />
           <meta charSet="UTF-8" />
         </Head>
-        {isDesktop ? <><Gizmo />   <Cursor />  <Loader settings={page.settings}/>
-        </>:    <Navigation logo={page.settings?.data.logo} links={page.settings?.data.slices[2].items} settings={page.settings}/>}
+
+        {isDesktop ? 
+          <>
+            <Gizmo />
+            <Cursor />
+            <Loader settings={page.settings}/>
+          </>:    
+            <Navigation logo={page.settings?.data.logo} links={page.settings?.data.slices[2].items} settings={page.settings}/>
+        }
       
         <motion.div
-          
           className={styles.Container}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
           style={{
-      
             transition: "all 5 ease",
             marginTop: isDesktop ? `calc(${height-foldedHeight}px + ${footerOffset}px)` : `calc(${height}px)`,
           }}
         >
           <SliceZone slices={page.data.slices} components={components} />
 
+          {isDesktop && 
+            <section 
+              onMouseOver={() => {
+                if(!router.asPath.includes("work")){
+                  useCursor.setState({
+                    cursorVariant: "logo",
+                    isOverProject: true,
+                    title: page.data.title,
+                    description: page.data.description
+                  });
+                } else {
+                  useCursor.setState({
+                    cursorVariant: "hoveronlink",
+                    isOverProject: true,
+                    title: "visit the frontpage",
+                    description: "/"
+                  });
+                } 
+                }}
+                onClick={()=>{
+                  if(router.asPath.includes("work")){
+                    window.location.href = "/";  
+                  }
+                }}
+                onMouseLeave={() => {
+                  useCursor.setState({
+                    cursorVariant: "default",
+                    isOverProject: false,
+                    title: "",
+                    description: ""
 
-          <section 
-            
-            onMouseOver={() => {
-              if(!router.asPath.includes("work")){
-                useCursor.setState({
-                  cursorVariant: "logo",
-                  isOverProject: true,
-                  title: page.data.title,
-                  description: page.data.description
-                });
-              } else {
-                useCursor.setState({
-                  cursorVariant: "hoveronlink",
-                  isOverProject: true,
-                  title: "visit the frontpage",
-                  description: "/"
-                });
-              } 
-              }}
-              onClick={()=>{
-                if(router.asPath.includes("work")){
-                  window.location.href = "/";  
-                }
-              }}
-              onMouseLeave={() => {
-                useCursor.setState({
-                  cursorVariant: "default",
-                  isOverProject: false,
-                  title: "",
-                  description: ""
-
-                });
-              }}>
-
-          <div id="finallogo"> 
-            {isDesktop && <ParticleCanvas  imageUrl={page.settings?.data.logo.url} isPageTop={false}/> }
-          </div>   
-        </section>
+                  });
+                }}>
+              <div id="finallogo"> 
+                <ParticleCanvas  imageUrl={page.settings?.data.logo.url} isPageTop={false}/>
+              </div>   
+            </section>
+          }
         </motion.div>
-
-
+    
         {isDesktop && 
+        <>
           <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: width>600 ? `calc(100% - ${height-foldedHeight+45}px - ${footerOffset*2}px)`: "8rem", backgroundColor: "var(--main-bg-color)"}}>
           </div>
-        }
 
-        {isDesktop && 
-          <div className={styles.LogoHeader}style={{display: "flex", justifyContent: "center",  alignItems:"center", width: "100%", position: "fixed", zIndex: 1, top: "0", maxHeight: "4.6rem", minHeight: width<600 ? "60px" : 0,  overflow: "hidden", transition: "opacity 0.0s ease-in", padding: "0rem 1rem", opacity: headerInPosition ? 1 :0, transition: "all 0.1s"}}>
-            <img src={Logo.src} alt="logo" style={{width: "calc(100%)"}}/>
-          </div>
+        <div className={styles.LogoHeader}style={{display: "flex", justifyContent: "center",  alignItems:"center", width: "100%", position: "fixed", zIndex: 1, top: "0", maxHeight: "4.6rem", minHeight: width<600 ? "60px" : 0,  overflow: "hidden", transition: "opacity 0.0s ease-in", padding: "0rem 1rem", opacity: headerInPosition ? 1 :0, transition: "all 0.1s"}}>
+        <img src={Logo.src} alt="logo" style={{width: "calc(100%)"}}/>
+        </div>
+        </>
         }
-   
-
         <div style={{width: "100%", position: "fixed", zIndex: -1, top: 0, bottom:0, backgroundColor: "var(--main-bg-color)", opacity: headerInPosition ? 1 :0, transition: "all 0.1s"}}>
         </div>
-
-
-
-
       </>
     )
   );

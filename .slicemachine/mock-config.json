@@ -88,12 +88,7 @@
         "items": {}
       }
     },
-    "Structure": {
-      "default": {
-        "primary": {},
-        "items": {}
-      }
-    },
+
     "MediaArray": {
       "default": {
         "primary": {}

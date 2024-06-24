@@ -1,17 +1,13 @@
 import styles from "./ClientLogoGrid.module.scss";
-import PrismicRichTextResolver from "../Resolvers/PrismicRichTextResolver/PrismicRichTextResolver";
 import Image from "next/image";
 import { PrismicLink, PrismicRichText } from "@prismicio/react";
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import useCursor from "../Resolvers/States/Cursor";
-import Layout from "../Layout/Layout";
-import { useExcluder } from "../Resolvers/States/Excluder";
+
 import Marquee from "react-marquee-slider";
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
-import ClientLogoPixelCanvas from "./ClientLogoCanvas.jsx";
 
-import { ImagePixelated } from "react-pixelate";
 
 const fadeFromRight = {
   right: {
@@ -118,7 +114,6 @@ const ClientLogoGrid = ({ slice }) => {
     >
 
                     {slice?.items?.map((item, index) => {
-                      // const { moveExcluder, removeExcluder } = useExcluder();
                       return (
                        
                          <motion.div
@@ -235,14 +230,6 @@ const ClientLogoCarousel = ({ slice }) => {
     </motion.div>
   );
 };
-
-
-
-
-
-
-
-
 
 
 export default ClientLogoGrid;

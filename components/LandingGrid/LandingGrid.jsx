@@ -1,29 +1,11 @@
 import { Suspense, useRef, useEffect , useState} from "react";
 import styles from "./LandingGrid.module.scss";
-import { PrismicLink } from "@prismicio/react";
-import PrismicRichTextResolver from "../Resolvers/PrismicRichTextResolver/PrismicRichTextResolver";
-import MediaResolver from "../Resolvers/MediaResolver/MediaResolver";
+
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
 import { motion } from "framer-motion";
-import useCursor from "../Resolvers/States/Cursor";
 import Layout from "../Layout/Layout";
-import { useExcluder } from "../Resolvers/States/Excluder";
 import {WorkCarousel} from "../../slices/WorkCarousel"
 
-const blendIn = {
-  hidden: {
-    opacity: 0,
-    transition: {
-      duration: 0.25,
-    },
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.25,
-    },
-  },
-}
 
 
 

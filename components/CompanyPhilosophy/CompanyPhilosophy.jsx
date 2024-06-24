@@ -86,7 +86,6 @@ const CompanyPhilosophy = ({ slice }) => {
                   <ul>
                     {item.list.map((listItem, index) => {
                       const listRef = useRef();
-                      // const { moveExcluder, removeExcluder } = useExcluder();
                       return listItem.type === "list-item" ? (
                         <motion.li
                           ref={listRef}

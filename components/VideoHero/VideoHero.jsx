@@ -2,15 +2,15 @@ import styles from "./VideoHero.module.scss";
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import MediaResolver from "../Resolvers/MediaResolver/MediaResolver";
-import { PrismicRichText } from "@prismicio/react";
-import Layout from "../Layout/Layout";
-import { TypeShuffle } from "./TypeShuffle";
-import Shuffle from "./Shuffle";
-import VideoCanvas from "../Resolvers/videoCanvas";
-import ThreeD from "../threeD/threeD";
-import AiVideoCanvas from "./aiImageCanvas";
-import PixelCanvas from "../Resolvers/_pixelCanvasForImages";
-import PixelCanvasVideo from "../Resolvers/_pixelCanvasForVideo";
+// import { PrismicRichText } from "@prismicio/react";
+// import Layout from "../Layout/Layout";
+// import { TypeShuffle } from "./TypeShuffle";
+// import Shuffle from "./Shuffle";
+// import VideoCanvas from "../Resolvers/videoCanvas";
+// import ThreeD from "../threeD/threeD";
+// import AiVideoCanvas from "./aiImageCanvas";
+// import PixelCanvas from "../Resolvers/_pixelCanvasForImages";
+// import PixelCanvasVideo from "../Resolvers/_pixelCanvasForVideo";
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
 
 

@@ -2,18 +2,9 @@ import { useEffect, useState, useRef } from "react";
 import styles from "./Loader.module.scss";
 import useCursor from "../Resolvers/States/Cursor";
 import { motion } from "framer-motion";
-
 import * as React from "react";
-import { Engine, Render, Bodies, World, Query, Runner} from 'matter-js'
-
 import useSound from "use-sound";
-
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
-
-
-
-
-
 
 export default function Loader({settings}) {
   const [index, setIndex] = useState(0);
@@ -23,11 +14,8 @@ export default function Loader({settings}) {
   const [userIsIn, setUserIsIn] = useState(false);
   const [blocks, setBlocks] = useState([]);
   const blocksRef = useRef(blocks);
-  const [floor, setFloor] = useState();
 
-  const scene = useRef()
-  const isPressed = useRef(false)
-  const engine = useRef(Engine.create())
+
   const {width, height} = useWindowDimensions();
   const url = useCursor((state) => state.url);
 
@@ -40,15 +28,8 @@ export default function Loader({settings}) {
     blocksRef.current = blocks; // Keep the ref updated with the current blocks
   }, [blocks]);
 
-  const cw = width + 140;
-  const ch = height + 140;
-
-  const squareSize = 200; // Size of the squares
-
-
 
   function closeLoader(){
-    World.remove(engine.current.world, [floor])
     setUserHasEntered(true);
     useCursor.setState({
       muted: false

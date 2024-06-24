@@ -107,7 +107,6 @@ class Effect {
             const pixels = pixelsObject.data;
   
 
-            console.log("inits effect", context, pixels);
             for (let y = 0; y < this.height; y+= this.gap) {
                 for (let x = 0; x < this.width; x+= this.gap) {
                     const index = (y * this.width + x) * 4;
@@ -155,11 +154,11 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
 
     useEffect(()=>{
 
-        
-        const _effect = new Effect(canvas.current);
-        let _context = canvas.current.getContext('2d');
+        console.log("inserts particle cnavas");
 
-        console.log("loads particle canvas", _effect, _context);
+        const _effect = new Effect(canvas.current);
+        let _context = canvas.current.getContext('2d' );
+
         setContext(_context); 
         setEffect(_effect);
 
@@ -171,27 +170,14 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
         }
 
         myImage.onload = function() {
-            console.log("image loaded", myImage);
+            console.log("loads image");
+         
             myImage.crossOrigin = "anonymous";
             startImage(myImage, _context, _effect);
+            // myImage.onload = null
         }
 
         setImage(myImage);
-
-
-
-        // if(myImage.complete){
-        //     console.log("image complete", myImage);
-        //     myImage.crossOrigin = "anonymous";
-        //     startImage(myImage, _context, _effect);
-        //  } else {
-        //     console.log("image not complate");
-        //     myImage.onload = function() {
-        //         console.log("image loaded", myImage);
-        //         myImage.crossOrigin = "anonymous";
-        //         startImage(myImage, _context, _effect);
-        //     }
-        //  } 
 
         window.addEventListener('resize', restartImage);
 
@@ -227,7 +213,6 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
     const startImage = (image, _context, _effect) =>{
             
         if(canvas.current){
-            console.log("has canvas");
 
             let imageWidthHolder = image.width;
             let imageHeightHolder = image.height;
@@ -277,10 +262,7 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
 
 
     return (
-        <div style={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom: isPageTop ? "0" : "12rem"}} >
-            
-            {/* <img style={{width: 0}}src={imageUrl} ref={imageRef}/> */}
-            
+        <div style={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom: isPageTop ? "0" : "12rem"}} >            
             <canvas
                 ref={canvas}
                 width={width}   

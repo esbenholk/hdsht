@@ -1,14 +1,11 @@
 import styles from "./Gizmo.module.scss";
-import { useRef, useEffect, useState, useMemo } from "react";
-import { Canvas, useFrame, extend, useThree } from "@react-three/fiber";
-import * as THREE from "three";
+import { useRef, useEffect, useState} from "react";
+import { Canvas, useFrame, extend} from "@react-three/fiber";
 import { lerp } from "three/src/math/MathUtils";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
-// import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useScroll } from "framer-motion";
 import useCursor from "../Resolvers/States/Cursor";
-// import { KernelSize } from "postprocessing";
 
 extend({ RenderPass, UnrealBloomPass });
 

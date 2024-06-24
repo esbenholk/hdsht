@@ -4,8 +4,6 @@ import { PrismicLink } from "@prismicio/react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import useCursor from "../Resolvers/States/Cursor";
-import DateTime from "../DateTime/DateTime";
-import { useExcluder } from "../Resolvers/States/Excluder";
 import useSound from "use-sound";
 
 const ContactSection = ({ slice }) => {
@@ -63,7 +61,6 @@ const ContactSection = ({ slice }) => {
             }}
             ref={container}
           >
-            {/* <DateTime location={item.timezone} hovered={hovered} /> */}
             <motion.div className={styles.Title}>
               <PrismicRichText field={item.title} />
             </motion.div>

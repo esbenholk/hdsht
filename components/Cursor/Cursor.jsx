@@ -2,7 +2,6 @@ import { useEffect, useState,useRef } from "react";
 import { motion } from "framer-motion";
 import styles from "./Cursor.module.scss";
 import useCursor from "../Resolvers/States/Cursor";
-import { TypeAnimation } from 'react-type-animation';
 import useSound from "use-sound";
 // import buttonHoverSound1 from 'sounds/1.mp3';
 
