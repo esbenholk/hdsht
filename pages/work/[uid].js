@@ -28,7 +28,7 @@ const Page = ({ page }) => {
 
   slice.primary = {order:"_", title: page.data.title};
   useEffect(() => {
-    console.log("work page mounted", page, page.settings);
+    console.log("we made ", page.data.title);
     useCursor.setState({ cursor: "default" });
     setIsMounted(true);
 

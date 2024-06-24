@@ -10,26 +10,10 @@ import useCursor from "../components/Resolvers/States/Cursor";
 import { useRouter } from "next/router";
 
 
-export default function App({ Component, pageProps, page }) {
+export default function App({ Component, pageProps }) {
   const [isMounted, setIsMounted] = useState(false);
-  const [desc, setDesc] = useState("");
-  const [title, setTitle] = useState("");
   const router = useRouter();
-  const [isMobile, setIsMobile] = useState();
-
-
   useEffect(() => {
-    const userAgent = navigator.userAgent;
-    const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
-    setIsMobile(mobile);
-
-    console.log("App comp mounted", page);
-    if(pageProps.page && pageProps.page.data && pageProps.page.data.description){
-      setDesc(pageProps.page.data.description);
-    }
-    if(pageProps.page && pageProps.page.data && pageProps.page.data.title){
-      setTitle(pageProps.page.data.title);
-    }
     setIsMounted(true);
   }, []);
 

@@ -5,19 +5,26 @@ import MediaResolver from "../Resolvers/MediaResolver/MediaResolver";
 import useVideo from "../Resolvers/States/Video";
 
 
-const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex, isActive }) => {
+const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex, isActive, keynm }) => {
   const slide = useSwiperSlide();
   const videoRef = useRef();
-  const { setCurrentVideo } = useVideo();
+  const { setCurrentVideo, currentVideo} = useVideo();
 
   useEffect(() => {
     if (
       slideIndex === slice.items.indexOf(item) &&
       item.carouselitem.kind !== "image"
     ) {
+
       setCurrentVideo(videoRef.current);
+      console.log("setting current video", videoRef.current, slideIndex);
+
     }
-  }, [slideIndex, gallerySwiperRef.current?.swiper?.realIndex]);
+
+   
+  }, [gallerySwiperRef.current?.swiper?.realIndex]);
+
+
 
   return (<>
     {item.carouselitem &&     <Suspense fallback={<LoadSpinner />}>
@@ -34,7 +41,9 @@ const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex, isActive }) =
         slide={slide}
         videoRef={videoRef}
         loop={false}
-        localMuted={true}
+        keynm={keynm}
+        autoPlay={false}
+    
       />
 
 

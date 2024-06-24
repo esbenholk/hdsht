@@ -38,10 +38,12 @@ const VideoHero = ({ slice }) => {
       <motion.div className={styles.Container}>
             <div className={styles.VideoContainer}>
               <MediaResolver
+                  autoPlay={true}
                   media={slice.primary.videolink}
                   videoRef={videoRef}
                   loop={true}
                   isVideoHeader={true}
+                  keynm={"videoheader"}
                   />
 
                  

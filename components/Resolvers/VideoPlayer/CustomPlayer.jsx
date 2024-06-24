@@ -1,23 +1,30 @@
 import styles from "./VideoPlayer.module.scss";
 import useVideo from "../States/Video";
 import useCursor from "../States/Cursor";
+import { useState, useEffect } from "react";
 
-const CustomPlayer = ({ media, videoRef, isActive, localMuted }) => {
+const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
   //make a custom video player that uses the media.url as src and scales to it's dimensions, as well as updates the currentTime and duration of useVideo
   //   make a regex that checks the media.rul prefix and returns a source JSX elemt with the correct type
   //   make a useEffect that updates the currentTime and duration of useVideo
   const url = useCursor((state) => state.url);
   const muted = useCursor((state) => state.muted);
+  const [localMuted, setMuted] = useState(true);
 
+
+  useEffect(()=>{
+    console.log("current slide", isActive);
+  },[])
 
   return (
     <div className={url.includes("work") ? styles.VideoWrapperInWork : styles.VideoWrapper} >
       <video
+        id={keynm}
         className={styles.Video}
         loop
-        autoPlay={isActive}
+        autoPlay={true}
         playsInline
-        muted={localMuted ? localMuted : muted}
+        muted={!muted && !localMuted ? false : true}
         controls={false}
         onLoadedMetadata={() => {
           useVideo.setState({
@@ -48,14 +55,11 @@ const CustomPlayer = ({ media, videoRef, isActive, localMuted }) => {
           });
         }}
         onMouseEnter={()=>{
-          if(videoRef && videoRef.current){
-            videoRef.current.play();
-          }
+          setMuted(false);
         }}
         onMouseLeave={()=>{
-          if(videoRef && videoRef.current){
-            videoRef.current.pause();
-          }
+            setMuted(false);
+       
         }}
       >
         {

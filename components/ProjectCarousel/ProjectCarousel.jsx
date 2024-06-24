@@ -10,8 +10,6 @@ import "swiper/scss/effect-fade";
 import "swiper/scss/navigation";
 import "swiper/scss/free-mode";
 import "swiper/scss/mousewheel";
-
-
 import {
   Navigation,
   Thumbs,
@@ -23,7 +21,6 @@ import {
   EffectFade
 } from "swiper";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
-
 import useVideo from "../Resolvers/States/Video";
 import {
   motion,
@@ -48,8 +45,6 @@ const slideInFromBottom = {
     },
   },
 };
-
-
 function JumbleWordInElement(element, word, speed){
   const letters = "!!ZX#¤%/&)(!?=`^*Ø?§╚╚¥┘ █Å@abcdefghijklmenopqurstpuwvxyzæøå_-_= 0172";
   let words = word.split(" ");
@@ -92,12 +87,6 @@ function JumbleWordInElement(element, word, speed){
     iteration += 1;
   },1);
 }
-
-
-
-
-
-
 const ProjectCarousel = ({ slice, project }) => {
   const gallerySwiperRef = useRef();
   const carousel = useRef();
@@ -120,16 +109,6 @@ const ProjectCarousel = ({ slice, project }) => {
   const infoRef = useRef();
   const creditRef = useRef();
 
-
-  useEffect(()=>{
-    let cursor = document.getElementById("Cross");
-    if(cursor){
-      let _section = cursor.getElementsByTagName("section")[0];
-      setSection(_section);
-    }
-    
-
-  },[])
   useEffect(() => {
     if (slice.items[slideIndex].carouselitem.kind === "image") {
       setCurrentSlide("image");
@@ -141,24 +120,7 @@ const ProjectCarousel = ({ slice, project }) => {
     }
   }, [slideIndex, currentVideo]);
 
-
-  // const handleScroll = () => {
-  //     setCursorExpanded(false);
-  //     useCursor.setState({
-  //       cursorVariant: "default",
-  //       isOverProject: false,
-  //       description:"",
-  //       title: "",
-  //       shouldrenderdetailsontop: false,
-  //       instruction: "click to read",
-  //       carouselTopLeftPos: {x:0,y: 0}
-  //     });
-
-  //   window.removeEventListener('scroll', handleScroll);
-
-  // };
   const timer = useRef(0);
-
   useEffect(() => {
     timer.current = setInterval(() => {
       if (!paused) {
@@ -173,6 +135,8 @@ const ProjectCarousel = ({ slice, project }) => {
     setSeconds(0);
   };
   useEffect(() => {
+
+    console.log("renders carousel");
     const gallerySwiper = gallerySwiperRef.current?.swiper;
     const thumbnailSwiper = thumbSwiperRef.current?.swiper;
 
@@ -242,8 +206,6 @@ const ProjectCarousel = ({ slice, project }) => {
       shouldrenderdetailsontop: false
     });
   };
-
-
   const handleClick = (e, item)=>{
   
     if(infoIsExpanded){
@@ -316,6 +278,21 @@ const ProjectCarousel = ({ slice, project }) => {
             setCurrentVideo(null);
           }
           resetTimer();
+
+          let videos = document.getElementsByTagName("video");
+          for (let index = 0; index < videos.length; index++) {
+            if(videos[index].id != "videoheader"){
+              videos[index].pause();
+            }
+        
+            
+          }
+          let _currentVideo = document.getElementById(project.data.title + gallerySwiperRef.current?.swiper?.realIndex)
+          if(_currentVideo){
+            console.log("has current video", _currentVideo);
+            _currentVideo.play();
+          }
+      
         }}
         onMouseOver={() => {
           handleHover(project);
@@ -351,19 +328,23 @@ const ProjectCarousel = ({ slice, project }) => {
               key={i}
               // onMouseOver={handleSlide}
      
-              onMouseOver={() => {
-                handleHover(project);
-              }}
-              onMouseLeave={handleLeave}
+              // onMouseOver={() => {
+              //   handleHover(project);
+              // }}
+              // onMouseLeave={handleLeave}
             >
               {({ isActive }) => (
-                   <GallerySlide
+                <>
+                <GallerySlide
+                keynm={project.data.title + i}
                 item={item}
                 gallerySwiperRef={gallerySwiperRef}
                 slice={slice}
                 isActive={isActive}
                 slideIndex={slideIndex}
               />
+                </>
+          
               )}
            
             </SwiperSlide>
@@ -371,7 +352,7 @@ const ProjectCarousel = ({ slice, project }) => {
         })}
       </Swiper>
      
-          <Swiper
+        <Swiper
           onSwiper={setThumbsSwiper}
           ref={thumbSwiperRef}
           className={`${styles.ThumbSwiper}  ${infoIsExpanded && styles.Hidden}`}
