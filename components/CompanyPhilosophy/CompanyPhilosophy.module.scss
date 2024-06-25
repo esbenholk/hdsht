@@ -41,10 +41,10 @@
     .Description {
       // padding: 1rem;
       width: 66% !important;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      // display: flex;
+      // flex-direction: column;
+      // align-items: center;
+      // justify-content: center;
       .DescriptionWImage {
         padding: 1rem;
       }
@@ -53,10 +53,14 @@
         // height: 100%;
         // overflow: hidden;
         img {
-          width: 100%;
-          height: 100%;
+          width: calc(100% - 2rem);
+          // height: 100%;
           object-fit: cover;
+          border-radius:  2rem;
         }
+      }
+      h4, p{
+        font-size: var(--reg-font-size-mobile);
       }
     }
     .List {
@@ -106,7 +110,35 @@
   .Container {
     font-family: var(--secondary-font-reg);
     padding: var(--container-margin);
+    .Content{
+      .Description {
+        // padding: 1rem;
+        width: 100% !important;
+        // display: flex;
+        // flex-direction: column;
+        // align-items: center;
+        // justify-content: center;
+        .DescriptionWImage {
+          padding: 0rem;
+        }
+        .Image {
+          // width: 100%;
+          // height: 100%;
+          // overflow: hidden;
+          img {
+            width: calc(100%);
+            // height: 100%;
+            object-fit: cover;
+            border-radius:  2rem;
+          }
+        }
+        h4, p{
+          font-size: var(--reg-font-size-mobile);
+        }
+      }
 
+    }
+  
     svg {
       width: 100%;
       height: 100%;

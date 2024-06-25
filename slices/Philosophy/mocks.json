@@ -33,7 +33,7 @@
             "type",
             {
               "__TYPE__": "FieldContent",
-              "value": "List",
+              "value": "Description with image",
               "type": "Select"
             }
           ],

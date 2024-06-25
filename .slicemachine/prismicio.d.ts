@@ -1260,7 +1260,7 @@ export interface PhilosophySliceDefaultItem {
      * - **Documentation**: https://prismic.io/docs/core-concepts/select
      *
      */
-    type: prismicT.SelectField<"Description with image" | "List" | "client logo grid" | "work example carousel">;
+    type: prismicT.SelectField<"Description with image" | "List">;
     /**
      * Category field in *Philosophy → Items*
      *
@@ -1490,101 +1490,6 @@ type StickyHeaderSliceVariation = StickyHeaderSliceDefault;
  */
 export type StickyHeaderSlice = prismicT.SharedSlice<"sticky_header", StickyHeaderSliceVariation>;
 /**
- * Primary content in Structure → Primary
- *
- */
-interface StructureSliceDefaultPrimary {
-    /**
-     * Title field in *Structure → Primary*
-     *
-     * - **Field Type**: Title
-     * - **Placeholder**: *None*
-     * - **API ID Path**: structure.primary.title
-     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-     *
-     */
-    title: prismicT.TitleField;
-    /**
-     * SubOrder field in *Structure → Primary*
-     *
-     * - **Field Type**: Number
-     * - **Placeholder**: *None*
-     * - **API ID Path**: structure.primary.suborder
-     * - **Documentation**: https://prismic.io/docs/core-concepts/number
-     *
-     */
-    suborder: prismicT.NumberField;
-    /**
-     * Order field in *Structure → Primary*
-     *
-     * - **Field Type**: Number
-     * - **Placeholder**: *None*
-     * - **API ID Path**: structure.primary.order
-     * - **Documentation**: https://prismic.io/docs/core-concepts/number
-     *
-     */
-    order: prismicT.NumberField;
-}
-/**
- * Item in Structure → Items
- *
- */
-export interface StructureSliceDefaultItem {
-    /**
-     * Location field in *Structure → Items*
-     *
-     * - **Field Type**: Title
-     * - **Placeholder**: *None*
-     * - **API ID Path**: structure.items[].location
-     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-     *
-     */
-    location: prismicT.TitleField;
-    /**
-     * Category Title field in *Structure → Items*
-     *
-     * - **Field Type**: Title
-     * - **Placeholder**: *None*
-     * - **API ID Path**: structure.items[].category_title
-     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-     *
-     */
-    category_title: prismicT.TitleField;
-    /**
-     * List field in *Structure → Items*
-     *
-     * - **Field Type**: Rich Text
-     * - **Placeholder**: *None*
-     * - **API ID Path**: structure.items[].list
-     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-     *
-     */
-    list: prismicT.RichTextField;
-}
-/**
- * Default variation for Structure Slice
- *
- * - **API ID**: `default`
- * - **Description**: `Structure`
- * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
- *
- */
-export type StructureSliceDefault = prismicT.SharedSliceVariation<"default", Simplify<StructureSliceDefaultPrimary>, Simplify<StructureSliceDefaultItem>>;
-/**
- * Slice variation for *Structure*
- *
- */
-type StructureSliceVariation = StructureSliceDefault;
-/**
- * Structure Shared Slice
- *
- * - **API ID**: `structure`
- * - **Description**: `Structure`
- * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
- *
- */
-export type StructureSlice = prismicT.SharedSlice<"structure", StructureSliceVariation>;
-/**
  * Primary content in WorkCarousel → Primary
  *
  */
@@ -1739,6 +1644,6 @@ declare module "@prismicio/client" {
         (repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
     }
     namespace Content {
-        export type { LandingDocumentData, LandingDocumentDataSlicesSlice, LandingDocument, PageDocumentData, PageDocumentDataSlicesSlice, PageDocument, SettingsDocumentData, SettingsDocumentDataSlicesSlice, SettingsDocument, WorkDocumentData, WorkDocumentDataSlicesSlice, WorkDocument, AllDocumentTypes, AddressSliceDefaultPrimary, AddressSliceDefaultItem, AddressSliceDefault, AddressSliceVariation, AddressSlice, RichTextSliceDefaultPrimary, RichTextSliceDefaultItem, RichTextSliceDefault, RichTextSliceVariation, RichTextSlice, TextSliceDefaultPrimary, TextSliceDefaultItem, TextSliceDefault, TextSliceVariation, TextSlice, ClientLogosSliceDefaultPrimary, ClientLogosSliceDefaultItem, ClientLogosSliceDefault, ClientLogosSliceVariation, ClientLogosSlice, ContactSliceDefaultPrimary, ContactSliceDefaultItem, ContactSliceDefault, ContactSliceVariation, ContactSlice, CookieFooterSliceDefaultPrimary, CookieFooterSliceDefault, CookieFooterSliceVariation, CookieFooterSlice, CreditFooterSliceDefaultPrimary, CreditFooterSliceDefault, CreditFooterSliceVariation, CreditFooterSlice, HeroTextSliceDefaultItem, HeroTextSliceDefault, HeroTextSliceVariation, HeroTextSlice, HeroVideoSliceDefaultPrimary, HeroVideoSliceDefault, HeroVideoSliceVariation, HeroVideoSlice, ImageSliceSliceDefaultPrimary, ImageSliceSliceDefault, ImageSliceSliceVariation, ImageSliceSlice, LinksSliceDefaultItem, LinksSliceDefault, LinksSliceVariation, LinksSlice, MediaArraySliceDefaultPrimary, MediaArraySliceDefaultItem, MediaArraySliceDefault, MediaArraySliceVariation, MediaArraySlice, PhilosophySliceDefaultPrimary, PhilosophySliceDefaultItem, PhilosophySliceDefault, PhilosophySliceVariation, PhilosophySlice, ProfileWorkGridSliceDefaultPrimary, ProfileWorkGridSliceDefaultItem, ProfileWorkGridSliceDefault, ProfileWorkGridSliceVariation, ProfileWorkGridSlice, StickyHeaderSliceDefaultPrimary, StickyHeaderSliceDefault, StickyHeaderSliceVariation, StickyHeaderSlice, StructureSliceDefaultPrimary, StructureSliceDefaultItem, StructureSliceDefault, StructureSliceVariation, StructureSlice, WorkCarouselSliceDefaultPrimary, WorkCarouselSliceDefaultItem, WorkCarouselSliceDefault, WorkCarouselSliceVariation, WorkCarouselSlice, WorkGridSliceDefaultPrimary, WorkGridSliceDefaultItem, WorkGridSliceDefault, WorkGridSliceVariation, WorkGridSlice };
+        export type { LandingDocumentData, LandingDocumentDataSlicesSlice, LandingDocument, PageDocumentData, PageDocumentDataSlicesSlice, PageDocument, SettingsDocumentData, SettingsDocumentDataSlicesSlice, SettingsDocument, WorkDocumentData, WorkDocumentDataSlicesSlice, WorkDocument, AllDocumentTypes, AddressSliceDefaultPrimary, AddressSliceDefaultItem, AddressSliceDefault, AddressSliceVariation, AddressSlice, RichTextSliceDefaultPrimary, RichTextSliceDefaultItem, RichTextSliceDefault, RichTextSliceVariation, RichTextSlice, TextSliceDefaultPrimary, TextSliceDefaultItem, TextSliceDefault, TextSliceVariation, TextSlice, ClientLogosSliceDefaultPrimary, ClientLogosSliceDefaultItem, ClientLogosSliceDefault, ClientLogosSliceVariation, ClientLogosSlice, ContactSliceDefaultPrimary, ContactSliceDefaultItem, ContactSliceDefault, ContactSliceVariation, ContactSlice, CookieFooterSliceDefaultPrimary, CookieFooterSliceDefault, CookieFooterSliceVariation, CookieFooterSlice, CreditFooterSliceDefaultPrimary, CreditFooterSliceDefault, CreditFooterSliceVariation, CreditFooterSlice, HeroTextSliceDefaultItem, HeroTextSliceDefault, HeroTextSliceVariation, HeroTextSlice, HeroVideoSliceDefaultPrimary, HeroVideoSliceDefault, HeroVideoSliceVariation, HeroVideoSlice, ImageSliceSliceDefaultPrimary, ImageSliceSliceDefault, ImageSliceSliceVariation, ImageSliceSlice, LinksSliceDefaultItem, LinksSliceDefault, LinksSliceVariation, LinksSlice, MediaArraySliceDefaultPrimary, MediaArraySliceDefaultItem, MediaArraySliceDefault, MediaArraySliceVariation, MediaArraySlice, PhilosophySliceDefaultPrimary, PhilosophySliceDefaultItem, PhilosophySliceDefault, PhilosophySliceVariation, PhilosophySlice, ProfileWorkGridSliceDefaultPrimary, ProfileWorkGridSliceDefaultItem, ProfileWorkGridSliceDefault, ProfileWorkGridSliceVariation, ProfileWorkGridSlice, StickyHeaderSliceDefaultPrimary, StickyHeaderSliceDefault, StickyHeaderSliceVariation, StickyHeaderSlice, WorkCarouselSliceDefaultPrimary, WorkCarouselSliceDefaultItem, WorkCarouselSliceDefault, WorkCarouselSliceVariation, WorkCarouselSlice, WorkGridSliceDefaultPrimary, WorkGridSliceDefaultItem, WorkGridSliceDefault, WorkGridSliceVariation, WorkGridSlice };
     }
 }

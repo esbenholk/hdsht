@@ -15,7 +15,6 @@ import MediaArray from './MediaArray';
 import Philosophy from './Philosophy';
 import ProfileWorkGrid from './ProfileWorkGrid';
 import StickyHeader from './StickyHeader';
-
 import WorkCarousel from './WorkCarousel';
 import WorkGrid from './WorkGrid';
 
@@ -55,7 +54,6 @@ export const components = {
 	philosophy: Philosophy,
 	profile_work_grid: ProfileWorkGrid,
 	sticky_header: StickyHeader,
-
 	work_carousel: WorkCarousel,
 	work_grid: WorkGrid,
 };
