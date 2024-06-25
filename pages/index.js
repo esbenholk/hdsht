@@ -169,17 +169,23 @@ const Page = ({ page }) => {
         </motion.div>
     
         {isDesktop && 
-        <>
           <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: width>600 ? `calc(100% - ${height-foldedHeight+45}px - ${footerOffset*2}px)`: "8rem", backgroundColor: "var(--main-bg-color)"}}>
           </div>
-
-        <div className={styles.LogoHeader}style={{display: "flex", justifyContent: "center",  alignItems:"center", width: "100%", position: "fixed", zIndex: 1, top: "0", maxHeight: "4.6rem", minHeight: width<600 ? "60px" : 0,  overflow: "hidden", transition: "opacity 0.0s ease-in", padding: "0rem 1rem", opacity: headerInPosition ? 1 :0, transition: "all 0.1s"}}>
-        <img src={Logo.src} alt="logo" style={{width: "calc(100%)"}}/>
-        </div>
-        </>
         }
+
+        {isDesktop && 
+          <div className={styles.LogoHeader}style={{ width: "100%", position: "fixed", zIndex: 1, top: "0", padding: "0rem 1rem", maxHeight: "4.6rem", minHeight: width<600 ? "60px" : 0,  overflow: "hidden", transition: "opacity 0.0s ease-in", opacity: headerInPosition ? 1 :0, transition: "all 0.1s"}}>
+            <img src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)", objectFit: "stretch"}}/>
+          </div>
+        }
+   
+
         <div style={{width: "100%", position: "fixed", zIndex: -1, top: 0, bottom:0, backgroundColor: "var(--main-bg-color)", opacity: headerInPosition ? 1 :0, transition: "all 0.1s"}}>
         </div>
+
+
+
+
       </>
     )
   );

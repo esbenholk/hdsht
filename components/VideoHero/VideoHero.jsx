@@ -1,35 +1,71 @@
 import styles from "./VideoHero.module.scss";
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import MediaResolver from "../Resolvers/MediaResolver/MediaResolver";
-// import { PrismicRichText } from "@prismicio/react";
-// import Layout from "../Layout/Layout";
-// import { TypeShuffle } from "./TypeShuffle";
-// import Shuffle from "./Shuffle";
-// import VideoCanvas from "../Resolvers/videoCanvas";
-// import ThreeD from "../threeD/threeD";
-// import AiVideoCanvas from "./aiImageCanvas";
-// import PixelCanvas from "../Resolvers/_pixelCanvasForImages";
-// import PixelCanvasVideo from "../Resolvers/_pixelCanvasForVideo";
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
-
+import useCursor from "../Resolvers/States/Cursor";
+import Logo from 'assets/svg/HDSHT_HD.svg';
 
 const VideoHero = ({ slice }) => {
   const videoRef = useRef();
   const span = useRef();
+  const muted = useCursor((state) => state.muted);
 
-  const [isMobile, setIsMobile] = useState();
+  const [isDesktop, setIsDesktop] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const {width} = useWindowDimensions();
+  const {width, height} = useWindowDimensions();
+  const logoRef = useRef();
+  const [headerInPosition, setHeaderInPosition] = useState(false);
+  const [localMuted, setMuted] = useState(false);
+
+
+  useEffect(() => {
+    console.log("welcome to HDSHT");
+    const handleScroll = () => {
+
+
+      // if(logoRef.current ){
+      //   const itemOffset = logoRef.current.getBoundingClientRect().y;
+      //   if (itemOffset < -50) {
+      //     setLogoInPosition(true);
+      //     setMuted(true);
+      //   } else {
+      //     setLogoInPosition(false);
+      //     setMuted(false);
+      //   }
+      // }
+
+      let h3s = document.getElementsByTagName('h3');
+      if(h3s[0]){
+        let stickyPosY = h3s[0].getBoundingClientRect().y;
+  
+       
+        if(stickyPosY<50 ){
+          setHeaderInPosition(true);
+          setMuted(true);
+
+        } else {
+          setHeaderInPosition(false);
+          setMuted(false);
+
+        }
+      }
+
+    }; 
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
 
+    // console.log("PAGE", page);
+    const userAgent = navigator.userAgent;
+    const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+    setIsDesktop(!mobile);
     setLoaded(true);
-    if(width < 600){
-      setIsMobile(true);
-
-    }
-  }, []);
+  }, [width]);
 
 
 
@@ -37,37 +73,40 @@ const VideoHero = ({ slice }) => {
     loaded && (
       <motion.div className={styles.Container}>
             <div className={styles.VideoContainer}>
-              <MediaResolver
+                <video
+                  id={"videoheader"}
+                  className={styles.Video}
+                  loop
                   autoPlay={true}
-                  media={slice.primary.videolink}
-                  videoRef={videoRef}
-                  loop={true}
-                  isVideoHeader={true}
-                  keynm={"videoheader"}
-                  />
-
-                 
+                  playsInline
+                  muted={!muted && !localMuted ? false : true}
+                  controls={false}
+                  ref={videoRef}
+                  onError={(e) => {
+                    // console.log(e);
+                  }}
+                  onMouseEnter={()=>{
+                    setMuted(false);
+                  }}
+                  onMouseLeave={()=>{
+                      setMuted(false);
                 
-           
-              {/* object recognition in video cnavas */}
-              {/* <AiVideoCanvas  media={slice.primary.videolink}/> */}
+                  }}
+                >
+                  {
+                    slice.primary.videolink.url && <>
+                        {slice.primary.videolink.url.match(/.mp4/) && <source src={slice.primary.videolink.url} type="video/mp4" />}  
+                    </>
+                  }
 
-                {/* simple image in pixelation canvas */}
-                {/* <PixelCanvas imageUrl={slice.primary.image.url} image={slice.primary.image} /> */}
+                </video>
 
-                {/* video in pixelation canvas */}
-                {/* <PixelCanvasVideo  imageUrl={slice.primary.image.url} videoUrl={slice.primary.videolink.url}/> */}
-                
-                {/* rain shader */}
-                {/* <ThreeD image={slice.primary.image}/> */}
-              
-       
-           
+
             </div>
 
-   
-        
+    
 
+            
       </motion.div>
     )
   );

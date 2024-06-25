@@ -13,9 +13,10 @@
     height: inherit !important;
 
     img {
-      width: 100% !important;
+      // width: 100% !important;
       height: 100%;
-      object-fit: cover;
+      width: fit-content;
+      object-fit: contain;
       border-radius: 2rem;
       // border: 1px solid  white;
     }
@@ -67,7 +68,8 @@
     max-height: 70vh;
     margin: var(--container-margin);
     direction: rtl;
-  
+    pointer-events: none;
+
   
     div{
       position: relative;
@@ -268,7 +270,6 @@
       max-height: none;
       margin: 0;
       direction: rtl;
-
       div{
         position: relative;
         padding: 0rem;

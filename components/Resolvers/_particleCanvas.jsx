@@ -179,15 +179,8 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
 
         setImage(myImage);
 
-        window.addEventListener('resize', restartImage);
 
-        return () => {
-            window.removeEventListener('resize', restartImage);
-
-            window.cancelAnimationFrame(animationFrameId);
-        };
-
-    },[])
+    },[width])
 
 
     useEffect(()=>{
@@ -211,20 +204,21 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
     };
 
     const startImage = (image, _context, _effect) =>{
-            
-        if(canvas.current){
+        console.log("starts image", image);
 
+        if(canvas.current){
             let imageWidthHolder = image.width;
             let imageHeightHolder = image.height;
             if(imageWidthHolder > width){
                 imageWidthHolder = width;
-                imageHeightHolder = image.height * (image.width/image.height);
+                imageHeightHolder = image.height * (imageWidthHolder /image.height);
             }
             imageWidthHolder = width-100;
             imageHeightHolder = imageWidthHolder / (image.width/image.height);
 
             _context.clearRect(0,0,width, canvas.current.height);
             // _context.drawImage(myImage, 100, 100, 100, 100);
+            console.log("starts image", image, imageWidthHolder);
 
             _context.drawImage(image, canvas.current.width*0.5-imageWidthHolder*0.5,canvas.current.height*0.5-imageHeightHolder*0.5, imageWidthHolder, imageHeightHolder);
             _effect.init(_context);
@@ -248,7 +242,9 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
 
 
     function restartImage(){
+     
         if(context && effect && image){
+            console.log("restarts image");
             startImage(image, context, effect);
 
         }

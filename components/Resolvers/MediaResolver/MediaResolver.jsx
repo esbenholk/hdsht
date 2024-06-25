@@ -1,7 +1,7 @@
 import Image from "next/image";
 import CustomPlayer from "../VideoPlayer/CustomPlayer";
 
-const MediaResolver = ({ media, videoRef, keynm, isActive, height, localMuted, autoPlay }) => {
+const MediaResolver = ({isVideoHeader, media, videoRef, keynm, isActive, height, localMuted, autoPlay }) => {
 
   // if (
   //   media.kind === "document" &&

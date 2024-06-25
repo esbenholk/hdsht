@@ -101,9 +101,8 @@ const ProjectCarousel = ({ slice, project }) => {
   const nexturl = useCursor((state) => state.nexturl);
   const url = useCursor((state) => state.url);
   // const [isVisible, setIsVisible] = useState(false);
-  const {width, height} = useWindowDimensions();
+  const {width} = useWindowDimensions();
   const [section, setSection] = useState();
-  const [cursorExpanded, setCursorExpanded] = useState(false);
 
   const [infoIsExpanded, setINfoIsExpanded] = useState(false);
   const infoRef = useRef();
@@ -114,8 +113,7 @@ const ProjectCarousel = ({ slice, project }) => {
       setCurrentSlide("image");
       setCurrentVideo(null);
       useVideo.setState({ duration: null, currentTime: null });
-    }
-    if (slice.items[slideIndex].carouselitem.kind === "document") {
+    } else {
       setCurrentSlide("video");
     }
   }, [slideIndex, currentVideo]);
@@ -135,11 +133,8 @@ const ProjectCarousel = ({ slice, project }) => {
     setSeconds(0);
   };
   useEffect(() => {
-
-    console.log("renders carousel");
     const gallerySwiper = gallerySwiperRef.current?.swiper;
     const thumbnailSwiper = thumbSwiperRef.current?.swiper;
-
     if (gallerySwiper.controller && thumbnailSwiper.controller) {
       gallerySwiper.controller.control = thumbnailSwiper;
       thumbnailSwiper.controller.control = gallerySwiper;
@@ -168,6 +163,7 @@ const ProjectCarousel = ({ slice, project }) => {
 
   useEffect(() => {
     if(hovered){
+      console.log(currentSlide, duration);
       const trigger = currentSlide === "image" ? 5 : duration;
       if (seconds > trigger && !paused) {
         gallerySwiperRef.current.swiper.slideNext();
@@ -214,6 +210,23 @@ const ProjectCarousel = ({ slice, project }) => {
    
   }
 
+  function pauseVideos(){
+    let videos = document.getElementsByTagName("video");
+    for (let index = 0; index < videos.length; index++) {
+      if(videos[index].id != "videoheader"){
+        videos[index].pause();
+      }    
+    }
+  }
+
+  function playCurrentVideo(){
+    let _currentVideo = document.getElementById(project.data.title + gallerySwiperRef.current?.swiper?.realIndex)
+          if(_currentVideo){
+            console.log("has current video", _currentVideo);
+            _currentVideo.play();
+          }
+      
+  }
 
   // url.includes("work") ? styles.WorkCarouselContainer : 
   return (
@@ -227,8 +240,12 @@ const ProjectCarousel = ({ slice, project }) => {
       onMouseOver={()=>{
         setHovered(true);
       }}
+      onMouseEnter={()=>{
+        playCurrentVideo();
+      }}
       onMouseLeave={()=>{
         setHovered(false);
+        pauseVideos();
       }}
       onClick={(e)=>{
         if(!url.includes("work")){
@@ -256,7 +273,6 @@ const ProjectCarousel = ({ slice, project }) => {
         slidesPerView={1}
         loop={true}
         effect={"fade"}
-
         thumbs={{
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
@@ -279,20 +295,8 @@ const ProjectCarousel = ({ slice, project }) => {
           }
           resetTimer();
 
-          let videos = document.getElementsByTagName("video");
-          for (let index = 0; index < videos.length; index++) {
-            if(videos[index].id != "videoheader"){
-              videos[index].pause();
-            }
-        
-            
-          }
-          let _currentVideo = document.getElementById(project.data.title + gallerySwiperRef.current?.swiper?.realIndex)
-          if(_currentVideo){
-            console.log("has current video", _currentVideo);
-            _currentVideo.play();
-          }
-      
+          pauseVideos();
+          playCurrentVideo();  
         }}
         onMouseOver={() => {
           handleHover(project);
