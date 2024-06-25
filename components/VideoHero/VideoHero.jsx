@@ -39,7 +39,7 @@ const VideoHero = ({ slice }) => {
         let stickyPosY = h3s[0].getBoundingClientRect().y;
   
        
-        if(stickyPosY<50 ){
+        if(stickyPosY<150 ){
           setHeaderInPosition(true);
           setMuted(true);
 

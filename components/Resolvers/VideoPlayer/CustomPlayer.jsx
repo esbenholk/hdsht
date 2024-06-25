@@ -1,7 +1,34 @@
 import styles from "./VideoPlayer.module.scss";
 import useVideo from "../States/Video";
 import useCursor from "../States/Cursor";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import useWindowDimensions from "../UseWindowDimensions";
+
+
+function useIsInViewport(ref) {
+  const [isIntersecting, setIsIntersecting] = useState(false);
+
+  const observer = useMemo(
+    () =>
+      new IntersectionObserver(([entry]) =>
+        setIsIntersecting(entry.isIntersecting),
+      ),
+    [],
+  );
+
+  useEffect(() => {
+    if(ref){
+      observer.observe(ref.current);
+    }
+
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [ref, observer]);
+
+  return isIntersecting;
+}
 
 const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
   //make a custom video player that uses the media.url as src and scales to it's dimensions, as well as updates the currentTime and duration of useVideo
@@ -10,21 +37,28 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
   const url = useCursor((state) => state.url);
   const muted = useCursor((state) => state.muted);
   const [localMuted, setMuted] = useState(true);
-
+  const isInViewport = useIsInViewport(videoRef);
 
   useEffect(()=>{
-    console.log("current slide", isActive);
-  },[])
+    if(isInViewport && isActive && videoRef){
+      videoRef.current.play();
+    }
+  },[isInViewport])
+
+
+  
+
 
   return (
     <div className={url.includes("work") ? styles.VideoWrapperInWork : styles.VideoWrapper} >
       <video
+        ref={videoRef}
         id={keynm}
         className={styles.Video}
         loop
         autoPlay={true}
         playsInline
-        muted={!muted && !localMuted ? false : true}
+        muted={isInViewport && !muted && !localMuted  ? false : true}
         controls={false}
         onLoadedMetadata={() => {
           useVideo.setState({
