@@ -92,15 +92,15 @@
 
   left: 0;
   right: 0;
-  bottom:0;
+  // bottom:0;
   height: calc(100% - 9rem );
   backdrop-filter: blur(10px) saturate(50%) !important;
   z-index: 4;
   transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
-  border-bottom-left-radius: 3rem;
-  border-bottom-right-radius: 3rem;
+  border-top-left-radius: 3rem;
+  border-top-right-radius: 3rem;
   border: 1px solid black;
-  padding: 4.5rem 1rem 4.5rem  1rem;
+  padding: 2rem 1rem 4.5rem  1rem;
   // border-radius: 1rem 0 0 1rem;
   // mix-blend-mode: var(--mix-blend-mode);
   filter: invert(1);
@@ -179,11 +179,11 @@
 }
 
 .Open{
-  top: 0;
+  bottom: 0%;
 
 }
 .Closed {
-  top: -130%;
+  bottom: -130%;
 }
 
 //write media queries for mobile here

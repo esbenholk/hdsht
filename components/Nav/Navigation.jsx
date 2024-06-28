@@ -125,7 +125,7 @@ export function Navigation({ slice, logo, links, settings }) {
 
           
         </motion.div>
-
+{/* 
         <div className={styles.NavContainer}>
           <div
             className={styles.ToggleBtn}
@@ -195,8 +195,12 @@ export function Navigation({ slice, logo, links, settings }) {
             ></motion.div>
           </div>
         </div>
-  
-        <div className={styles.BottomNavContainer}>
+   */}
+        <div className={styles.BottomNavContainer}          
+            ref={toggle}
+            onClick={SlideIn}
+            onMouseOver={handleHover}
+            onMouseLeave={handleMouseLeave}>
           <img src={logo.url} alt="logo"/>
         </div>
       </>
