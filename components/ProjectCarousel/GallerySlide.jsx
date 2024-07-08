@@ -43,6 +43,7 @@ const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex, isActive, key
         loop={false}
         keynm={keynm}
         autoPlay={false}
+        item={item}
     
       />
 
