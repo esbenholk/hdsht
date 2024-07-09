@@ -1,0 +1,346 @@
+[
+  {
+    "uid": {
+      "__TYPE__": "UIDContent",
+      "value": "raw"
+    },
+    "title": {
+      "__TYPE__": "FieldContent",
+      "value": "kids",
+      "type": "Text"
+    },
+    "description": {
+      "__TYPE__": "FieldContent",
+      "value": "earlier",
+      "type": "Text"
+    },
+    "keywords": {
+      "__TYPE__": "FieldContent",
+      "value": "victory",
+      "type": "Text"
+    },
+    "slices": {
+      "__TYPE__": "SliceContentType",
+      "value": [
+        {
+          "key": "work_grid$d71436e8-c8d3-407e-8003-2e1e5d6cfbdd",
+          "name": "work_grid",
+          "widget": {
+            "__TYPE__": "SharedSliceContent",
+            "variation": "default",
+            "primary": {
+              "order": {
+                "__TYPE__": "FieldContent",
+                "value": "53",
+                "type": "Number"
+              },
+              "negative_order": {
+                "__TYPE__": "FieldContent",
+                "value": "33",
+                "type": "Number"
+              }
+            },
+            "items": [
+              {
+                "__TYPE__": "GroupItemContent",
+                "value": [
+                  [
+                    "project_title",
+                    {
+                      "__TYPE__": "FieldContent",
+                      "value": "combination",
+                      "type": "Text"
+                    }
+                  ],
+                  [
+                    "description",
+                    {
+                      "__TYPE__": "StructuredTextContent",
+                      "value": [
+                        {
+                          "type": "paragraph",
+                          "content": {
+                            "text": "Culpa ad do anim. Aute dolor irure nostrud. Eiusmod non aute pariatur."
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  [
+                    "work",
+                    {
+                      "__TYPE__": "LinkContent",
+                      "value": {
+                        "__TYPE__": "DocumentLink",
+                        "id": "mock_document_id"
+                      }
+                    }
+                  ]
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "key": "image_slice$bf8bb9fe-4f80-4bd9-9096-d389a28f6f9e",
+          "name": "image_slice",
+          "widget": {
+            "__TYPE__": "SharedSliceContent",
+            "variation": "default",
+            "primary": {
+              "title": {
+                "__TYPE__": "StructuredTextContent",
+                "value": [
+                  {
+                    "type": "heading1",
+                    "content": {
+                      "text": "Income"
+                    }
+                  }
+                ]
+              },
+              "image": {
+                "__TYPE__": "ImageContent",
+                "origin": {
+                  "id": "main",
+                  "url": "https://images.unsplash.com/photo-1586952518485-11b180e92764",
+                  "width": 4172,
+                  "height": 4000
+                },
+                "url": "https://images.unsplash.com/photo-1586952518485-11b180e92764",
+                "width": 4172,
+                "height": 4000,
+                "edit": {
+                  "zoom": 1,
+                  "crop": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "background": "transparent"
+                },
+                "thumbnails": {}
+              }
+            },
+            "items": [
+              {
+                "__TYPE__": "GroupItemContent",
+                "value": []
+              }
+            ]
+          }
+        },
+        {
+          "key": "rich_text$58a9443b-46fc-40d3-b382-16e8b3fd75b3",
+          "name": "rich_text",
+          "widget": {
+            "__TYPE__": "SharedSliceContent",
+            "variation": "default",
+            "primary": {
+              "title": {
+                "__TYPE__": "StructuredTextContent",
+                "value": [
+                  {
+                    "type": "heading1",
+                    "content": {
+                      "text": "Examine"
+                    }
+                  }
+                ]
+              }
+            },
+            "items": [
+              {
+                "__TYPE__": "GroupItemContent",
+                "value": [
+                  [
+                    "content",
+                    {
+                      "__TYPE__": "StructuredTextContent",
+                      "value": [
+                        {
+                          "type": "paragraph",
+                          "content": {
+                            "text": "Ad elit deserunt sint eiusmod esse cillum. Id aute proident irure labore esse in nostrud ex eu fugiat labore."
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "key": "contact$fb536ea8-1b10-4ceb-b75a-13cd58c9841b",
+          "name": "contact",
+          "widget": {
+            "__TYPE__": "SharedSliceContent",
+            "variation": "default",
+            "primary": {
+              "order": {
+                "__TYPE__": "FieldContent",
+                "value": "80",
+                "type": "Number"
+              },
+              "negative_order": {
+                "__TYPE__": "FieldContent",
+                "value": "12",
+                "type": "Number"
+              }
+            },
+            "items": [
+              {
+                "__TYPE__": "GroupItemContent",
+                "value": [
+                  [
+                    "title",
+                    {
+                      "__TYPE__": "StructuredTextContent",
+                      "value": [
+                        {
+                          "type": "heading3",
+                          "content": {
+                            "text": "While"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  [
+                    "address",
+                    {
+                      "__TYPE__": "StructuredTextContent",
+                      "value": [
+                        {
+                          "type": "paragraph",
+                          "content": {
+                            "text": "Nostrud deserunt ex laborum tempor anim aliquip tempor deserunt dolore esse voluptate veniam ullamco aliquip et."
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  [
+                    "link1",
+                    {
+                      "__TYPE__": "LinkContent",
+                      "value": {
+                        "__TYPE__": "ExternalLink",
+                        "url": "http://twitter.com"
+                      }
+                    }
+                  ],
+                  [
+                    "text1",
+                    {
+                      "__TYPE__": "FieldContent",
+                      "value": "fresh",
+                      "type": "Text"
+                    }
+                  ],
+                  [
+                    "link2",
+                    {
+                      "__TYPE__": "LinkContent",
+                      "value": {
+                        "__TYPE__": "ExternalLink",
+                        "url": "https://slicemachine.dev"
+                      }
+                    }
+                  ],
+                  [
+                    "text2",
+                    {
+                      "__TYPE__": "FieldContent",
+                      "value": "fine",
+                      "type": "Text"
+                    }
+                  ],
+                  [
+                    "link3",
+                    {
+                      "__TYPE__": "LinkContent",
+                      "value": {
+                        "__TYPE__": "ExternalLink",
+                        "url": "http://twitter.com"
+                      }
+                    }
+                  ],
+                  [
+                    "text3",
+                    {
+                      "__TYPE__": "FieldContent",
+                      "value": "sang",
+                      "type": "Text"
+                    }
+                  ],
+                  [
+                    "link4",
+                    {
+                      "__TYPE__": "LinkContent",
+                      "value": {
+                        "__TYPE__": "ExternalLink",
+                        "url": "https://prismic.io"
+                      }
+                    }
+                  ],
+                  [
+                    "text4",
+                    {
+                      "__TYPE__": "FieldContent",
+                      "value": "every",
+                      "type": "Text"
+                    }
+                  ],
+                  [
+                    "link5",
+                    {
+                      "__TYPE__": "LinkContent",
+                      "value": {
+                        "__TYPE__": "ExternalLink",
+                        "url": "https://prismic.io"
+                      }
+                    }
+                  ],
+                  [
+                    "text5",
+                    {
+                      "__TYPE__": "FieldContent",
+                      "value": "element",
+                      "type": "Text"
+                    }
+                  ]
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "key": "hero_text$7a9aeb97-9d8b-4a22-b82a-1a53c4501f71",
+          "name": "hero_text",
+          "widget": {
+            "__TYPE__": "SharedSliceContent",
+            "variation": "default",
+            "primary": {},
+            "items": [
+              {
+                "__TYPE__": "GroupItemContent",
+                "value": [
+                  [
+                    "hero_text",
+                    {
+                      "__TYPE__": "FieldContent",
+                      "value": "right",
+                      "type": "Text"
+                    }
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+]

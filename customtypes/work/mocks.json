@@ -1,0 +1,149 @@
+[
+  {
+    "uid": {
+      "__TYPE__": "UIDContent",
+      "value": "second"
+    },
+    "title": {
+      "__TYPE__": "FieldContent",
+      "value": "course",
+      "type": "Text"
+    },
+    "keywords": {
+      "__TYPE__": "FieldContent",
+      "value": "slow",
+      "type": "Text"
+    },
+    "nextwork": {
+      "__TYPE__": "LinkContent",
+      "value": {
+        "__TYPE__": "DocumentLink",
+        "id": "mock_document_id"
+      }
+    },
+    "description": {
+      "__TYPE__": "FieldContent",
+      "value": "job",
+      "type": "Text"
+    },
+    "credits": {
+      "__TYPE__": "FieldContent",
+      "value": "engine",
+      "type": "Text"
+    },
+    "slices": {
+      "__TYPE__": "SliceContentType",
+      "value": [
+        {
+          "key": "work_carousel$058aaef3-b11e-4d94-accd-53784d647860",
+          "name": "work_carousel",
+          "widget": {
+            "__TYPE__": "SharedSliceContent",
+            "variation": "default",
+            "primary": {
+              "title": {
+                "__TYPE__": "StructuredTextContent",
+                "value": [
+                  {
+                    "type": "heading1",
+                    "content": {
+                      "text": "Brief"
+                    }
+                  }
+                ]
+              }
+            },
+            "items": [
+              {
+                "__TYPE__": "GroupItemContent",
+                "value": [
+                  [
+                    "carouselitem",
+                    {
+                      "__TYPE__": "LinkContent",
+                      "value": {
+                        "id": "mock_Media_link",
+                        "kind": "image/jpeg",
+                        "name": "mock_name",
+                        "url": "https://source.unsplash.com/daily",
+                        "size": "0",
+                        "__TYPE__": "FileLink"
+                      }
+                    }
+                  ],
+                  [
+                    "thumb",
+                    {
+                      "__TYPE__": "LinkContent",
+                      "value": {
+                        "id": "mock_Media_link",
+                        "kind": "image/jpeg",
+                        "name": "mock_name",
+                        "url": "https://source.unsplash.com/daily",
+                        "size": "0",
+                        "__TYPE__": "FileLink"
+                      }
+                    }
+                  ]
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "key": "text$7be42d83-97c5-4562-8e3c-cbf2cf4b5fc7",
+          "name": "text",
+          "widget": {
+            "__TYPE__": "SharedSliceContent",
+            "variation": "default",
+            "primary": {
+              "title": {
+                "__TYPE__": "StructuredTextContent",
+                "value": [
+                  {
+                    "type": "heading1",
+                    "content": {
+                      "text": "Determine"
+                    }
+                  }
+                ]
+              },
+              "description": {
+                "__TYPE__": "StructuredTextContent",
+                "value": [
+                  {
+                    "type": "paragraph",
+                    "content": {
+                      "text": "Mollit velit deserunt cupidatat anim proident ullamco dolor elit Lorem qui Lorem ipsum nulla."
+                    }
+                  }
+                ]
+              }
+            },
+            "items": [
+              {
+                "__TYPE__": "GroupItemContent",
+                "value": [
+                  [
+                    "text_block",
+                    {
+                      "__TYPE__": "StructuredTextContent",
+                      "value": [
+                        {
+                          "type": "paragraph",
+                          "content": {
+                            "text": "Dolore do culpa nisi fugiat do enim duis."
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+]

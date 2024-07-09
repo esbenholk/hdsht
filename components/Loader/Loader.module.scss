@@ -1,6 +1,9 @@
   // background-color: var(--main-font-color-highlight);
 
+.ImageContainer{
+  mix-blend-mode: difference;
 
+}
 .Container{
   position: fixed;
   top:0%;
@@ -15,7 +18,6 @@
   transition: all 1.5s ease-in;
   background-repeat: no-repeat;
   background-size: cover;
-  mix-blend-mode: difference;
 
   //   --mask: linear-gradient(to top, 
   //     rgba(0,0,0, 1) 1%,

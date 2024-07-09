@@ -76,8 +76,8 @@ export default function Loader({settings}) {
         </div>
       }
       <motion.div
-      className={`${styles.Container}  ${!userHasEntered ? styles.On : styles.Off}`}
-      style={{backgroundImage: `url(${settings.data.slices[1] && settings.data.slices[1].items.length>0 && settings.data.slices[1].items[Math.floor(Math.random() * settings.data.slices[1].items.length)].media.url})`}}
+      className={`${styles.Container}  ${!userHasEntered ? styles.On : styles.Off} ${!settings.data.slices[1] && styles.ImageContainer}`}
+      style={{backgroundImage: `url(${settings.data.slices[1] && settings.data.slices[1].items.length>0 && settings.data.slices[1].items[Math.floor(Math.random() * settings.data.slices[1].items.length)].media.url})`, backgroundColor: "var(--main-border-glow-color)"}}
       onClick={(e)=>{
         //handleMouseDown(e);
 
