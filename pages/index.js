@@ -33,7 +33,12 @@ const Page = ({ page }) => {
 
 
   useEffect(() => {
-    console.log("welcome to HDSHT");
+    console.log("welcome to HDSHT", page.settings);
+
+
+    useCursor.setState({
+      loaderImage: page.settings.data.placeholderimage.url
+    });
     const handleScroll = () => {
 
 

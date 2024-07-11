@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import MediaResolver from "../Resolvers/MediaResolver/MediaResolver";
 import useVideo from "../Resolvers/States/Video";
 import styles from "./ProjectCarousel.module.scss";
 import Scrubber from "./Scrubber";
 import useCursor from "../Resolvers/States/Cursor";
+import Image from "next/image";
 
-const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused}) => {
+const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused, loaderImage}) => {
   const [activeVideo, setActiveVideo] = useState(false);
   const { duration } = useVideo();
+
 
   const handleHover = (item) => {
     useCursor.setState({
@@ -33,6 +34,7 @@ const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused}) => {
   };
 
   useEffect(() => {
+  
     if (
       gallerySwiperRef?.current?.swiper?.realIndex === slice.items.indexOf(item)
     ) {
@@ -42,41 +44,39 @@ const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused}) => {
     }
   }, [gallerySwiperRef?.current?.swiper?.realIndex]);
 
-  if (item.thumb && item.thumb.url) {
-    return (
-      <div        
-        onMouseOver={() => {
-          handleHover();
-        }}
-        onMouseLeave={() => {
-          handleLeave();
-        }}>
-        <MediaResolver media={item.thumb} className={styles.VideoThumb} localMuted={true}/>
 
-        {activeVideo && (
-          <Scrubber
-            paused={paused}
-            slice={slice}
-            item={item}
-            slideIndex={slideIndex}
-            activeVideo={activeVideo}
+
+  return (
+    <div  
+    onMouseOver={() => {
+      handleHover();
+    }}
+    onMouseLeave={() => {
+      handleLeave();
+    }}>
+      {item.carouselitem && 
+        <>
+          <Image
+              loading="lazy"
+              src={item.thumb && item.thumb.url ? item.thumb.url : item.carouselitem.kind === "image" ? item.carouselitem.url : loaderImage}
+              width={item.thumb && item.thumb.width ? 20 : 100}
+              height={200}
+              alt={item.carouselitem.name}
+              className={styles.VideoThumb} 
           />
-        )}
-      </div>
-    );
-  } else {
-    return (
-      <div     
-      onMouseOver={() => {
-        handleHover();
-      }}
-      onMouseLeave={() => {
-        handleLeave();
-      }}>
-      <MediaResolver media={item.carouselitem} className={styles.ImageThumb} localMuted={true}/>
+          {activeVideo && (
+              <Scrubber
+                paused={paused}
+                slice={slice}
+                item={item}
+                slideIndex={slideIndex}
+                activeVideo={activeVideo}
+              />
+          )}
+        </>   
+      }
      
-      </div>
-    );
-  }
+    </div>
+  );
 };
 export default ThumbSlide;

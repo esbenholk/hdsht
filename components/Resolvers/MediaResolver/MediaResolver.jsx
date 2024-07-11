@@ -1,6 +1,7 @@
 import Image from "next/image";
 import CustomPlayer from "../VideoPlayer/CustomPlayer";
 
+
 const MediaResolver = ({isVideoHeader, media, videoRef, keynm, isActive, height, localMuted, autoPlay }) => {
 
   // if (
@@ -27,11 +28,11 @@ const MediaResolver = ({isVideoHeader, media, videoRef, keynm, isActive, height,
     media.kind === "image"
   ) {
     return  <Image
+    loading="lazy"
     src={media.url}
     width={media.width}
     height={height? height : media.height }
     alt={media.name}
-    loading="eager"
   />;
   }else{
 

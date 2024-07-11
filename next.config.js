@@ -9,11 +9,11 @@ const nextConfig = {
     return config
   },
   images: {
-    domains: ["images.prismic.io", "hdsht.cdn.prismic.io/", "hdsht.cdn.prismic.io"],
+    domains: ["images.prismic.io", "hdsht2.cdn.prismic.io/", "hdsht2.cdn.prismic.io"],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'hdsht.cdn.prismic.io',
+        hostname: 'hdsht2.cdn.prismic.io',
         port: '',
       },
     ],

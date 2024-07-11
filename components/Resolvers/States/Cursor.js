@@ -11,6 +11,7 @@ const useCursor = create((set) => ({
   carouselTopLeftPos: {x:0,y:0},
   isLoader: false,
   muted: true,
-  isPhoneNumberLink: false
+  isPhoneNumberLink: false,
+  loaderImage: ""
 }));
 export default useCursor;

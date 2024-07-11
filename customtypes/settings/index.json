@@ -3,6 +3,7 @@
   "label": "settings",
   "repeatable": false,
   "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "title": {
@@ -16,6 +17,14 @@
         "type": "Image",
         "config": {
           "label": "logo",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "placeholderimage": {
+        "type": "Image",
+        "config": {
+          "label": "placeholderImage",
           "constraint": {},
           "thumbnails": []
         }

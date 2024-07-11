@@ -3,6 +3,7 @@ import styles from "./ProjectCarousel.module.scss";
 import { Swiper, SwiperSlide, useSwiperSlide, useSwiper } from "swiper/react";
 import { PrismicLink } from "@prismicio/react";
 import AnimatedButton from "./AnimatedButton";
+import Progress from "./Progress/Progress";
 import "swiper/scss";
 import "swiper/scss/thumbs";
 import "swiper/scss/pagination";
@@ -107,6 +108,8 @@ const ProjectCarousel = ({ slice, project }) => {
   const [infoIsExpanded, setINfoIsExpanded] = useState(false);
   const infoRef = useRef();
   const creditRef = useRef();
+
+  const loaderImage = useCursor((state) => state.loaderImage);
 
   useEffect(() => {
     if (slice.items[slideIndex].carouselitem.kind === "image") {
@@ -222,7 +225,7 @@ const ProjectCarousel = ({ slice, project }) => {
   function playCurrentVideo(){
     let _currentVideo = document.getElementById(project.data.title + gallerySwiperRef.current?.swiper?.realIndex)
           if(_currentVideo){
-            console.log("has current video", _currentVideo);
+            // console.log("has current video", _currentVideo);
             _currentVideo.play();
           }
       
@@ -254,12 +257,12 @@ const ProjectCarousel = ({ slice, project }) => {
       }}
      
     >
-      {/* {hovered &&  <Progress
+      {hovered &&  <Progress
         slice={slice}
         slideIndex={slideIndex}
         paused={paused}
         currentSlide={currentSlide}
-      />} */}
+      />}
 
       {/* <Controls
         hovered={hovered}
@@ -355,8 +358,9 @@ const ProjectCarousel = ({ slice, project }) => {
           );
         })}
       </Swiper>
-     
-        <Swiper
+   
+      
+      <Swiper
           onSwiper={setThumbsSwiper}
           ref={thumbSwiperRef}
           className={`${styles.ThumbSwiper}  ${infoIsExpanded && styles.Hidden}`}
@@ -378,25 +382,36 @@ const ProjectCarousel = ({ slice, project }) => {
                 // onMouseOver={handleSlide}
                 onMouseLeave={handleLeave}
               >
+                
                 <Suspense fallback={<LoadSpinner />}>
             
-                  <ThumbSlide
-                    item={item}
-                    slideIndex={slideIndex}
-                    slice={slice}
-                    gallerySwiperRef={gallerySwiperRef}
-                    paused={paused}
-                  />
+                  
+                  
+                      <ThumbSlide
+                      loaderImage={loaderImage}
+                      item={item}
+                      slideIndex={slideIndex}
+                      slice={slice}
+                      gallerySwiperRef={gallerySwiperRef}
+                      paused={paused}
+                    />
+               
+            
+
+ 
                 </Suspense>
               </SwiperSlide>
             );
           })}
         </Swiper>
+      
+
+        
  
 
 
 
-{project && <>
+    {project && <>
       <div className={styles.InfoDiv}>
         <PrismicLink href={project.url}
           onMouseOver={() => {

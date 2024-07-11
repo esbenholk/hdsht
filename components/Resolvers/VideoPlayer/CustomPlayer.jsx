@@ -56,7 +56,9 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
         id={keynm}
         className={styles.Video}
         loop
-        autoPlay={true}
+        autoPlay={autoPlay}
+        preload="none"
+        loading="lazy"
         playsInline
         muted={isInViewport && !muted && !localMuted  ? false : true}
         controls={false}
@@ -79,7 +81,7 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
             duration: videoRef && videoRef.current.duration,
           });
         }}
-        ref={videoRef}
+        // ref={videoRef}
         onError={(e) => {
           // console.log(e);
         }}
@@ -98,7 +100,6 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
       >
         {
           media.url && <>
-              {/* <source src={media.url} /> */}
               {media.url.match(/.mp4/) && <source src={media.url} type="video/mp4" />}
               {media.url.match(/.webm/) && (
                 <source src={media.url} type="video/webm" />

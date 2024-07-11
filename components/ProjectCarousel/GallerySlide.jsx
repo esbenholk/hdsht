@@ -16,8 +16,8 @@ const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex, isActive, key
       item.carouselitem.kind !== "image"
     ) {
 
-      setCurrentVideo(videoRef.current);
-      console.log("setting current video", videoRef.current, slideIndex);
+      // setCurrentVideo(videoRef.current);
+      // console.log("setting current video", videoRef.current, slideIndex);
 
     }
 

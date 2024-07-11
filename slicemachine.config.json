@@ -1,6 +1,6 @@
 {
-  "apiEndpoint": "https://hdsht.prismic.io/api/v2",
-  "repositoryName": "hdsht",
+  "apiEndpoint": "https://hdsht2.prismic.io/api/v2",
+  "repositoryName": "hdsht2",
   "adapter": "@slicemachine/adapter-next",
   "libraries": ["./slices"],
   "localSliceSimulatorURL": "http://localhost:3000/slice-simulator"
