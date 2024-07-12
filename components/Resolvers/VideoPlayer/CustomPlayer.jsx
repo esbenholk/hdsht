@@ -38,7 +38,6 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
   const url = useCursor((state) => state.url);
   const containerRef = useRef();
   const muted = useCursor((state) => state.muted);
-  const [localMuted, setMuted] = useState(true);
   const isInViewport = useIsInViewport(containerRef);
 
 
@@ -71,7 +70,7 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
         height={"100%"}
         volume={1}
         style={{padding: 0, width: "100%", height: "100%"}}
-        muted={isInViewport && !muted && !localMuted  ? false : true}
+        muted={isInViewport && !muted   ? false : true}
         // controls={false}
         onPlay={() => {
           useVideo.setState({
@@ -86,13 +85,7 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
             ended: true,
           });
         }}
-        onMouseEnter={()=>{
-          setMuted(false);
-        }}
-        onMouseLeave={()=>{
-            setMuted(false);
-       
-        }}
+
       >
 
 
