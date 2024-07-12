@@ -30,6 +30,7 @@ import useCursor from "../Resolvers/States/Cursor";
 import GallerySlide from "./GallerySlide";
 import ThumbSlide from "./ThumbSlide";
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
+import PrismicRichTextResolver from "../Resolvers/PrismicRichTextResolver/PrismicRichTextResolver";
 
 
 const slideInFromBottom = {
@@ -137,14 +138,14 @@ const ProjectCarousel = ({ slice, project }) => {
   const resetTimer = () => {
     setSeconds(0);
   };
-  // useEffect(() => {
-  //   const gallerySwiper = gallerySwiperRef.current?.swiper;
-  //   const thumbnailSwiper = thumbSwiperRef.current?.swiper;
-  //   if (gallerySwiper.controller && thumbnailSwiper.controller) {
-  //     gallerySwiper.controller.control = thumbnailSwiper;
-  //     thumbnailSwiper.controller.control = gallerySwiper;
-  //   }
-  // }, []);
+  useEffect(() => {
+    const gallerySwiper = gallerySwiperRef.current?.swiper;
+    const thumbnailSwiper = thumbSwiperRef.current?.swiper;
+    if (gallerySwiper.controller && thumbnailSwiper.controller) {
+      gallerySwiper.controller.control = thumbnailSwiper;
+      thumbnailSwiper.controller.control = gallerySwiper;
+    }
+  }, []);
 
   useEffect(() => {
       const trigger = currentSlide === "image" ? 5 : duration;
@@ -194,26 +195,26 @@ const ProjectCarousel = ({ slice, project }) => {
    
   }
 
-  function pauseVideos(){
-    let videos = document.getElementsByTagName("video");
-    for (let index = 0; index < videos.length; index++) {
-      if(videos[index].id != "videoheader"){
-        videos[index].pause();
-        console.log("pause video", videos[index].id );
-      }    
-    }
-  }
-  function playCurrentVideo(){
-   let _currentVideo =document.getElementById(project.data.title + gallerySwiperRef.current?.swiper?.realIndex);
+  // function pauseVideos(){
+  //   let videos = document.getElementsByTagName("video");
+  //   for (let index = 0; index < videos.length; index++) {
+  //     if(videos[index].id != "videoheader"){
+  //       videos[index].pause();
+  //       console.log("pause video", videos[index].id );
+  //     }    
+  //   }
+  // }
+  // function playCurrentVideo(){
+  //  let _currentVideo =document.getElementById(project.data.title + gallerySwiperRef.current?.swiper?.realIndex);
     
    
-   console.log("plays current video",currentVideo, duration, currentVideo.getDuration());
+  //  console.log("plays current video",currentVideo, duration, currentVideo.getDuration());
     
     
-    // if(currentVideo){
-    //     currentVideo.play();
-    // }
-  }
+  //   // if(currentVideo){
+  //   //     currentVideo.play();
+  //   // }
+  // }
 
   return (
     <motion.div
@@ -227,7 +228,6 @@ const ProjectCarousel = ({ slice, project }) => {
         setHovered(true);
       }}
       onMouseEnter={()=>{
-        playCurrentVideo();
         setPaused(false);
       }}
       onMouseLeave={()=>{
@@ -319,7 +319,7 @@ const ProjectCarousel = ({ slice, project }) => {
               {({ isActive }) => (
                 <>
                 <GallerySlide
-                keynm={project.data.title + i}
+                // keynm={project.data.title + i}
                 item={item}
                 gallerySwiperRef={gallerySwiperRef}
                 slice={slice}
@@ -427,6 +427,7 @@ const ProjectCarousel = ({ slice, project }) => {
                       <p ref={infoRef} >
                         {project.data.description}
                       </p>
+                
 
                     </div>
 
@@ -440,6 +441,8 @@ const ProjectCarousel = ({ slice, project }) => {
                   </div>
               </motion.div>
     </> }
+
+
     </motion.div>
   );
 };

@@ -13,18 +13,13 @@ const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex, isActive, key
   useEffect(() => {
 
     if(isActive){
-      console.log("slide change in galleryslide", slideIndex, slice.items.indexOf(item), gallerySwiperRef.current?.swiper?.realIndex);
 
       if (
         slideIndex === slice.items.indexOf(item) &&
         item.carouselitem.kind !== "image"
       ) {
-  
         setCurrentVideo(videoRef.current);
-        setDuration(videoRef.current.getDuration());
-  
-        console.log("setting current video", item.carouselitem, videoRef.current, slideIndex, videoRef.current.getDuration());
-  
+        setDuration(videoRef.current.getDuration()); 
       }
     }
    

@@ -16,6 +16,7 @@
       // width: 100% !important;
       height: 100%;
       width: fit-content;
+      max-width: 100%;
       object-fit: contain;
       border-radius: 2rem;
       // border: 5px solid  red;
@@ -52,7 +53,8 @@
 
 
 .InfoContainer {
-  z-index: 9999999;
+  z-index: 1;
+  pointer-events: none;
   position: absolute;
   top: 0;
   right: 0;
@@ -94,6 +96,7 @@
         font-weight: 705;
         line-height: 41.4px;
         text-align: left;
+        direction: ltr;
   
         max-height: 100%;
       }
@@ -105,18 +108,21 @@
       width:0%;
       max-height: 0%;
       max-width: 0%;
-      direction: rtl;
+      // direction: rtl;
       overflow: hidden;
       transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .Description.Open{
-      max-height: 70%;
+      max-height: 60%;
       max-width: 100%;
       height: auto;
       width: 100%;
       padding: 2rem;
       border-radius: 2rem;
       overflow-y: scroll;
+      z-index: 999999999999999;
+      pointer-events:all;
+
   
     }
     .Credits{
@@ -138,13 +144,16 @@
       }
     }
     .Credits.Open{
-      max-height: 20%;
+      max-height: 40%;
       max-width: 100%;
-      height: auto;
+      height: fit-content;
+      pointer-events:all;
+
       width: 100%;
       padding: 2rem;
       border-radius: 2rem;
       overflow-y: scroll;
+      z-index: 999999999999999;
   
      
     }
@@ -191,7 +200,7 @@
     margin-right: 0.2rem !important;
     border: 1px solid white;
     overflow: hidden;
-    max-width: 10rem !important;
+    max-width: 20rem !important;
     flex-shrink: 0 !important;
     flex-grow: 0 !important;
     // width: fit-content !important;

@@ -3,7 +3,8 @@ import useVideo from "../States/Video";
 import useCursor from "../States/Cursor";
 import { useState, useEffect, useRef, useMemo } from "react";
 
-import ReactPlayer from 'react-player'
+import ReactPlayer from 'react-player/lazy'
+
 
 function useIsInViewport(ref) {
   const [isIntersecting, setIsIntersecting] = useState(false);
@@ -68,11 +69,11 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
         playing={isInViewport && isActive}
         width={"100%"}
         height={"100%"}
+        volume={1}
         style={{padding: 0, width: "100%", height: "100%"}}
         muted={isInViewport && !muted && !localMuted  ? false : true}
         // controls={false}
-        onReady={() => {
-          console.log("react player sets duration", videoRef.current.getDuration());
+        onPlay={() => {
           useVideo.setState({
             duration: videoRef && videoRef.current.getDuration(),
             currentTime: videoRef && videoRef.current.currentTime,

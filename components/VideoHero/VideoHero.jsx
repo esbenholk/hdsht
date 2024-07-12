@@ -19,20 +19,7 @@ const VideoHero = ({ slice }) => {
 
 
   useEffect(() => {
-    console.log("welcome to HDSHT");
     const handleScroll = () => {
-
-
-      // if(logoRef.current ){
-      //   const itemOffset = logoRef.current.getBoundingClientRect().y;
-      //   if (itemOffset < -50) {
-      //     setLogoInPosition(true);
-      //     setMuted(true);
-      //   } else {
-      //     setLogoInPosition(false);
-      //     setMuted(false);
-      //   }
-      // }
 
       let h3s = document.getElementsByTagName('h3');
       if(h3s[0]){

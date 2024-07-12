@@ -33,7 +33,7 @@ const Page = ({ page }) => {
 
 
   useEffect(() => {
-    console.log("welcome to HDSHT", page.settings);
+    console.log("welcome to HDSHT");
 
 
     useCursor.setState({
@@ -114,7 +114,7 @@ const Page = ({ page }) => {
         {isDesktop ? 
           <>
             <Gizmo />
-            {/* <Cursor /> */}
+            <Cursor />
             <Loader settings={page.settings}/>
           </>:    
             <Navigation logo={page.settings?.data.logo} links={page.settings?.data.slices[2].items} settings={page.settings}/>

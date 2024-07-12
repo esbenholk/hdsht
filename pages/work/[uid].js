@@ -28,9 +28,13 @@ const Page = ({ page }) => {
 
   slice.primary = {order:"_", title: page.data.title};
   useEffect(() => {
-    console.log("we made ", page.data.title);
+    console.log("we made ", page.data.title, page);
     useCursor.setState({ cursor: "default" });
     setIsMounted(true);
+
+    useCursor.setState({
+      loaderImage: page.settings.data.placeholderimage.url
+    });
 
     const userAgent = navigator.userAgent;
     const mobile = userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
@@ -38,7 +42,6 @@ const Page = ({ page }) => {
     setIsDesktop(!mobile);
 
     if(page.data.nextwork && page.data.nextwork.url){
-      console.log("has next work",page.data.nextwork.url);
       useCursor.setState({ nexturl: page.data.nextwork.url });
     }
   }, []);
