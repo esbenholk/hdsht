@@ -1,9 +1,9 @@
 import styles from "./VideoPlayer.module.scss";
 import useVideo from "../States/Video";
 import useCursor from "../States/Cursor";
-import { useState, useEffect, useMemo } from "react";
-import useWindowDimensions from "../UseWindowDimensions";
+import { useState, useEffect, useRef, useMemo } from "react";
 
+import ReactPlayer from 'react-player'
 
 function useIsInViewport(ref) {
   const [isIntersecting, setIsIntersecting] = useState(false);
@@ -35,13 +35,17 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
   //   make a regex that checks the media.rul prefix and returns a source JSX elemt with the correct type
   //   make a useEffect that updates the currentTime and duration of useVideo
   const url = useCursor((state) => state.url);
+  const containerRef = useRef();
   const muted = useCursor((state) => state.muted);
   const [localMuted, setMuted] = useState(true);
-  const isInViewport = useIsInViewport(videoRef);
+  const isInViewport = useIsInViewport(containerRef);
+
 
   useEffect(()=>{
-    if(isInViewport && isActive && videoRef){
-      videoRef.current.play();
+    if(isInViewport && isActive && videoRef.current){
+      videoRef.current.playing = true;
+    } else {
+      videoRef.current.playing = false;
     }
   },[isInViewport])
 
@@ -50,41 +54,32 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
 
 
   return (
-    <div className={url.includes("work") ? styles.VideoWrapperInWork : styles.VideoWrapper} >
-      <video
+    <div ref={containerRef} className={url.includes("work") ? styles.VideoWrapperInWork : styles.VideoWrapper} >
+      <ReactPlayer
         ref={videoRef}
         id={keynm}
         className={styles.Video}
         loop
-        autoPlay={autoPlay}
-        preload="none"
+        // autoPlay={autoPlay}
         loading="lazy"
         playsInline
-        muted={isInViewport && !muted && !localMuted  ? false : true}
         controls={false}
-        onLoadedMetadata={() => {
+        url={media.url}
+        playing={isInViewport && isActive}
+        width={"100%"}
+        height={"100%"}
+        style={{padding: 0, width: "100%", height: "100%"}}
+        muted={isInViewport && !muted && !localMuted  ? false : true}
+        // controls={false}
+        onReady={() => {
+          console.log("react player sets duration", videoRef.current.getDuration());
           useVideo.setState({
-            duration: videoRef && videoRef.current.duration,
+            duration: videoRef && videoRef.current.getDuration(),
             currentTime: videoRef && videoRef.current.currentTime,
             ended: false,
           });
         }}
-        onTimeUpdate={() => {
-          useVideo.setState({
-            currentTime: videoRef && videoRef.current.currentTime,
-            duration: videoRef && videoRef.current.duration,
-            ended: false,
-          });
-        }}
-        onDurationChange={() => {
-          useVideo.setState({
-            duration: videoRef && videoRef.current.duration,
-          });
-        }}
-        // ref={videoRef}
-        onError={(e) => {
-          // console.log(e);
-        }}
+
         onEnded={() => {
           useVideo.setState({
             ended: true,
@@ -98,24 +93,9 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
        
         }}
       >
-        {
-          media.url && <>
-              {media.url.match(/.mp4/) && <source src={media.url} type="video/mp4" />}
-              {media.url.match(/.webm/) && (
-                <source src={media.url} type="video/webm" />
-              )}
-              {media.url.match(/.ogg/) && <source src={media.url} type="video/ogg" />}
-              {media.url.match(/.m4v/) && <source src={media.url} type="video/m4v" />}
-              {media.url.match(/.mov/) && <source src={media.url} type="video/mov" />}
-              {media.url.match(/.avi/) && <source src={media.url} type="video/avi" />}
-              {media.url.match(/.flv/) && <source src={media.url} type="video/flv" />}
-              {media.url.match(/.wmv/) && <source src={media.url} type="video/wmv" />}
-              {media.url.match(/.mkv/) && <source src={media.url} type="video/mkv" />}
-          
-          </>
-        }
 
-      </video>
+
+      </ReactPlayer>
     </div>
   );
 };

@@ -97,11 +97,12 @@ const ProjectCarousel = ({ slice, project }) => {
   const [seconds, setSeconds] = useState(0);
   const [hovered, setHovered] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(null);
-  const { duration, setCurrentVideo, currentVideo } = useVideo();
-  const [paused, setPaused] = useState(false);
+  const { duration, setCurrentVideo, currentVideo,  setDuration } = useVideo();
+  const [paused, setPaused] = useState(true);
   const nexturl = useCursor((state) => state.nexturl);
   const url = useCursor((state) => state.url);
-  // const [isVisible, setIsVisible] = useState(false);
+
+
   const {width} = useWindowDimensions();
   const [section, setSection] = useState();
 
@@ -114,8 +115,8 @@ const ProjectCarousel = ({ slice, project }) => {
   useEffect(() => {
     if (slice.items[slideIndex].carouselitem.kind === "image") {
       setCurrentSlide("image");
-      setCurrentVideo(null);
-      useVideo.setState({ duration: null, currentTime: null });
+      // setCurrentVideo(null);
+      // useVideo.setState({ duration: null, currentTime: null });
     } else {
       setCurrentSlide("video");
     }
@@ -132,46 +133,26 @@ const ProjectCarousel = ({ slice, project }) => {
       clearInterval(timer.current);
     };
   }, [paused]);
+
   const resetTimer = () => {
     setSeconds(0);
   };
-  useEffect(() => {
-    const gallerySwiper = gallerySwiperRef.current?.swiper;
-    const thumbnailSwiper = thumbSwiperRef.current?.swiper;
-    if (gallerySwiper.controller && thumbnailSwiper.controller) {
-      gallerySwiper.controller.control = thumbnailSwiper;
-      thumbnailSwiper.controller.control = gallerySwiper;
-    }
-  }, []);
+  // useEffect(() => {
+  //   const gallerySwiper = gallerySwiperRef.current?.swiper;
+  //   const thumbnailSwiper = thumbSwiperRef.current?.swiper;
+  //   if (gallerySwiper.controller && thumbnailSwiper.controller) {
+  //     gallerySwiper.controller.control = thumbnailSwiper;
+  //     thumbnailSwiper.controller.control = gallerySwiper;
+  //   }
+  // }, []);
 
   useEffect(() => {
-    gallerySwiperRef.current.swiper.on("slideChange", () => {
-      setSlideIndex(gallerySwiperRef.current.swiper.realIndex);
-    });
-    const leftArrowKey = 37;
-    const rightArrowKey = 39;
-
-    const handleKeyDown = (e) => {
-      if (e.keyCode === leftArrowKey) {
-        gallerySwiperRef.current.swiper.slidePrev();
-      } else if (e.keyCode === rightArrowKey) {
-        gallerySwiperRef.current.swiper.slideNext();
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
-
-  useEffect(() => {
-    if(hovered){
-      console.log(currentSlide, duration);
       const trigger = currentSlide === "image" ? 5 : duration;
+      
       if (seconds > trigger && !paused) {
+        console.log("swipes per content");
         gallerySwiperRef.current.swiper.slideNext();
       }
-    }
   }, [seconds]);
 
   const handleHover = (item) => {
@@ -218,20 +199,22 @@ const ProjectCarousel = ({ slice, project }) => {
     for (let index = 0; index < videos.length; index++) {
       if(videos[index].id != "videoheader"){
         videos[index].pause();
+        console.log("pause video", videos[index].id );
       }    
     }
   }
-
   function playCurrentVideo(){
-    let _currentVideo = document.getElementById(project.data.title + gallerySwiperRef.current?.swiper?.realIndex)
-          if(_currentVideo){
-            // console.log("has current video", _currentVideo);
-            _currentVideo.play();
-          }
-      
+   let _currentVideo =document.getElementById(project.data.title + gallerySwiperRef.current?.swiper?.realIndex);
+    
+   
+   console.log("plays current video",currentVideo, duration, currentVideo.getDuration());
+    
+    
+    // if(currentVideo){
+    //     currentVideo.play();
+    // }
   }
 
-  // url.includes("work") ? styles.WorkCarouselContainer : 
   return (
     <motion.div
       className={`${styles.CarouselContainer }` }
@@ -245,10 +228,12 @@ const ProjectCarousel = ({ slice, project }) => {
       }}
       onMouseEnter={()=>{
         playCurrentVideo();
+        setPaused(false);
       }}
       onMouseLeave={()=>{
         setHovered(false);
-        pauseVideos();
+        // pauseVideos();
+        setPaused(true);
       }}
       onClick={(e)=>{
         if(!url.includes("work")){
@@ -257,12 +242,13 @@ const ProjectCarousel = ({ slice, project }) => {
       }}
      
     >
-      {hovered &&  <Progress
+      <Progress
         slice={slice}
         slideIndex={slideIndex}
         paused={paused}
         currentSlide={currentSlide}
-      />}
+        hovered={hovered}
+      />
 
       {/* <Controls
         hovered={hovered}
@@ -282,24 +268,24 @@ const ProjectCarousel = ({ slice, project }) => {
         onReachEnd={() => {
             if(url.includes("work") && nexturl){
               window.location.href = nexturl;              
-            } else {
-              // if(gallerySwiperRef.current && gallerySwiperRef.current.nextSibling){
-              //   gallerySwiperRef.current.nextSibling.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-              // }
-            }
+            } 
         }}
         modules={[EffectFade, FreeMode, Navigation, Thumbs, Mousewheel, Lazy]}
         mousewheel={false}
         lazy={true}
         onSlideChange={() => {
-          if (slice?.items[slideIndex].carouselitem.kind === "document") {
-          } else {
-            setCurrentVideo(null);
-          }
+          // if (slice?.items[slideIndex].carouselitem.kind === "document") {
+          // } else {
+          //   setCurrentVideo(null);
+          // }
           resetTimer();
 
-          pauseVideos();
-          playCurrentVideo();  
+          if(currentVideo){
+            setDuration(currentVideo.getDuration());
+          }
+          // pauseVideos();
+          // playCurrentVideo(); 
+          setSlideIndex(gallerySwiperRef.current.swiper.realIndex) 
         }}
         onMouseOver={() => {
           handleHover(project);
@@ -307,10 +293,7 @@ const ProjectCarousel = ({ slice, project }) => {
         onMouseLeave={() => {
           handleLeave();
         }}
-   
-        // onInit={() => {
-        //   startTimer();
-        // }}
+
         onSlideNextTransitionStart={() => {
           if (thumbSwiperRef.current?.swiper) {
             thumbSwiperRef.current.swiper.slideNext();
@@ -324,7 +307,6 @@ const ProjectCarousel = ({ slice, project }) => {
 
         onClick={(e) => {
           gallerySwiperRef.current.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-   
         }}
 
       >
@@ -333,12 +315,6 @@ const ProjectCarousel = ({ slice, project }) => {
             <SwiperSlide
               className={styles.GallerySlide}
               key={i}
-              // onMouseOver={handleSlide}
-     
-              // onMouseOver={() => {
-              //   handleHover(project);
-              // }}
-              // onMouseLeave={handleLeave}
             >
               {({ isActive }) => (
                 <>
@@ -384,9 +360,6 @@ const ProjectCarousel = ({ slice, project }) => {
               >
                 
                 <Suspense fallback={<LoadSpinner />}>
-            
-                  
-                  
                       <ThumbSlide
                       loaderImage={loaderImage}
                       item={item}
@@ -395,10 +368,6 @@ const ProjectCarousel = ({ slice, project }) => {
                       gallerySwiperRef={gallerySwiperRef}
                       paused={paused}
                     />
-               
-            
-
- 
                 </Suspense>
               </SwiperSlide>
             );
@@ -406,7 +375,7 @@ const ProjectCarousel = ({ slice, project }) => {
         </Swiper>
       
 
-        
+   
  
 
 

@@ -81,6 +81,8 @@ export type LandingDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | TextSlice
+  | StickyHeaderSlice
   | WorkGridSlice
   | ImageSliceSlice
   | RichTextSlice

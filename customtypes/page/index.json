@@ -3,6 +3,7 @@
   "label": "Page",
   "repeatable": true,
   "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "uid": {
@@ -38,6 +39,12 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "text": {
+              "type": "SharedSlice"
+            },
+            "sticky_header": {
+              "type": "SharedSlice"
+            },
             "work_grid": {
               "type": "SharedSlice"
             },

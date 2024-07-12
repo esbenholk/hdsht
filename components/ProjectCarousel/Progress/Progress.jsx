@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import styles from "./Progress.module.scss";
 import useVideo from "../../Resolvers/States/Video";
 import { motion, useAnimationControls } from "framer-motion";
+
+
 const Progress = ({ slice, slideIndex, paused, currentSlide }) => {
-  const { duration } = useVideo();
+  const duration = useVideo((state) => state.duration);
 
   return (
     <div className={styles.ProgressBar}>
@@ -24,6 +26,7 @@ const Progress = ({ slice, slideIndex, paused, currentSlide }) => {
             setPlayed(false);
           }
         }, [slideIndex]);
+        
         useEffect(() => {
           if (playing && !played) {
             // console.log("playing");

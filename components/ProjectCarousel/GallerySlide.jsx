@@ -8,18 +8,26 @@ import useVideo from "../Resolvers/States/Video";
 const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex, isActive, keynm }) => {
   const slide = useSwiperSlide();
   const videoRef = useRef();
-  const { setCurrentVideo, currentVideo} = useVideo();
+  const { setCurrentVideo, setDuration, currentVideo} = useVideo();
 
   useEffect(() => {
-    if (
-      slideIndex === slice.items.indexOf(item) &&
-      item.carouselitem.kind !== "image"
-    ) {
 
-      // setCurrentVideo(videoRef.current);
-      // console.log("setting current video", videoRef.current, slideIndex);
+    if(isActive){
+      console.log("slide change in galleryslide", slideIndex, slice.items.indexOf(item), gallerySwiperRef.current?.swiper?.realIndex);
 
+      if (
+        slideIndex === slice.items.indexOf(item) &&
+        item.carouselitem.kind !== "image"
+      ) {
+  
+        setCurrentVideo(videoRef.current);
+        setDuration(videoRef.current.getDuration());
+  
+        console.log("setting current video", item.carouselitem, videoRef.current, slideIndex, videoRef.current.getDuration());
+  
+      }
     }
+   
 
    
   }, [gallerySwiperRef.current?.swiper?.realIndex]);

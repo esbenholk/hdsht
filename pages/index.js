@@ -114,7 +114,7 @@ const Page = ({ page }) => {
         {isDesktop ? 
           <>
             <Gizmo />
-            <Cursor />
+            {/* <Cursor /> */}
             <Loader settings={page.settings}/>
           </>:    
             <Navigation logo={page.settings?.data.logo} links={page.settings?.data.slices[2].items} settings={page.settings}/>

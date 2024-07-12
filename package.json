@@ -32,6 +32,7 @@
     "react-curtains": "^1.0.10",
     "react-dom": "18.2.0",
     "react-marquee-slider": "^1.1.5",
+    "react-player": "^2.16.0",
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",
     "styled-components": "^6.1.8",

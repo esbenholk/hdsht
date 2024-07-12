@@ -169,9 +169,7 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
             console.log("error", e);
         }
 
-        myImage.onload = function() {
-            console.log("loads image");
-         
+        myImage.onload = function() {       
             myImage.crossOrigin = "anonymous";
             startImage(myImage, _context, _effect);
             // myImage.onload = null
@@ -204,8 +202,6 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
     };
 
     const startImage = (image, _context, _effect) =>{
-        console.log("starts image", image);
-
         if(canvas.current){
             let imageWidthHolder = image.width;
             let imageHeightHolder = image.height;
@@ -218,7 +214,6 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
 
             _context.clearRect(0,0,width, canvas.current.height);
             // _context.drawImage(myImage, 100, 100, 100, 100);
-            console.log("starts image", image, imageWidthHolder);
 
             _context.drawImage(image, canvas.current.width*0.5-imageWidthHolder*0.5,canvas.current.height*0.5-imageHeightHolder*0.5, imageWidthHolder, imageHeightHolder);
             _effect.init(_context);
