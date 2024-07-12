@@ -214,7 +214,7 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
 
             _context.clearRect(0,0,width, canvas.current.height);
             // _context.drawImage(myImage, 100, 100, 100, 100);
-
+            console.log("hej dont look me under the hood plz");
             _context.drawImage(image, canvas.current.width*0.5-imageWidthHolder*0.5,canvas.current.height*0.5-imageHeightHolder*0.5, imageWidthHolder, imageHeightHolder);
             _effect.init(_context);
             _effect.draw(_context);

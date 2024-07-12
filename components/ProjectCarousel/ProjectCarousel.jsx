@@ -242,13 +242,17 @@ const ProjectCarousel = ({ slice, project }) => {
       }}
      
     >
-      <Progress
-        slice={slice}
-        slideIndex={slideIndex}
-        paused={paused}
-        currentSlide={currentSlide}
-        hovered={hovered}
-      />
+      {hovered && 
+            <Progress
+            slice={slice}
+            slideIndex={slideIndex}
+            paused={paused}
+            currentSlide={currentSlide}
+            hovered={hovered}
+          />
+      
+      }
+
 
       {/* <Controls
         hovered={hovered}
