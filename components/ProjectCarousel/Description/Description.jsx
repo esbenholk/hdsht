@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Description.module.scss";
-import Exit from "../../SVGR/Exit";
 import PrismicRichTextResolver from "../../Resolvers/PrismicRichTextResolver/PrismicRichTextResolver";
-import Scene from "./3D/Scene";
 import { motion, useInView } from "framer-motion";
 import useCursor from "@/components/Resolvers/States/Cursor";
 

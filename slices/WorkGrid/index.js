@@ -1,6 +1,9 @@
 import React,{useEffect, useState} from 'react'
-import LandingGrid from '../../components/LandingGrid/LandingGrid'
 import { createClient } from "../../prismicio";
+
+
+const LandingGrid = React.lazy(() => import('../../components/LandingGrid/LandingGrid'));
+
 
 function WorkGrid({ slice }){
 

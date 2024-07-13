@@ -1,27 +1,19 @@
-import { Suspense, useRef, useEffect , useState} from "react";
+import React,  { Suspense, useRef, useEffect , useState} from "react";
 import styles from "./LandingGrid.module.scss";
 
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
 import { motion } from "framer-motion";
 import Layout from "../Layout/Layout";
-import {WorkCarousel} from "../../slices/WorkCarousel"
-
-
-
+import ProjectCarousel from "../ProjectCarousel/ProjectCarousel";
 
 export default function LandingGrid({workInGridWithDetails}) {
 
   const grid = useRef();
-
-
-  // const { moveExcluder, removeExcluder } = useExcluder();
-  // const [hovering, setHovering] = useState(false);
   const mediaWrapper = useRef();
 
   return (
     <motion.div
       className={styles.Wrapper}
-      // onMouseLeave={() => removeExcluder()}
     >
       <Layout>
         <motion.div  ref={grid}>
@@ -48,7 +40,8 @@ export default function LandingGrid({workInGridWithDetails}) {
                   <motion.div 
          
                   >
-                    <WorkCarousel slice={slice} project={item}/>
+                    {/* <WorkCarousel slice={slice} project={item}/> */}
+                    <ProjectCarousel slice={slice} project={item}/>
 
                 
                   </motion.div>
@@ -64,48 +57,6 @@ export default function LandingGrid({workInGridWithDetails}) {
             ))}
           
             </div>
-       
-            // const videoRef = useRef();
-            // const mediaWrapper = useRef();
-            // const [hovering, setHovering] = useState(false);
-            // return (
-            //   <motion.div
-            //     key={key}
-            //     className={styles.MediaWrapper}
-            //     onMouseOver={() => {
-            //       setHovering(true);
-            //       moveExcluder(mediaWrapper.current);
-            //       handleHover();
-            //     }}
-            //     onMouseLeave={() => {
-            //       setHovering(false);
-            //       handleLeave();
-            //     }}
-            //     ref={mediaWrapper}
-            //     style={{
-            //       borderRadius: "1rem",
-            //     }}
-             
-            //   >
-            //     <Suspense fallback={<LoadSpinner />}>
-            //       <motion.div
-            //         className={styles.LinkOverlay}
-            //         variants={blendIn}
-            //         animate={hovering ? "visible" : "hidden"}
-            
-            //       >
-            //         <PrismicLink href={item.worklink.url}>
-            //           {item.project_title}
-            //         </PrismicLink>
-            //       </motion.div>
-            //       <MediaResolver
-            //         media={item.mediaforgrid}
-            //         videoRef={videoRef}
-            //         loop={true}
-            //       />
-            //     </Suspense>
-            //   </motion.div>
-            // );
           ))}
         </motion.div>
       </Layout>

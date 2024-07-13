@@ -32,9 +32,6 @@ function useIsInViewport(ref) {
 }
 
 const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
-  //make a custom video player that uses the media.url as src and scales to it's dimensions, as well as updates the currentTime and duration of useVideo
-  //   make a regex that checks the media.rul prefix and returns a source JSX elemt with the correct type
-  //   make a useEffect that updates the currentTime and duration of useVideo
   const url = useCursor((state) => state.url);
   const containerRef = useRef();
   const muted = useCursor((state) => state.muted);
@@ -48,10 +45,6 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
       videoRef.current.playing = false;
     }
   },[isInViewport])
-
-
-  
-
 
   return (
     <div ref={containerRef} className={url.includes("work") ? styles.VideoWrapperInWork : styles.VideoWrapper} >
@@ -79,7 +72,6 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
             ended: false,
           });
         }}
-
         onEnded={() => {
           useVideo.setState({
             ended: true,
@@ -87,8 +79,6 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
         }}
 
       >
-
-
       </ReactPlayer>
     </div>
   );

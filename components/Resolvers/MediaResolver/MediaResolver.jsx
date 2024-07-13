@@ -1,42 +1,62 @@
 import Image from "next/image";
 import CustomPlayer from "../VideoPlayer/CustomPlayer";
+import useCursor from "../States/Cursor";
+import { useRef, useState, useMemo, useEffect } from "react";
+import { PrismicImage } from '@prismicio/react'
+import 'lazysizes';
+// import a plugin
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
+
+function useIsInViewport(ref) {
+  const [isIntersecting, setIsIntersecting] = useState(false);
+
+  const observer = useMemo(
+    () =>
+      new IntersectionObserver(([entry]) =>
+        setIsIntersecting(entry.isIntersecting),
+      ),
+    [],
+  );
+
+  useEffect(() => {
+    if(ref){
+      observer.observe(ref.current);
+    }
 
 
-const MediaResolver = ({isVideoHeader, media, videoRef, keynm, isActive, height, localMuted, autoPlay }) => {
+    return () => {
+      observer.disconnect();
+    };
+  }, [ref, observer]);
 
-  // if (
-  //   media.kind === "document" &&
-  //   media.url.match(".(video | mp4|mkv|wmv|m4v|mov|avi|flv|webm|flac|mka|m4a|aac|ogg)")
-  // ) {
-  //   return <CustomPlayer media={media} videoRef={videoRef} isActive={isActive}/>;
-  // } else if (isVideoHeader) {
+  return isIntersecting;
+}
 
-  //   return <CustomPlayer media={media} videoRef={videoRef} isActive={true}/>;
-  // }else if (media.kind === "image") {
-  //   return (
-  //      <Image
-  //       src={media.url}
-  //       width={media.width}
-  //       height={media.height }
-  //       alt={media.name}
-  //       loading="eager"
-  //     />
-  //   );
-  // }
+const MediaResolver = ({media, videoRef, keynm, isActive, height, localMuted, autoPlay }) => {
+  const loaderImage = useCursor((state) => state.loaderImage);
+  const ref = useRef();
 
+  const isInViewport =  useIsInViewport(ref);
   if (
     media.kind === "image"
   ) {
-    return  <Image
-    loading="lazy"
-    src={media.url}
-    width={media.width}
-    height={height? height : media.height }
-    alt={media.name}
-  />;
+    return  <div ref={ref}>
+        <Image
+          loading="lazy"
+          src={media.url}
+          width={media.width}
+          height={height? height : media.height }
+          alt={media.name}
+          blurDataURL={loaderImage}
+          placeholder="blur"
+        />
+        {/* <PrismicImage field={media}/> */}
+    </div>;
   }else{
 
-    return <CustomPlayer autoPlay={autoPlay} keynm={keynm} media={media} videoRef={videoRef} isActive={isActive} localMuted={localMuted}/>;
+    return <div ref={ref} >
+        <CustomPlayer autoPlay={autoPlay} keynm={keynm} media={media} videoRef={videoRef} isActive={isActive} localMuted={localMuted}/> 
+    </div>;
   }
   
 

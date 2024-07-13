@@ -5,8 +5,6 @@ import Article from './Article';
 import CarouselDescription from './CarouselDescription';
 import ClientLogos from './ClientLogos';
 import Contact from './Contact';
-import CookieFooter from './CookieFooter';
-import CreditFooter from './CreditFooter';
 import HeroText from './HeroText';
 import HeroVideo from './HeroVideo';
 import ImageSlice from './ImageSlice';
@@ -24,8 +22,7 @@ export {
 	CarouselDescription,
 	ClientLogos,
 	Contact,
-	CookieFooter,
-	CreditFooter,
+
 	HeroText,
 	HeroVideo,
 	ImageSlice,
@@ -44,8 +41,7 @@ export const components = {
 	text: CarouselDescription,
 	client_logos: ClientLogos,
 	contact: Contact,
-	cookie_footer: CookieFooter,
-	credit_footer: CreditFooter,
+
 	hero_text: HeroText,
 	hero_video: HeroVideo,
 	image_slice: ImageSlice,

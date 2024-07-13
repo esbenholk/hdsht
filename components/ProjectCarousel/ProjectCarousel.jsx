@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, Suspense } from "react";
 import styles from "./ProjectCarousel.module.scss";
-import { Swiper, SwiperSlide, useSwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { PrismicLink } from "@prismicio/react";
 import AnimatedButton from "./AnimatedButton";
 import Progress from "./Progress/Progress";
@@ -14,11 +14,9 @@ import "swiper/scss/mousewheel";
 import {
   Navigation,
   Thumbs,
-  Pagination,
   FreeMode,
   Mousewheel,
   Lazy,
-  Autoplay,
   EffectFade
 } from "swiper";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
@@ -30,7 +28,6 @@ import useCursor from "../Resolvers/States/Cursor";
 import GallerySlide from "./GallerySlide";
 import ThumbSlide from "./ThumbSlide";
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
-import PrismicRichTextResolver from "../Resolvers/PrismicRichTextResolver/PrismicRichTextResolver";
 
 
 const slideInFromBottom = {
@@ -262,7 +259,7 @@ const ProjectCarousel = ({ slice, project }) => {
       /> */}
       <Swiper
         ref={gallerySwiperRef}
-        className={styles.SwiperTop}
+        className={`${styles.SwiperTop} swiper--lazy`}
         slidesPerView={1}
         loop={true}
         effect={"fade"}
@@ -330,6 +327,7 @@ const ProjectCarousel = ({ slice, project }) => {
                 isActive={isActive}
                 slideIndex={slideIndex}
               />
+
                 </>
           
               )}
@@ -339,6 +337,7 @@ const ProjectCarousel = ({ slice, project }) => {
         })}
       </Swiper>
    
+      {width > 600 && 
       
       <Swiper
           onSwiper={setThumbsSwiper}
@@ -364,19 +363,21 @@ const ProjectCarousel = ({ slice, project }) => {
               >
                 
                 <Suspense fallback={<LoadSpinner />}>
-                      <ThumbSlide
+                      {/* <ThumbSlide
                       loaderImage={loaderImage}
                       item={item}
                       slideIndex={slideIndex}
                       slice={slice}
                       gallerySwiperRef={gallerySwiperRef}
                       paused={paused}
-                    />
+                    /> */}
                 </Suspense>
               </SwiperSlide>
             );
           })}
         </Swiper>
+      }
+      
       
 
    

@@ -1,11 +1,11 @@
 @import "/assets/fonts/displdts/displdts.scss";
-@import "/assets/fonts/sf-mono-cufonfonts-webfont/style.scss";
-@import "/assets/fonts/LetterGothic/LetterGothic.scss";
-@import "/assets/fonts/Xanh_Mono/XanhMono.scss";
-@import "/assets/fonts/bainshidai/bianzhidai.scss";
+
 @import "/assets/fonts/CopperHewitt_Book/CooperHewitt-Book.scss";
  
 :root {
+  --bubble-font: "displdts";
+  --secondary-font-reg: 'Cooper Hewitt Book';
+  --regular-font : 'Cooper Hewitt Book';
 
   ///main scheme
   --main-font-color: #828282;
@@ -14,23 +14,7 @@
   --main-bg-color: lightgrey;
   --secondary-bg-color: #4e464c;
 
-  --display-font: "SF Mono Bold";
-  // --regular-font: "SF Mono Regular";
-  --regular-font : 'Cooper Hewitt Book';
-  --secondary-font-reg: 'Cooper Hewitt Book';
-  // --secondary-font-reg: "Xanh Mono Regular";
-  --credit-font: 'MonospaceTypewriter';
-  --secondary-font-italic: "Xanh Mono Italic";
-  --third-font-display: "Letter Gothic Bold";
-  --third-font-display-italic: "Letter Gothic Bold Slanted";
-  --third-font-reg: "Letter Gothic Medium";
-  --third-font-italic: "Letter Gothic Slanted";
-  --detail-font: "SF Mono Light";
-  --hero-font: "Sf Mono Bold Italic";
-  --mix-blend-mode: luminosity;
-  --special-font-regular: "Displdts";
-  --special-font-display: "DOTMATRI";
-  --bubble-font: "displdts";
+
   --container-margin: 0.75rem;
   --reg-font-size-mobile: 20px;
 }
