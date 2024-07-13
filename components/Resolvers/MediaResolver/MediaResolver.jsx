@@ -41,7 +41,7 @@ const MediaResolver = ({media, videoRef, keynm, isActive, height, localMuted, au
     media.kind === "image"
   ) {
     return  <div ref={ref}>
-        <Image
+        {/* <Image
           loading="lazy"
           src={media.url}
           width={media.width}
@@ -51,8 +51,8 @@ const MediaResolver = ({media, videoRef, keynm, isActive, height, localMuted, au
           placeholder="blur"
           className={`  swiper-lazy`} 
 
-        />
-        {/* <PrismicImage field={media}/> */}
+        /> */}
+        <PrismicImage field={media}/>
     </div>;
   }else{
 

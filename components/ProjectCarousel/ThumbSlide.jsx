@@ -4,6 +4,7 @@ import styles from "./ProjectCarousel.module.scss";
 import Scrubber from "./Scrubber";
 import useCursor from "../Resolvers/States/Cursor";
 import Image from "next/image";
+import { PrismicImage } from '@prismicio/react'
 
 const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused, loaderImage}) => {
   const [activeVideo, setActiveVideo] = useState(false);
@@ -65,6 +66,7 @@ const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused, loaderI
               className={`${styles.VideoThumb}  swiper-lazy `} 
              
           />
+
           {activeVideo && (
               <Scrubber
                 paused={paused}
