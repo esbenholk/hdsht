@@ -44,6 +44,17 @@
   }
 }
 
+
+@media screen and (max-width: 768px) {
+
+  .ProgressBar {
+
+    width: calc(100% - 2rem);
+    left: 1rem;
+  }
+
+}
+
 @keyframes fill {
   0% {
     width: 0%;

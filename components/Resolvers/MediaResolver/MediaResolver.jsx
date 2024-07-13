@@ -49,6 +49,8 @@ const MediaResolver = ({media, videoRef, keynm, isActive, height, localMuted, au
           alt={media.name}
           blurDataURL={loaderImage}
           placeholder="blur"
+          className={`  swiper-lazy`} 
+
         />
         {/* <PrismicImage field={media}/> */}
     </div>;

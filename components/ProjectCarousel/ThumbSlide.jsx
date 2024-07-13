@@ -59,10 +59,11 @@ const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused, loaderI
           <Image
               loading="lazy"
               src={item.thumb && item.thumb.url ? item.thumb.url : item.carouselitem.kind === "image" ? item.carouselitem.url : loaderImage}
-              width={item.thumb && item.thumb.width ? 20 : 100}
+              width={item.thumb && item.thumb.width ? 20 : 300}
               height={200}
               alt={item.carouselitem.name}
-              className={styles.VideoThumb} 
+              className={`${styles.VideoThumb}  swiper-lazy `} 
+             
           />
           {activeVideo && (
               <Scrubber

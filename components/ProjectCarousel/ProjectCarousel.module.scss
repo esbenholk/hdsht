@@ -38,7 +38,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 0rem;
   p{
     font-size: var(--reg-font-size-mobile);
     margin: 0;
@@ -201,7 +201,7 @@
     margin-right: 0.2rem !important;
     border: 1px solid white;
     overflow: hidden;
-    max-width: 28rem !important;
+    max-width: 45rem !important;
     flex-shrink: 0 !important;
     flex-grow: 0 !important;
     // width: fit-content !important;
@@ -214,6 +214,9 @@
       object-fit: cover !important;
       -webkit-logical-width: max-content !important;
     }
+  }
+  .ThumbSlideImage{
+    max-width: 5rem !important;
   }
   .ThumbSlide:hover{
     border: 0.1rem solid black;
@@ -240,7 +243,7 @@
 
 @media screen and (max-width: 768px) {
   .InfoDiv{
-    padding: 1rem 0.5rem ;
+    padding: 0rem 0.5rem ;
     // margin-top: -2.5rem;
     a,
     h3,

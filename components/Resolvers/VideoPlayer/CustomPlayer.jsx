@@ -47,7 +47,8 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
   },[isInViewport])
 
   return (
-    <div ref={containerRef} className={url.includes("work") ? styles.VideoWrapperInWork : styles.VideoWrapper} >
+    <div  className={url.includes("work") ? styles.VideoWrapperInWork : styles.VideoWrapper} >
+      <div ref={containerRef} className={styles.CenterPoint}></div>
       <ReactPlayer
         ref={videoRef}
         id={keynm}

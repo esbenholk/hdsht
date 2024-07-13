@@ -5,6 +5,7 @@ import { PrismicLink } from "@prismicio/react";
 import AnimatedButton from "./AnimatedButton";
 import Progress from "./Progress/Progress";
 import "swiper/scss";
+import "swiper/css/lazy";
 import "swiper/scss/thumbs";
 import "swiper/scss/pagination";
 import "swiper/scss/effect-fade";
@@ -123,7 +124,7 @@ const ProjectCarousel = ({ slice, project }) => {
   const timer = useRef(0);
   useEffect(() => {
     timer.current = setInterval(() => {
-      if (!paused) {
+      if (!paused || width < 600) {
         setSeconds((seconds) => seconds + 1);
       }
     }, 1000);
@@ -138,7 +139,7 @@ const ProjectCarousel = ({ slice, project }) => {
   useEffect(() => {
     const gallerySwiper = gallerySwiperRef.current?.swiper;
     const thumbnailSwiper = thumbSwiperRef.current?.swiper;
-    if (gallerySwiper.controller && thumbnailSwiper.controller) {
+    if (gallerySwiper && gallerySwiper.controller && thumbnailSwiper.controller) {
       gallerySwiper.controller.control = thumbnailSwiper;
       thumbnailSwiper.controller.control = gallerySwiper;
     }
@@ -148,7 +149,6 @@ const ProjectCarousel = ({ slice, project }) => {
       const trigger = currentSlide === "image" ? 5 : duration;
       
       if (seconds > trigger && !paused) {
-        console.log("swipes per content");
         gallerySwiperRef.current.swiper.slideNext();
       }
   }, [seconds]);
@@ -239,15 +239,22 @@ const ProjectCarousel = ({ slice, project }) => {
       }}
      
     >
-      {hovered && 
-            <Progress
+      {hovered ? 
+        <Progress
+          slice={slice}
+            slideIndex={slideIndex}
+            paused={paused}
+            currentSlide={currentSlide}
+          hovered={hovered}
+          />
+        : width < 600 ?
+          <Progress
             slice={slice}
             slideIndex={slideIndex}
             paused={paused}
             currentSlide={currentSlide}
             hovered={hovered}
-          />
-      
+        /> : null
       }
 
 
@@ -273,7 +280,8 @@ const ProjectCarousel = ({ slice, project }) => {
         }}
         modules={[EffectFade, FreeMode, Navigation, Thumbs, Mousewheel, Lazy]}
         mousewheel={false}
-        lazy={true}
+           checkinview="true"
+          lazy="true"
         onSlideChange={() => {
           // if (slice?.items[slideIndex].carouselitem.kind === "document") {
           // } else {
@@ -340,6 +348,8 @@ const ProjectCarousel = ({ slice, project }) => {
       {width > 600 && 
       
       <Swiper
+          checkinview="true"
+          lazy="true"
           onSwiper={setThumbsSwiper}
           ref={thumbSwiperRef}
           className={`${styles.ThumbSwiper}  ${infoIsExpanded && styles.Hidden}`}
@@ -356,21 +366,21 @@ const ProjectCarousel = ({ slice, project }) => {
           {slice?.items.map((item, i) => {
             return (
               <SwiperSlide
-                className={styles.ThumbSlide}
+                className={`${styles.ThumbSlide} ${item.carouselitem.kind === "image" && styles.ThumbSlideImage}`}
                 key={i}
                 // onMouseOver={handleSlide}
                 onMouseLeave={handleLeave}
               >
                 
                 <Suspense fallback={<LoadSpinner />}>
-                      {/* <ThumbSlide
+                      <ThumbSlide
                       loaderImage={loaderImage}
                       item={item}
                       slideIndex={slideIndex}
                       slice={slice}
                       gallerySwiperRef={gallerySwiperRef}
                       paused={paused}
-                    /> */}
+                    />
                 </Suspense>
               </SwiperSlide>
             );
@@ -449,6 +459,29 @@ const ProjectCarousel = ({ slice, project }) => {
 
 
     </motion.div>
+
+
+//     <div>
+
+// {slice?.items.map((item, i) => {
+//           return (
+         
+//                 <>
+//                 <GallerySlide
+//                 // keynm={project.data.title + i}
+//                 item={item}
+//                 gallerySwiperRef={gallerySwiperRef}
+//                 slice={slice}
+//                 // isActive={isActive}
+//                 slideIndex={slideIndex}
+//               />
+
+//                 </>
+          
+            
+//           );
+//         })}
+//     </div>
   );
 };
 

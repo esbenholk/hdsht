@@ -20,43 +20,39 @@ export default function LandingGrid({workInGridWithDetails}) {
 
    
           {workInGridWithDetails && workInGridWithDetails.map((item, key) => (
-            <div key={key}>
-            
-         
-            {item.data.slices && item.data.slices.map((slice, index)=>(
-              <div key={index}>
-            {slice && slice.slice_type === "work_carousel" && 
-            <motion.div
-                key={key}
-                className={styles.MediaWrapper}
-      
-                ref={mediaWrapper}
-                style={{
-                  borderRadius: "1rem",
-                }}
-             
-              >
-                <Suspense fallback={<LoadSpinner />} style={{position: "relative"}}>
-                  <motion.div 
-         
-                  >
-                    {/* <WorkCarousel slice={slice} project={item}/> */}
-                    <ProjectCarousel slice={slice} project={item}/>
-
+         <div key={key}>
+              {item.data.slices && item.data.slices.map((slice, index)=>(
+                <div key={index}>
+                    {slice && slice.slice_type === "work_carousel" && 
+                    <motion.div
+                        key={key}
+                        className={styles.MediaWrapper}
+              
+                        ref={mediaWrapper}
+                        style={{
+                          borderRadius: "1rem",
+                        }}
+                    
+                      >
+                        <Suspense fallback={<LoadSpinner />} style={{position: "relative"}}>
+                          <motion.div 
                 
-                  </motion.div>
+                          >
+                            {/* <WorkCarousel slice={slice} project={item}/> */}
+                            <ProjectCarousel slice={slice} project={item}/>
+
+                        
+                          </motion.div>
 
 
-               
-                </Suspense>
-              </motion.div> 
-            }
-          
-             </div>
-                
-            ))}
-          
-            </div>
+                      
+                        </Suspense>
+                      </motion.div> 
+                    }
+                  
+                </div>       
+              ))}
+            </div>          
           ))}
         </motion.div>
       </Layout>
