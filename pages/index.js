@@ -133,7 +133,7 @@ const Page = ({ page }) => {
         >
           <SliceZone slices={page.data.slices} components={components} />
 
-          {isDesktop && 
+          {/* {isDesktop && 
             <section 
               onMouseOver={() => {
                 if(!router.asPath.includes("work")){
@@ -170,7 +170,7 @@ const Page = ({ page }) => {
                 <ParticleCanvas  imageUrl={page.settings?.data.logo.url} isPageTop={false}/>
               </div>   
             </section>
-          }
+          } */}
         </motion.div>
     
         {isDesktop && 

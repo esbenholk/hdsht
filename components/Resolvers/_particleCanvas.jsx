@@ -165,15 +165,17 @@ const ParticleCanvas = ({ imageUrl, imageWidth, imageHeight, isPageTop }) => {
 
         const myImage = new Image();
         myImage.src = imageUrl;
+        myImage.crossOrigin = "anonymous";
+
         myImage.onerror = function(e){
-            console.log("error", e);
+            console.log("error", e, myImage);
         }
 
         myImage.onload = function() {       
-            myImage.crossOrigin = "anonymous";
             startImage(myImage, _context, _effect);
             // myImage.onload = null
         }
+
 
         setImage(myImage);
 

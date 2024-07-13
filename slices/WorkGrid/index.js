@@ -59,6 +59,7 @@ function WorkGrid({ slice }){
   }
 
   function getNextProjects(startpoint, interval){
+    handleLeave();
     setIsWorking(true);
     setCurrentIndex(startpoint + interval);
 
@@ -88,7 +89,7 @@ function WorkGrid({ slice }){
         <button className="loadmore" 
         onMouseOver={handleHover}
         onMouseLeave={handleLeave}
-        onClick={() => getNextProjects(currentIndex, 10)}>
+        onClick={() => getNextProjects(currentIndex, 10) }>
           load more</button>
     } 
     
