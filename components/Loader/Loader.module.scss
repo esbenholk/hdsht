@@ -22,21 +22,6 @@
   filter: saturate(100%) brightness(1);
   // transition-delay: 2.7s;
 
-  img{ 
-    width: 300px;
-    height: 300px;
-    max-width: 50%;
-    object-fit: contain;
-    transition: all 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
-
-  }
-  h2{
-    font-size: 1.2rem;
-    margin: 0;
-    margin-top: 2rem;
-    color: #3E3E3E;
-    transform: translate(-400%, 0);
-  }
 }
 
 .On{
@@ -72,42 +57,10 @@
   transition: all 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.BackgroundGame{
-  position: fixed;
-  z-index: 99;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(255,255,255,1);;
-  transition: all 0.5s ease-in-out;
-}
-
-.BackGroundOff{
-  background-color: rgba(0,0,0,0);
-}
-
 .Off{
   opacity: 0;
   background-color: rgba(0,0,0,0);
   // mix-blend-mode: difference;
   filter: saturate(300%) brightness(5);
   // top: 200%;
-}
-
-@media screen and (max-width: 768px) {
-  .Container{
-    // transition-delay:1.2s;
-    h2{
-
-      transform: translate(0, 0);
-    }
-  }
-  // .Off{
-  //   opacity: 0;
-  //   top:0;
-  //   visibility: hidden;
-  // }
-
-
 }

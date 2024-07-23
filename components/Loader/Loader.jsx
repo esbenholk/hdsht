@@ -1,53 +1,30 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Loader.module.scss";
 import useCursor from "../Resolvers/States/Cursor";
 import { motion } from "framer-motion";
 import * as React from "react";
 import useSound from "use-sound";
-import useWindowDimensions from "../Resolvers/UseWindowDimensions";
 import Image from "next/image";
-import CustomPlayer from "../Resolvers/VideoPlayer/CustomPlayer";
 
 export default function Loader({settings}) {
   const [index, setIndex] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isPageLoaded, setIsPageLoaded] = useState(false); 
   const [userHasEntered, setUserHasEntered] = useState(false);
   const [userIsIn, setUserIsIn] = useState(false);
-  const [blocks, setBlocks] = useState([]);
-  const blocksRef = useRef(blocks);
-
-
-  const {width, height} = useWindowDimensions();
-  const url = useCursor((state) => state.url);
-
+ 
   const sounds = settings.data.slices[3].items;
   const [soundUrl, setSoundUrl] = useState(sounds[Math.floor(Math.random() * sounds.length)].media.url);
-  const  [play, { stop, pause }] = useSound(soundUrl, {interrupt: true});
+  const  [play] = useSound(soundUrl, {interrupt: true});
 
 
-  useEffect(() => {
-    blocksRef.current = blocks; // Keep the ref updated with the current blocks
-  }, [blocks]);
 
 
-  function closeLoader(){
-    setUserHasEntered(true);
-    useCursor.setState({
-      muted: false
-    });
-  }
+
  
   useEffect(()=>{
-
-
-
     setSoundUrl(sounds[Math.floor(Math.random() * sounds.length)].media.url);
-
   },[]);
   
   useEffect(() => {
-    setIsLoaded(true);
     useCursor.setState({
       cursorVariant: "hover",
       isOverProject: false,
@@ -57,11 +34,7 @@ export default function Loader({settings}) {
     })
   }, []);
 
-  useEffect(() => {
-      if (isLoaded) {
-          setIsPageLoaded(true);
-      }
-  }, [isLoaded]);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -76,84 +49,48 @@ export default function Loader({settings}) {
     <>
     {!userIsIn && 
 
-<>
-      {settings.data.slices[1] && settings.data.slices[1].items.length>0 && 
-        <div className={`${styles.BackgroundGame}  ${!userHasEntered ? styles.BackGroundOn : styles.BackGroundOff}`}>
-        </div>
-      }
+      <>
       <motion.div
       className={`${styles.Container}  ${!userHasEntered ? styles.On : styles.Off} ${!settings.data.slices[1] && styles.ImageContainer}`}
       style={{backgroundImage: `url(${settings.data.slices[1] && settings.data.slices[1].items.length>0 && settings.data.slices[1].items[Math.floor(Math.random() * settings.data.slices[1].items.length)].media.url})`, backgroundColor: "var(--main-border-glow-color)"}}
-      onClick={(e)=>{
-        //handleMouseDown(e);
+      >
+      </motion.div>
+      {settings.data.slices[0] && settings.data.slices[0].items.length>0  &&
+            <Image width={300} height={300} priority src={settings.data.slices[0].items[index].media.url} alt="loading gif" className={`${!userHasEntered ? styles.Opaque : styles.Transparent}`}
+              onMouseEnter={()=>{
+                    useCursor.setState({
+                      cursorVariant: "hoveronbiglink",
+                      isOverProject: false,
+                      title: "click to enter",
+                      description: ""
+                    })
+              }}
+              onClick={(e)=>{
 
-        if(!window.location.href.includes("pink")){
-
-          console.log("user goes in through loader" );
-          setUserHasEntered(true);
-
-          setTimeout(() => {
-            setUserIsIn(true);
-          }, 1500);
-        }
-        useCursor.setState({
-          muted: false
-        });
-    
-      }}
-    >
-    </motion.div>
-    {settings.data.slices[0] && settings.data.slices[0].items.length>0  &&
-      
-
-      <>
-      { settings.data.slices[0].items[index].media.kind !== "image" ? 
-        <>
-        <CustomPlayer autoPlay={true} media={settings.data.slices[0].items[index].media} isActive={true} localMuted={true}/>
-        </>
-      : 
-        <Image width={300} height={300} priority src={settings.data.slices[0].items[index].media.url} alt="loading gif" className={`${!userHasEntered ? styles.Opaque : styles.Transparent}`}
-        onMouseOver={()=>{
-              useCursor.setState({
-                cursorVariant: "hoveronbiglink",
-                isOverProject: false,
-                title: "click to enter",
-                description: ""
-              })
-        }}
-        onClick={(e)=>{
-          //handleMouseDown(e);
-
-          if(!window.location.href.includes("pink")){
-            setUserHasEntered(true);
-
-            play();
-
-            setTimeout(() => {
-              setUserIsIn(true);
-              // stop();
-            }, 1500);
-
-            useCursor.setState({
-              muted: false
-            });
-          }
-            }}
-
-        onMouseLeave={()=>{
-              useCursor.setState({
-              cursorVariant: "default",
-              isOverProject: false,
-              title: "HDSHT",
-              description: ""
-              });
-            }}
-        />
-      
+                if(!window.location.href.includes("pink")){
+        
+                  setUserHasEntered(true);
+                  play();
+        
+                  setTimeout(() => {
+                    setUserIsIn(true);
+                  }, 1500);
+                }
+                useCursor.setState({
+                  muted: false
+                });
+            
+              }}
+              onMouseLeave={()=>{
+                    useCursor.setState({
+                    cursorVariant: "default",
+                    isOverProject: false,
+                    title: "HDSHT",
+                    description: ""
+                    });
+                  }}
+              />
       }
-      </>
-      
-    }
     </>
     }
     

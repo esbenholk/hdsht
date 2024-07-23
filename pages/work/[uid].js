@@ -20,7 +20,6 @@ import Loader from "@/components/Loader/Loader";
 
 const Page = ({ page }) => {
   const [isMounted, setIsMounted] = useState(false);
-  const logoRef = useRef();
   const {width} = useWindowDimensions();
   const [isDesktop, setIsDesktop] = useState();
 

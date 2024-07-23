@@ -137,6 +137,9 @@ const ProjectCarousel = ({ slice, project }) => {
     setSeconds(0);
   };
   useEffect(() => {
+
+    console.log("swiper", slice, project);
+
     const gallerySwiper = gallerySwiperRef.current?.swiper;
     const thumbnailSwiper = thumbSwiperRef.current?.swiper;
     if (gallerySwiper && gallerySwiper.controller && thumbnailSwiper.controller) {
@@ -337,7 +340,6 @@ const ProjectCarousel = ({ slice, project }) => {
               />
 
                 </>
-          
               )}
            
             </SwiperSlide>

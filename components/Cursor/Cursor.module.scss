@@ -9,122 +9,6 @@
 
 }
 
-
-
-.Cross{
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  pointer-events: none;
-  margin: 0 !important;
-}
-.Cross div{
-  display: flex;
-  position: absolute;
-  top:0;
-  left:0;
-}
-.Data{
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  pointer-events: none;
-  margin-left: 2em;
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-}
-.Data span{
-  font-size: 1.5rem;
-  max-width: 500px;
-  font-family: var(--bubble-font);
-  mix-blend-mode: screen !important;
-
-}
-
-.Cross{
-  // mix-blend-mode: difference;
-
-}
-.Stuck{
-  position: fixed;
-  top: 1rem;
-  bottom: 1rem;
-  left: 1rem;
-  right: 1rem;
-}
-
-.LoaderFrame{
-  z-index: 9999999999999999999999999;
-  --s: 70px; /* the size on the corner */
-  --g: 100px; /* the gap between the border and image */
-  --t: 5px;
-  pointer-events: none;
-
-  padding: calc(var(--g) + var(--t));
-  outline: 1px solid white; /* the color here */
-  outline-offset: calc(-1*var(--t));
-  mask:
-    conic-gradient(at var(--s) var(--s),#0000 75%,#000 0)
-    0 0/calc(100% - var(--s)) calc(100% - var(--s)),
-    linear-gradient(#000 0 0) content-box;
-  transition: .4s;
-
-  background-color: rgba(0,0,0,0);
-  // transform: translate(-50%, -50%);
-
-}
-.Free{
-  width: 200px;
-  height: 200px;
-  transform: translate(-50%, -50%);
-
-  position: relative;
-  max-width: 200px;
-  max-height: 200px;
-}
-.Cross section{
-  --s: 70px; /* the size on the corner */
-  --g: 10px; /* the gap between the border and image */
-  --t: 5px;
-
-  padding: calc(var(--g) + var(--t));
-  outline: 1px solid white; /* the color here */
-  outline-offset: calc(-1*var(--t));
-  mask:
-    conic-gradient(at var(--s) var(--s),#0000 75%,#000 0)
-    0 0/calc(100% - var(--s)) calc(100% - var(--s)),
-    linear-gradient(#000 0 0) content-box;
-  transition: .4s;
-  width: 200px;
-  height: 200px;
-  background-color: rgba(0,0,0,0);
-  transform: translate(-50%, -50%);
-  position: relative;
-  max-width: 200px;
-  max-height: 200px;
-}
-.Cross section.Focus{
-  max-width: 70px !important;
-  max-height: 70px !important;
-}
-
-.Cross section p{
-  position: absolute;
-  bottom: 0;
-  font-size: 0.6rem;
-}
-.Cross section span{
-  display: inline-block;
-  width: 100%;
-}
-.Cross section span:not(:first-of-type){
-  padding: 5rem;
-  max-width: calc(100% - 10rem);
-}
-
 ///vertical line
 .Cross div:is(:first-child){
   transform: translate(-50%, -50%);
@@ -144,47 +28,7 @@
   background: linear-gradient(90deg, var(--main-font-color) 49%,  rgba(0,0,0,0) 49%,  rgba(0,0,0,0) 51%, var(--main-font-color)51%);
 }
 
-.DescriptionContianer{
-  position: absolute;
-  background-color: rgba(0,0,0,0);
-  display: flex;
-  flex-direction: column;
-  margin: 1rem;
-  margin-top: -2rem;
-  width: 50rem;
-  top:0;
-  left:0;
-}
-.DescriptionContianerTopLeft{
-  position: absolute;
-  background-color: rgba(0,0,0,0);
-  display: flex;
-  flex-direction: column;
-  margin: 1rem;
-  margin-top: -2rem;
-  width: 50rem;
-  bottom:0;
-  right:0;
-  transform: translate(-105%, -100%);
-}
 
-
-
-.DescriptionContianerTopLeft span{
-  margin-bottom: 2rem;
-  text-align: right;
-  font-family: var(--bubble-font);
-
-}
-.DescriptionContianer span{
-  margin-bottom: 2rem;
-  text-align: justify;
-  font-family: var(--bubble-font);
-}
-.DescriptionContianer span,
-.DescriptionContianerTopLeft span{
-  font-family: var(--reg-font);
-}
 
 .PinkDot,
 .Dot{
@@ -281,30 +125,6 @@
 }
 
 
-.littleHairVer{
-  height: 10px;
-  background-color: var(--main-font-color);
-  width: 1px;
-  transform: translate(-50%,-50%);
-  z-index: 9999999999999999999;
-  position: absolute;
-  filter: invert(1);
-}
-.littleHairHor{
-  width: 10px;
-  background-color: var(--main-font-color);
-  height: 1px;
-  transform: translate(-50%,-50%);
-  z-index: 9999999999999999999;
-  position: absolute;
-  filter: invert(1);
-
-
-}
-// .Hoveronlink .Dot{
-//   max-width: 50px;
-//   max-height: 50px;
-// }
 .Hoveronlink .Dot div{
   margin: -3px;
 }
