@@ -1,25 +1,10 @@
-import { useEffect, useState, useRef, Suspense } from "react";
+import { useEffect, useState, useRef, Suspense, lazy } from "react";
 import styles from "./ProjectCarousel.module.scss";
-import { Swiper, SwiperSlide } from "swiper/react";
+// import { Swiper, SwiperSlide } from "swiper/react";
 import { PrismicLink } from "@prismicio/react";
 import AnimatedButton from "./AnimatedButton";
 import Progress from "./Progress/Progress";
-import "swiper/scss";
-import "swiper/css/lazy";
-import "swiper/scss/thumbs";
-import "swiper/scss/pagination";
-import "swiper/scss/effect-fade";
-import "swiper/scss/navigation";
-import "swiper/scss/free-mode";
-import "swiper/scss/mousewheel";
-import {
-  Navigation,
-  Thumbs,
-  FreeMode,
-  Mousewheel,
-  Lazy,
-  EffectFade
-} from "swiper";
+
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
 import useVideo from "../Resolvers/States/Video";
 import {
@@ -29,6 +14,8 @@ import useCursor from "../Resolvers/States/Cursor";
 import GallerySlide from "./GallerySlide";
 import ThumbSlide from "./ThumbSlide";
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
+import Slider from "react-slick";
+
 
 
 const slideInFromBottom = {
@@ -87,23 +74,84 @@ function JumbleWordInElement(element, word, speed){
     iteration += 1;
   },1);
 }
-const ProjectCarousel = ({ slice, project }) => {
-  const gallerySwiperRef = useRef();
+
+
+
+
+const ProjectCarousel = ({ slice, project, isInViewport }) => {
+  const [amountOfVideos, setAmoutOfVideos] = useState(1);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlideType, setCurrentSlideType] = useState("");
+
   const carousel = useRef();
-  const thumbSwiperRef = useRef();
-  const [thumbsSwiper, setThumbsSwiper] = useState(0);
-  const [slideIndex, setSlideIndex] = useState(0);
+  const settings = {
+    dots: false,
+    fade: true,
+    swipe: true,
+    lazyLoad: !isInViewport,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: currentSlide,
+    // variableWidth: true,
+    swipeToSlide: true,
+    // centerMode: true,
+    beforeChange: (prev, next) => {
+      setCurrentSlide(next);
+      resetTimer();
+    },
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />
+
+  };
+  function SampleNextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={styles.ArrowButton}
+        style={{ ...style, right: 0 }}
+        onClick={onClick}
+        onMouseOver={() => {
+          handleHoverButton(project);
+        }}        
+        onMouseLeave={handleLeave}
+      />
+    );
+  }
+  
+  function SamplePrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={styles.ArrowButton}
+        style={{ ...style, left: 0 }}
+        onClick={onClick}
+        onMouseOver={() => {
+          handleHoverButton(project);
+        }}
+        onMouseLeave={handleLeave}
+      />
+    );
+  
+  
+  }
+
+  const gallerySwiperRef = useRef();
+
+  // const thumbSwiperRef = useRef();
+  // const [thumbsSwiper, setThumbsSwiper] = useState(0);
+  // const [slideIndex, setSlideIndex] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [hovered, setHovered] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(null);
-  const { duration, setCurrentVideo, currentVideo,  setDuration } = useVideo();
+  const { duration} = useVideo();
   const [paused, setPaused] = useState(true);
-  const nexturl = useCursor((state) => state.nexturl);
+  // const nexturl = useCursor((state) => state.nexturl);
   const url = useCursor((state) => state.url);
 
 
   const {width} = useWindowDimensions();
-  const [section, setSection] = useState();
+  // const [section, setSection] = useState();
 
   const [infoIsExpanded, setINfoIsExpanded] = useState(false);
   const infoRef = useRef();
@@ -112,14 +160,14 @@ const ProjectCarousel = ({ slice, project }) => {
   const loaderImage = useCursor((state) => state.loaderImage);
 
   useEffect(() => {
-    if (slice.items[slideIndex].carouselitem.kind === "image") {
-      setCurrentSlide("image");
+    if (slice.items[currentSlide].carouselitem.kind === "image") {
+      setCurrentSlideType("image");
       // setCurrentVideo(null);
       // useVideo.setState({ duration: null, currentTime: null });
     } else {
-      setCurrentSlide("video");
+      setCurrentSlideType("video");
     }
-  }, [slideIndex, currentVideo]);
+  }, [currentSlide]);
 
   const timer = useRef(0);
   useEffect(() => {
@@ -136,23 +184,39 @@ const ProjectCarousel = ({ slice, project }) => {
   const resetTimer = () => {
     setSeconds(0);
   };
-  useEffect(() => {
+  // useEffect(() => {
 
-    console.log("swiper", slice, project);
+  //   console.log("swiper", slice, project);
 
-    const gallerySwiper = gallerySwiperRef.current?.swiper;
-    const thumbnailSwiper = thumbSwiperRef.current?.swiper;
-    if (gallerySwiper && gallerySwiper.controller && thumbnailSwiper.controller) {
-      gallerySwiper.controller.control = thumbnailSwiper;
-      thumbnailSwiper.controller.control = gallerySwiper;
+  //   const gallerySwiper = gallerySwiperRef.current?.swiper;
+  //   const thumbnailSwiper = thumbSwiperRef.current?.swiper;
+  //   if (gallerySwiper && gallerySwiper.controller && thumbnailSwiper.controller) {
+  //     gallerySwiper.controller.control = thumbnailSwiper;
+  //     thumbnailSwiper.controller.control = gallerySwiper;
+  //   }
+  // }, []);
+
+  useEffect(()=>{
+    if(slice){
+      let amount = 0;
+      for (let index = 0; index < slice.items.length; index++) {
+        const element = slice.items[index];
+        if(element.carouselitem.kind === "video"){
+          amount++;
+        }
+        
+      }
+      setAmoutOfVideos(amount);
+    
     }
-  }, []);
+
+
+  },[])
 
   useEffect(() => {
-      const trigger = currentSlide === "image" ? 5 : duration;
-      
+      const trigger = currentSlideType === "image" ? 5 : duration;
       if (seconds > trigger && !paused) {
-        gallerySwiperRef.current.swiper.slideNext();
+        gallerySwiperRef.current.slickNext();
       }
   }, [seconds]);
 
@@ -163,7 +227,7 @@ const ProjectCarousel = ({ slice, project }) => {
         isOverProject: true,
         description: "",
         instruction: !url.includes("work") && infoIsExpanded ? "" : "",
-        title: item? item.data.title : "",
+        // title: item? item.data.title : "",
         shouldrenderdetailsontop: false
       });
   };
@@ -191,30 +255,10 @@ const ProjectCarousel = ({ slice, project }) => {
   
     if(infoIsExpanded){
       setINfoIsExpanded(false);
+      handleLeave();
     }
    
   }
-
-  // function pauseVideos(){
-  //   let videos = document.getElementsByTagName("video");
-  //   for (let index = 0; index < videos.length; index++) {
-  //     if(videos[index].id != "videoheader"){
-  //       videos[index].pause();
-  //       console.log("pause video", videos[index].id );
-  //     }    
-  //   }
-  // }
-  // function playCurrentVideo(){
-  //  let _currentVideo =document.getElementById(project.data.title + gallerySwiperRef.current?.swiper?.realIndex);
-    
-   
-  //  console.log("plays current video",currentVideo, duration, currentVideo.getDuration());
-    
-    
-  //   // if(currentVideo){
-  //   //     currentVideo.play();
-  //   // }
-  // }
 
   return (
     <motion.div
@@ -239,165 +283,88 @@ const ProjectCarousel = ({ slice, project }) => {
         if(!url.includes("work")){
           handleClick(e, project);
         }
-      }}
-     
+      }}  
     >
       {hovered ? 
         <Progress
           slice={slice}
-            slideIndex={slideIndex}
+            slideIndex={currentSlide}
             paused={paused}
-            currentSlide={currentSlide}
+            currentSlide={currentSlideType}
           hovered={hovered}
           />
         : width < 600 ?
           <Progress
             slice={slice}
-            slideIndex={slideIndex}
+            slideIndex={currentSlide}
             paused={paused}
-            currentSlide={currentSlide}
+            currentSlide={currentSlideType}
             hovered={hovered}
         /> : null
       }
 
-
-      {/* <Controls
-        hovered={hovered}
-        setHovered={setHovered}
-        paused={paused}
-        setPaused={setPaused}
-      /> */}
-      <Swiper
-        ref={gallerySwiperRef}
+      <Slider
+         {...settings}
         className={`${styles.SwiperTop} swiper--lazy`}
-        slidesPerView={1}
-        loop={true}
-        effect={"fade"}
-        thumbs={{
-          swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
-        }}
-        onReachEnd={() => {
-            if(url.includes("work") && nexturl){
-              window.location.href = nexturl;              
-            } 
-        }}
-        modules={[EffectFade, FreeMode, Navigation, Thumbs, Mousewheel, Lazy]}
-        mousewheel={false}
-           checkinview="true"
-          lazy="true"
-        onSlideChange={() => {
-          // if (slice?.items[slideIndex].carouselitem.kind === "document") {
-          // } else {
-          //   setCurrentVideo(null);
-          // }
-          resetTimer();
-
-          if(currentVideo){
-            setDuration(currentVideo.getDuration());
-          }
-          // pauseVideos();
-          // playCurrentVideo(); 
-          setSlideIndex(gallerySwiperRef.current.swiper.realIndex) 
-        }}
-        onMouseOver={() => {
+         onMouseOver={() => {
           handleHover(project);
         }}
         onMouseLeave={() => {
           handleLeave();
         }}
-
-        onSlideNextTransitionStart={() => {
-          if (thumbSwiperRef.current?.swiper) {
-            thumbSwiperRef.current.swiper.slideNext();
-          }
-        }}
-        onSlidePrevTransitionStart={() => {
-          if (thumbSwiperRef.current?.swiper) {
-            thumbSwiperRef.current.swiper.slidePrev();
-          }
-        }}
-
-        onClick={(e) => {
-          gallerySwiperRef.current.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-        }}
-
+        ref={gallerySwiperRef}
       >
         {slice?.items.map((item, i) => {
           return (
-            <SwiperSlide
-              className={styles.GallerySlide}
-              key={i}
-            >
-              {({ isActive }) => (
-                <>
-                <GallerySlide
-                // keynm={project.data.title + i}
-                item={item}
-                gallerySwiperRef={gallerySwiperRef}
-                slice={slice}
-                isActive={isActive}
-                slideIndex={slideIndex}
-              />
+            <div className={styles.GallerySlide}   key={i}> 
+                  <GallerySlide
+                  item={item}
+                  slice={slice}
+                  isActive={currentSlide == i}
+                  currentSlide={currentSlide}
+                />
+                {/* <p style={{position: "absolute", top: 0}}>slide: {i} , isActive={currentSlide}, duration: {duration}, seconds: {seconds}, amount of videos: {amountOfVideos}</p> */}
+              </div>
 
-                </>
-              )}
-           
-            </SwiperSlide>
           );
         })}
-      </Swiper>
-   
-      {width > 600 && 
-      
-      <Swiper
-          checkinview="true"
-          lazy="true"
-          onSwiper={setThumbsSwiper}
-          ref={thumbSwiperRef}
-          className={`${styles.ThumbSwiper}  ${infoIsExpanded && styles.Hidden}`}
-          modules={[FreeMode, Thumbs, Mousewheel]}
-          mousewheel
-          // spaceBetween={10}
-          direction={"horizontal"}
-          slideToClickedSlide={true}
-          slidesPerView={"auto"}
-          loop
-          freeMode={true}
-          centeredSlides
-        >
-          {slice?.items.map((item, i) => {
-            return (
-              <SwiperSlide
-                className={`${styles.ThumbSlide} ${item.carouselitem.kind === "image" && styles.ThumbSlideImage}`}
-                key={i}
-                // onMouseOver={handleSlide}
-                onMouseLeave={handleLeave}
-              >
-                
-                <Suspense fallback={<LoadSpinner />}>
+      </Slider>
+
+     {width > 600 && 
+        <div
+            className={`${styles.ThumbSwiper}  ${infoIsExpanded && styles.Hidden}`}
+          >
+            {slice?.items.map((item, i) => {
+              return (
+                <div
+                  className={`${styles.ThumbSlide} ${!hovered ? styles.Hidden : null}`}
+                  style={{width: item.carouselitem.kind === "image" && amountOfVideos > 1 ? `${(100/slice.items.length)*(amountOfVideos/slice.items.length) }%` :`${(100/slice.items.length)/(amountOfVideos/slice.items.length)}%` } }
+                  key={i}
+                  // onMouseOver={handleSlide}
+                  onMouseLeave={handleLeave}
+                  onClick={() => {
+                    gallerySwiperRef.current.slickGoTo(i)
+                  }}
+                >   
+                  
+                  <Suspense fallback={<LoadSpinner />}>
                       <ThumbSlide
-                      loaderImage={loaderImage}
-                      item={item}
-                      slideIndex={slideIndex}
-                      slice={slice}
-                      gallerySwiperRef={gallerySwiperRef}
-                      paused={paused}
-                    />
-                </Suspense>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      }
+                        loaderImage={loaderImage}
+                        item={item}
+                        slideIndex={currentSlide}
+                        slice={slice}
+                        gallerySwiperRef={gallerySwiperRef}
+                        paused={paused}
+                     
+                      />
+                  </Suspense>
+                </div>
+              );
+            })}
+          </div>
+        }
       
-      
-
-   
- 
-
-
-
-    {project && <>
+      {project && <>
       <div className={styles.InfoDiv}>
         <PrismicLink href={project.url}
           onMouseOver={() => {
@@ -414,7 +381,7 @@ const ProjectCarousel = ({ slice, project }) => {
           onClick={(e) => {
 
             if(width>700 && !infoIsExpanded){
-              gallerySwiperRef.current.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+              carousel.current.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
             }
 
             if(!infoIsExpanded && infoRef){
@@ -426,7 +393,7 @@ const ProjectCarousel = ({ slice, project }) => {
             }
             setINfoIsExpanded(!infoIsExpanded);
 
-            if(!url.includes("work") && section){
+            if(!url.includes("work")){
               handleClick(e, project);
             }
           }}>
@@ -436,8 +403,8 @@ const ProjectCarousel = ({ slice, project }) => {
 
         </>}
       </div>
-
-              <motion.div className={`${styles.InfoContainer} ${infoIsExpanded ? styles.Open : styles.Closed}` }>
+      
+      <motion.div className={`${styles.InfoContainer} ${infoIsExpanded ? styles.Open : styles.Closed}` }>
            
                   <div className={styles.Content}>
                     <div className={`${infoIsExpanded ? styles.Open : styles.Closed} ${styles.Description}`}>
@@ -458,32 +425,8 @@ const ProjectCarousel = ({ slice, project }) => {
                   </div>
               </motion.div>
     </> }
-
-
     </motion.div>
-
-
-//     <div>
-
-// {slice?.items.map((item, i) => {
-//           return (
-         
-//                 <>
-//                 <GallerySlide
-//                 // keynm={project.data.title + i}
-//                 item={item}
-//                 gallerySwiperRef={gallerySwiperRef}
-//                 slice={slice}
-//                 // isActive={isActive}
-//                 slideIndex={slideIndex}
-//               />
-
-//                 </>
-          
-            
-//           );
-//         })}
-//     </div>
+    
   );
 };
 

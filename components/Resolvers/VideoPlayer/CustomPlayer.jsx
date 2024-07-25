@@ -39,12 +39,12 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
 
 
   useEffect(()=>{
-    if(isInViewport && isActive && videoRef.current){
+    if(isInViewport && isActive && videoRef &&  videoRef.current){
       videoRef.current.playing = true;
-    } else {
+    } else if(videoRef && videoRef.current){
       videoRef.current.playing = false;
     }
-  },[isInViewport])
+  },[isInViewport, videoRef])
 
   return (
     <div  className={url.includes("work") ? styles.VideoWrapperInWork : styles.VideoWrapper} >

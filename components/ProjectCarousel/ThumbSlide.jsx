@@ -4,7 +4,7 @@ import styles from "./ProjectCarousel.module.scss";
 import Scrubber from "./Scrubber";
 import useCursor from "../Resolvers/States/Cursor";
 import Image from "next/image";
-import { PrismicImage } from '@prismicio/react'
+
 
 const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused, loaderImage}) => {
   const [activeVideo, setActiveVideo] = useState(false);
@@ -35,15 +35,16 @@ const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused, loaderI
   };
 
   useEffect(() => {
-  
     if (
-      gallerySwiperRef?.current?.swiper?.realIndex === slice.items.indexOf(item)
+      slideIndex === slice.items.indexOf(item) 
     ) {
       setActiveVideo(true);
+      // console.log("thmbslide is the current slide");
+
     } else {
       setActiveVideo(false);
     }
-  }, [gallerySwiperRef?.current?.swiper?.realIndex]);
+  }, [slideIndex]);
 
 
 
@@ -60,14 +61,16 @@ const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused, loaderI
           <Image
               loading="lazy"
               src={item.thumb && item.thumb.url ? item.thumb.url : item.carouselitem.kind === "image" ? item.carouselitem.url : loaderImage}
-              width={item.thumb && item.thumb.width ? 20 : 300}
-              height={200}
+              width={300}
+              height={100}
               alt={item.carouselitem.name}
-              className={`${styles.VideoThumb}  swiper-lazy `} 
+              
+              className={`${styles.VideoThumb } ${activeVideo ? styles.Active : null }` } 
              
           />
 
-          {activeVideo && (
+          {activeVideo && item.carouselitem.kind !== "image"  && (
+            <>
               <Scrubber
                 paused={paused}
                 slice={slice}
@@ -75,6 +78,7 @@ const ThumbSlide = ({ item, slideIndex, slice, gallerySwiperRef, paused, loaderI
                 slideIndex={slideIndex}
                 activeVideo={activeVideo}
               />
+            </>
           )}
         </>   
       }

@@ -12,6 +12,7 @@ import dynamic from "next/dynamic";
 import { useFooterOffset } from "../components/Resolvers/States/FooterOffset";
 import useWindowDimensions from "../components/Resolvers/UseWindowDimensions"
 import Logo from 'assets/svg/HDSHT_HD.svg';
+import Image from "next/image";
 
 import Loader from "@/components/Loader/Loader";
 
@@ -35,6 +36,8 @@ const Page = ({ page }) => {
       loaderImage: page.settings.data.placeholderimage.url
     });
     const handleScroll = () => {
+
+      
       let h3s = document.getElementsByTagName('h3');
       if(h3s[0]){
         let stickyPosY = h3s[0].getBoundingClientRect().y; 
@@ -118,7 +121,8 @@ const Page = ({ page }) => {
             <div style={{position: "fixed", zIndex: -1, bottom: 0, left: 0, right: 0, height: width>600 ? `calc(100% - ${height-foldedHeight+45}px - ${footerOffset*2}px)`: "8rem", backgroundColor: "var(--main-bg-color)"}}>
             </div>
             <div className={styles.LogoHeader}style={{ width: "100%", position: "fixed", zIndex: 1, top: "0", padding: "0rem 1rem", maxHeight: "4.6rem", minHeight: width<600 ? "60px" : 0,  overflow: "hidden", transition: "opacity 0.0s ease-in", opacity: headerInPosition ? 1 :0, transition: "all 0.1s"}}>
-            <img src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)", objectFit: "stretch"}}/>
+            {/* <img src={Logo.src} alt="logo" style={{width: "calc(100% - 2rem)", objectFit: "stretch"}}/> */}
+              <Image src={Logo.src} alt="logo" width={width} height={230} style={{width: "calc(100% - 2rem)", height: "auto", objectFit: "stretch"}}/>
           </div>
           </>:    
             <Navigation logo={page.settings?.data.logo} links={page.settings?.data.slices[2].items} settings={page.settings}/>

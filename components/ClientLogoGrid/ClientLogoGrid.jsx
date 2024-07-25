@@ -5,7 +5,6 @@ import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import useCursor from "../Resolvers/States/Cursor";
 
-import Marquee from "react-marquee-slider";
 import useWindowDimensions from "../Resolvers/UseWindowDimensions";
 
 
@@ -143,25 +142,16 @@ const ClientLogoGrid = ({ slice }) => {
                                 });
                               }}
                             >
-                              <img
-                                src={item.logo.url}
-                        
-                                alt={item.logo.url}
-                              />
-                            </a>
-                                   {/* <img
-                                src={item.logo.url}
-                                width={100}
-                                height={90}
-                                alt={item.logo.url}
-                              /> */}
-                            {/* <ImagePixelated src={item.logo.url}  fillTransparencyColor={"lightgrey"} centered={true} pixelSize={1}/> */}
+                                <Image
+                                    loading = 'lazy'
+                                    src={item.logo.url}
+                                    width={500}
+                                    height={500}
+                                    alt={item.logo.url}
 
-                            {/* {isMobile ? <img
-                                src={item.logo.url}
-                          
-                                alt={item.logo.url}
-                              /> : <ClientLogoPixelCanvas imageUrl={item.logo.url} imageHeight={200} imageWidth={500}/>} */}
+                                />
+                            </a>
+            
                           </motion.div>
                     
                       ) 
@@ -174,62 +164,62 @@ const ClientLogoGrid = ({ slice }) => {
     
   );
 };
-const ClientLogoCarousel = ({ slice }) => {
-  const grid = useRef();
-  const inView = useInView(grid, { once: true });
-  const {width} = useWindowDimensions();
-  const [paused, setPaused] = useState(false);
+// const ClientLogoCarousel = ({ slice }) => {
+//   const grid = useRef();
+//   const inView = useInView(grid, { once: true });
+//   const {width} = useWindowDimensions();
+//   const [paused, setPaused] = useState(false);
 
-  return (
-    <motion.div
-      className={styles.Wrapper}
-      initial="right"
-      animate={inView ? "center" : "right"}
-      ref={grid}
-      onMouseOver={()=>{
-        setPaused(true);
-      }}
-      onMouseLeave={()=>{
-        setPaused(false);
-      }}
-    >
-      <motion.div className={styles.TitleContainer}>
-        <span>{slice.primary.suborder}</span>
-        <PrismicRichText field={slice.primary.title} />
-      </motion.div>
+//   return (
+//     <motion.div
+//       className={styles.Wrapper}
+//       initial="right"
+//       animate={inView ? "center" : "right"}
+//       ref={grid}
+//       onMouseOver={()=>{
+//         setPaused(true);
+//       }}
+//       onMouseLeave={()=>{
+//         setPaused(false);
+//       }}
+//     >
+//       <motion.div className={styles.TitleContainer}>
+//         <span>{slice.primary.suborder}</span>
+//         <PrismicRichText field={slice.primary.title} />
+//       </motion.div>
 
-        <motion.div
-          className={styles.Container}
-          variants={fadeFromRight}
-        >
-          <div
-            style={{
-              display: "block",
-              position: "relative",
-              width: "100%",
-              // height: "90px",
-              overflow: "hidden",
-            }}
-          >
-              <Marquee
-                velocity={paused ? 0 : width>700 ? 50: 5}
-                minScale={0.7}
-                resetAfterTries={200}
-                scatterRandomly={false}
+//         <motion.div
+//           className={styles.Container}
+//           variants={fadeFromRight}
+//         >
+//           <div
+//             style={{
+//               display: "block",
+//               position: "relative",
+//               width: "100%",
+//               // height: "90px",
+//               overflow: "hidden",
+//             }}
+//           >
+//               <Marquee
+//                 velocity={paused ? 0 : width>700 ? 50: 5}
+//                 minScale={0.7}
+//                 resetAfterTries={200}
+//                 scatterRandomly={false}
               
-              >
-              <TickerContent slice={slice}/>
-              <TickerContent slice={slice}/>
+//               >
+//               <TickerContent slice={slice}/>
+//               <TickerContent slice={slice}/>
 
-              <TickerContent slice={slice}/>
+//               <TickerContent slice={slice}/>
 
-              </Marquee>
-          </div>
+//               </Marquee>
+//           </div>
          
-        </motion.div>
-    </motion.div>
-  );
-};
+//         </motion.div>
+//     </motion.div>
+//   );
+// };
 
 
 export default ClientLogoGrid;

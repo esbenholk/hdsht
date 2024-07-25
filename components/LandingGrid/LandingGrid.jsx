@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Layout from "../Layout/Layout";
 import ProjectCarousel from "../ProjectCarousel/ProjectCarousel";
 
+
 export default function LandingGrid({workInGridWithDetails}) {
   return (
     <motion.div
@@ -25,7 +26,7 @@ export default function LandingGrid({workInGridWithDetails}) {
                           }}
                         >
                           <Suspense fallback={<LoadSpinner />} style={{position: "relative"}}>
-                              <ProjectCarousel slice={slice} project={item}/>
+                              <ProjectCarousel slice={slice} project={item} />
                           </Suspense>
                         </motion.div> 
                     }

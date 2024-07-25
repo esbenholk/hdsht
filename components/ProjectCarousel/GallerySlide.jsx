@@ -1,12 +1,12 @@
 import { useEffect, useRef, Suspense } from "react";
-import { useSwiperSlide } from "swiper/react";
+// import { useSwiperSlide } from "swiper/react";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
 import MediaResolver from "../Resolvers/MediaResolver/MediaResolver";
 import useVideo from "../Resolvers/States/Video";
 
 
-const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex, isActive, keynm }) => {
-  const slide = useSwiperSlide();
+const GallerySlide = ({ item, slice, currentSlide, isActive, keynm }) => {
+  // const slide = useSwiperSlide();
   const videoRef = useRef();
   const { setCurrentVideo, setDuration, currentVideo} = useVideo();
 
@@ -15,7 +15,7 @@ const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex, isActive, key
     if(isActive){
 
       if (
-        slideIndex === slice.items.indexOf(item) &&
+        currentSlide === slice.items.indexOf(item) &&
         item.carouselitem.kind !== "image"
       ) {
         setCurrentVideo(videoRef.current);
@@ -25,7 +25,7 @@ const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex, isActive, key
    
 
    
-  }, [gallerySwiperRef.current?.swiper?.realIndex]);
+  }, [currentSlide]);
 
 
 
@@ -41,7 +41,7 @@ const GallerySlide = ({ item, slice, gallerySwiperRef, slideIndex, isActive, key
         }}
         isActive={isActive}
         media={item.carouselitem}
-        slide={slide}
+        // slide={slide}
         videoRef={videoRef}
         loop={false}
         keynm={keynm}

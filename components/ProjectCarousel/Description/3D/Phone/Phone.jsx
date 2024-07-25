@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useState } from "react";
-// import { useGLTF, Html, MeshReflectorMaterial } from "@react-three/drei";
-import { PrismicRichText } from "@prismicio/react";
-import styles from "./Phone.module.scss";
-import { motion } from "framer-motion-3d";
-import { useMotionValue, useTransform } from "framer-motion";
-import { MeshStandardMaterial } from "three";
+// import React, { useRef, useEffect, useState } from "react";
+// // import { useGLTF, Html, MeshReflectorMaterial } from "@react-three/drei";
+// import { PrismicRichText } from "@prismicio/react";
+// import styles from "./Phone.module.scss";
+// import { motion } from "framer-motion-3d";
+// import { useMotionValue, useTransform } from "framer-motion";
+// import { MeshStandardMaterial } from "three";
 
 export default function Phone({ slice, modal }) {
   // const group = useRef();

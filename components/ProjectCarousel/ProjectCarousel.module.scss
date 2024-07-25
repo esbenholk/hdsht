@@ -1,3 +1,11 @@
+.ArrowButton{
+  position: absolute;
+  width: 40%;
+  top:0;
+  background: rgba(0,0,0, 0);
+  height: 100%;
+  z-index: 1;
+}
 .SwiperTop {
   height: 75vh;
   width: 100%;
@@ -6,32 +14,50 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    position: relative;
-    overflow: hidden;
+    // overflow: hidden;
     background-color: var(--main-bg-color);
-    width: inherit !important;
-    height: inherit !important;
+    width: 100% !important;
+    height: 75vh !important;
+    border-radius: 2rem;
 
-    img {
-      // width: 100% !important;
+    div{
+      display: flex;
+      justify-content: center;
+      align-content: center;
+        
       height: 100%;
+      // width: 100%;
+      // img{
+      //   object-fit: contain;
+      // }
+      // .video{
+      //   object-fit: cover;
+      // }
+    }
+
+    img, video {
+      // width: 100% !important;
+      max-height:75vh;
+      // height: 75vh !important;
       width: fit-content;
       max-width: 100%;
-      object-fit: contain;
+      object-fit: cover;
+      height: 100%;
       border-radius: 2rem;
       // border: 5px solid  red;
     }
 
-    video {
-      position: relative;
-      height: 100% !important;
-      width: 100% !important;
-      top: 0;
-      object-fit: cover !important;
-      border-radius: 2rem;
-      // border: 10px solid  blue;
 
-    }
+    // video {
+    //   position: relative;
+    //   height: 100% !important;
+    //   width: 100% !important;
+    //   top: 0;
+    //   object-fit: cover !important;
+    //   border-radius: 2rem;
+    //   // border: 10px solid  blue;
+
+    // }
   }
 }
 .InfoDiv{
@@ -113,7 +139,7 @@
       transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .Description.Open{
-      max-height: 60%;
+      max-height: 40%;
       max-width: 100%;
       height: auto;
       width: 100%;
@@ -144,7 +170,7 @@
       }
     }
     .Credits.Open{
-      max-height: 40%;
+      max-height: 60%;
       max-width: 100%;
       height: fit-content;
       pointer-events:all;
@@ -178,9 +204,14 @@
   margin: 0;
   margin-top: -6vh;
   transform: translate(0,-20%);
-  border-left: 1px solid white;
-  border-right: 1px solid white;
-  flex-shrink: 10 !important;
+  // border-left: 1px solid white;
+  // border-right: 1px solid white;
+  // flex-shrink: 10 !important;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin-right: 0.3rem !important;
+  margin-left: 0.3rem !important;
 
   .Scrubber {
     position: absolute;
@@ -195,30 +226,37 @@
     align-items: center;
     justify-content: center;
     border-radius: 0.5rem;
+    position: relative;
 
     margin: 0 !important;
     // margin-bottom: 2rem !important;
-    margin-right: 0.2rem !important;
+    margin-right: 0.1rem !important;
+    margin-left: 0.1rem !important;
     border: 1px solid white;
     overflow: hidden;
-    max-width: 45rem !important;
-    flex-shrink: 0 !important;
-    flex-grow: 0 !important;
-    // width: fit-content !important;
-    -webkit-logical-width: fit-content !important;
-
+    width: 100%;
+    // // width: 50vh;
+    // // max-width: 50% !important;
+    // // flex-shrink: 0 !important;
+    // // flex-grow: 0 !important;
+    // // width: fit-content !important;
+    // -webkit-logical-width: fit-content !important;
+    div:has(img){
+      width: 100%;
+      height: 100%;
+    }
     img {
       width: 100%;
       height: 100% !important;
 
       object-fit: cover !important;
-      -webkit-logical-width: max-content !important;
+      // -webkit-logical-width: max-content !important;
     }
   }
   .ThumbSlideImage{
-    max-width: 5rem !important;
+    // max-width: 10rem !important;
   }
-  .ThumbSlide:hover{
+  .Active{
     border: 0.1rem solid black;
     filter: invert(1);
   
@@ -357,34 +395,15 @@
     width: 100%;
   
     .GallerySlide {
-      display: flex;
-      justify-content: center;
-      align-content: center;
-      position: relative;
-      overflow: hidden;
-      height: 65vh !important;
-      width: inherit !important;
-      // height: inherit !important;
-      img {
+
+
+      img, video {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        // aspect-ratio: 1 / 1;
-        // border: 1px solid  white;
-
       }
   
-      video {
-        position: relative;
-        height: 100% !important;
-        width: 100% !important;
-        top: 0;
-        object-fit: cover !important;
-        border-radius: 2rem;  
-        // aspect-ratio: 1 / 1;
-        // border: 1px solid  white;
-
-      }
+     
      
     }
   }

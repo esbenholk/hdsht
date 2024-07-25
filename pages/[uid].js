@@ -31,7 +31,7 @@ const Page = ({ page }) => {
     setIsMounted(true);
   }, []);
   useEffect(() => {
-    console.log("we made ", page.data.title, page);
+    // console.log("we made ", page.data.title, page);
     useCursor.setState({ cursor: "default" });
     setIsMounted(true);
 

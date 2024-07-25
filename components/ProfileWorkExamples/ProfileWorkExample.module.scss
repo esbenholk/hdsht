@@ -1,3 +1,12 @@
+.ArrowButton{
+  position: absolute;
+  width: 40%;
+  top:0;
+  background: rgba(0,0,0, 0);
+  height: 100%;
+  z-index: 1;
+}
+
 .SwiperTop {
   height: 50vh;
   width: 100%;
@@ -5,33 +14,66 @@
   justify-content: center;
   align-content: center;
 
+ 
   .GallerySlide {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-content: center;
-    position: relative;
-    overflow: hidden;
+    // overflow: hidden;
+    background-color: var(--main-bg-color);
+    width: 100% !important;
+    height: 50vh !important;
+    border-radius: 2rem;
 
-    width: inherit !important;
-    height: 100% !important;
-
-    img {
-      width: 100% !important;
-      max-height: 100%;
-      object-fit: cover;
-      border-radius: 2rem;
+    div{
+      display: flex;
+      justify-content: center;
+      align-content: center;
+        
+      height: 100%;
+      // width: 100%;
+      // img{
+      //   object-fit: contain;
+      // }
+      // .video{
+      //   object-fit: cover;
+      // }
     }
 
     video {
-      position: relative;
-      height: 100% !important;
-      width: 100% !important;
-      top: 0;
-      object-fit: cover !important;
-      border-radius: 2rem;
+      // width: 100% !important;
+      max-height:50vh;
+      // height: 75vh !important;
+      width: fit-content;
+      max-width: 100%;
+      object-fit: cover;
 
+      border-radius: 2rem;
+      // border: 5px solid  red;
     }
+    img {
+      // width: 100% !important;
+      max-height:50vh;
+      // height: 75vh !important;
+      width: 100%;
+      max-width: 100%;
+      object-fit: cover;
+
+      border-radius: 2rem;
+      // border: 5px solid  red;
+    }
+
+
+    // video {
+    //   position: relative;
+    //   height: 100% !important;
+    //   width: 100% !important;
+    //   top: 0;
+    //   object-fit: cover !important;
+    //   border-radius: 2rem;
+    //   // border: 10px solid  blue;
+
+    // }
   }
 }
 .InfoDiv{

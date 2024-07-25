@@ -5,7 +5,7 @@ const ImageSlice = ({ slice }) => {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     setLoaded(true);
-    console.log(slice);
+    // console.log(slice);
     
   }, []);
   return <section>{loaded && <BasicImage slice={slice} />}</section>;
