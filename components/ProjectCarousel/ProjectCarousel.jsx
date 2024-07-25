@@ -88,7 +88,7 @@ const ProjectCarousel = ({ slice, project, isInViewport }) => {
     dots: false,
     fade: true,
     swipe: true,
-    lazyLoad: !isInViewport,
+    lazyLoad: isInViewport,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
