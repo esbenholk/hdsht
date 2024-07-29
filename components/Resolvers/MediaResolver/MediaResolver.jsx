@@ -51,6 +51,7 @@ const MediaResolver = ({media, videoRef, keynm, isActive, height, localMuted, au
           placeholder="blur"
           className={`  swiper-lazy`} 
           // sizes="100vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
 
         />
         {/* <PrismicImage field={media}/> */}
