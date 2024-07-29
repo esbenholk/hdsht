@@ -7,36 +7,12 @@ import 'lazysizes';
 // import a plugin
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
-function useIsInViewport(ref) {
-  const [isIntersecting, setIsIntersecting] = useState(false);
-
-  const observer = useMemo(
-    () =>
-      new IntersectionObserver(([entry]) =>
-        setIsIntersecting(entry.isIntersecting),
-      ),
-    [],
-  );
-
-  useEffect(() => {
-    if(ref){
-      observer.observe(ref.current);
-    }
-
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [ref, observer]);
-
-  return isIntersecting;
-}
 
 const MediaResolver = ({media, videoRef, keynm, isActive, height, localMuted, autoPlay }) => {
   const loaderImage = useCursor((state) => state.loaderImage);
   const ref = useRef();
 
-  const isInViewport =  useIsInViewport(ref);
+
   if (
     media.kind === "image"
   ) {
@@ -51,7 +27,7 @@ const MediaResolver = ({media, videoRef, keynm, isActive, height, localMuted, au
           placeholder="blur"
           className={`  swiper-lazy`} 
           // sizes="100vw"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+          sizes="(max-width: 768px) 90vw, (max-width: 1200px) 90vw, 90vw"
 
         />
         {/* <PrismicImage field={media}/> */}

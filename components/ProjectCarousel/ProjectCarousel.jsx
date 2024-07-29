@@ -88,11 +88,12 @@ const ProjectCarousel = ({ slice, project, isInViewport }) => {
     dots: false,
     fade: true,
     swipe: true,
-    lazyLoad: isInViewport,
+    lazyLoad: "progressive",
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+
     initialSlide: currentSlide,
     // variableWidth: true,
     swipeToSlide: true,
