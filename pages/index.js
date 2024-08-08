@@ -30,7 +30,7 @@ const Page = ({ page }) => {
 
 
   useEffect(() => {
-    console.log("welcome to HDSHT");
+    console.log("welcome to HDSHT xoxo");
 
     useCursor.setState({
       loaderImage: page.settings.data.placeholderimage.url
