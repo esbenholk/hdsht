@@ -23,6 +23,8 @@ export default function Loader({settings}) {
 
  
   useEffect(()=>{
+    console.log("loader has data", settings);
+    
     setSoundUrl(sounds[Math.floor(Math.random() * sounds.length)].media.url);
   },[]);
   
@@ -54,7 +56,7 @@ export default function Loader({settings}) {
       <>
       <motion.div
       className={`${styles.Container}  ${!userHasEntered ? styles.On : styles.Off} ${!settings.data.slices[1] && styles.ImageContainer}`}
-      style={{backgroundImage: `url(${settings.data.slices[1] && settings.data.slices[1].items.length>0 && settings.data.slices[1].items[Math.floor(Math.random() * settings.data.slices[1].items.length)].media.url})`, backgroundColor: "var(--main-border-glow-color)"}}
+      style={{backgroundImage: `url(${settings.data.slices[1] && settings.data.slices[1].items.length>0 && width > 600 ? settings.data.slices[1].items[Math.floor(Math.random() * settings.data.slices[1].items.length)].media.url : settings.data.slices[6] && settings.data.slices[6].items.length>0 ? settings.data.slices[6].items[Math.floor(Math.random() * settings.data.slices[6].items.length)].media.url : "hej"})`, backgroundColor: "var(--main-border-glow-color)"}}
       onClick={(e)=>{
 
         if(!window.location.href.includes("pink")){
