@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import * as React from "react";
 import useSound from "use-sound";
 import Image from "next/image";
+import ReactPlayer from 'react-player/lazy';
+import useWindowDimensions from "../Resolvers/UseWindowDimensions";
 
 export default function Loader({settings}) {
   const [index, setIndex] = useState(0);
@@ -15,7 +17,7 @@ export default function Loader({settings}) {
   const [soundUrl, setSoundUrl] = useState(sounds[Math.floor(Math.random() * sounds.length)].media.url);
   const  [play] = useSound(soundUrl, {interrupt: true});
 
-
+  const {width} = useWindowDimensions();
 
 
 
@@ -53,8 +55,49 @@ export default function Loader({settings}) {
       <motion.div
       className={`${styles.Container}  ${!userHasEntered ? styles.On : styles.Off} ${!settings.data.slices[1] && styles.ImageContainer}`}
       style={{backgroundImage: `url(${settings.data.slices[1] && settings.data.slices[1].items.length>0 && settings.data.slices[1].items[Math.floor(Math.random() * settings.data.slices[1].items.length)].media.url})`, backgroundColor: "var(--main-border-glow-color)"}}
+      onClick={(e)=>{
+
+        if(!window.location.href.includes("pink")){
+
+          setUserHasEntered(true);
+          play();
+
+          setTimeout(() => {
+            setUserIsIn(true);
+          }, 1500);
+        }
+        useCursor.setState({
+          muted: false
+        });
+    
+      }}
+      
       >
+
+        {settings.data.slices[4] && settings.data.slices[4].items.length>0 && <>
+          <div className={`${styles.Container}` }>
+            <ReactPlayer
+              className={` ${!userHasEntered ? styles.Video : styles.TransparentVideo}`}
+              loop
+              // autoPlay={autoPlay}
+              loading="lazy"
+              playsInline
+              controls={false}
+              url={width > 600 ? settings.data.slices[4].items[Math.floor(Math.random() * settings.data.slices[4].items.length)].media.url : settings.data.slices[5].items[Math.floor(Math.random() * settings.data.slices[5].items.length)].media.url}
+              playing={true}
+              width={"100%"}
+              height={"100%"}
+              volume={1}
+              // style={{padding: 0, width: "100%", height: "100%"}}
+              muted={true}
+            >
+            </ReactPlayer>
+          </div>
+        </>}
+      
       </motion.div>
+
+     
       {settings.data.slices[0] && settings.data.slices[0].items.length>0  &&
             <Image width={300} height={300} priority src={settings.data.slices[0].items[index].media.url} alt="loading gif" className={`${!userHasEntered ? styles.Opaque : styles.Transparent}`}
               onMouseEnter={()=>{
