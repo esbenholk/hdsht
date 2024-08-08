@@ -15,8 +15,8 @@
 
     video {
       width: 100%;
-      height: 100%;
-      // height: auto;
+      // height: 100%;
+      height: 85%;      // min-height: 75%;
       object-fit: cover;
       object-position: center;
       
@@ -32,4 +32,24 @@
     font-size: 1.5rem;
     font-family: var(--secondary-font-italic);
   }
+}
+
+
+@media screen and (max-width: 768px) {
+  .Container {
+  
+    .VideoContainer {
+
+  
+      video {
+   
+        height: 100%;      // min-height: 75%;
+
+  
+  
+      }
+    }
+   
+  }
+  
 }
