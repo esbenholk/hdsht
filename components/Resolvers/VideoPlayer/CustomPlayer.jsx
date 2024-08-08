@@ -57,6 +57,9 @@ const CustomPlayer = ({ media, videoRef, isActive, keynm, autoPlay }) => {
         // autoPlay={autoPlay}
         loading="lazy"
         playsInline
+        playsinline
+        webkit-playsInline
+        webkit-playsinline
         controls={false}
         url={media.url}
         playing={isInViewport && isActive}
