@@ -30,7 +30,7 @@ const Page = ({ page }) => {
 
 
   useEffect(() => {
-    console.log("welcome to HDSHT xoxo");
+    console.log("welcome to HDSHT xoxo", page);
 
     useCursor.setState({
       loaderImage: page.settings.data.placeholderimage.url
@@ -94,6 +94,10 @@ const Page = ({ page }) => {
             content="width=device-width, initial-scale=1.0"
           />
           <meta charSet="UTF-8" />
+          <meta property='og:title' content={page.data.title}/>
+          <meta property='og:image' content={page.settings.data.placeholderimage.url}/>
+          <meta property='og:description' content={page.data.description}/>
+       
         </Head>
 
 
