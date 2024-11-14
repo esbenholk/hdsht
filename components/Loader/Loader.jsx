@@ -54,25 +54,61 @@ export default function Loader({settings}) {
 
       <>
       <motion.div
+        className={`${styles.Container}  ${!userHasEntered ? styles.On : styles.Off} ${!settings.data.slices[1] && styles.ImageContainer}`}
+        style={{backgroundImage: `url(${settings.data.slices[1] && settings.data.slices[1].items.length>0 && width > 600 ? settings.data.slices[1].items[Math.floor(Math.random() * settings.data.slices[1].items.length)].media.url : settings.data.slices[6] && settings.data.slices[6].items.length>0 ? settings.data.slices[6].items[Math.floor(Math.random() * settings.data.slices[6].items.length)].media.url : "hej"})`, backgroundColor: "var(--main-border-glow-color)"}}
+        onClick={(e)=>{
 
-      className={`${styles.Container}  ${!userHasEntered ? styles.On : styles.Off} ${!settings.data.slices[1] && styles.ImageContainer}`}
-      style={{backgroundImage: `url(${settings.data.slices[1] && settings.data.slices[1].items.length>0 && width > 600 ? settings.data.slices[1].items[Math.floor(Math.random() * settings.data.slices[1].items.length)].media.url : settings.data.slices[6] && settings.data.slices[6].items.length>0 ? settings.data.slices[6].items[Math.floor(Math.random() * settings.data.slices[6].items.length)].media.url : "hej"})`, backgroundColor: "var(--main-border-glow-color)"}}
-      onClick={(e)=>{
+                  setUserHasEntered(true);
+                  play();
+        
+                  setTimeout(() => {
+                    setUserIsIn(true);
+                  }, 1500);
 
-                setUserHasEntered(true);
-                play();
-      
-                setTimeout(() => {
-                  setUserIsIn(true);
-                }, 1500);
-
-                useCursor.setState({
-                  muted: false
-                });
-            
-              }}
-      
+                  useCursor.setState({
+                    muted: false
+                  });
+              
+                }}
       >
+          <div >
+              {settings.data.slices[0] && settings.data.slices[0].items.length>0  &&
+                    <Image width={300} height={300} priority src={settings.data.slices[0].items[index].media.url} alt="loading gif" 
+                      onMouseEnter={()=>{
+                            useCursor.setState({
+                              cursorVariant: "hoveronbiglink",
+                              isOverProject: false,
+                              title: "click to enter",
+                              description: ""
+                            })
+                      }}
+                      onClick={(e)=>{
+
+                        setUserHasEntered(true);
+                        play();
+              
+                        setTimeout(() => {
+                          setUserIsIn(true);
+                        }, 1500);
+
+                        useCursor.setState({
+                          muted: false
+                        });
+                    
+                      }}
+                      onMouseLeave={()=>{
+                            useCursor.setState({
+                            cursorVariant: "default",
+                            isOverProject: false,
+                            title: "HDSHT",
+                            description: ""
+                            });
+                          }}
+                    />
+                    
+              }
+              <h2 className={`${styles.enter} ${!userHasEntered ? styles.On : styles.Off}`} >click to enter</h2>
+          </div>
 
         {settings.data.slices[4] && settings.data.slices[4].items.length>0 && <>
           <div className={`${styles.Container}` }>
@@ -97,41 +133,7 @@ export default function Loader({settings}) {
       
       </motion.div>
 
-     
-      {settings.data.slices[0] && settings.data.slices[0].items.length>0  &&
-            <Image width={300} height={300} priority src={settings.data.slices[0].items[index].media.url} alt="loading gif" className={`${!userHasEntered ? styles.Opaque : styles.Transparent}`}
-              onMouseEnter={()=>{
-                    useCursor.setState({
-                      cursorVariant: "hoveronbiglink",
-                      isOverProject: false,
-                      title: "click to enter",
-                      description: ""
-                    })
-              }}
-              onClick={(e)=>{
-
-                setUserHasEntered(true);
-                play();
-      
-                setTimeout(() => {
-                  setUserIsIn(true);
-                }, 1500);
-
-                useCursor.setState({
-                  muted: false
-                });
-            
-              }}
-              onMouseLeave={()=>{
-                    useCursor.setState({
-                    cursorVariant: "default",
-                    isOverProject: false,
-                    title: "HDSHT",
-                    description: ""
-                    });
-                  }}
-              />
-      }
+ 
     </>
     }
     

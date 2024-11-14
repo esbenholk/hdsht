@@ -22,10 +22,10 @@
   background-size: cover;
   background-position: center;
 
-  div:first-child {
-    height: 100%;
-    width: 100%;
-  }
+  // div:first-child {
+  //   height: 100%;
+  //   width: 100%;
+  // }
   
   video {
     width: 100%;
@@ -48,20 +48,23 @@
 
 .On{
   opacity: 1;
-  top: 0;
+  // top: 0;
 }
 .Opaque{
-  position: fixed;
+  // position: fixed;
   opacity: 1;
   width: 300px;
-  height: 300px;
-  max-width: 50%;
+  // height: 300px;
+  // max-width: 50%;
   object-fit: contain;
   z-index: 99;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
   transition: all 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .TransparentVideo{
   // opacity: 0;
@@ -82,7 +85,26 @@
 
   transition: all 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
+.enter{
+  font-family: var(--bubble-font);
+  font-size: 2.1rem;
+  margin: 0rem;
+  margin-top: 0.5rem;
+  width: 100%;
+  text-align: center;
+  animation: strobe 0.1s infinite;
+  color: black;
+  transition: all 0.1s;
+}
 
+@keyframes strobe {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
 .Off{
   opacity: 0;
   background-color: rgba(0,0,0,0);
